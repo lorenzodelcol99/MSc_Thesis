@@ -1,0 +1,1 @@
+Lorenzo Del Col's Master Thesis repository: current title "The Short, the Long, and the Consequences of VAR Analysis For Structural DSGE Estimation" under the great supervion of Professor Efrem Castelnuovo University of Padua
