@@ -1,0 +1,34 @@
+*.mat
+*.asv
+.DS_Store
+
+
+
+# =========================
+# macOS System Files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# =========================
+# MATLAB Temporary Files
+# =========================
+*.asv
+*.m~
+*.autosave
+slprj/
+
+# =========================
+# LaTeX Temporary Files
+# =========================
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk

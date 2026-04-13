@@ -30,7 +30,8 @@ for zx=1:11
 %     xlabel('Periods After Shock')
     axis tight
 end
-suptitle('Embodied Technology Shock'),print -dps2 figirfpi_lr
+%%%%% LORENZO DEL COL change line 34 remove print command to avoid ps2 crash (Previously --> suptitle('Embodied Technology Shock'),print -dps2 figirfpi_lr )%%%%%
+suptitle('Embodied Technology Shock')
 
 figure, orient landscape
 for zx=1:11
@@ -46,7 +47,9 @@ for zx=1:11
 %     xlabel('Periods After Shock')
     axis tight
 end
-suptitle('Neutral Technology Shock'),print -dps2 -append figirfpi_lr
+%%%%% LORENZO DEL COL change line 51 remove print command to avoid ps2 crash (Previously --> suptitle('Neutral Technology Shock'),print -dps2 -append figirfpi_lr) %%%%%
+suptitle('Neutral Technology Shock')
+
 
 figure, orient landscape
 for zx=1:11
@@ -62,7 +65,8 @@ for zx=1:11
 %     xlabel('Periods After Shock')
     axis tight
 end
-suptitle('Fed Funds Shock'),print -dps2 -append figirfpi_lr
+%%%%% LORENZO DEL COL change line 68 remove print command to avoid ps2 crash (Previously --> suptitle('Fed Funds Shock'),print -dps2 -append figirfpi_lr )%%%%%
+suptitle('Fed Funds Shock')
 
 impztmp = impzout;
 impzout(:,:,1)  =   -impzout(:,:,1);

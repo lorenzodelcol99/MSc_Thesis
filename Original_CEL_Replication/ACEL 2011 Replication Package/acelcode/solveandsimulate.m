@@ -27,8 +27,8 @@ if AIM == 1
     condn  = 10^(-10); %condition used by AIM if a matrix does not invert, not important here
     uprbnd = 0.99999;  %largest eigenvalue of the feedback matrix, allowed to be slightly above unity
     hmat =[alpha_2,alpha_1,alpha_0]; % Aim uses this order of alphas.
-    
-    [A,ErrFlagVal] = feedback(alphas,hmat,condn,uprbnd);
+    %%%%% LORENZO DEL COL modified line 31 from "feedback" to --> "acel_feedback"
+    [A,ErrFlagVal] = acel_feedback(alphas,hmat,condn,uprbnd);
     
 else
     

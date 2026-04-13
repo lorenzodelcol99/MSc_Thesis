@@ -7,8 +7,8 @@ xx(2)=kap2;
 xx(3)=kap3;
 
 [ff] = funcdiACEL(xx,alpha,siga,theta,yt,phi,del,rhot,muzst,muups,beta,ksip,Spp);
-
-options = optimset('LevenbergMarquardt','on','Display','off','TolFun',1e-10,'TolX',1e-10,'MaxFun',5000,'Diagnostics','off','MaxFunEvals',4000,'MaxIter',5000);
+%% LORENZO DEL COL --> modified line 11 from the original version (see later in this line) to the current one, for modern matlab syntax reasons  "options = optimset('LevenbergMarquardt','on','Display','off','TolFun',1e-10,'TolX',1e-10,'MaxFun',5000,'Diagnostics','off','MaxFunEvals',4000,'MaxIter',5000);"
+options = optimset('Algorithm','levenberg-marquardt','Display','off','TolFun',1e-10,'TolX',1e-10,'Diagnostics','off','MaxFunEvals',4000,'MaxIter',5000);
 [xnew,fval,exitflag]=fsolve('funcdiACEL',xx,options,alpha,siga,theta,yt,phi,del,rhot,muzst,muups,beta,ksip,Spp);
 
 kap1=xnew(1);
