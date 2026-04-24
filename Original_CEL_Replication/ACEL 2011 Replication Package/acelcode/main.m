@@ -32,9 +32,10 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 %   parameters pertaining to estimated VAR
 %
 %%%%% LORENZO DEL COL change line 35 estvar = 0 to --> estvar = 1
-estvar      = 0;     % Set to 1 if you want to estimate the ACEL VAR.
+estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
-nlags       = 4;     % If estvar = 1, this controls number of lags in VAR
+%%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
+nlags       = 16     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -48,8 +49,8 @@ nl          = 3;     % If estvar = 1, ish = 1; leads and lags to use in centered
 %
 %  parameters related to bootstrapping various objects from VAR
 %
-%%%%% LORENZO DEL COL change line 52 imp = 0 to --> imp = 1 as we have done --> previously estvar = 1
-imp         = 0;     % If estvar = 1, compute impulse resp funcs, variance decomps, multivariate q-stats and  
+%%%%% LORENZO DEL COL change line 53 imp = 0 to --> imp = 1 as we have done --> previously estvar = 1
+imp         = 1;     % If estvar = 1, compute impulse resp funcs, variance decomps, multivariate q-stats and  
                      %     use the bootstrap to compute the sampling uncertainty in all these objects. Also, graph the
                      %     response of the variables to the three identified shocks: neutral and embodied technology
                      %     shocks, and policy shocks. Finally, store the results of the calculations for later use.
@@ -58,7 +59,8 @@ vardecomp   = 0;     % If estvar = 1, if unity, compute and print out point esti
 decomp      = 0;     % If estvar = 1, if unity, plot decomposition of historical data in terms of fundamental shocks
 
 ndraws      =1000;   % If estvar = 1, imp = 1; number of artificial data sets to use in bootstrapping
-PortmanteauLags = [4 6 8 10];%If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
+%%%%% LORENZO DEL COL change line 63 (If I chanfge the VAR lags, need to change also this) PortmanteauLags = 0 to --> PortmanteauLags = XXXXX %%%%% 
+PortmanteauLags = [16 20 24 28];%If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
 a           = 8;     % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with shortest period for band pass filter to let through
 b           = 32;    % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with longest period for band pass filter.
 lam         = 1600;  % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); parameter for HP filter.
@@ -69,7 +71,7 @@ simm        = 0;     % If estvar = 1, ish = 1; do experiments on time-domain pro
 %                    
                     
 firmspecific  = 1;   % If 1, compute the value of ksip implied by the firm-specific model and parameter values specified below.
-%%%%% LORENZO DEL COL change line 72 mimp = 0 to --> mimp = 1 %%%%%
+%%%%% LORENZO DEL COL change line 75 mimp = 0 to --> mimp = 1 %%%%%
 mimp          = 1;   % Graph model impulse responses (model params are in getparam.m, verify that MATLAB paths in setpath.m is correct)                   
                    
 
