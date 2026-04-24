@@ -18,7 +18,7 @@ close all;
 %   
 
 vver        = 0;     % Set to 0 if using MATLAB version 6.5, to 1 for MATLAB 7
-period      = 1;     % if 1, sample 1959:Q2-2001:Q4; 2, sample 1959:Q2-1979:Q4; 3, sample 1980:Q1-2001:Q4; 4, sample 1982:Q1-2001:Q4    
+period      = 4;     % if 1, sample 1959:Q2-2001:Q4; 2, sample 1959:Q2-1979:Q4; 3, sample 1980:Q1-2001:Q4; 4, sample 1982:Q1-2001:Q4    
 money       = 1;     % if 1, use MZM as measure of money, otherwise use M2
 pinvestment = 1;     % if 1 use investment deflator for pi, otherwise use price of equipment
 FR          = 0;     % if 0, use benchmark data, with P16 for population; if 1, use Francis and Ramey's measure of population instead 
