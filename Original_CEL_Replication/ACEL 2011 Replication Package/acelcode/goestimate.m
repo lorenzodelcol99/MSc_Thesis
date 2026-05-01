@@ -22,8 +22,8 @@ type estimate
 disp(['Criterion value  ' num2str(fq)]);
 disp(' ');
 diary off;
-
-options = optimset('Display','iter','TolFun',1e-10,'TolX',1e-8,'maxiter',maxx,'MaxFun',maxx,'LargeScale','off');
+%%% LORENZO DEL COL changes line 26 from options = optimset('Display','iter','TolFun',1e-10,'TolX',1e-8,'maxiter',maxx,'MaxFun',maxx,'LargeScale','off');--> to options = optimset('Display','iter','TolFun',1e-10,'TolX',1e-8,'MaxIter',maxx,'MaxFunEvals',10000,'LargeScale','off');
+options = optimset('Display','iter','TolFun',1e-10,'TolX',1e-8,'MaxIter',maxx,'MaxFunEvals',10000,'LargeScale','off');
 [DD,ValDD,exitflag]=fminsearch('quadform',init,options,par,taux,nsteps,psihat,Vhat,[],1,0,criterion);
 
 if exitflag == 0

@@ -30,16 +30,19 @@ for ii = 2:T
     yi(ii)=(theta-1)*et(ii)-theta*pi(ii);
 end
 
-subplot(221)
-hist(yi)
-title('output')
-subplot(222)
-hist(pi)
-title('prices')
-tt=200:250;
-subplot(223)
-plot(tt,pi(tt),tt,yi(tt),'*',tt,yi(tt))
-legend('prices','output')
-subplot(224)
-plot(tt,yi(tt))
-title('output')
+% LORENZO DEL COL
+% --- muted graphs to avoid conflicts with makeplots
+% subplot(221)
+% hist(yi)
+% title('output')
+% subplot(222)
+% hist(pi)
+% title('prices')
+% tt=200:250;
+% subplot(223)
+% plot(tt,pi(tt),tt,yi(tt),'*',tt,yi(tt))
+% legend('prices','output')
+% subplot(224)
+% plot(tt,yi(tt))
+% title('output')
+% --- FINE GRAFICI SILENZIATI ---

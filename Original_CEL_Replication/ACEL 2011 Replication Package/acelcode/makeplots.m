@@ -30,7 +30,7 @@ if AIM == 1
     uprbnd = 0.99999;  %largest eigenvalue of the feedback matrix, allowed to be slightly above unity
     hmat =[alpha_2,alpha_1,alpha_0]; % Aim uses this order of alphas.
     
-    [A,ErrFlagVal] = feedback(alphas,hmat,condn,uprbnd);
+    [A,ErrFlagVal] = acel_feedback(alphas,hmat,condn,uprbnd);
     
 else
     
@@ -114,21 +114,46 @@ end
 suptitle('Neutral Technology Shock'),
 %print -dps2 modvsvarN
 
-figure%, orient landscape
+
+%%% LORENZO DEL COL full block of code substitution
+figure(9); 
+set(gcf, 'Name', 'Fed Funds Shock', 'NumberTitle', 'on'); 
+
 for zx=1:11
     subplot(4,3,zx)
     si = squeeze(simimp(1:pnstep,zx,3,:));
     stdirf3(:,zx)    =   std(si,1,2);
+    
     plot(0:pnstep-1,100*impzout(1:pnstep,zx,3),'k-')
     hold on
     grpyat = [(0:pnstep-1)' 100*(impzout(1:pnstep,zx,3)-1.96*std(si,1,2)) ; (pnstep-1:-1:0)' 100*(impzout(pnstep:-1:1,zx,3)+1.96*std(si(pnstep:-1:1,:),1,2))];
     patch(grpyat(:,1),grpyat(:,2),[0.7 0.7 0.7],'edgecolor',[0.65 0.65 0.65]);     
     plot(0:pnstep-1,100*impzout(1:pnstep,zx,3),'k-')
+    
     plot(0:pnstep-1,modirf3((zx-1)*pnstep+1:zx*pnstep),'k.-')
+    
     title(varnamz(zx,:));
     axis tight
     hold off
 end
-suptitle('Fed Funds Shock'),
-%print -dps2 modvsvarM
-% end
+suptitle('Fed Funds Shock');
+
+
+% figure%, orient landscape
+%for zx=1:11
+%    subplot(4,3,zx)
+%    si = squeeze(simimp(1:pnstep,zx,3,:));
+%    stdirf3(:,zx)    =   std(si,1,2);
+%    plot(0:pnstep-1,100*impzout(1:pnstep,zx,3),'k-')
+%    hold on
+%    grpyat = [(0:pnstep-1)' 100*(impzout(1:pnstep,zx,3)-1.96*std(si,1,2)) ; (pnstep-1:-1:0)' 100*(impzout(pnstep:-1:1,zx,3)+1.96*std(si(pnstep:-1:1,:),1,2))];
+%    patch(grpyat(:,1),grpyat(:,2),[0.7 0.7 0.7],'edgecolor',[0.65 0.65 0.65]);     
+%    plot(0:pnstep-1,100*impzout(1:pnstep,zx,3),'k-')
+%    plot(0:pnstep-1,modirf3((zx-1)*pnstep+1:zx*pnstep),'k.-')
+%    title(varnamz(zx,:));
+%    axis tight
+%    hold off
+%end
+%suptitle('Fed Funds Shock'),
+%%print -dps2 modvsvarM
+%%end

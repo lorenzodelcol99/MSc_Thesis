@@ -18,7 +18,7 @@ close all;
 %   
 
 vver        = 0;     % Set to 0 if using MATLAB version 6.5, to 1 for MATLAB 7
-period      = 4;     % if 1, sample 1959:Q2-2001:Q4; 2, sample 1959:Q2-1979:Q4; 3, sample 1980:Q1-2001:Q4; 4, sample 1982:Q1-2001:Q4    
+period      = 1;     % if 1, sample 1959:Q2-2001:Q4; 2, sample 1959:Q2-1979:Q4; 3, sample 1980:Q1-2001:Q4; 4, sample 1982:Q1-2001:Q4    
 money       = 1;     % if 1, use MZM as measure of money, otherwise use M2
 pinvestment = 1;     % if 1 use investment deflator for pi, otherwise use price of equipment
 FR          = 0;     % if 0, use benchmark data, with P16 for population; if 1, use Francis and Ramey's measure of population instead 
@@ -35,7 +35,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 16     % If estvar = 1, this controls number of lags in VAR
+nlags       =12     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -60,7 +60,7 @@ decomp      = 0;     % If estvar = 1, if unity, plot decomposition of historical
 
 ndraws      =1000;   % If estvar = 1, imp = 1; number of artificial data sets to use in bootstrapping
 %%%%% LORENZO DEL COL change line 63 (If I chanfge the VAR lags, need to change also this) PortmanteauLags = 0 to --> PortmanteauLags = XXXXX %%%%% 
-PortmanteauLags = [16 20 24 28];%If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
+PortmanteauLags = [4 8 12 16];%If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
 a           = 8;     % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with shortest period for band pass filter to let through
 b           = 32;    % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with longest period for band pass filter.
 lam         = 1600;  % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); parameter for HP filter.
@@ -74,15 +74,15 @@ firmspecific  = 1;   % If 1, compute the value of ksip implied by the firm-speci
 %%%%% LORENZO DEL COL change line 75 mimp = 0 to --> mimp = 1 %%%%%
 mimp          = 1;   % Graph model impulse responses (model params are in getparam.m, verify that MATLAB paths in setpath.m is correct)                   
                    
-
-estimatemodel = 0;   % If 1, estimate the general equilibrium model. The optimized model parameters can be found in estimate.m. To
+%%%%% LORENZO DEL COL change line 78 estimatemodel = 0 to --> estimatemodel = 1 to IMPULSE RESPONSE MATCHING (MINIMUM DISTANCE) THE DSGE ACCORDING TO THE CURRENT VAR WITH DIFFERENT LAG ORDER%%%%%
+estimatemodel = 1;   % If 1, estimate the general equilibrium model. The optimized model parameters can be found in estimate.m. To
                      %        see the contents of this file, enter 'type estimate.m' at the MATLAB command prompt after optimization 
                      %        is complete. Inputs for estimation include initial parameters (in getparams.m, or can be overwritten as
                      %        indicated below). Other inputs include VAR impulse responses and sampling uncertainty, which are produced
                      %        by running with imp = 1, estvar = 1 the first time. The information is stored for later
                      %        runs in .mat files (see loadreducedform.m for more information.)
                      
-maxx=10;            %Number of iterations (could be zero) for model estimation (irrelevant if estimatemodel not equal to 1)
+maxx=1000;            %Number of iterations (could be zero) for model estimation (irrelevant if estimatemodel not equal to 1)
                 
                      
 stderr        = 0;   % Only relevant if estimatemodel = 1. If 1, then compute the standard errors of the 
