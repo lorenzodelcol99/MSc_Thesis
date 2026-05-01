@@ -26,3 +26,4 @@ slprj/
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+*.mat
