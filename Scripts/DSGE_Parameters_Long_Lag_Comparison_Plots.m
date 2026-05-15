@@ -1,69 +1,67 @@
 % =========================================================================
-% compare_parameters.m
-% Script to extract and compare key DSGE structural parameters
-% across VAR lag lengths p=4, p=8, and p=12.
+% compare_parameters_SE_Optimised.m
+% Smart script to extract DSGE parameters, SEs, and Significance Stars.
 % =========================================================================
 clear; clc;
 
-% Define the absolute path to your Output folder
+% 1. Load the data into a single cell array of structures
 base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/';
+models = {load([base_path, 'results_lag4_new.mat']), ...
+          load([base_path, 'results_lag8_new.mat']), ...
+          load([base_path, 'results_lag12_new.mat'])};
 
-% Load the three saved workspaces into distinct structures
-L4  = load([base_path, 'results_lag4.mat']);
-L8  = load([base_path, 'results_lag8.mat']);
-L12 = load([base_path, 'results_lag12.mat']);
+% 2. Define parameters and their mapping
+var_names  = {'epsilon', 'b', 'sigma_a', 'kappa', 'gam', 'xi_w', 'sig_M', 'sig_muz', 'sig_muups'};
+se_indices = [11, 14, 15, 12, 18, 13, 8, 9, 10];
+row_labels = {'Habit Formation (epsilon)', 'Inv. Adj. Cost (b)', ...
+              'Capacity Util. Cost (sigma_a)', 'Phillips Curve Slope (kappa)', ...
+              'Price Indexation (gam)', 'Wage Stickiness (xi_w)', ...
+              'Vol: Monetary Shock (sig_M)', 'Vol: Neutral Tech (sig_muz)', ...
+              'Vol: Embodied Tech (sig_muups)'}';
 
-% -------------------------------------------------------------------------
-% Parameter Extraction and Table Generation
-% -------------------------------------------------------------------------
+% 3. Pre-allocate the results arrays
+num_vars = length(var_names);
+results  = {cell(num_vars, 1), cell(num_vars, 1), cell(num_vars, 1)};
 
-% Define the parameters we want to compare
-var_names = {'h', 'b', 'sigma_a', 'kappa', 'gam', 'xi_w', 'sig_M', 'sig_muz', 'sig_muups'};
-
-% Define the clean, formal labels for the rows
-row_labels = {'Habit Formation (h)', ...
-              'Inv. Adj. Cost (b)', ...
-              'Capacity Util. Cost (sigma_a)', ...
-              'Phillips Curve Slope (kappa)', ...
-              'Price Indexation (gam)', ...
-              'Wage Stickiness (xi_w)', ...
-              'Vol: Monetary Shock (sig_M)', ...
-              'Vol: Neutral Tech (sig_muz)', ...
-              'Vol: Embodied Tech (sig_muups)'}'; % Notice the ' at the end to make it a column
-
-% Pre-allocate arrays to hold the values
-vals_4  = zeros(length(var_names), 1);
-vals_8  = zeros(length(var_names), 1);
-vals_12 = zeros(length(var_names), 1);
-
-% Loop through each parameter and extract its value
-for i = 1:length(var_names)
-    v = var_names{i};
-    
-    if isfield(L4, v),  vals_4(i)  = L4.(v);  else vals_4(i)  = NaN; end
-    if isfield(L8, v),  vals_8(i)  = L8.(v);  else vals_8(i)  = NaN; end
-    if isfield(L12, v), vals_12(i) = L12.(v); else vals_12(i) = NaN; end
+% 4. MASTER LOOP: Iterate through models and variables elegantly
+for m = 1:3 % Loop over Lag 4, Lag 8, Lag 12
+    for i = 1:num_vars
+        v = var_names{i};
+        idx = se_indices(i);
+        
+        if isfield(models{m}, v) && isfield(models{m}, 'xxse')
+            val = models{m}.(v);
+            se  = models{m}.xxse(idx);
+            t_stat = abs(val / se);
+            
+            % Bulletproof logic for significance stars
+            if t_stat >= 2.576
+                stars = '***';
+            elseif t_stat >= 1.960
+                stars = '**';
+            elseif t_stat >= 1.645
+                stars = '*';
+            else
+                stars = '';
+            end
+            
+            % Format: Point Estimate + Stars + (Standard Error)
+            results{m}{i} = sprintf('%.4f%s (%.4f)', val, stars, se);
+        else
+            results{m}{i} = 'NaN';
+        end
+    end
 end
 
-% -------------------------------------------------------------------------
-% Create and Export the Official Table
-% -------------------------------------------------------------------------
+% 5. Create and Export the Official Table
+final_table = table(row_labels, results{1}, results{2}, results{3}, ...
+    'VariableNames', {'Parameter_Name', 'Lag_4', 'Lag_8', 'Lag_12'});
 
-% Create a formal MATLAB Table object
-Parameter_Name = row_labels;
-Lag_4 = round(vals_4, 4);   % Round to 4 decimal places for cleanliness
-Lag_8 = round(vals_8, 4);
-Lag_12 = round(vals_12, 4);
-
-final_table = table(Parameter_Name, Lag_4, Lag_8, Lag_12);
-
-% Display the table in the Command Window
 disp(' ');
-disp('=== DSGE Structural Parameter Comparison Across Lag Lengths ===');
+disp('=== Final DSGE Parameter Table ===');
+disp('Note: *** p<0.01, ** p<0.05, * p<0.10');
 disp(final_table);
 
-% EXPORT TO EXCEL
-% excel_filename = [base_path, 'Structural_Parameters_Comparison.xlsx'];
+% excel_filename = [base_path, 'Structural_Parameters_Final.xlsx'];
 % writetable(final_table, excel_filename);
-
-% disp(['SUCCESS: Table saved to ', excel_filename]);
+% disp(['SUCCESS: Table cleanly exported to ', excel_filename]);

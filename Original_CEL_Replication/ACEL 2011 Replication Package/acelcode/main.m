@@ -35,7 +35,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       =16     % If estvar = 1, this controls number of lags in VAR
+nlags       =8     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -84,8 +84,8 @@ estimatemodel = 1;   % If 1, estimate the general equilibrium model. The optimiz
                      
 maxx=1000;            %Number of iterations (could be zero) for model estimation (irrelevant if estimatemodel not equal to 1)
                 
-                     
-stderr        = 0;   % Only relevant if estimatemodel = 1. If 1, then compute the standard errors of the 
+%%%%% LORENZO DEL COL change line 88 (stderr=1) to compute STANDARD DEVIATION OF THE CALIBRATED PARAMETERS                     
+stderr        = 1;   % Only relevant if estimatemodel = 1. If 1, then compute the standard errors of the 
                      % estimated parameters in the model (these are defined
                      % in file setup.m).
                      
@@ -309,7 +309,8 @@ if estimatemodel == 1
 
     taux=[1 2 4 5 8 10 14 16];%equations with limited information
         
-    [yy] = goestimate(xx,par,maxx,stderr,nsteps,name,II,criterion,taux,FR,product,hours,nlags,ndraws);
+    %%% LORENZO[yy] = goestimate(xx,par,maxx,stderr,nsteps,name,II,criterion,taux,FR,product,hours,nlags,ndraws);
+    [yy, xxse] = goestimate(xx,par,maxx,stderr,nsteps,name,II,criterion,taux,FR,product,hours,nlags,ndraws);
     xx=yy;
 
     chk=0;
