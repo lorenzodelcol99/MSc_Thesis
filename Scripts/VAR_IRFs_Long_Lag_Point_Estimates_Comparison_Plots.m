@@ -23,7 +23,7 @@ disp('Data loaded successfully. Generating 3 clean VAR figures...');
 % --- NEW TOGGLE SWITCH ---
 % Set to 'true' to plot all 11 variables. 
 % Set to 'false' to plot only the 5 key variables.
-plot_all_variables = false; 
+plot_all_variables = true; 
 % -------------------------
 
 if plot_all_variables

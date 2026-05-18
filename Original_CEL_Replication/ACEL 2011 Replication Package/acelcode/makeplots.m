@@ -117,7 +117,7 @@ suptitle('Neutral Technology Shock'),
 
 %%% LORENZO DEL COL full block of code substitution
 figure(9); 
-set(gcf, 'Name', 'Fed Funds Shock', 'NumberTitle', 'on'); 
+set(gcf, 'Name', 'Monetary Policy Shock', 'NumberTitle', 'on'); 
 
 for zx=1:11
     subplot(4,3,zx)
@@ -136,7 +136,7 @@ for zx=1:11
     axis tight
     hold off
 end
-suptitle('Fed Funds Shock');
+suptitle('Monetary Policy Shock');
 
 
 % figure%, orient landscape
