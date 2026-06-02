@@ -45,6 +45,7 @@ save fixparams par chk taux nepar nsteps Vhat;
 
   g1 = hessian(1:length(gammas),1:length(gammas));
   g2 = hessian(1:length(gammas),length(gammas)+1:length(hessian));
+  %%% LORENZO change line 49: from "-inv(g1)" to --> -pinv(g1) --> try to use the Pseudo Inverse Matrix
   Dhat = -inv(g1)*g2;
   
   %Loading the file which contains the matrix with bootstrapped standard deviations; size j x j

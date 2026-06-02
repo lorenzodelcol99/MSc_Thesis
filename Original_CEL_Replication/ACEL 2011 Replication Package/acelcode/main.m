@@ -35,7 +35,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 10     % If estvar = 1, this controls number of lags in VAR
+nlags       = 4     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -60,7 +60,7 @@ decomp      = 0;     % If estvar = 1, if unity, plot decomposition of historical
 
 ndraws      =1000;   % If estvar = 1, imp = 1; number of artificial data sets to use in bootstrapping
 %%%%% LORENZO DEL COL change line 63 (If I chanfge the VAR lags, need to change also this) PortmanteauLags = 0 to --> PortmanteauLags = XXXXX %%%%% 
-PortmanteauLags = [4 8 12 16];%If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
+PortmanteauLags = [4 8 12 16];% If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
 a           = 8;     % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with shortest period for band pass filter to let through
 b           = 32;    % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with longest period for band pass filter.
 lam         = 1600;  % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); parameter for HP filter.
@@ -82,14 +82,15 @@ estimatemodel = 1;   % If 1, estimate the general equilibrium model. The optimiz
                      %        by running with imp = 1, estvar = 1 the first time. The information is stored for later
                      %        runs in .mat files (see loadreducedform.m for more information.)
                      
-maxx=1000;            %Number of iterations (could be zero) for model estimation (irrelevant if estimatemodel not equal to 1)
+maxx=1000;           % Number of iterations (could be zero) for model estimation (irrelevant if estimatemodel = 0)
                 
 %%%%% LORENZO DEL COL change line 88 (stderr=1) to compute STANDARD DEVIATION OF THE CALIBRATED PARAMETERS                     
 stderr        = 1;   % Only relevant if estimatemodel = 1. If 1, then compute the standard errors of the 
                      % estimated parameters in the model (these are defined
                      % in file setup.m).
-                     
-criterion     = 0;   % Only relevant if estimatemodel = 1. 
+
+%%%%% LORENZO DEL COL change line 93 to estimate the DSGE in isolation with one shock at the time (NEED TO CHANGE ALSO LINE 308! PAY ATTENTION)
+criterion     = 1;   % Only relevant if estimatemodel = 1. 
                      %If 0, use all three shocks in the estimation criterion. 
                      %If 1, use only the monetary policy shock.
                      %If 2, use only the embodied technology shock.
@@ -302,7 +303,10 @@ if estimatemodel == 1
     %If you're not interested in adjust.m, then just
     %enter the parameter values you want in the line right after 'adjust'.
     
+    %%% LORENZO: MODIFY LINE 307 from "pp=0;" to --> "pp=1;" IF YOU NEED TO
+    %%% RE ESTIMATE THE DSGE SUBJECT TO THE SHOCKS IN ISOLATION (if line 93 criterion=1)
     pp=0;
+
     if pp == 1
         adjust
     end
