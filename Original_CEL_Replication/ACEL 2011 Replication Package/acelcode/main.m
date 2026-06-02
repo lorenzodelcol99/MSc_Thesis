@@ -35,7 +35,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 6     % If estvar = 1, this controls number of lags in VAR
+nlags       = 10     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
