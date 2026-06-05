@@ -93,7 +93,7 @@ for zx=1:11
     axis tight
     hold off
 end
-suptitle('Embodied Technology Shock'),
+sgtitle('Embodied Technology Shock'),
 %print -dps2 modvsvarE
 
 figure%, orient landscape
@@ -111,7 +111,7 @@ for zx=1:11
     axis tight
     hold off
 end
-suptitle('Neutral Technology Shock'),
+sgtitle('Neutral Technology Shock'),
 %print -dps2 modvsvarN
 
 
@@ -136,7 +136,7 @@ for zx=1:11
     axis tight
     hold off
 end
-suptitle('Monetary Policy Shock');
+sgtitle('Monetary Policy Shock');
 
 
 % figure%, orient landscape

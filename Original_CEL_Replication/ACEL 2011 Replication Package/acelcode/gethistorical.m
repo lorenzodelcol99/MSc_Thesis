@@ -107,7 +107,8 @@ for zx=1:11
     title(varnamz(zx,:));
 end
 suptitle('Figure 8: Historical decomposition - embodied technology shocks only')
-print -dps2 figure8
+% LORENZO DEL COL: change dps2 into dpdf  line 110
+print -dpdf figure8
 
 figure, orient landscape
 for zx=1:11
@@ -137,7 +138,8 @@ for zx=1:11
     title(varnamz(zx,:));
 end
 suptitle('Figure 7: Historical decomposition - neutral technology shocks only')
-print -dps2 figure7
+% LORENZO DEL COL: change dps2 into dpdf line 142
+print -dpdf figure7
 
 figure, orient landscape
 for zx=1:11
@@ -167,7 +169,8 @@ for zx=1:11
     title(varnamz(zx,:));
 end
 suptitle('Figure 6: Historical decomposition - monetary policy shocks only')
-print -dps2 figure6
+% LORENZO DEL COL: change dps2 into dpdf line 172
+print -dpdf figure6
 
 figure, orient landscape
 for zx=1:11
@@ -197,4 +200,5 @@ for zx=1:11
     title(varnamz(zx,:));
 end
 suptitle('Figure 9: Historical decomposition - monetary policy and technology shocks')
-print -dps2 figure9
+% LORENZO DEL COL: change dps2 into dpdf line 204
+print -dpdf figure9
