@@ -73,10 +73,10 @@ end
 
 disp('--- In-Sample Benchmark RMSE (Full Sample) ---');
 
-% Ensure this list contains exactly 10 names to match the 10 columns of Y
-actual_var_names = {'Real_Productivity_Gr', 'Inflation', 'Capacity_Util', ...
-                    'ln_Hours', 'Real_Output_Gr', 'Real_Consumption_Gr', ...
-                    'Real_Investment_Gr', 'Real_Wage_Gr', 'Fed_Funds_Rate', 'Real_MZM_Gr'};
+% List contains exactly 10 varaibles matched with the 10 columns of Y (names exactly taken from ACEL2011)
+actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator', 'Capacity_Util', ...
+                    'ln_Hours', 'ln(GDP/Hours) - ln_Real_Wages', 'ln_Consumption/GDP', ...
+                    'ln_Investments/GDP', 'Fed_Funds_Rate', 'ln_GDP Deflator + ln_GDP - ln_MZM'};
 
 row_names = strcat('VAR(', string(lags_to_test), ')');
 
@@ -99,7 +99,7 @@ T_total = size(stored_aligned_residuals{idx_p4}, 1);
 time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
 % Define which variable column to plot (e.g., 1 is Output)
-var_to_plot = 1; 
+var_to_plot = 9; 
 
 figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
 

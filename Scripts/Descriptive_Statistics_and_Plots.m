@@ -23,10 +23,10 @@ T_total = size(Y, 1);
 % Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
 time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
-% Ensure this list contains exactly 10 names to match the 10 columns of Y
-actual_var_names = {'Real_Productivity_Gr', 'Inflation', 'Capacity_Util', ...
-                    'ln_Hours', 'Real_Output_Gr', 'Real_Consumption_Gr', ...
-                    'Real_Investment_Gr', 'Real_Wage_Gr', 'Fed_Funds_Rate', 'Real_MZM_Gr'};
+% List contains exactly 10 varaibles matched with the 10 columns of Y (names exactly taken from ACEL2011)
+actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator', 'Capacity_Util', ...
+                    'ln_Hours', 'ln(GDP/Hours) - ln_Real_Wages', 'ln_Consumption/GDP', ...
+                    'ln_Investments/GDP', 'Fed_Funds_Rate', 'ln_GDP Deflator + ln_GDP - ln_MZM'};
 
 
 %% Plotting all the raw series 
@@ -63,14 +63,14 @@ figure("Name", "Raw Series", ...
                                     % [0.1 0.1] means start the window 10% from the left and 10% from the bottom of your screen.
                                     % [0.8 0.8] means make the window 80% as wide and 80% as tall as your entire screen.
 
-% Plot the first variable in isolation
-plot(time_vector, Y(:, 2), ...      % plot(X, Y): is plotting command. The first input (time_vector) is the X-axis, and the second input (Y(:, 2)) is the Y-axis.
+% Plot the a choose [1 ; 10]  variable in isolation
+plot(time_vector, Y(:, 9), ...      % plot(X, Y): is plotting command. The first input (time_vector) is the X-axis, and the second input (Y(:, 2)) is the Y-axis.
     ...                             % Y(:, 2): This is matrix indexing. The colon (:) means "take all rows", and the 2 means "from the second column." So, this extracts the entire historical series for the second variable in your dataset (which is Productivity Growth).
     'LineWidth', 1.5, ...           % Makes the line slightly thicker than the MATLAB default (which is 0.5), making it easier to read in a printed document.
     'Color', [0 0.4470 0.7410]);    % This defines the exact colour of the line using an RGB (Red, Green, Blue) triplet. The numbers range from 0 to 1. This specific combination produces the standard, highly readable "MATLAB Blue."
 xlabel('Time');
-ylabel(actual_var_names{2});
-title(['Isolated Plot of ', actual_var_names{2}], 'Interpreter', 'none');
+ylabel(actual_var_names{9});
+title(['Isolated Plot of ', actual_var_names{9}], 'Interpreter', 'none');
 grid on;
 
 %% Plotting all the series in isolation
