@@ -87,3 +87,33 @@ for v = 1:length(actual_var_names)
     title(['Isolated Plot of ', actual_var_names{v}], 'Interpreter', 'none');
     grid on;
 end
+
+%% Descriptive Statistics Benchmark
+disp('Calculating benchmark descriptive statistics...');
+
+% Calculate the statistics for each column in the Y matrix
+% The transpose (') flips the row vectors into column vectors for the table
+stat_mean     = mean(Y, 1)';   
+stat_variance = var(Y, 0, 1)';      
+stat_std_dev  = std(Y, 0, 1)';       
+stat_iqr      = iqr(Y, 1)';              
+
+% Compile the results into a clean MATLAB table, forcing a fixed decimal format
+benchmark_table = table(compose('%.6f', stat_mean),...
+                        compose('%.6f', stat_variance), ...
+                        compose('%.6f', stat_std_dev), ...
+                        compose('%.6f', stat_iqr), ...
+    'VariableNames', {'Mean', 'Variance', 'Std_Deviation', 'IQR'}, ...
+    'RowNames', actual_var_names);
+
+disp('--- Unconditional Descriptive Statistics (Full Sample) ---');
+disp(benchmark_table);
+
+%% Save Descriptive Statistics Data
+disp('Saving data...');
+
+save('/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Descriptive_Statistics/Dsecriptive_Stat_Data.mat', ...
+     'stat_mean', 'stat_variance', ...
+     'stat_std_dev', 'stat_iqr');
+
+disp('Data successfully saved!');

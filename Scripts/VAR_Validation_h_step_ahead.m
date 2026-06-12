@@ -59,7 +59,10 @@ for i = 1:num_lags               % 1:num_lags it creates a row vector displaying
     % 3. Calculate In-Sample RMSE
     RMSE_insample_benchmark(i, :) = sqrt(mean(e_hat_raw.^2));
     
-    % --- 4. TIME ALIGNMENT ROUTINE ---
+    % 4. Calculate the RMSE in PERCENTAGE POINTS
+    RMSE_insample_benchmark_perc(i, :) = RMSE_insample_benchmark(i, :) * 100 ;
+
+    % --- 5. TIME ALIGNMENT ROUTINE ---
     % Create a matrix of NaNs equal to the size of the original dataset
     e_hat_aligned = NaN(T_total, num_vars);
     % Insert the raw residuals starting AFTER the lag length 'p'
@@ -68,10 +71,10 @@ for i = 1:num_lags               % 1:num_lags it creates a row vector displaying
     % Store the aligned residuals in the cell array
     stored_aligned_residuals{i} = e_hat_aligned;
     
-    disp(['In-Sample RMSE computed for VAR(', num2str(p), ')']);
+    disp(['In-Sample RMSE Percentage Points computed for VAR(', num2str(p), ')']);
 end
 
-disp('--- In-Sample Benchmark RMSE (Full Sample) ---');
+disp('--- In-Sample Benchmark RMSE PP (Full Sample) ---');
 
 % List contains exactly 10 varaibles matched with the 10 columns of Y (names exactly taken from ACEL2011)
 actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator', 'Capacity_Util', ...
@@ -81,9 +84,16 @@ actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator',
 row_names = strcat('VAR(', string(lags_to_test), ')');
 
 % Using array2table for a cleaner console output
-disp(array2table(RMSE_insample_benchmark, 'VariableNames', actual_var_names, 'RowNames', cellstr(row_names)));
+disp(array2table(RMSE_insample_benchmark_perc, 'VariableNames', actual_var_names, 'RowNames', cellstr(row_names)));
 
+%% Save Residuals and RMSE Data
+disp('Saving data...');
 
+save('/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/VAR_Residuals_RMSE_Estimates/in_sample_benchmark_data.mat', ...
+     'stored_aligned_residuals', 'RMSE_insample_benchmark', ...
+     'RMSE_insample_benchmark_perc', 'actual_var_names', 'lags_to_test', 'num_vars');
+
+disp('Data successfully saved!');
 
 %% Plotting the Benchmark Residuals (Single Variable)
 disp('Generating residual plot...');
@@ -170,58 +180,131 @@ end
 xlabel(t, 'Year');
 
 
+%% Plotting In-Sample RMSE vs Lag Length (Simplified)
+disp('Generating In-Sample RMSE plots...');
 
-%% STEP 2 & 3: RECURSIVE OUT-OF-SAMPLE h-STEP AHEAD FORECASTING
+% Initialize a standard white figure window
+figure('Name', 'In-Sample RMSE by Lag', 'Color', 'w', 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+
+% Define the X-axis
+lags_x = [4, 6, 8, 10, 12]; 
+
+% Loop through all variables
+for v = 1:num_vars
+    
+    % Create a 4x3 grid and place the plot in the v-th position
+    subplot(4, 3, v);
+    
+    % Plot the data with round markers ('-o')
+    plot(lags_x, RMSE_insample_benchmark_perc(:, v), '-o', 'LineWidth', 1.5);
+    
+    % Add titles and format the axes
+    title(actual_var_names{v}, 'Interpreter', 'none');
+    grid on;
+    xticks(lags_x);
+    xlim([3, 13]); 
+    ylabel('RMSE (pp)');
+    
+end
+
+% Add a master title to the entire figure
+sgtitle('In-Sample RMSE vs. Lag Length', 'FontWeight', 'bold', 'FontSize', 14);
+
+
+
+%% ACF of Residuals
+disp('Generating ACF plots for the residuals...');
+
+% Define how many autocorrelation lags to compute (20 quarters = 5 years is standard)
+acf_lags = 20;
+
+% Loop over each tested VAR lag structure
+for i = 1:length(lags_to_test)
+    
+    p = lags_to_test(i);
+    
+    % Create a new white figure for each VAR model
+    figure('Name', ['Residual ACF: VAR(', num2str(p), ')'], 'Color', 'w', ...
+           'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+    
+    % Loop through all 10 variables to create the subplots
+    for v = 1:num_vars
+        subplot(4, 3, v);
+        
+        % Extract the residuals for the specific variable and lag
+        % We must use rmmissing() because the time-alignment padded the start with NaNs
+        res_clean = rmmissing(stored_aligned_residuals{i}(:, v));
+        
+        % Plot the ACF
+        autocorr(res_clean, 'NumLags', acf_lags);
+        
+        % Format the subplot
+        title(actual_var_names{v}, 'Interpreter', 'none');
+        grid on;
+        
+        % Remove the default 'Lag' and 'Sample Autocorrelation' labels to reduce clutter
+        xlabel('');
+        ylabel('');
+    end
+    
+    % Add a master title to the figure
+    sgtitle(['Autocorrelation Function of Residuals: VAR(', num2str(p), ')'], ...
+            'FontWeight', 'bold', 'FontSize', 14);
+end
+
+
+%% STEP 3: RECURSIVE OUT-OF-SAMPLE h-STEP AHEAD FORECASTING
 
 % Forse non ha senso fare h-step ahead forecast, sappiamo ex-ante che
 % l'aumento dei parametri penalizza la forecast performance.. devo parlare
-% con efrem.
-disp('Starting Recursive Out-of-Sample Forecasting...');
+% con Efrem.
+% Forse non ha senso fare h-step ahead forecast error analysis, need to focus on in sample estimates in light of the De Greave and Westermark insights
+%disp('Starting Recursive Out-of-Sample Forecasting...');
 
-T_total = size(Y, 1);
-max_h = max(h); % The furthest horizon we need to forecast (4)
-num_horizons = length(h);
+%T_total = size(Y, 1);
+%max_h = max(h); % The furthest horizon we need to forecast (4)
+%num_horizons = length(h);
 
 % Preallocate a 4D array to store forecast errors. 
 % Dimensions: (Time, Variables, Lags, Horizons)
-OOS_Errors = NaN(T_total, num_vars, num_lags, num_horizons);
+%OOS_Errors = NaN(T_total, num_vars, num_lags, num_horizons);
 
 % Setup EMT options specifically for the out-of-sample forecasting
-options_fcst.priors.name = 'Jeffrey'; % Flat prior for classical-equivalent OLS estimates
-options_fcst.K = 100;                  % Keep draws very low for speed
-options_fcst.fhor = max_h;            % Instruct EMT to forecast up to max_h
-options_fcst.noprint = 1;             % Suppress console warnings during the loop
+%options_fcst.priors.name = 'Jeffrey'; % Flat prior for classical-equivalent OLS estimates
+%options_fcst.K = 100;                  % Keep draws very low for speed
+%options_fcst.fhor = max_h;            % Instruct EMT to forecast up to max_h
+%options_fcst.noprint = 1;             % Suppress console warnings during the loop
 
 % Loop 1: Iterate over each lag structure
-for i = 1:num_lags
-    p = lags_to_test(i);
-    disp(['--> Estimating recursive forecasts for VAR(', num2str(p), ')...']);
+%for i = 1:num_lags
+%    p = lags_to_test(i);
+%    disp(['--> Estimating recursive forecasts for VAR(', num2str(p), ')...']);
     
     % Loop 2: The Expanding Time Window
-    for t = T_start : (T_total - max_h)
+%    for t = T_start : (T_total - max_h)
         
         % A. Isolate the training data (1959 up to current time 't')
-        Y_train = Y(1:t, :);
+%        Y_train = Y(1:t, :);
         
         % B. Re-estimate the VAR and generate forecasts automatically
-        BVAR_fcst = bvar_(Y_train, p, options_fcst);
+%        BVAR_fcst = bvar_(Y_train, p, options_fcst);
         
         % C. Extract the mean forecast across the K draws
         % Size is (horizon x variables)
-        Y_forecast_mean = mean(BVAR_fcst.forecasts.no_shocks, 3);
+%        Y_forecast_mean = mean(BVAR_fcst.forecasts.no_shocks, 3);
         
         % D. Extract the true data for the next max_h quarters
-        Y_true = Y((t+1):(t+max_h), :);
+%        Y_true = Y((t+1):(t+max_h), :);
         
         % Loop 3: Extract and save the errors for the specific horizons (1, 3, 5, 10)
-        for hz_idx = 1:num_horizons
-            current_h = h(hz_idx);
+%        for hz_idx = 1:num_horizons
+%            current_h = h(hz_idx);
             
             % Forecast Error = Actual Data - Forecasted Data
-            OOS_Errors(t+current_h, :, i, hz_idx) = Y_true(current_h, :) - Y_forecast_mean(current_h, :);
-        end
-    end
-end
+%            OOS_Errors(t+current_h, :, i, hz_idx) = Y_true(current_h, :) - Y_forecast_mean(current_h, :);
+%        end
+%    end
+%end
 
-disp('Recursive Out-of-Sample Forecasting Complete.');
+%disp('Recursive Out-of-Sample Forecasting Complete.');
 
