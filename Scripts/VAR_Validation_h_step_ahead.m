@@ -72,13 +72,21 @@ for i = 1:num_lags               % 1:num_lags it creates a row vector displaying
 end
 
 disp('--- In-Sample Benchmark RMSE (Full Sample) ---');
-var_names = strcat('Var', string(1:num_vars));
+
+% Ensure this list contains exactly 10 names to match the 10 columns of Y
+actual_var_names = {'Real_Productivity_Gr', 'Inflation', 'Capacity_Util', ...
+                    'ln_Hours', 'Real_Output_Gr', 'Real_Consumption_Gr', ...
+                    'Real_Investment_Gr', 'Real_Wage_Gr', 'Fed_Funds_Rate', 'Real_MZM_Gr'};
+
 row_names = strcat('VAR(', string(lags_to_test), ')');
-disp(array2table(RMSE_insample_benchmark, 'VariableNames', cellstr(var_names), 'RowNames', cellstr(row_names)));
+
+% Using array2table for a cleaner console output
+disp(array2table(RMSE_insample_benchmark, 'VariableNames', actual_var_names, 'RowNames', cellstr(row_names)));
+
+
 
 %% Plotting the Benchmark Residuals (Single Variable)
 disp('Generating residual plot...');
-
 % Find the array indices for the specific models you want to compare
 idx_p4 = find(lags_to_test == 4);
 idx_p12 = find(lags_to_test == 12);
@@ -87,13 +95,13 @@ idx_p12 = find(lags_to_test == 12);
 % Extract the total number of observations (T_total) directly from the padded matrix
 T_total = size(stored_aligned_residuals{idx_p4}, 1);
 
-% Create a datetime vector starting from 1960:Q1 progressing by one quarter
-time_vector = datetime(1960, 1, 1) + calmonths(3 * (0:T_total-1)');
+% Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
+time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
 % Define which variable column to plot (e.g., 1 is Output)
 var_to_plot = 1; 
 
-figure('Name', ['Residual Comparison: ', var_names{var_to_plot}], 'Color', 'w');
+figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
 
 % Plot the VAR(4) residuals against the time vector
 plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), 'LineWidth', 1.5, 'Color', [0 0.4470 0.7410], 'DisplayName', 'VAR(4)');
@@ -106,7 +114,7 @@ plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), 'LineWidth'
 yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
 
 % Title using the dynamic variable name
-title(['In-Sample Residuals for ', var_names{var_to_plot}], 'Interpreter', 'none');
+title(['In-Sample Residuals for ', actual_var_names{var_to_plot}], 'Interpreter', 'none');
 xlabel('Year');
 ylabel('Error');
 legend('Location', 'best');
@@ -114,7 +122,6 @@ grid on;
 hold off;
 
 %% Big Plot of the Benchmark Residuals
-
 disp('Generating residual plots...');
 
 % Find the array indices for the specific models you want to compare
@@ -122,9 +129,9 @@ idx_p4 = find(lags_to_test == 4);
 idx_p12 = find(lags_to_test == 12);
 
 % --- DATE GENERATION ---
-% Create a datetime vector starting from 1960:Q1 (observation 1)
+% Create a datetime vector starting from 1959:Q2 (April 1, 1959)
 % progressing by one quarter (3 months) for the length of T_total
-time_vector = datetime(1960, 1, 1) + calmonths(3 * (0:T_total-1)');
+time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
 % Create a large figure window to comfortably fit all subplots
 figure('Name', 'Residual Comparison: VAR(4) vs VAR(12)', 'Color', 'w', 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
@@ -133,7 +140,7 @@ figure('Name', 'Residual Comparison: VAR(4) vs VAR(12)', 'Color', 'w', 'Units', 
 t = tiledlayout(4, 3, 'TileSpacing', 'compact', 'Padding', 'compact');
 title(t, 'In-Sample Residuals: VAR(4) vs VAR(12)', 'FontWeight', 'bold', 'FontSize', 14);
 
-% Loop through all 11 variables
+% Loop through all variables
 for v = 1:num_vars
     nexttile; % Move to the next plot in the grid
     
@@ -148,7 +155,7 @@ for v = 1:num_vars
     yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
     
     % Title each subplot using the actual economic variable names defined earlier
-    title(var_names{v}, 'Interpreter', 'none');
+    title(actual_var_names{v}, 'Interpreter', 'none');
     
     % Add the legend ONLY to the first tile to avoid cluttering the graphic
     if v == 1
