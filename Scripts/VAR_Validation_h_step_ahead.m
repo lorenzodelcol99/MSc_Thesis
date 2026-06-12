@@ -32,7 +32,7 @@ T_start = 150;
 
 
 %% Full Sample VAR Evaluation: Benchmark Residuals
-num_vars = size(Y, 2);             % Size equal to ne number of columns of the Y matrix
+num_vars = size(Y, 2);             % Size equal to the number of columns of the Y matrix
 num_lags = length(lags_to_test);   % Number of different lags that we need to test
 T_total = size(Y, 1);              % Extract total observations for time alignment
 
@@ -168,6 +168,9 @@ end
 
 % Add a shared X-axis label at the bottom of the grid
 xlabel(t, 'Year');
+
+
+
 %% STEP 2 & 3: RECURSIVE OUT-OF-SAMPLE h-STEP AHEAD FORECASTING
 
 % Forse non ha senso fare h-step ahead forecast, sappiamo ex-ante che
@@ -176,7 +179,7 @@ xlabel(t, 'Year');
 disp('Starting Recursive Out-of-Sample Forecasting...');
 
 T_total = size(Y, 1);
-max_h = max(h); % The furthest horizon we need to forecast (10)
+max_h = max(h); % The furthest horizon we need to forecast (4)
 num_horizons = length(h);
 
 % Preallocate a 4D array to store forecast errors. 
