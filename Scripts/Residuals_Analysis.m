@@ -129,6 +129,9 @@ disp(['Ljung-Box Stat: ', num2str(stat_lb), ' | p-value: ', num2str(pValue_lb)])
 
 
 %% --- MASS RESIDUAL DIAGNOSTICS: LJUNG-BOX TEST ---
+% H0: All the first p autocorrelation are statistically equal to 0
+% H1: At least one order is serially correlated
+% --> Ideally we want large P values, we do not want to reject the null
 disp('Computing Ljung-Box statistics across all variables and lag structures...');
 
 % Define the range of autocorrelation lags to test (1 to 20)
@@ -172,6 +175,9 @@ end
 disp('Ljung-Box testing complete. Results stored in LB_h, LB_pvalues, LB_stats, and LB_cValues.');
 
 %% ---  VISUALISING LJUNG-BOX P-VALUES ---
+% H0: All the first p autocorrelation are statistically equal to 0
+% H1: At least one order is serially correlated
+% --> Ideally we want large P values, we do not want to reject the null
 disp('Generating Ljung-Box p-value plots...');
 
 % Initialize a large, clean white figure window
@@ -225,25 +231,162 @@ end
 sgtitle('Ljung-Box Test p-values (H0: Residuals are White Noise)', 'FontWeight', 'bold', 'FontSize', 14);
 
 
+%% --- RESIDUAL VS UNCONDITIONAL STANDARD DEVIATION ---
+
+% Ideally Residuals' Standard Deviation should be less than undondidional standard deviation of the variabls
+% If this is true means that the VAR hase more predictive power to the unconditional mean of the series (basic benchmark)
+
+disp('Computing Standard Deviations of Residuals vs Unconditional Data...');
+
+% Pre-allocate matrices to store results 
+% Dimensions: (num_vars x num_lags)
+sd_residuals     = zeros(num_vars, num_lags);
+sd_unconditional = zeros(num_vars, num_lags);
+variance_ratio   = zeros(num_vars, num_lags); 
+
+% Loop over each tested VAR lag structure
+for i = 1:num_lags
+    
+    % Loop through each variable
+    for v = 1:num_vars
+        
+        % 1. Extract residuals for this specific lag and variable
+        current_res = stored_aligned_residuals{i}(:, v);
+        
+        % Find the indices where data actually exists (ignoring the NaNs at the start)
+        valid_indices = ~isnan(current_res);
+        res_clean = current_res(valid_indices);
+        
+        % 2. Extract the exact matching sample from the raw data matrix Y
+        % This guarantees an accurate "apples-to-apples" comparison
+        y_clean = Y(valid_indices, v);
+        
+        % 3. Calculate Standard Deviations (Step 1 & 2)
+        sd_residuals(v, i)     = std(res_clean);
+        sd_unconditional(v, i) = std(y_clean);
+        
+        % 4. Compare the two (Step 3)
+        % We calculate the ratio Var(res) / Var(Y). 
+        % This should strictly be less than 1.
+        SD_ratio(v, i) = std(res_clean) / std(y_clean);
+        
+    end
+end
+
+disp('Standard deviations and variance ratios computed successfully.');
+
+%% --- : PRESENTING THE RESIDUALS SD TABLE  ---
+disp('Generating Standard Deviation output...');
+
+sd_residuals
+
+disp("Residuals' SD Displayed!");
+
+%% --- : PRESENTING THE  Variables' Unconditional SD TABLE  ---
+disp('Generating Standard Deviation output...');
+
+sd_unconditional
+
+disp("Residuals' VAriables Displayed!");
+
+
+%% --- : PRESENTING THE SD Ratio TABLE  ---
+disp('Generating Standard Deviation output...');
+
+SD_ratio
+
+disp("Ratios Displayed!");
+
+%% ---------------------------------------------------------
+% 1. Command Window Table (For exact numbers)
+% ---------------------------------------------------------
+% Create dynamic column names based on the lags you tested
+col_names = cell(1, num_lags);
+for i = 1:num_lags
+    col_names{i} = ['VAR_Lag_', num2str(lags_to_test(i))];
+end
+
+% Convert the 10x5 matrix into a formal MATLAB table
+SD_ratio_table = array2table(SD_ratio, ...
+    'RowNames', actual_var_names, ...
+    'VariableNames', col_names);
+
+disp('--- Ratio of Residual Variance to Unconditional Variance ---');
+disp(SD_ratio_table);
+
+
+% ---------------------------------------------------------
+% 2. Visual Heatmap (For presentations and visual checks)
+% ---------------------------------------------------------
+% Create a clean, white figure window
+figure('Name', 'Variance Ratios', 'Color', 'w', 'Position', [150, 150, 800, 600]);
+
+% Create the X-axis labels as strings for the heatmap
+x_labels = string(lags_to_test);
+
+% Generate the heatmap
+hm_var = heatmap(x_labels, actual_var_names, SD_ratio);
+
+% Format the visual elements
+hm_var.Title = 'Ratio of Residual Standard Deviation to Unconditional Variance';
+hm_var.XLabel = 'VAR Lag Order (p)';
+hm_var.YLabel = 'Macroeconomic Variable';
+
+% We want the color scale to be intuitive: 
+% Ratios close to 0 (excellent fit) will be visually distinct from ratios closer to 1 (poor fit).
+% 'bone' or 'parula' are highly professional colormaps for academic papers.
+colormap(parula); 
+
+disp('Table and Heatmap generated successfully.');
 
 
 
-% What I want to do is: Test the Null Hypotesys of H0: every autocorrelation at each order between 
-% the residuals of a given variables are statistically equal to zero --> H0: the Residuals are WN
 
-% I want to do this for each variables rediduals' at each lag choice
+ 
+%% --- PRESENTING THE Standard Deviation results (TABLE & HEATMAP) ---
+disp('Generating Standard Deviation Ratio (std residuals / std variables) output...');
 
-% After having created the results I can create a graph with three dimensions.
-% With the Y axes indicating the P value (o P value o KiSquare statistics, need to think about visualization)
-%  of the LB for the residuals of the given variable (one graph per each variable)
-% X axes equal to the VAR lag choice
-% Z axes equal to the p order of autocorrelation of residuals tested
-% In this way I can visually look the performance across lags of the
-% residuals (if they behave as WN)
+% ---------------------------------------------------------
+% 1. Command Window Table 
+% ---------------------------------------------------------
+col_names = cell(1, num_lags);
+for i = 1:num_lags
+    col_names{i} = ['VAR_Lag_', num2str(lags_to_test(i))];
+end
 
-% Gemini consiglia "heatmap" al posto di 3D graph, ci sta
+SD_ratio_table = array2table(SD_ratio, 'RowNames', actual_var_names, 'VariableNames', col_names);
 
-%% --- ALTERNATIVE VISUALISATION: P-VALUE HEATMAPS ---
+disp('--- Ratio of Residual Standard Deviation to Unconditional Variance ---');
+disp(SD_ratio_table);
+
+% ---------------------------------------------------------
+% 2. Visual Heatmap
+% ---------------------------------------------------------
+figure('Name', 'Standard Deviation Ratios', 'Color', 'w', 'Position', [150, 150, 800, 600]);
+
+hm_var = heatmap(string(lags_to_test), actual_var_names, SD_ratio);
+
+hm_var.Title = 'Ratio of Residual Standard Deviation to Unconditional Variance';
+hm_var.XLabel = 'VAR Lag Order (p)';
+hm_var.YLabel = 'Macroeconomic Variable';
+
+% THE REVERSAL: Start at 1 (White) and transition down to Padova Red
+r_gradient = linspace(1, 155/255, 64)';
+g_gradient = linspace(1, 0/255, 64)';
+b_gradient = linspace(1, 20/255, 64)';
+
+padova_map_reversed = [r_gradient, g_gradient, b_gradient];
+
+% Apply the reversed map
+colormap(padova_map_reversed);
+
+disp('Table and Reversed Padovian Heatmap generated successfully.');
+
+
+
+
+
+%% --- ALTERNATIVE VISUALISATION: Residuals ACF P-VALUE HEATMAPS ---
 disp('Generating Ljung-Box Heatmaps...');
 
 % Loop through each VAR lag structure (1 to 5)
@@ -276,7 +419,7 @@ for i = 1:num_lags
     
 end
 
-%% --- 3D VISUALISATION: P-VALUE SURFACE ---
+%% --- 3D VISUALISATION: Residuals ACF P-VALUE SURFACE ---
 disp('Generating 3D Ljung-Box p-value plots...');
 
 for i = 1:num_lags
