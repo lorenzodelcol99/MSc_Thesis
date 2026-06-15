@@ -42,16 +42,67 @@ load(estim_res_file);
 
 disp('Data loaded successfully.');
 
-%% Stability Test
-%%%%%%%%%%%%%%%% Stability of the VAR Test: Does the Wold Decomposition exists at each VAR lag choice? %%%%%%%%%%%%%%%%
-% Test if all the Eigenvalues of the Companion Matrix lies outside the Unit circle
+
+%% --- STABILITY TEST: BUILT-IN LagOp METHOD ---
+
+%%%%%%%%%%%%%%%% Stability of the VAR Test: Does the Wold Decomposition exist at each VAR lag choice? %%%%%%%%%%%%%%%%
+% Test if all the Eigenvalues of the Companion Matrix lie inside the Unit circle --> in a way that the Roots are greater than 1
+
+num_lags = length(lags_to_test);
+
+disp('Testing VAR stability using MATLAB 2025 built-in functions...');
+
+% Pre-allocate cell array
+stability_results = cell(num_lags, 2);
+
+for i = 1:num_lags
+    p = lags_to_test(i);
+    
+    % 1. Specify and estimate the model
+    Mdl = varm(num_vars, p);
+    EstMdl = estimate(Mdl, Y, 'Display', 'off');
+    
+    % 2. Create the Lag Operator Polynomial
+    % We concatenate the Lag 0 matrix (an Identity matrix) with the estimated AR matrices
+    ARLagOp = LagOp([{eye(num_vars)} EstMdl.AR]);
+    
+    % 3. Check stability using the built-in function
+    if isStable(ARLagOp)
+        stability_results{i, 1} = ['VAR(', num2str(p), ')'];
+        stability_results{i, 2} = 'Stable';
+    else
+        stability_results{i, 1} = ['VAR(', num2str(p), ')'];
+        stability_results{i, 2} = 'UNSTABLE';
+    end
+end
+
+% Format and display the table
+stability_table = cell2table(stability_results, ...
+    'VariableNames', {'Lag_Structure', 'Wold_Decomposition_Status'});
+
+disp('--- Stability Test Results ---');
+disp(stability_table);
 
 
 
+% not trusting too much this piece of code, But it is highly possible that
+% I have an unstable VAR, remeber that I have the FFR, that are highly
+% persistent and probably unit root! Check the ACF graph, 25 quarters of
+% significance, that's unit root
 
-%%%%%%%%%%%%%%%% RESIDUAL ANALYSIS %%%%%%%%%%%%%%%%%
+% Extract the Federal Funds Rate (9th column)
+ffr_data = Y(:, 9);
 
-%% ACF of Residuals
+% Generate the quick ACF plot
+figure('Name', 'ACF: Federal Funds Rate', 'Color', 'w');
+autocorr(ffr_data, 'NumLags', 40); 
+title('Autocorrelation Function: Federal Funds Rate');
+
+
+
+%% %%%%%%%%%%%%%% RESIDUAL ANALYSIS %%%%%%%%%%%%%%%%%
+
+% ACF of Residuals
 disp('Generating ACF plots for the residuals...');
 
 % Define how many autocorrelation lags to compute (20 quarters = 5 years is standard)
