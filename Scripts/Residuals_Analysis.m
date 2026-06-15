@@ -103,6 +103,8 @@ title('Autocorrelation Function: Federal Funds Rate');
 %% %%%%%%%%%%%%%% RESIDUAL ANALYSIS %%%%%%%%%%%%%%%%%
 
 % ACF of Residuals
+
+
 disp('Generating ACF plots for the residuals...');
 
 % Define how many autocorrelation lags to compute (20 quarters = 5 years is standard)
@@ -142,9 +144,9 @@ for i = 1:length(lags_to_test)
             'FontWeight', 'bold', 'FontSize', 14);
 end
 
-%% Compute and display the Box-Pierce and Ljung-Box test statistics for residuals
+%% Compute and display Ljung-Box test statistics for residuals
 
-%% --- SINGLE LAG ISOLATION TEST (VAR 4) ---
+% --- SINGLE LAG ISOLATION TEST (VAR 4) ---
 %                          LB Test
 % H0: All the first p autocorrelation are statistically equal to 0
 % H1: At least one order is serially correlated
@@ -179,7 +181,8 @@ acf_lags_to_test = [1:20];
 disp(['Ljung-Box Stat: ', num2str(stat_lb), ' | p-value: ', num2str(pValue_lb)]);
 
 
-%% --- MASS RESIDUAL DIAGNOSTICS: LJUNG-BOX TEST ---
+%% --- RESIDUAL DIAGNOSTICS: LJUNG-BOX TEST ---
+
 % H0: All the first p autocorrelation are statistically equal to 0
 % H1: At least one order is serially correlated
 % --> Ideally we want large P values, we do not want to reject the null
@@ -226,6 +229,7 @@ end
 disp('Ljung-Box testing complete. Results stored in LB_h, LB_pvalues, LB_stats, and LB_cValues.');
 
 %% ---  VISUALISING LJUNG-BOX P-VALUES ---
+
 % H0: All the first p autocorrelation are statistically equal to 0
 % H1: At least one order is serially correlated
 % --> Ideally we want large P values, we do not want to reject the null
@@ -284,8 +288,8 @@ sgtitle('Ljung-Box Test p-values (H0: Residuals are White Noise)', 'FontWeight',
 
 %% --- RESIDUAL VS UNCONDITIONAL STANDARD DEVIATION ---
 
-% Ideally Residuals' Standard Deviation should be less than undondidional standard deviation of the variabls
-% If this is true means that the VAR hase more predictive power to the unconditional mean of the series (basic benchmark)
+% Ideally Residuals' Standard Deviation should be less than unconditional standard deviation of the variabls
+% If this is true means that the VAR has more predictive power to the unconditional mean of the series (basic benchmark)
 
 disp('Computing Standard Deviations of Residuals vs Unconditional Data...');
 
@@ -348,50 +352,6 @@ SD_ratio
 
 disp("Ratios Displayed!");
 
-%% ---------------------------------------------------------
-% 1. Command Window Table (For exact numbers)
-% ---------------------------------------------------------
-% Create dynamic column names based on the lags you tested
-col_names = cell(1, num_lags);
-for i = 1:num_lags
-    col_names{i} = ['VAR_Lag_', num2str(lags_to_test(i))];
-end
-
-% Convert the 10x5 matrix into a formal MATLAB table
-SD_ratio_table = array2table(SD_ratio, ...
-    'RowNames', actual_var_names, ...
-    'VariableNames', col_names);
-
-disp('--- Ratio of Residual Variance to Unconditional Variance ---');
-disp(SD_ratio_table);
-
-
-% ---------------------------------------------------------
-% 2. Visual Heatmap (For presentations and visual checks)
-% ---------------------------------------------------------
-% Create a clean, white figure window
-figure('Name', 'Variance Ratios', 'Color', 'w', 'Position', [150, 150, 800, 600]);
-
-% Create the X-axis labels as strings for the heatmap
-x_labels = string(lags_to_test);
-
-% Generate the heatmap
-hm_var = heatmap(x_labels, actual_var_names, SD_ratio);
-
-% Format the visual elements
-hm_var.Title = 'Ratio of Residual Standard Deviation to Unconditional Variance';
-hm_var.XLabel = 'VAR Lag Order (p)';
-hm_var.YLabel = 'Macroeconomic Variable';
-
-% We want the color scale to be intuitive: 
-% Ratios close to 0 (excellent fit) will be visually distinct from ratios closer to 1 (poor fit).
-% 'bone' or 'parula' are highly professional colormaps for academic papers.
-colormap(parula); 
-
-disp('Table and Heatmap generated successfully.');
-
-
-
 
  
 %% --- PRESENTING THE Standard Deviation results (TABLE & HEATMAP) ---
@@ -430,8 +390,100 @@ padova_map_reversed = [r_gradient, g_gradient, b_gradient];
 
 % Apply the reversed map
 colormap(padova_map_reversed);
+% Alternative colour --> colormap(parula); 
 
 disp('Table and Reversed Padovian Heatmap generated successfully.');
+
+
+%% --- MULTIVARIATE RESIDUAL UNFORECASTABILITY TEST ---
+
+%%% CONTROLLARE STA COSA
+
+disp('Estimating auxiliary VARs on residuals to test for unforecastability...');
+
+h_res = 4; % Number of residual lags to test in the auxiliary VAR
+
+% Pre-allocate a cell array for the final table
+res_var_results = cell(num_lags, 3);
+
+for i = 1:num_lags
+    p = lags_to_test(i);
+    
+    % 1. Extract and clean the residuals for the current baseline VAR
+    % rmmissing removes the NaN padding at the start of the aligned matrix
+    res_matrix = rmmissing(stored_aligned_residuals{i});
+    
+    % 2. Specify the Restricted Model: VAR(0) (Pure White Noise)
+    Mdl_R = varm(num_vars, 0);
+    
+    % 3. Specify the Unrestricted Model: VAR(h_res)
+    Mdl_U = varm(num_vars, h_res);
+    
+    % 4. Enforce identical samples for the Likelihood Ratio test
+    % The first h_res observations of the residuals must be used as the pre-sample
+    Y0_res = res_matrix(1:h_res, :);
+    Y_est_res = res_matrix(h_res+1:end, :);
+    
+    % 5. Estimate both models on the perfectly aligned residual sample
+    [~, ~, logL_R_aligned] = estimate(Mdl_R, Y_est_res, 'Display', 'off');
+    [~, ~, logL_U_aligned] = estimate(Mdl_U, Y_est_res, 'Y0', Y0_res, 'Display', 'off');
+    
+    % 6. Compute the Likelihood Ratio Statistic and p-value
+    LR_stat = 2 * (logL_U_aligned - logL_R_aligned);
+    
+    % Degrees of freedom: num_vars equations * (num_vars regressors * h_res lags)
+    df = num_vars^2 * h_res; 
+    
+    p_value = 1 - chi2cdf(LR_stat, df);
+    
+    % 7. Store the results cleanly
+    res_var_results{i, 1} = ['VAR(', num2str(p), ') Residuals'];
+    res_var_results{i, 2} = num2str(p_value, '%.4f');
+    
+    if p_value > 0.05
+        res_var_results{i, 3} = 'Unforecastable (Pass)';
+    else
+        res_var_results{i, 3} = 'Forecastable (Fail)';
+    end
+end
+
+% Format and display the final table
+res_var_table = cell2table(res_var_results, ...
+    'VariableNames', {'Baseline_Model', 'LR_Test_p_Value', 'Conclusion'});
+
+disp('--- Auxiliary VAR Residual Test Results ---');
+disp(res_var_table);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
