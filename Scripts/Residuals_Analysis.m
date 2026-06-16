@@ -22,11 +22,15 @@ disp('Historical data loaded successfully.')
 
 % Define the lag lengths to be evaluated sequentially
 lags_to_test = [4, 6, 8, 10, 12];
+num_lags = length(lags_to_test);
+
 % Define the h forecast horizon for h-step ahead forecast
 h = [1, 2, 3, 4];
 % Define the start of out of sample testing period
 % but the VAR12 has (12x10) + 1 = 123 parameters to estimate, so we need more than 123 observations to estimate it!
 T_start = 150;
+
+
 
 %% Loading results from the Estimation of In-Sample Residuals
 disp('Loading estimated residuals and benchmark data...');
@@ -48,7 +52,6 @@ disp('Data loaded successfully.');
 %%%%%%%%%%%%%%%% Stability of the VAR Test: Does the Wold Decomposition exist at each VAR lag choice? %%%%%%%%%%%%%%%%
 % Test if all the Eigenvalues of the Companion Matrix lie inside the Unit circle --> in a way that the Roots are greater than 1
 
-num_lags = length(lags_to_test);
 
 disp('Testing VAR stability using MATLAB 2025 built-in functions...');
 
@@ -395,68 +398,73 @@ colormap(padova_map_reversed);
 disp('Table and Reversed Padovian Heatmap generated successfully.');
 
 
-%% --- MULTIVARIATE RESIDUAL UNFORECASTABILITY TEST ---
 
-%%% CONTROLLARE STA COSA
+%% --- MULTIVARIATE OMITTED LAGS REGRESSION (SYSTEM-WIDE) ---
+% Are the residuals forecastable by omitted lagged values of the covariates?
 
-disp('Estimating auxiliary VARs on residuals to test for unforecastability...');
+disp('Running system-wide multivariate regression on omitted lags...');
 
-h_res = 4; % Number of residual lags to test in the auxiliary VAR
+h = 4; % Number of omitted lags to test (z = 1, 2, 3, 4)
+T_total = size(Y, 1);
 
-% Pre-allocate a cell array for the final table
-res_var_results = cell(num_lags, 3);
+% Pre-allocate cell array for results (5 VARs x 2 columns)
+% We will store the average R-squared across the 10 equations to judge the system fit
+multivariate_results = cell(num_lags, 2);
 
 for i = 1:num_lags
+    
     p = lags_to_test(i);
     
-    % 1. Extract and clean the residuals for the current baseline VAR
-    % rmmissing removes the NaN padding at the start of the aligned matrix
-    res_matrix = rmmissing(stored_aligned_residuals{i});
+    % The regression sample must start after the baseline lags (p) + omitted lags (h)
+    start_t = p + h + 1;
     
-    % 2. Specify the Restricted Model: VAR(0) (Pure White Noise)
-    Mdl_R = varm(num_vars, 0);
-    
-    % 3. Specify the Unrestricted Model: VAR(h_res)
-    Mdl_U = varm(num_vars, h_res);
-    
-    % 4. Enforce identical samples for the Likelihood Ratio test
-    % The first h_res observations of the residuals must be used as the pre-sample
-    Y0_res = res_matrix(1:h_res, :);
-    Y_est_res = res_matrix(h_res+1:end, :);
-    
-    % 5. Estimate both models on the perfectly aligned residual sample
-    [~, ~, logL_R_aligned] = estimate(Mdl_R, Y_est_res, 'Display', 'off');
-    [~, ~, logL_U_aligned] = estimate(Mdl_U, Y_est_res, 'Y0', Y0_res, 'Display', 'off');
-    
-    % 6. Compute the Likelihood Ratio Statistic and p-value
-    LR_stat = 2 * (logL_U_aligned - logL_R_aligned);
-    
-    % Degrees of freedom: num_vars equations * (num_vars regressors * h_res lags)
-    df = num_vars^2 * h_res; 
-    
-    p_value = 1 - chi2cdf(LR_stat, df);
-    
-    % 7. Store the results cleanly
-    res_var_results{i, 1} = ['VAR(', num2str(p), ') Residuals'];
-    res_var_results{i, 2} = num2str(p_value, '%.4f');
-    
-    if p_value > 0.05
-        res_var_results{i, 3} = 'Unforecastable (Pass)';
-    else
-        res_var_results{i, 3} = 'Forecastable (Fail)';
+    % 1. Construct the system Regressor Matrix X (The omitted lags)
+    % This creates the X_{t-j-z} matrix containing all 10 variables across 4 lags
+    X_omitted = [];
+    for lag = 1:h
+        shift = p + lag;
+        lagged_data = Y((start_t - shift) : (T_total - shift), :);
+        X_omitted = [X_omitted, lagged_data];
     end
+    
+    % Add a column of ones for the constant term in the regression
+    X_omitted = [ones(size(X_omitted, 1), 1), X_omitted];
+    
+    % 2. Extract the system Dependent Variable U (The residuals)
+    % Extract the T x 10 matrix and truncate to perfectly match start_t
+    raw_res = rmmissing(stored_aligned_residuals{i});
+    U_matrix = raw_res((start_t - p) : end, :); 
+    
+    % 3. Estimate the System in one single matrix operation
+    % This calculates the (41 x 10) Beta matrix simultaneously
+    % in MATLAB, the backslash operator (mldivide) is explicitly designed to solve systems of linear equations
+    Beta = X_omitted \ U_matrix;
+    
+    % 4. Calculate Fitted Values and Residuals of the Auxiliary Regression
+    U_fitted = X_omitted * Beta;
+    E_matrix = U_matrix - U_fitted;
+    
+    % 5. Calculate R-squared for the system
+    % Calculate the variance of the actual residuals vs the error of this regression
+    var_U = var(U_matrix);
+    var_E = var(E_matrix);
+    system_R2 = 1 - (var_E ./ var_U);
+    
+    % Store the mean R-squared across all 10 equations as a system summary
+    mean_system_R2 = mean(system_R2);
+    
+    multivariate_results{i, 1} = ['VAR(', num2str(p), ') Residuals'];
+    multivariate_results{i, 2} = num2str(mean_system_R2, '%.4f');
+    
 end
 
 % Format and display the final table
-res_var_table = cell2table(res_var_results, ...
-    'VariableNames', {'Baseline_Model', 'LR_Test_p_Value', 'Conclusion'});
+multivariate_table = cell2table(multivariate_results, ...
+    'VariableNames', {'Baseline_Model', 'Mean_System_R_Squared'});
 
-disp('--- Auxiliary VAR Residual Test Results ---');
-disp(res_var_table);
-
-
-
-
+disp('--- Multivariate Omitted Lags Regression Results ---');
+disp(multivariate_table);
+disp('Note: Values close to 0.00 indicate the omitted lags contain no predictable information.');
 
 
 
