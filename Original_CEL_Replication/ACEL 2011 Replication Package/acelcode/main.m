@@ -35,7 +35,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 4     % If estvar = 1, this controls number of lags in VAR
+nlags       = 12     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -89,8 +89,8 @@ stderr        = 1;   % Only relevant if estimatemodel = 1. If 1, then compute th
                      % estimated parameters in the model (these are defined
                      % in file setup.m).
 
-%%%%% LORENZO DEL COL change line 93 to estimate the DSGE in isolation with one shock at the time (NEED TO CHANGE ALSO LINE 308! PAY ATTENTION)
-criterion     = 1;   % Only relevant if estimatemodel = 1. 
+%%%%% LORENZO DEL COL change line 93 to estimate the DSGE in isolation with one shock at the time --> NOT FEASABLE ACEL PRE COMPUTED THE RESUTLS
+criterion     = 0;   % Only relevant if estimatemodel = 1. 
                      %If 0, use all three shocks in the estimation criterion. 
                      %If 1, use only the monetary policy shock.
                      %If 2, use only the embodied technology shock.
@@ -303,8 +303,7 @@ if estimatemodel == 1
     %If you're not interested in adjust.m, then just
     %enter the parameter values you want in the line right after 'adjust'.
     
-    %%% LORENZO: MODIFY LINE 307 from "pp=0;" to --> "pp=1;" IF YOU NEED TO
-    %%% RE ESTIMATE THE DSGE SUBJECT TO THE SHOCKS IN ISOLATION (if line 93 criterion=1)
+    
     pp=0;
 
     if pp == 1

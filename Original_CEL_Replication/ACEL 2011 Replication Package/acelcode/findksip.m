@@ -1,7 +1,7 @@
 function [ksipfspecific,ksiph,kap1,kap2,kap3,kap4,kap5,psi0,psi1,psi2,psi3] = ...
     findksip(gam,lambdaf,lambdaw,muups,muz,beta,del,eta,b,sigmaL,psiL,V,nu,x,eps,alpha,siga,Spp,ksiet,ksiep)
 
-%this takes the coefficients for the firm-specific capital versio of the ACEL model and computes the implied
+%this takes the coefficients for the firm-specific capital version of the ACEL model and computes the implied
 %value of ksip. It checks - by looking over a grid of admissible values of
 %ksip - that the solution is unique
           
