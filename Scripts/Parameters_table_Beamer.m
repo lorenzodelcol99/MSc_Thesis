@@ -3,7 +3,7 @@
 % =========================================================================
 clear; clc;
 
-data_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results';
+data_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
 save_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/DSGE_Parameters_Comparison';
 
 %% 1. MAPPA DEFINITIVA 
