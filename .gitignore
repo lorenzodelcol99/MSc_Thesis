@@ -27,3 +27,4 @@ slprj/
 *.fls
 *.fdb_latexmk
 *.mat
+!Output/Long-Lag_Exercise_Results/Results_Lag/*.mat
