@@ -1,12 +1,14 @@
 % =========================================================================
-% Script: Parameters_table_Beamer_Final_NoChi.m
+% Script: Parameters_table_Slides_4_8_12.m
 % =========================================================================
 clear; clc;
 
-data_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
-save_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/DSGE_Parameters_Comparison';
+load_path      = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/DSGE_Parameters_Comparison';
 
-%% 1. MAPPA DEFINITIVA 
+
+
+%% 1. MAPPING The Structural Parameters  
 param_map = {
     'Structural Estimated Frictions', 'header', '';
     'Price markup ($\lambda_f$)', 'par', 12;
@@ -22,13 +24,13 @@ param_map = {
     'Firm-specific capital ($\xi_{p, fs}$)', 'implied', 'ksip';
 };
 
-%% 2. Caricamento Dati
-data4  = load(fullfile(data_dir, 'results_lag_4.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
-data8  = load(fullfile(data_dir, 'results_lag_8.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
-data12 = load(fullfile(data_dir, 'results_lag_12.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
+%% 2. Loading Data
+data4  = load(fullfile(load_path, 'results_lag_4.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
+data8  = load(fullfile(load_path, 'results_lag_8.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
+data12 = load(fullfile(load_path, 'results_lag_12.mat'), 'xx', 'xxse', 'par', 'ksip', 'ksiph');
 
-%% 3. Generazione LaTeX
-filename = fullfile(save_dir, 'dsge_params_table_beamer.tex');
+%% 3. Creating the LaTeX table
+filename = fullfile(save_base_path, 'dsge_params_table_beamer_4_8_12.tex');
 fileID = fopen(filename, 'w');
 
 fprintf(fileID, '\\begin{table}[htpb]\n    \\centering\n    \\scriptsize\n    \\begin{tabular}{lccc}\n    \\toprule\n');
@@ -50,7 +52,7 @@ for i = 1:size(param_map, 1)
 end
 fprintf(fileID, '    \\bottomrule\n    \\end{tabular}\n\\end{table}\n');
 fclose(fileID);
-fprintf('TABELLA GENERATA (No Chi): %s\n', filename);
+fprintf('Done and saved in : %s\n', filename);
 
 function s = format_pe(p, e)
     t = abs(p/e);
