@@ -10,7 +10,8 @@ addpath('/Users/lorenzodelcol/Desktop/GIT/BVAR_/bvartools');
 
 disp('Loading historical dataset...');
 % Define the absolute path to your Output folder
-base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+base_path      = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Descriptive_Statistics/';
 
 % Extract only the raw historical data matrix from the baseline file
 data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
@@ -50,8 +51,22 @@ for v = 1:length(actual_var_names)
     
     % Turn on the grid lines for easier visual reading
     grid on;
-    
+
 end
+
+% --- Automated Image Saving (PDF format) ---
+% Ensure the target directory exists
+if ~exist(save_base_path, 'dir')
+    mkdir(save_base_path);
+end
+
+% Define the file name and full path
+file_name = 'Raw_Historical_Series.pdf';
+save_path = fullfile(save_base_path, file_name);
+
+% Export as a vector PDF for perfect scaling in LaTeX
+exportgraphics(gcf, save_path, 'ContentType', 'vector');
+disp(['Figure successfully saved to: ', file_name]);
 
 %% Plotting series in isolation
 disp('Generating the raw series plot...');
@@ -74,7 +89,6 @@ title(['Isolated Plot of ', actual_var_names{9}], 'Interpreter', 'none');
 grid on;
 
 %% Plotting all the series in isolation
-
 for v = 1:length(actual_var_names)
     figure("Name", sprintf("Isolated Plot of %s", actual_var_names{v}), ...
         "Color", "w", ...
@@ -83,10 +97,28 @@ for v = 1:length(actual_var_names)
     
     plot(time_vector, Y(:, v), 'LineWidth', 1.5, 'Color', [0 0.4470 0.7410]);
     xlabel('Time');
-    ylabel(actual_var_names{v});
+    ylabel(actual_var_names{v}, 'Interpreter', 'none');
     title(['Isolated Plot of ', actual_var_names{v}], 'Interpreter', 'none');
     grid on;
+    
+    % --- Automated Image Saving (PDF format) ---
+    % Ensure the target directory exists
+    %if ~exist(save_base_path, 'dir')
+    %    mkdir(save_base_path);
+    %end
+    
+    % Clean the variable name to avoid path errors (removes slashes, spaces, etc.)
+    %safe_var_name = regexprep(actual_var_names{v}, '[^\w]', '_');
+    
+    % Define the dynamic file name and full path
+    %file_name = sprintf('Isolated_Plot_%s.pdf', safe_var_name);
+    %save_path = fullfile(save_base_path, file_name);
+    
+    % Export as a vector PDF for perfect scaling in LaTeX
+    %exportgraphics(gcf, save_path, 'ContentType', 'vector');
+    %disp(['Figure successfully saved to: ', file_name]);
 end
+
 
 %% Descriptive Statistics Benchmark
 disp('Calculating benchmark descriptive statistics...');
