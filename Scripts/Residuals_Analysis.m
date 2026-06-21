@@ -15,6 +15,8 @@ addpath('/Users/lorenzodelcol/Desktop/GIT/BVAR_/bvartools');
 disp('Loading historical dataset...');
 % Define the absolute path to your Output folder
 base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Residual_Analysis_Output/';
+
 % Extract only the raw historical data matrix from the baseline file
 data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
 Y = data_full_sample.vardata;
@@ -146,6 +148,56 @@ for i = 1:length(lags_to_test)
     sgtitle(['Autocorrelation Function of Residuals: VAR(', num2str(p), ')'], ...
             'FontWeight', 'bold', 'FontSize', 14);
 end
+%% To save the ACF images, before run the block above this
+% Loop over each tested VAR lag structure
+for i = 1:length(lags_to_test)
+    
+    p = lags_to_test(i);
+    
+    % Create a new white figure for each VAR model
+    figure('Name', ['Residual ACF: VAR(', num2str(p), ')'], 'Color', 'w', ...
+           'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+    
+    % Loop through all 10 variables to create the subplots
+    for v = 1:num_vars
+        subplot(4, 3, v);
+        
+        % Extract the residuals for the specific variable and lag
+        % We must use rmmissing() because the time-alignment padded the start with NaNs
+        res_clean = rmmissing(stored_aligned_residuals{i}(:, v));
+        
+        % Plot the ACF
+        autocorr(res_clean, 'NumLags', acf_lags);
+        
+        % Format the subplot
+        title(actual_var_names{v}, 'Interpreter', 'none');
+        grid on;
+        
+        % Remove the default 'Lag' and 'Sample Autocorrelation' labels to reduce clutter
+        xlabel('');
+        ylabel('');
+    end
+    
+    % Add a master title to the figure
+    sgtitle(['Autocorrelation Function of Residuals: VAR(', num2str(p), ')'], ...
+            'FontWeight', 'bold', 'FontSize', 14);
+            
+    % --- Automated Image Saving (PDF format) ---
+    % Ensure the target directory exists
+    if ~exist(save_base_path, 'dir')
+        mkdir(save_base_path);
+    end
+    
+    % Define the dynamic file name and full path
+    file_name = sprintf('ACF_Residuals_VAR_%d.pdf', p);
+    save_path = fullfile(save_base_path, file_name);
+    
+    % Export as a vector PDF for perfect scaling in LaTeX
+    exportgraphics(gcf, save_path, 'ContentType', 'vector');
+    disp(['Figure successfully saved to: ', file_name]);
+    
+end
+
 
 %% Compute and display Ljung-Box test statistics for residuals
 
@@ -232,7 +284,6 @@ end
 disp('Ljung-Box testing complete. Results stored in LB_h, LB_pvalues, LB_stats, and LB_cValues.');
 
 %% ---  VISUALISING LJUNG-BOX P-VALUES ---
-
 % H0: All the first p autocorrelation are statistically equal to 0
 % H1: At least one order is serially correlated
 % --> Ideally we want large P values, we do not want to reject the null
@@ -241,11 +292,22 @@ disp('Generating Ljung-Box p-value plots...');
 % Initialize a large, clean white figure window
 figure('Name', 'Ljung-Box p-values', 'Color', 'w', 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
 
-% Define a professional color palette for the 5 VAR lines
-colors = lines(num_lags); 
+% Define your professional, consistent colour palette
+color_L4  = [0.4660, 0.6740, 0.1880]; % Green
+color_L6  = [0.4940, 0.1840, 0.5560]; % Purple
+color_L8  = [0.8500, 0.3250, 0.0980]; % Orange
+color_L10 = [0.6350, 0.0780, 0.1840]; % Dark Red
+color_L12 = [0.0000, 0.4470, 0.7410]; % Blue
+
+% Store them in arrays for the loop
+custom_colors = [color_L4; color_L6; color_L8; color_L10; color_L12];
+line_styles   = {'-', '--', ':', '-.', '-'};
 
 % The X-axis values (Autocorrelation lags 1 to 20)
 acf_x = 1:num_acf_lags; 
+
+% Pre-allocate an array to hold the line handles for the legend
+h_lines = gobjects(1, num_lags);
 
 % Loop through each of the 10 variables to create a subplot for each
 for v = 1:num_vars
@@ -258,9 +320,15 @@ for v = 1:num_vars
         % squeeze() takes the 3D slice (1 x 1 x 20) and flattens it into a 1D vector (20 x 1)
         current_pvals = squeeze(LB_pvalues(i, v, :));
         
-        % Plot the line with small round markers
-        plot(acf_x, current_pvals, '-o', 'LineWidth', 1.5, 'Color', colors(i,:), ...
-             'MarkerSize', 3, 'DisplayName', ['VAR(', num2str(lags_to_test(i)), ')']);
+        % Plot the line with consistent colours and line styles, keeping the round markers
+        p = plot(acf_x, current_pvals, 'LineStyle', line_styles{i}, 'Marker', 'o', ...
+             'LineWidth', 1.5, 'Color', custom_colors(i,:), ...
+             'MarkerSize', 3, 'DisplayName', ['VAR p = ', num2str(lags_to_test(i))]);
+             
+        % Save the handle ONLY from the first subplot
+        if v == 1
+            h_lines(i) = p;
+        end
     end
     
     % Draw the critical 0.05 threshold line in red
@@ -273,21 +341,26 @@ for v = 1:num_vars
     xticks(2:2:num_acf_lags);     % Show X-axis ticks every 2 lags to reduce clutter
     grid on;
     
-    % Add the legend ONLY to the first subplot to keep the figure clean
-    if v == 1
-        legend('Location', 'best', 'FontSize', 8);
-    end
-    
     % Add axis labels
+
     xlabel('ACF Lag');
     ylabel('p-value');
     
     hold off;
 end
 
+% --- LEGEND LOGIC ---
+% Subplot 12 is empty. We place the legend perfectly in the bottom right corner.
+ax12 = subplot(4, 3, 12);
+axis(ax12, 'off'); 
+
+lgd = legend(ax12, h_lines, 'Location', 'west');
+lgd.FontSize = 11; 
+
 % Add a master title
 sgtitle('Ljung-Box Test p-values (H0: Residuals are White Noise)', 'FontWeight', 'bold', 'FontSize', 14);
 
+exportgraphics(gcf, fullfile(save_base_path, 'Ljung_Box_P_Values_Across_VAR_Lags.pdf'), 'ContentType', 'vector');
 
 %% --- RESIDUAL VS UNCONDITIONAL STANDARD DEVIATION ---
 
@@ -397,7 +470,7 @@ colormap(padova_map_reversed);
 
 disp('Table and Reversed Padovian Heatmap generated successfully.');
 
-
+exportgraphics(gcf, fullfile(save_base_path, 'Standard_Deviation_Ratios.pdf'), 'ContentType', 'vector');
 
 %% --- MULTIVARIATE OMITTED LAGS REGRESSION (SYSTEM-WIDE) ---
 % Are the residuals forecastable by omitted lagged values of the covariates?

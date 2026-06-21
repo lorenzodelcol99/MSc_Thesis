@@ -4,19 +4,19 @@
 % 1-step ahead forecast error analysis using the Canova/Ferroni Toolbox
 % =========================================================================
 clear; clc; close all;
-
 disp('Initializing Empirical Macro Toolbox (EMT)...');
+
 % Add the Canova/Ferroni toolbox to the MATLAB path
 addpath('/Users/lorenzodelcol/Desktop/GIT/BVAR_/bvartools');
-
 disp('Loading historical dataset...');
+
 % Define the absolute path to your Output folder
 base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/VAR_Residuals_RMSE_Estimates';
 
 % Extract only the raw historical data matrix from the baseline file
 data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
 Y = data_full_sample.vardata;
-
 disp('Historical data loaded successfully.')
 
 % Define the lag lengths to be evaluated sequentially
@@ -27,9 +27,8 @@ h = [1, 2, 3, 4];
 
 % Define the start of out of sample testing period
 % 120 it should be 1989:Q4 so that we include 6 years of Great Moderation in the training data
-% but the VAR12 hase (12x11) + 1 = 133 parameters to estimate, so we need more than 133 observations to estimate it!
+% but the VAR12 has (12x11) + 1 = 133 parameters to estimate, so we need more than 133 observations to estimate it!
 T_start = 150;
-
 
 %% Full Sample VAR Evaluation: Benchmark Residuals
 num_vars = size(Y, 2);             % Size equal to the number of columns of the Y matrix
@@ -42,6 +41,7 @@ RMSE_insample_benchmark = zeros(num_lags, num_vars); % 5 x 11 matrix
 stored_aligned_residuals = cell(num_lags, 1);        % 5 rows (num lags) x 1 column matrix (is a column vector)
 
 disp('Estimating in-sample benchmark residuals across all lag structures using EMT...');
+
 options.priors.name = 'Jeffrey'; % Jeffrey's prior, is an uninformative prior, is a flat prior, using this option 
                                  % (which is the default in the EMT) is as if wee are estimating the VAR in the Frequentist approach
 options.K = 100;                 % number of bootstrap, set K = 100 to have a rapid check, the defaults is K=5000
@@ -61,7 +61,7 @@ for i = 1:num_lags               % 1:num_lags it creates a row vector displaying
     
     % 4. Calculate the RMSE in PERCENTAGE POINTS
     RMSE_insample_benchmark_perc(i, :) = RMSE_insample_benchmark(i, :) * 100 ;
-
+    
     % --- 5. TIME ALIGNMENT ROUTINE ---
     % Create a matrix of NaNs equal to the size of the original dataset
     e_hat_aligned = NaN(T_total, num_vars);
@@ -88,15 +88,29 @@ disp(array2table(RMSE_insample_benchmark_perc, 'VariableNames', actual_var_names
 
 %% Save Residuals and RMSE Data
 disp('Saving data...');
+% Construct the full file path safely
+save_file_path = fullfile(save_base_path, 'in_sample_benchmark_data.mat');
 
-save('/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/VAR_Residuals_RMSE_Estimates/in_sample_benchmark_data.mat', ...
+% Save the data
+save(save_file_path, ...
      'stored_aligned_residuals', 'RMSE_insample_benchmark', ...
      'RMSE_insample_benchmark_perc', 'actual_var_names', 'lags_to_test', 'num_vars');
 
-disp('Data successfully saved!');
+disp(['Data successfully saved to: ', save_file_path]);
+
+%% -------------------------------------------------------------------------
+% Formatting Setup (Global Palette)
+% -------------------------------------------------------------------------
+color_L4  = [0.4660, 0.6740, 0.1880]; % Green
+color_L6  = [0.4940, 0.1840, 0.5560]; % Purple
+color_L8  = [0.8500, 0.3250, 0.0980]; % Orange
+color_L10 = [0.6350, 0.0780, 0.1840]; % Dark Red
+color_L12 = [0.0000, 0.4470, 0.7410]; % Blue 
+line_styles = {'-', '--', ':', '-.', '-'};
 
 %% Plotting the Benchmark Residuals (Single Variable)
 disp('Generating residual plot...');
+
 % Find the array indices for the specific models you want to compare
 idx_p4 = find(lags_to_test == 4);
 idx_p12 = find(lags_to_test == 12);
@@ -108,17 +122,19 @@ T_total = size(stored_aligned_residuals{idx_p4}, 1);
 % Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
 time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
-% Define which variable column to plot (e.g., 1 is Output)
+% Define which variable column to plot (e.g., 9 is Fed Funds Rate)
 var_to_plot = 9; 
 
 figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
 
-% Plot the VAR(4) residuals against the time vector
-plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), 'LineWidth', 1.5, 'Color', [0 0.4470 0.7410], 'DisplayName', 'VAR(4)');
+% Plot the VAR(4) residuals against the time vector using standard formatting
+plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), ...
+    'LineWidth', 1.5, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
 hold on;
 
-% Plot the VAR(12) residuals against the time vector
-plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), 'LineWidth', 1.5, 'Color', [0.8500 0.3250 0.0980], 'LineStyle', '--', 'DisplayName', 'VAR(12)');
+% Plot the VAR(12) residuals against the time vector using standard formatting
+plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), ...
+    'LineWidth', 1.5, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
 
 % Add a horizontal zero line for visual reference
 yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
@@ -130,6 +146,56 @@ ylabel('Error');
 legend('Location', 'best');
 grid on;
 hold off;
+
+%% Plotting the Benchmark Residuals (All Variables In Isolation)
+disp('Generating residual plots for all variables in isolation...');
+
+% Find the array indices for the specific models you want to compare
+idx_p4 = find(lags_to_test == 4);
+idx_p12 = find(lags_to_test == 12);
+
+% --- DATE GENERATION ---
+% Extract the total number of observations (T_total) directly from the padded matrix
+T_total = size(stored_aligned_residuals{idx_p4}, 1);
+
+% Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
+time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
+
+% Loop through all 10 variables
+for var_to_plot = 1:num_vars
+    
+    figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
+    
+    % Plot the VAR(4) residuals against the time vector using standard formatting
+    plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), ...
+        'LineWidth', 1.5, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
+    hold on;
+    
+    % Plot the VAR(12) residuals against the time vector using standard formatting
+    plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), ...
+        'LineWidth', 1.5, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
+    
+    % Add a horizontal zero line for visual reference
+    yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
+    
+    % Title using the dynamic variable name
+    title(['In-Sample Residuals for ', actual_var_names{var_to_plot}], 'Interpreter', 'none');
+    xlabel('Year');
+    ylabel('Error');
+    legend('Location', 'best');
+    grid on;
+    hold off;
+    
+    % --- Optional Automated Image Saving (PDF format) ---
+    %safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
+    %file_name = sprintf('InSample_Residuals_%s.pdf', safe_var_name);
+    %save_path = fullfile(save_base_path, file_name);
+    %exportgraphics(gcf, save_path, 'ContentType', 'vector');
+    
+end
+
+disp('All individual residual plots have been generated.');
+
 
 %% Big Plot of the Benchmark Residuals
 disp('Generating residual plots...');
@@ -155,11 +221,13 @@ for v = 1:num_vars
     nexttile; % Move to the next plot in the grid
     
     % Plot the VAR(4) residuals against the time vector
-    plot(time_vector, stored_aligned_residuals{idx_p4}(:, v), 'LineWidth', 1.2, 'Color', [0 0.4470 0.7410], 'DisplayName', 'VAR(4)');
+    plot(time_vector, stored_aligned_residuals{idx_p4}(:, v), ...
+        'LineWidth', 1.2, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
     hold on;
     
     % Plot the VAR(12) residuals against the time vector
-    plot(time_vector, stored_aligned_residuals{idx_p12}(:, v), 'LineWidth', 1.2, 'Color', [0.8500 0.3250 0.0980], 'LineStyle', '--', 'DisplayName', 'VAR(12)');
+    plot(time_vector, stored_aligned_residuals{idx_p12}(:, v), ...
+        'LineWidth', 1.2, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
     
     % Add a horizontal zero line for visual reference
     yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
@@ -179,8 +247,13 @@ end
 % Add a shared X-axis label at the bottom of the grid
 xlabel(t, 'Year');
 
+% --- Optional Automated Image Saving (PDF format) ---
+    %safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
+    %file_name = sprintf('InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf', safe_var_name);
+    %save_path = fullfile(save_base_path, file_name);
+    %exportgraphics(gcf, save_path, 'ContentType', 'vector');
 
-%% Plotting In-Sample RMSE vs Lag Length (Simplified)
+%% Plotting In-Sample RMSE vs Lag Length
 disp('Generating In-Sample RMSE plots...');
 
 % Initialize a standard white figure window
@@ -195,8 +268,8 @@ for v = 1:num_vars
     % Create a 4x3 grid and place the plot in the v-th position
     subplot(4, 3, v);
     
-    % Plot the data with round markers ('-o')
-    plot(lags_x, RMSE_insample_benchmark_perc(:, v), '-o', 'LineWidth', 1.5);
+    % Plot the data with round markers ('-ko' is a solid black line with circle markers)
+    plot(lags_x, RMSE_insample_benchmark_perc(:, v), '-ko', 'LineWidth', 1.5, 'MarkerFaceColor', 'k');
     
     % Add titles and format the axes
     title(actual_var_names{v}, 'Interpreter', 'none');
@@ -210,6 +283,11 @@ end
 % Add a master title to the entire figure
 sgtitle('In-Sample RMSE vs. Lag Length', 'FontWeight', 'bold', 'FontSize', 14);
 
+% --- Optional Automated Image Saving (PDF format) ---
+    safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
+    file_name = sprintf('InSample_RMSE__Across_Lags_All_Variables.pdf', safe_var_name);
+    save_path = fullfile(save_base_path, file_name);
+    exportgraphics(gcf, save_path, 'ContentType', 'vector');
 
 
 %% STEP 3: RECURSIVE OUT-OF-SAMPLE h-STEP AHEAD FORECASTING
