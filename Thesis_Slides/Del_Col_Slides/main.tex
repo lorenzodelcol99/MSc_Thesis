@@ -78,7 +78,6 @@
 \end{frame}
 
 \begin{frame}{This Paper}\label{slide:this_paper}
-    % Definizione locale dello stile del bullet per questa slide
     \textbf{Research Question:}
     \begin{itemize}
         \item \textcolor{PadovaRed}{Can VAR truncation bias have significant implications for DSGE estimation?}
@@ -165,9 +164,9 @@
 \begin{frame}{Long-Lag}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{VAR_Residuals_Across_Lags/Residual_Comparison_Fed_Funds_Rate_4Vs12.pdf}
+        \includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
         \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
-        \label{fig:placeholder}
+        \label{fig:placeholder1}
     \end{figure}
 \end{frame}
 
@@ -183,7 +182,6 @@
         \item Better coverage
     \end{itemize}
 \end{frame}
-
 
 \begin{frame}{Baseline Exercise}
     Framework:
@@ -202,7 +200,7 @@
 \begin{frame}{ACEL2011's Mechanism}
     Classic NK models accountes for inflation inertia by assuming that firms re-optimise their prices every six quarter or even less often
     \begin{itemize}
-        \item \cite{ACEL2011}'s model inflation is inertial despite firms re-optimise prices average every 1.8 \textbf{\color{red}{(1.5 WP --> che valori metto? --> In slides devo citare WP e mettere valori WP corretto?)}} quarters
+        \item \cite{ACEL2011}'s model inflation is inertial despite firms re-optimise prices average every 1.8 quarters
         \item Inertia is explained by the fact that, when firms re optimise they do it by a small amount because each firm's short run marginal cost is increasing in its own output
         \item The key assumption is that, in any given period a firm's capital stock is pre-determined and is firm specific
     \end{itemize}
@@ -215,12 +213,9 @@
     \end{itemize}
 \end{frame}
 
-
-
 \begin{frame}{ACEL2011's Mechanism (Cond't)}
 \begin{itemize}
     \item When log-linearized, the only difference in characterizing equilibrium equations lies in the Phillips Curve equation
-% The change in inflation at time t is equal to discounted expected change in inflation at time t+1 plus a reduced form coefficient $\gamma$, multiplying time  economy-wide average real marginal cost
 \end{itemize}
 
 \begin{align}
@@ -244,12 +239,7 @@
 \end{itemize}
 \end{frame}
 
-%   Focus on first 2 pages of the paper, there you'll find the mechanism     well explained
-%    \\
-%    My point here is that, the distinction between firm specific vs homogeneous capital does not hold when I enrich the lag-structure of the VAR, consequently the Firm-Specific Calvo parameter, (which is the one that allow ACEL2011 to distinct the two theoretical modes) as the lag structure increase it converges to the value of the Homogeneous capital one.
-
 \begin{frame}{ACEL2011 Results}
-\textbf{\color{red}{QUA CI SONO VALORI WP}}
     The estimated $\gamma$ is 0.014, this implies that in:
     \begin{itemize}
         \item Homogeneous Capital model, firms change prices every 5.6 quarters, with an implied $\xi_p = 0.82 $
@@ -269,46 +259,38 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{IRFs VARs just baseline bands/VAR Comparison (Baseline Bands): Monetary Policy Shock.pdf}
+        \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
         \caption{IRFs VAR Comparison: Monetary Policy Shock}
-        \label{fig:placeholder}
+        \label{fig:placeholder2}
     \end{figure}
     \begin{flushright}
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
-
 
 \begin{frame}{DSGE IRFs; Monetary Policy Shock}\label{slide:dsge_irfs}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{IRFs DSGE Matched/IRF Comparison: Monetary Policy Shock.pdf}
+        \includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Monetary_Policy_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
         \caption{IRFs DSGE Comparison: Monetary Policy Shock}
-        \label{fig:placeholder}
+        \label{fig:placeholder3}
     \end{figure}
     \begin{flushright}
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
 
-%Ottimo risultato dei long-lag p=12 per real wages sia in VAR che in DSGE (anche in paper pubblicato Real Wages hanno la curva piatta!)--> they should increase as there is the Calvo lottery --> demand side shocks put upward pressures in wages, that is; labour demand is higher but wages need to increase so that labour supply meets demand
-%\\
-%VAR --> Less Pronaunced efffects, and the maximum effect seems to happen later in time, less pronaunced but more persistent effect
-%\\
-%DSGE --> Output, Inflation, Consuption, Investment seems to have a mitigated effect (the hump shape is less pronaunced
-
-
 \begin{frame}{DSGE Structural Parameters}\label{slide:dsge_params}
-\input{DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12}
+\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}
     \begin{flushright}
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
 
-\begin{frame}{DSGE Structural Parameters All Lags}\label{slide:dsge_params}
-\input{DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags}
+\begin{frame}{DSGE Structural Parameters All Lags}\label{slide:dsge_params_all}
+\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}
     \begin{flushright}
-        \hyperlink{slide:this_paper_all_lags}{\beamerreturnbutton{Back}}
+        \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
 
@@ -349,16 +331,6 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     
 \end{frame}
 
-%Sembra che gamma, all'aumentare dei lag aumenta, in particolare, see with lag = 12
-%--> gam = 0.013, ksip (Calvo Price Parameter under firm-specific capital model) = 0.89 --> (completamente diverso rispetto diverso dal baseline, è grande e pressochè uguale a quello under homogeneous capital), the associated duration is 8.96'
-%--> ksip (Calvo Price Parameter under homogeneous capital model) = 0.90 , the associated duration is 9.59 '
-%there is no more difference between the firsm-specific and the homogeneous capital models
-
-%--> Questo è un risultato molto forte, all'aumentare dei lag sembra che gamma  e calvo price parameter under firm specific vs homogeneous siano quasi uguali, non ci sia differenza tra i due.
-%quindi potrebbe essere che la specificità del capitale non sia quella componente che causa inflation inertia.
-%e sembra che pure in the firm specific world, no longer change prices frequently every 1.5 quarters on average, but more than 8 quarters, like in the homogeneous capital world
-
-
 \begin{frame}{Next Step}
     In the ACEL2011 baseline exercise
     \begin{itemize}
@@ -385,112 +357,99 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \end{frame}
 
 % =========================================================
-% Da qui in poi inizia l'appendice. 
+% APPENDICE
 % =========================================================
 \appendix
 
 \begin{frame}{VAR IRFs; Monetary Policy Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{IRFs VARs (all CI)/VAR Comparison: Monetary Policy Shock.pdf}
+    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
     \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
-    \label{fig:placeholder}
+    \label{fig:placeholder4}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR4}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
+    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
     \caption{MP: DSGE4 Vs VAR4}
-    \label{fig:placeholder}
+    \label{fig:placeholder5}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR8}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
+    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
     \caption{MP: DSGE4 Vs VAR8}
-    \label{fig:placeholder}
+    \label{fig:placeholder6}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
+    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
     \caption{MP: DSGE4 Vs VAR12}
-    \label{fig:placeholder}
+    \label{fig:placeholder7}
 \end{figure}
 \end{frame}
 
 \begin{frame}{VAR IRFs; Neutral Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{IRFs VARs (all CI)/VAR Comparison: Neutral Technology Shock.pdf}
+    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
     \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
-    \label{fig:placeholder}
+    \label{fig:placeholder8}
 \end{figure}
 \end{frame}
 
 \begin{frame}{DSGE IRFs; Neutral Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{IRFs DSGE Matched/IRF Comparison: Neutral Technology Shock.pdf}
+    \includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
     \caption{IRFs DSGE Matched/IRF Comparison: Neutral Technology Shock}
-    \label{fig:placeholder}
+    \label{fig:placeholder9}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Neutral Technology Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
+    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
     \caption{NT: DSGE4 Vs VAR12}
-    \label{fig:placeholder}
+    \label{fig:placeholder10}
 \end{figure}
 \end{frame}
 
 \begin{frame}{Neutral Technology Shock; DSGE12 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
+    \includegraphics[width=0.95\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
     \caption{NT: DSGE12 Matched with VAR12}
-    \label{fig:placeholder}
+    \label{fig:placeholder11}
 \end{figure}
 \end{frame}
 
 \begin{frame}{VAR IRFs; Embodied Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{IRFs VARs (all CI)/VAR Comparison: Embodied Technology Shock.pdf}
+    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
     \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
-    \label{fig:placeholder}
+    \label{fig:placeholder12}
 \end{figure}
 \end{frame}
-
-
 
 \begin{frame}{Embodied Technology Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
+    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
     \caption{ET: DSGE4 Vs VAR12}
-    \label{fig:placeholder}
+    \label{fig:placeholder13}
 \end{figure}
 \end{frame}
-
-
-%\begin{frame}{Potential Issues}
-%    Paper citato dai Jordà --> Lewis and Reinsel 1985, problemi di convergenza in asympthotic normality as the lag leght increases to fast respect the number of observations available
-%    \\
-%    Let's check the HD and FEVD across different lag structure --> according to Canova and Fosso (2026) we should confound (mixing up) the shocks in the HD
-%    \\
-%    Question, But if our objective is to use the VAR to  correctly educate the DSGE by giving auxiliary moments to match its IRFs, is a problem that with our Long-Lag VAR we are mixing up the HD?
-%    \\
-%    And, why are the HD messed up? while the IRFs are correctly identified? --> at the end the two things use the structural shocks as input, so I don't understand if one (IRFs) works greatly with Long-Lags, the other (HD) is completely broken
-%\end{frame}
 
 % =========================================================
 % TRUCCO PER NASCONDERE LA BIBLIOGRAFIA
