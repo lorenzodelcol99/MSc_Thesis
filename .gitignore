@@ -18,13 +18,21 @@ slprj/
 # LaTeX Temporary Files
 # =========================
 *.aux
+*.bbl
+*.blg
+*.brf
+*.bcf
+*.fls
+*.fdb_latexmk
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
 *.log
 *.nav
 *.out
 *.snm
 *.toc
+*.run.xml
 *.synctex.gz
-*.fls
-*.fdb_latexmk
-*.mat
-!Output/Long-Lag_Exercise_Results/Results_Lag/*.mat
