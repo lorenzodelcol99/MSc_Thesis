@@ -92,12 +92,62 @@ Summarize the main takeaways, discuss the policy implications, and mention any l
 Detail where the reader can find your code (e.g., a GitHub link).
 
 \section{Additional Figures and Tables}
+\subsection{ACEL 2005 VAR Variables}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.85\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
-    \caption{In-Sample Residuals for the Federal Funds Rate. If this renders, the pathing is correct.}
+    \IfFileExists{../../Output/Descriptive_Statistics/Raw_Historical_Series.pdf}{\includegraphics[width=1\linewidth]{../../Output/Descriptive_Statistics/Raw_Historical_Series.pdf}}{\fbox{Missing file: ../../Output/Descriptive_Statistics/Raw_Historical_Series.pdf}}
+    \caption{Raw Historical Series}
     \label{fig:test_residuals}
 \end{figure}
+
+
+\subsection{ACEL 2005 VAR(4) Baseline Shocks Results}
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_4.pdf}}
+    \caption{Embodied Technology Shock}
+    \label{fig:test_residuals}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_4.pdf}}
+    \caption{Neutral Technology Shock}
+    \label{fig:test_residuals}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_4.pdf}}
+    \caption{Monetary Policy Shock}
+    \label{fig:test_residuals}
+\end{figure}
+
+\subsection{ACEL 2005 VAR(4) DSGE MatchedBaseline Shocks Results}
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_basic_DSGE_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_basic_DSGE_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_basic_DSGE_lag_4.pdf}}
+    \caption{Embodied Technology Shock DSGE4 Matched}
+    \label{fig:test_residuals}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_basic_DSGE_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_basic_DSGE_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_basic_DSGE_lag_4.pdf}}
+    \caption{Neutral Technology Shock DSGE4 Matched}
+    \label{fig:test_residuals}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_basic_DSGE_lag_4.pdf}{\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_basic_DSGE_lag_4.pdf}}{\fbox{Missing file: ../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_basic_DSGE_lag_4.pdf}}
+    \caption{Monetary Policy Shock}
+    \label{fig:test_residuals}
+\end{figure}
+
+
+
+
 
 \label{app:figures}
 
