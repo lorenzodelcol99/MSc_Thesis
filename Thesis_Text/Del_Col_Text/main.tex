@@ -1,0 +1,105 @@
+\documentclass[12pt, a4paper]{article} % Changed to a4paper for EU standards
+
+% --- MARGINS & LANGUAGE ---
+\usepackage[margin=1in]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% --- SPACING ---
+\usepackage{setspace} 
+\onehalfspacing % Standard 1.5 spacing for academic theses
+%\doublespacing % Uncomment for 2.0 spacing if requested by supervisor
+
+% --- MATH & FONTS ---
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage{mathptmx}   % Times New Roman for text and math
+\usepackage{bm}         % For bold math symbols
+\usepackage{microtype}  % Improves text justification and typography
+
+% --- FIGURES & TABLES ---
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{subfig}
+\usepackage{booktabs}   % For professional looking tables
+
+% --- CODE & UTILITIES ---
+\usepackage{listings}   
+\usepackage{verbatim}   
+\usepackage{color}  
+\usepackage[colorinlistoftodos]{todonotes}
+
+% --- CITATIONS & LINKS (THE "BLACK" VERSION) ---
+\usepackage{natbib}
+% 'hidelinks' removes all red/blue colors from citations and URLs, 
+% keeping them standard black text while remaining clickable.
+\usepackage[hidelinks]{hyperref} 
+
+\begin{document}
+
+% --- TITLE PAGE ---
+\title{\textbf{The Short, the Long, and the Consequences of VAR Analysis For Structural DSGE Estimation}\\{\small \textbf{Master's Degree in Applied Economics; Economic Data Analytics \\University of Padova; Supervisor Prof. Efrem Castelnuovo}}}
+\author{Lorenzo Del Col}
+\date{\today} % Automatically prints today's date, or hardcode it like: March 20th, 2026
+\maketitle
+
+% --- ABSTRACT ---
+\begin{abstract}
+    Truncation bias could be a severe problem regarding structural VAR analysis (De Greave and Westermark ) (DGW2025) claims that the role of lag choice in SVAR is crucial to correctly identify IRFs, and they claim that choosing long lags solve the bias and, surprisingly, this reduce the variance of the point estimate. CEE2005 is a classic paper that studies the effects of monetary policy shock in the economy. Particularly their DSGE is calibrated ex-ante using matching the model's IRFs with the ones estimated from the VAR analysis. The aim of this thesis is to perform the (DGW2025) exercise, see if and how the IRFs changes, analys how the DSGE model calibration vary and if the model is consistent to this new empirical way to estimate the VARs. If so, we want to understand more about the claimed variance reduction caused by the solution of the truncation bias how works in the Frequentist and Bayesian world.
+\end{abstract}
+\newpage
+
+% --- TABLE OF CONTENTS ---
+\tableofcontents
+\newpage
+
+% --- 1. INTRODUCTION ---
+\section{Introduction}
+Provide the background of your topic, state the research problem, and outline the structure of your thesis here.
+
+\subsection{Research Question}
+Clearly define what your thesis aims to solve or investigate.
+
+% --- 2. LITERATURE REVIEW / THEORETICAL FRAMEWORK ---
+\section{Theoretical Framework}
+Discuss the existing literature and the theoretical models that underpin your research.
+
+% --- 3. METHODOLOGY ---
+\section{Methodology}
+Explain the empirical strategy, models, and data you are using.
+
+% --- 4. RESULTS ---
+\section{Empirical Results}
+Present your findings, regression tables, and graphs here.
+
+% --- 5. CONCLUSION ---
+\section{Conclusion}
+Summarize the main takeaways, discuss the policy implications, and mention any limitations of your work.
+
+\clearpage
+
+% --- BIBLIOGRAPHY ---
+\bibliographystyle{apalike}
+\bibliography{biblio} % Make sure you have a biblio.bib file in your project
+
+\clearpage
+
+% --- APPENDIX ---
+\appendix
+\section{Replication Files and Code}
+\label{app:code}
+Detail where the reader can find your code (e.g., a GitHub link).
+
+\section{Additional Figures and Tables}
+\label{app:figures}
+
+% Example of a blank figure insertion
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{filename.png}
+%     \caption{Describe the figure here.}
+%     \label{fig:my_label}
+% \end{figure}
+
+\end{document}
