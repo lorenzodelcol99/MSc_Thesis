@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage{natbib}
+\usepackage[round, authoryear]{natbib}
 \usepackage{booktabs}
 \usepackage{amssymb} 
 
@@ -105,19 +105,19 @@
 \begin{frame}{Related Literature}
     \textbf{IRFs:}
     \begin{itemize}
-        \item \cite{Moller_Wolf2021, Ludwig2024}
+        \item \citep{Moller_Wolf2021, Ludwig2026}
     \end{itemize}
     \textbf{DSGE IRFs matching with VARs}
     \begin{itemize}
-        \item \cite{CEE2005, ACEL2011, Jarocinski_Karadi2020}
+        \item \citep{CEE2005, ACEL2011, Jarocinski_Karadi2020}
     \end{itemize}
     \textbf{Truncation Bias}
     \begin{itemize}
-        \item \cite{Long_Lag2025, Baumeister2025}
+        \item \citep{Long_Lag2025, Baumeister2025}
     \end{itemize}
     \textbf{Long Lag VARs}
     \begin{itemize}
-        \item \cite{Antolin-Diaz_Surico2025}
+        \item \citep{Antolin-Diaz_Surico2025}
     \end{itemize}
 \end{frame}
 
@@ -164,7 +164,9 @@
 \begin{frame}{Long-Lag}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+        \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+            {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+            {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
         \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
         \label{fig:placeholder1}
     \end{figure}
@@ -200,13 +202,13 @@
 \begin{frame}{ACEL2011's Mechanism}
     Classic NK models accountes for inflation inertia by assuming that firms re-optimise their prices every six quarter or even less often
     \begin{itemize}
-        \item \cite{ACEL2011}'s model inflation is inertial despite firms re-optimise prices average every 1.8 quarters
+        \item \citet{ACEL2011}'s model inflation is inertial despite firms re-optimise prices average every 1.8 quarters
         \item Inertia is explained by the fact that, when firms re optimise they do it by a small amount because each firm's short run marginal cost is increasing in its own output
         \item The key assumption is that, in any given period a firm's capital stock is pre-determined and is firm specific
     \end{itemize}
 
     \vspace{0.5cm}
-    They create a two model that builds on \cite{CEE2005}: 
+    They create a two model that builds on \citet{CEE2005}: 
     \begin{itemize}
         \item Capital is Homogeneous
         \item Capital Firm-Specific
@@ -259,7 +261,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+            {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
         \caption{IRFs VAR Comparison: Monetary Policy Shock}
         \label{fig:placeholder2}
     \end{figure}
@@ -271,7 +275,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{DSGE IRFs; Monetary Policy Shock}\label{slide:dsge_irfs}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Monetary_Policy_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
+        \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Monetary_Policy_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Monetary_Policy_Shock/DSGE_Comparison_Lags_4_8_12.pdf}}
+            {\fbox{Missing file: DSGE\_Comparison\_Lags\_4\_8\_12.pdf}}
         \caption{IRFs DSGE Comparison: Monetary Policy Shock}
         \label{fig:placeholder3}
     \end{figure}
@@ -281,14 +287,18 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \end{frame}
 
 \begin{frame}{DSGE Structural Parameters}\label{slide:dsge_params}
-\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}}
+    {\fbox{Missing file: dsge\_params\_table\_beamer\_4\_8\_12.tex}}
     \begin{flushright}
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
 
 \begin{frame}{DSGE Structural Parameters All Lags}\label{slide:dsge_params_all}
-\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}}
+    {\fbox{Missing file: dsge\_params\_table\_beamer\_all\_lags.tex}}
     \begin{flushright}
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
@@ -342,7 +352,7 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 
     New Exercise
     \begin{itemize}
-        \item Same exercise using \cite{Jarocinski_Karadi2020}
+        \item Same exercise using \citet{Jarocinski_Karadi2020}
         \item Analyse the Long-Lag VAR results in both the
         Frequentist and Bayesian approach
     \end{itemize}
@@ -364,7 +374,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{VAR IRFs; Monetary Policy Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
     \label{fig:placeholder4}
 \end{figure}
@@ -373,7 +385,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR4}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
+        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}}
+        {\fbox{Missing file: MP\_DSGE4\_lag\_4.pdf}}
     \caption{MP: DSGE4 Vs VAR4}
     \label{fig:placeholder5}
 \end{figure}
@@ -382,7 +396,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR8}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
+        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}}
+        {\fbox{Missing file: MP\_DSGE4\_lag\_8.pdf}}
     \caption{MP: DSGE4 Vs VAR8}
     \label{fig:placeholder6}
 \end{figure}
@@ -391,7 +407,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Monetary Policy Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
+        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}}
+        {\fbox{Missing file: MP\_DSGE4\_lag\_12.pdf}}
     \caption{MP: DSGE4 Vs VAR12}
     \label{fig:placeholder7}
 \end{figure}
@@ -400,7 +418,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{VAR IRFs; Neutral Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
     \label{fig:placeholder8}
 \end{figure}
@@ -409,7 +429,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{DSGE IRFs; Neutral Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: DSGE\_Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs DSGE Matched/IRF Comparison: Neutral Technology Shock}
     \label{fig:placeholder9}
 \end{figure}
@@ -418,7 +440,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Neutral Technology Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
+        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}}
+        {\fbox{Missing file: NT\_DSGE4\_lag\_12.pdf}}
     \caption{NT: DSGE4 Vs VAR12}
     \label{fig:placeholder10}
 \end{figure}
@@ -427,7 +451,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Neutral Technology Shock; DSGE12 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}}
+        {\fbox{Missing file: NT\_newDSGE\_lag\_12.pdf}}
     \caption{NT: DSGE12 Matched with VAR12}
     \label{fig:placeholder11}
 \end{figure}
@@ -436,7 +462,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{VAR IRFs; Embodied Technology Shock}
 \begin{figure}
     \centering
-    \includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
     \label{fig:placeholder12}
 \end{figure}
@@ -445,7 +473,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \begin{frame}{Embodied Technology Shock; DSGE4 vs VAR12}
 \begin{figure}
     \centering
-    \includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
+    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
+        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}}
+        {\fbox{Missing file: ET\_DSGE4\_lag\_12.pdf}}
     \caption{ET: DSGE4 Vs VAR12}
     \label{fig:placeholder13}
 \end{figure}
