@@ -92,6 +92,38 @@ Summarize the main takeaways, discuss the policy implications, and mention any l
 \label{app:code}
 Detail where the reader can find your code (e.g., a GitHub link).
 
+\section{Additional Tables}
+\label{app:tables}
+
+\subsection{DSGE Parameters Table: all lags}
+
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_all_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_all_lags.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
+Investment adjustment cost in VAR with 6 lags has a point estimate of 2413 with a standard deviation of 7400. 
+This is a good result in the sense that matches perfectly the ACEL2005 working paper, they estimate the baseline model with a VAR with 6 lags as robustness.
+The second thing that we can learn from this is that probably the likelihood function of this parameter int he underlying DSGE model, when matched with a VAR 6 is complitely flat.
+The maximum likelihood estimator is not able to find a maximum point
+
+
+\subsection{Implied Duration from Calvo Price Table: all lags}
+
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
+
+\subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
+
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
+
 \section{Additional Figures and Tables}
 \label{app:figures}
 
@@ -590,7 +622,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_1_UpToLag_4.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Monetary Policy Shock lag 4}
-    \label{fig:mp_baseline_lag4}
+    \label{fig:VAR_mp_baseline_lag4}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -598,7 +630,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_2_UpToLag_6.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Monetary Policy Shock lag 6}
-    \label{fig:mp_baseline_lag6}
+    \label{fig:VAR_mp_baseline_lag6}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -606,7 +638,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_3_UpToLag_8.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Monetary Policy Shock lag 8}
-    \label{fig:mp_baseline_lag8}
+    \label{fig:VAR_mp_baseline_lag8}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -614,7 +646,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_4_UpToLag_10.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Monetary Policy Shock lag 10}
-    \label{fig:mp_baseline_lag10}
+    \label{fig:VAR_mp_baseline_lag10}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -622,7 +654,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_5_UpToLag_12.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Monetary Policy Shock lag 12}
-    \label{fig:mp_baseline_lag12}
+    \label{fig:VAR_mp_baseline_lag12}
 \end{figure}
 
 \FloatBarrier
@@ -633,7 +665,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Embodied Technology Shock lag 4}
-    \label{fig:et_baseline_lag4}
+    \label{fig:VAR_et_baseline_lag4}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -641,7 +673,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Embodied Technology Shock lag 6}
-    \label{fig:et_baseline_lag6}
+    \label{fig:VAR_et_baseline_lag6}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -649,7 +681,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Embodied Technology Shock lag 8}
-    \label{fig:et_baseline_lag8}
+    \label{fig:VAR_et_baseline_lag8}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -657,7 +689,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Embodied Technology Shock lag 10}
-    \label{fig:et_baseline_lag10}
+    \label{fig:VAR_et_baseline_lag10}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -665,7 +697,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Embodied Technology Shock lag 12}
-    \label{fig:et_baseline_lag12}
+    \label{fig:VAR_et_baseline_lag12}
 \end{figure}
 
 \FloatBarrier
@@ -676,7 +708,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Neutral Technology Shock lag 4}
-    \label{fig:nt_baseline_lag4}
+    \label{fig:VAR_nt_baseline_lag4}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -684,7 +716,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Neutral Technology Shock lag 6}
-    \label{fig:nt_baseline_lag6}
+    \label{fig:VAR_nt_baseline_lag6}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -692,7 +724,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Neutral Technology Shock lag 8}
-    \label{fig:nt_baseline_lag8}
+    \label{fig:VAR_nt_baseline_lag8}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -700,7 +732,7 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Neutral Technology Shock lag 10}
-    \label{fig:nt_baseline_lag10}
+    \label{fig:VAR_nt_baseline_lag10}
 \end{figure}
 
 \begin{figure}[htpb]
@@ -708,10 +740,139 @@ Detail where the reader can find your code (e.g., a GitHub link).
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}
     {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
     \caption{Neutral Technology Shock lag 12}
-    \label{fig:nt_baseline_lag12}
+    \label{fig:VAR_nt_baseline_lag12}
 \end{figure}
 
 \FloatBarrier
 
-\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Monetary Technology Shock}
+\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Monetary Policy Shock}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Monetary Policy Shock lag 4}
+    \label{fig:DSGE_mp_baseline_lag4}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_2_UpToLag_6.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Monetary Policy Shock lag 6}
+    \label{fig:DSGE_mp_baseline_lag6}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_3_UpToLag_8.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Monetary Policy Shock lag 8}
+    \label{fig:DSGE_mp_baseline_lag8}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_4_UpToLag_10.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Monetary Policy Shock lag 10}
+    \label{fig:DSGE_mp_baseline_lag10}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_5_UpToLag_12.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Monetary Policy Shock lag 12}
+    \label{fig:DSGE_mp_baseline_lag12}
+\end{figure}
+
+\FloatBarrier
+\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Embodied Technology Shock}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Embodied Technology Shock lag 4}
+    \label{fig:DSGE_et_baseline_lag4}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Embodied Technology Shock lag 6}
+    \label{fig:DSGE_et_baseline_lag6}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Embodied Technology Shock lag 8}
+    \label{fig:DSGE_et_baseline_lag8}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Embodied Technology Shock lag 10}
+    \label{fig:DSGE_et_baseline_lag10}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Embodied Technology Shock lag 12}
+    \label{fig:DSGE_et_baseline_lag12}
+\end{figure}
+
+\FloatBarrier
+\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Neutral Technology Shock}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Neutral Technology Shock lag 4}
+    \label{fig:DSGE_nt_baseline_lag4}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Neutral Technology Shock lag 6}
+    \label{fig:DSGE_nt_baseline_lag6}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Neutral Technology Shock lag 8}
+    \label{fig:DSGE_nt_baseline_lag8}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Neutral Technology Shock lag 10}
+    \label{fig:DSGE_nt_baseline_lag10}
+\end{figure}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE Neutral Technology Shock lag 12}
+    \label{fig:DSGE_nt_baseline_lag12}
+\end{figure}
+
+\FloatBarrier
+
 \end{document}
