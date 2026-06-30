@@ -14,4 +14,4 @@ zeta=1/zetai;
 
 psi0= dd*(1-beta*ksip)*zeta*(1+ksip*beta*tau*(A*inv(eye(2)-ksip*beta*A))*tau');
 dau=[0 1]';
-psi1= dd*zeta*(1-beta*ksip)*ksip*beta*tau*(A*inv(eye(2)-ksip*beta*A))*dau;
+psi1= dd*zeta*(1-beta*ksip)*ksip*beta*tau*(A*inv(eye(2)-ksip*beta*A))*dau;, 

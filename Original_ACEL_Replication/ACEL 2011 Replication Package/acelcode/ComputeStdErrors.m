@@ -45,11 +45,17 @@ save fixparams par chk taux nepar nsteps Vhat;
 
   g1 = hessian(1:length(gammas),1:length(gammas));
   g2 = hessian(1:length(gammas),length(gammas)+1:length(hessian));
-  %%% LORENZO change line 49: from "-inv(g1)" to --> -pinv(g1) --> try to use the Pseudo Inverse Matrix
   Dhat = -inv(g1)*g2;
   
   %Loading the file which contains the matrix with bootstrapped standard deviations; size j x j
   load WhatMat; 
+
+  % LORENZO 30/06 Line 54: Capture and save the full VCV Matrix, not just the diagonal (variances)
+  Vmat_DSGE = Dhat * (WhatMat) * Dhat';
+  
+  % LORENZO 30/06 Line 57: Save it to the current working directory so you can load it in your Monte Carlo script
+  save Vmat_DSGE.mat Vmat_DSGE;
+
   StdErr = sqrt(diag(Dhat*(WhatMat)*Dhat'));
 
   disp('Standard errors for the estimated parameters');
