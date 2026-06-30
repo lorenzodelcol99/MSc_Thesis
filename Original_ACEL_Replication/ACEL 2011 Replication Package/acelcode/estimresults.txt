@@ -7693,3 +7693,397 @@ nsteps =
 
     20
 
+Parameter estimates and standard errors
+
+ans =
+
+   -0.0365    0.1125
+    0.3427    0.3127
+    2.9941    2.4707
+    0.9020    0.1478
+    0.8233    0.1570
+    0.2448    0.2463
+    0.2410    0.2269
+    0.3307    0.0850
+    0.0678    0.0456
+    0.3025    0.0444
+    0.8077    0.2111
+    3.2807    1.8874
+    0.7221    0.1506
+    0.7066    0.0463
+    1.9938    2.6066
+    1.3255    1.1521
+    0.1361    0.2393
+    0.0402    0.0246
+
+Criterion value  1063.3835
+parameter values and names
+
+%Following are the parameters that were estimated 
+rho_M       = -0.0365 ;
+rho_xz      = 0.3427 ;
+c_z         = 2.9941 ;
+rho_muz     = 0.9020 ;
+rho_xups    = 0.8233 ;
+c_ups       = 0.2448 ;
+rho_muups   = 0.2410 ;
+sig_M       = 0.3307 ;
+sig_muz     = 0.0678 ;
+sig_muups   = 0.3025 ;
+epsilon     = 0.8077 ;
+kappa       = 3.2807 ;
+xi_w        = 0.7221 ;
+b           = 0.7066 ;
+sigma_a     = 1.9938 ;
+cp_z        = 1.3255 ;
+cp_ups      = 0.1361 ;
+gam         = 0.0402 ;
+%Following are the parameters held fixed in the estimation 
+
+psi_L       = 1.0000 ;
+bet         = 0.9926 ;
+mu_ups      = 1.0042 ;
+mu_z        = 1.0001 ;
+delta       = 0.0250 ;
+alph        = 0.3600 ;
+nu          = 1.0000 ;
+psi_L       = 1.0000 ;
+x           = 1.0170 ;
+V           = 0.4500 ;
+sigma_L     = 1.0000 ;
+lambda_f    = 1.0100 ;
+lambda_w    = 1.0500 ;
+squig       = 1.0000 ;
+vartheta    = 0.0000 ;
+eta         = 0.0360 ;
+theta_M     = 0.0000 ;
+theta_muz   = 0.0000 ;
+theta_muups = 0.0000 ;
+ 
+Settings used to generate VAR impulse responses - see the lines at the beginning of main.m for explanations
+
+FR =
+
+     0
+
+
+product =
+
+     0
+
+
+hours =
+
+     0
+
+
+nlags =
+
+     4
+
+
+ndraws =
+
+        1000
+
+
+nsteps =
+
+    20
+
+Parameter estimates and standard errors
+
+ans =
+
+   1.0e+03 *
+
+    0.0001    0.0001
+    0.0002    0.0003
+    0.0016    0.0009
+    0.0009    0.0001
+    0.0008    0.0001
+    0.0008    0.0006
+    0.0008    0.0001
+    0.0003    0.0001
+    0.0001    0.0000
+    0.0001    0.0000
+    0.0008    0.0002
+    2.4135    7.4007
+    0.0009    0.0001
+    0.0007    0.0001
+    0.0105    0.0278
+    0.0013    0.0008
+   -0.0002    0.0005
+    0.0002    0.0002
+
+Criterion value  1462.3674
+parameter values and names
+
+%Following are the parameters that were estimated 
+rho_M       = 0.0505 ;
+rho_xz      = 0.2348 ;
+c_z         = 1.6108 ;
+rho_muz     = 0.8697 ;
+rho_xups    = 0.7976 ;
+c_ups       = 0.7552 ;
+rho_muups   = 0.8049 ;
+sig_M       = 0.2857 ;
+sig_muz     = 0.0598 ;
+sig_muups   = 0.1028 ;
+epsilon     = 0.8089 ;
+kappa       = 2413.4944 ;
+xi_w        = 0.9269 ;
+b           = 0.7183 ;
+sigma_a     = 10.5446 ;
+cp_z        = 1.3211 ;
+cp_ups      = -0.2297 ;
+gam         = 0.1519 ;
+%Following are the parameters held fixed in the estimation 
+
+psi_L       = 1.0000 ;
+bet         = 0.9926 ;
+mu_ups      = 1.0042 ;
+mu_z        = 1.0001 ;
+delta       = 0.0250 ;
+alph        = 0.3600 ;
+nu          = 1.0000 ;
+psi_L       = 1.0000 ;
+x           = 1.0170 ;
+V           = 0.4500 ;
+sigma_L     = 1.0000 ;
+lambda_f    = 1.0100 ;
+lambda_w    = 1.0500 ;
+squig       = 1.0000 ;
+vartheta    = 0.0000 ;
+eta         = 0.0360 ;
+theta_M     = 0.0000 ;
+theta_muz   = 0.0000 ;
+theta_muups = 0.0000 ;
+ 
+Settings used to generate VAR impulse responses - see the lines at the beginning of main.m for explanations
+
+FR =
+
+     0
+
+
+product =
+
+     0
+
+
+hours =
+
+     0
+
+
+nlags =
+
+     6
+
+
+ndraws =
+
+        1000
+
+
+nsteps =
+
+    20
+
+Parameter estimates and standard errors
+
+ans =
+
+   -0.0905    0.1360
+   -0.1564    1.3932
+    1.7855    6.6462
+    0.9682    0.0696
+    0.2918    0.5775
+    0.3932    0.1873
+    0.2899    0.2962
+    0.2411    0.0534
+    0.0128    0.0131
+    0.2145    0.0336
+    0.7531    0.1473
+    3.0372    1.5506
+    0.5617    0.1142
+    0.6935    0.0570
+    0.1175    0.6299
+    3.0319    7.9502
+    0.4043    0.3511
+    0.0402    0.0598
+
+Criterion value  1489.6975
+parameter values and names
+
+%Following are the parameters that were estimated 
+rho_M       = -0.0905 ;
+rho_xz      = -0.1564 ;
+c_z         = 1.7855 ;
+rho_muz     = 0.9682 ;
+rho_xups    = 0.2918 ;
+c_ups       = 0.3932 ;
+rho_muups   = 0.2899 ;
+sig_M       = 0.2411 ;
+sig_muz     = 0.0128 ;
+sig_muups   = 0.2145 ;
+epsilon     = 0.7531 ;
+kappa       = 3.0372 ;
+xi_w        = 0.5617 ;
+b           = 0.6935 ;
+sigma_a     = 0.1175 ;
+cp_z        = 3.0319 ;
+cp_ups      = 0.4043 ;
+gam         = 0.0402 ;
+%Following are the parameters held fixed in the estimation 
+
+psi_L       = 1.0000 ;
+bet         = 0.9926 ;
+mu_ups      = 1.0042 ;
+mu_z        = 1.0001 ;
+delta       = 0.0250 ;
+alph        = 0.3600 ;
+nu          = 1.0000 ;
+psi_L       = 1.0000 ;
+x           = 1.0170 ;
+V           = 0.4500 ;
+sigma_L     = 1.0000 ;
+lambda_f    = 1.0100 ;
+lambda_w    = 1.0500 ;
+squig       = 1.0000 ;
+vartheta    = 0.0000 ;
+eta         = 0.0360 ;
+theta_M     = 0.0000 ;
+theta_muz   = 0.0000 ;
+theta_muups = 0.0000 ;
+ 
+Settings used to generate VAR impulse responses - see the lines at the beginning of main.m for explanations
+
+FR =
+
+     0
+
+
+product =
+
+     0
+
+
+hours =
+
+     0
+
+
+nlags =
+
+     8
+
+
+ndraws =
+
+        1000
+
+
+nsteps =
+
+    20
+
+Parameter estimates and standard errors
+
+ans =
+
+   -0.0829    0.1267
+    0.4917    0.7426
+    0.9526    4.0416
+   -0.9347    0.2192
+    0.7705    0.0588
+    1.1108    1.2143
+    0.6709    0.3814
+    0.2309    0.0715
+    0.0002    0.0002
+    0.1204    0.0855
+    0.9409    0.2900
+   10.0700    7.2363
+    0.6918    0.1276
+    0.7802    0.0407
+    0.0853    0.2326
+   -2.2623    4.5762
+   -0.3638    0.6637
+    0.2827    0.3277
+
+Criterion value  2169.3078
+parameter values and names
+
+%Following are the parameters that were estimated 
+rho_M       = -0.0829 ;
+rho_xz      = 0.4917 ;
+c_z         = 0.9526 ;
+rho_muz     = -0.9347 ;
+rho_xups    = 0.7705 ;
+c_ups       = 1.1108 ;
+rho_muups   = 0.6709 ;
+sig_M       = 0.2309 ;
+sig_muz     = 0.0002 ;
+sig_muups   = 0.1204 ;
+epsilon     = 0.9409 ;
+kappa       = 10.0700 ;
+xi_w        = 0.6918 ;
+b           = 0.7802 ;
+sigma_a     = 0.0853 ;
+cp_z        = -2.2623 ;
+cp_ups      = -0.3638 ;
+gam         = 0.2827 ;
+%Following are the parameters held fixed in the estimation 
+
+psi_L       = 1.0000 ;
+bet         = 0.9926 ;
+mu_ups      = 1.0042 ;
+mu_z        = 1.0001 ;
+delta       = 0.0250 ;
+alph        = 0.3600 ;
+nu          = 1.0000 ;
+psi_L       = 1.0000 ;
+x           = 1.0170 ;
+V           = 0.4500 ;
+sigma_L     = 1.0000 ;
+lambda_f    = 1.0100 ;
+lambda_w    = 1.0500 ;
+squig       = 1.0000 ;
+vartheta    = 0.0000 ;
+eta         = 0.0360 ;
+theta_M     = 0.0000 ;
+theta_muz   = 0.0000 ;
+theta_muups = 0.0000 ;
+ 
+Settings used to generate VAR impulse responses - see the lines at the beginning of main.m for explanations
+
+FR =
+
+     0
+
+
+product =
+
+     0
+
+
+hours =
+
+     0
+
+
+nlags =
+
+    10
+
+
+ndraws =
+
+        1000
+
+
+nsteps =
+
+    20
+
