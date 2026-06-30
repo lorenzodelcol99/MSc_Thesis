@@ -1,26 +1,25 @@
 % =========================================================================
 % Script: MonteCarlo_Calvo_Parameters_TrueJoint.m
-% True Joint Monte Carlo Simulation using ACEL's native mapping functions
 % =========================================================================
-clear; clc;
+clear all; close all, clc;
 
-% --- SET THE TARGET LAG HERE ---
-target_lag = 4; % Change this dynamically to 4, 6, 8, 10, or 12
+% --- 1. SET PATHS AND TARGET LAG ---
+target_lag = 4; % Change this dynamically
+acel_code_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Original_ACEL_Replication/ACEL 2011 Replication Package/acelcode/';
+results_path   = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+vcv_path       = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/DSGE_VCV_Across_Lags/';
 
-% 1. Define Paths
-results_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
-vcv_path     = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/DSGE_VCV_Across_Lags/';
+% Add ACEL directory to path so 'findksip' is found
+addpath(acel_code_path);
 
 % 2. Load the specific lag results
 results_file = fullfile(results_path, sprintf('results_lag_%d.mat', target_lag));
-load(results_file); % Dynamically loads all parameters (alph, bet, xx, etc.)
+load(results_file); 
 
-% --- THE USER'S FIX FOR THE 'V' CONFLICT ---
-% If 'V' was saved as the VAR residual matrix, rename it to preserve it,
-% and restore the ACEL calibrated scalar for steady-state velocity.
+% The 'V' conflict fix
 if exist('V', 'var') && ~isscalar(V)
     VAR_V = V;       
-    V = 0.4500;    % This line overwrites the original V with the required calibrated scalar value for the steady-state velocity/money base.  
+    V = 0.4500;      
 end
 
 % Load the Joint Covariance Matrix
@@ -30,34 +29,45 @@ load(vcv_file, 'Vmat_DSGE');
 %% 3. Setup the Simulation Parameters
 N_draws = 10000;
 
-% Ensure xx is a row vector for mvnrnd
 if iscolumn(xx)
     xx = xx';
+end
+
+% --- NUMERICAL STABILITY FIX ---
+Vmat_DSGE = (Vmat_DSGE + Vmat_DSGE') / 2;
+[~, p] = chol(Vmat_DSGE);
+if p ~= 0
+    Vmat_DSGE = Vmat_DSGE + eye(size(Vmat_DSGE)) * 1e-8;
 end
 
 % 4. Draw ALL 18 estimated parameters jointly 
 simulated_params = mvnrnd(xx, Vmat_DSGE, N_draws);
 
-% Pre-allocate arrays for the implied Calvo parameters
 sim_ksiph = NaN(N_draws, 1);
 sim_ksip  = NaN(N_draws, 1);
 
 ksiet_guess = 0.98;
 ksiep_guess = 0.98;
 
-disp(['Running True Joint Monte Carlo simulations for VAR p = ', num2str(target_lag), '...'])
+disp(['Running True Joint Monte Carlo simulations for VAR p = ', num2str(target_lag), '...']);
+disp('--------------------------------------------------');
+
+% --- FIGURE SUPPRESSION ---
+set(0, 'DefaultFigureVisible', 'off'); 
 
 % 5. Loop through each draw
 for i = 1:N_draws
     
-    % Extract the specific simulated parameters (matching the ACEL indices)
+    if mod(i, 1000) == 0
+        fprintf('Processing draw %d out of %d...\n', i, N_draws);
+    end
+    
     sim_epsilon = simulated_params(i, 11);
     sim_kappa   = simulated_params(i, 12);
     sim_b       = simulated_params(i, 14);
     sim_sigma_a = simulated_params(i, 15);
     sim_gam     = simulated_params(i, 18);
     
-    % The nonlinear solver block
     try
         [ksip_out, ksiph_out] = findksip(sim_gam, lambda_f, lambda_w, mu_ups, mu_z, bet, ...
                                          delta, eta, sim_b, sigma_L, psi_L, V, nu, x, ...
@@ -68,22 +78,82 @@ for i = 1:N_draws
         sim_ksiph(i) = ksiph_out;
         
     catch
-        % Discard impossible multivariate draws (e.g., negative friction parameters)
         continue; 
     end
+    
+    % Clear figures to prevent RAM saturation
+    close all hidden; 
 end
+
+set(0, 'DefaultFigureVisible', 'on'); 
+disp('--------------------------------------------------');
 
 % 6. Clean the results 
 sim_ksiph_clean = sim_ksiph(~isnan(sim_ksiph));
 sim_ksip_clean  = sim_ksip(~isnan(sim_ksip));
 
 num_successful = length(sim_ksiph_clean);
-disp(['Successful draws: ', num2str(num_successful), ' / ', num2str(N_draws)])
+disp(['Successful draws: ', num2str(num_successful), ' / ', num2str(N_draws)]);
 
-% 7. Calculate the simulated Standard Errors
-SE_ksiph = std(sim_ksiph_clean);
-SE_ksip  = std(sim_ksip_clean);
+% 7. Calculate results
+if num_successful > 0
+    SE_ksiph = std(sim_ksiph_clean);
+    SE_ksip  = std(sim_ksip_clean);
 
-disp('=== True Joint Monte Carlo Results ===');
-disp(['Homogeneous Capital Calvo (xi_p,hom)   : ', num2str(mean(sim_ksiph_clean), '%.4f'), ' (SE: ', num2str(SE_ksiph, '%.4f'), ')']);
-disp(['Firm-Specific Capital Calvo (xi_p,fs)  : ', num2str(mean(sim_ksip_clean), '%.4f'), ' (SE: ', num2str(SE_ksip, '%.4f'), ')']);
+    disp('=== True Joint Monte Carlo Results ===');
+    disp(['Homogeneous Capital Calvo (xi_p,hom)   : ', num2str(mean(sim_ksiph_clean), '%.4f'), ' (SE: ', num2str(SE_ksiph, '%.4f'), ')']);
+    disp(['Firm-Specific Capital Calvo (xi_p,fs)  : ', num2str(mean(sim_ksip_clean), '%.4f'), ' (SE: ', num2str(SE_ksip, '%.4f'), ')']);
+else
+    disp('ERROR: No successful draws were obtained.');
+end
+
+%% =========================================================================
+% Script: Plot_Calvo_Distributions.m
+% Visualizing the Monte Carlo Posterior Distributions
+% =========================================================================
+
+% 1. Clean the data (remove any remaining complex noise)
+% Use real() to ensure no imaginary parts persist from the solver
+data_hom = real(sim_ksiph_clean);
+data_fs  = real(sim_ksip_clean);
+
+% 2. Setup Figure
+figure('Color', 'w', 'Position', [100, 100, 1000, 400]);
+
+% --- Plot Homogeneous ---
+subplot(1, 2, 1);
+[f_hom, xi_hom] = ksdensity(data_hom);
+plot(xi_hom, f_hom, 'LineWidth', 2, 'Color', [0 0.447 0.741]); % Blue
+hold on;
+xline(mean(data_hom), '--k', 'LineWidth', 1.5, 'Label', 'Mean');
+title('\bf Homogeneous Capital Calvo (\xi_{p,hom})');
+xlabel('Calvo Parameter');
+ylabel('Density');
+grid on;
+
+% --- Plot Firm-Specific ---
+subplot(1, 2, 2);
+[f_fs, xi_fs] = ksdensity(data_fs);
+plot(xi_fs, f_fs, 'LineWidth', 2, 'Color', [0.85 0.325 0.098]); % Red/Orange
+hold on;
+xline(mean(data_fs), '--k', 'LineWidth', 1.5, 'Label', 'Mean');
+title('\bf Firm-Specific Capital Calvo (\xi_{p,fs})');
+xlabel('Calvo Parameter');
+ylabel('Density');
+grid on;
+
+% 3. Optional: Add confidence intervals to the plots
+% Adding vertical lines for 95% Credible Interval
+ci_hom = prctile(data_hom, [2.5 97.5]);
+ci_fs  = prctile(data_fs, [2.5 97.5]);
+
+subplot(1, 2, 1);
+xline(ci_hom(1), ':r', 'LineWidth', 1);
+xline(ci_hom(2), ':r', 'LineWidth', 1);
+
+subplot(1, 2, 2);
+xline(ci_fs(1), ':r', 'LineWidth', 1);
+xline(ci_fs(2), ':r', 'LineWidth', 1);
+
+% Final formatting
+sgtitle(['Monte Carlo Posterior Distributions (N = ', num2str(length(data_hom)), ')']);
