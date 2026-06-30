@@ -84,6 +84,10 @@
 
 \end{frame}
 
+% =======================================
+% RESEARCH QUESTION
+% =======================================
+
 \begin{frame}{This Paper}\label{slide:this_paper}
     \textbf{Research Question:}
     \begin{itemize}
@@ -109,6 +113,10 @@
     \end{center}
 \end{frame}
 
+% =======================================
+% RELATED LITERATURE
+% =======================================
+
 \begin{frame}{Related Literature}
     \textbf{IRFs:}
     \begin{itemize}
@@ -128,6 +136,9 @@
     \end{itemize}
 \end{frame}
 
+% =======================================
+% ILLUSTRATION OF TRUNCATION BIAS PROBLEM
+% =======================================
 
 \begin{frame}{Illustration of Truncation Bias Problem}
     \begin{equation}
@@ -149,6 +160,10 @@
     \end{equation}
 \end{frame}
 
+% =======================================
+% LONG LAG 1
+% =======================================
+
 \begin{frame}{Long-Lag}
     \citet{Long_Lag2025} argue that increasing the lag structure improves IRFs estimates obtaining:
     \pause
@@ -168,6 +183,10 @@
     \end{itemize}
 \end{frame}
 
+% =======================================
+% LONG LAG 2
+% =======================================
+
 \begin{frame}{Long-Lag}
     \begin{figure}
         \centering
@@ -178,6 +197,10 @@
         \label{fig:placeholder1}
     \end{figure}
 \end{frame}
+
+% =======================================
+% LONG LAG BENEFITS
+% =======================================
 
 \begin{frame}{Long-Lag Benefits}
     The variance-reducing effect of lower misspecification often dominates the penalty of increased parameterisation.
@@ -192,6 +215,10 @@
     \end{itemize}
 \end{frame}
 
+% =======================================
+% BASELINE EXERCISE
+% =======================================
+
 \begin{frame}{Baseline Exercise}
     Framework:
     \begin{itemize}
@@ -203,8 +230,14 @@
     \begin{itemize}
         \item We re-estimate the VAR with different lag order
         \item Re-estimate the DSGE by IRFs matching
+        \item Analyse possible variations in the structural parameters across different lag choice
+        \item Search for possible drivers of structural changes
     \end{itemize}
 \end{frame}
+
+% =======================================
+% ACEL2011'S MECHANISM 1
+% =======================================
 
 \begin{frame}{ACEL2011's Mechanism}
     Classic NK models accountes for inflation inertia by assuming that firms re-optimise their prices every six quarter or even less often
@@ -222,15 +255,21 @@
     \end{itemize}
 \end{frame}
 
+% =======================================
+% ACEL2011'S MECHANISM 2
+% =======================================
+
 \begin{frame}{ACEL2011's Mechanism (Cond't)}
 \begin{itemize}
     \item When log-linearized, the only difference in characterizing equilibrium equations lies in the Phillips Curve equation
 \end{itemize}
 
 \begin{align}
-    \Delta\hat{\pi}_t &= \mathbb{E} [\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t|\Omega_t]
+    \Delta\hat{\pi}_t &= \mathbb{E} [\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t|\Omega_t] 
+    \label{eq:Phillips_Curve}
     \\
-    \gamma &= \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\chi
+    \gamma &= \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\chi 
+    \label{eq:Phillips_Curve_Slope}
 \end{align}
 
 \begin{itemize}
@@ -239,14 +278,22 @@
 \end{itemize}
 \end{frame}
 
+% =======================================
+% ACEL2011'S MECHANISM 3
+% =======================================
+
 \begin{frame}{ACEL2011's Mechanism (Cond't)}
 \begin{itemize}
-    \item In the \textbf{Homogeneous} capital model $\gamma$ (eq 5) depends on agent's discount rate $\beta$ and on the fraction $1 -\xi_p$ of firms that can optimise within the quarter
+    \item In the \textbf{Homogeneous} capital model $\gamma$ (eq. \ref{eq:Phillips_Curve_Slope}) depends on agent's discount rate $\beta$ and on the fraction $1 -\xi_p$ of firms that can optimise within the quarter
     \item In the \textbf{Firm Specific} $\gamma$ depends on a broader sets of structural parameters, is a non linear function with a non trivial representation.
     \item The more costly is for a firm to vary capital utilization, the steeper is its marginal cost curve and hence the smaller $\gamma$ is
     \item The more elastic is the individual firm's demand curve, the smaller is $\gamma$
 \end{itemize}
 \end{frame}
+
+% =======================================
+% ACEL2011'S RESULTS
+% =======================================
 
 \begin{frame}{ACEL2011 Results}
     The estimated $\gamma$ is 0.014, this implies that in:
@@ -265,6 +312,10 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \end{itemize}
 \end{frame}
 
+% =======================================
+% VAR IRFs MP
+% =======================================
+
 \begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
     \begin{figure}
         \centering
@@ -278,6 +329,10 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
+
+% =======================================
+% DSGE IRFs MP
+% =======================================
 
 \begin{frame}{DSGE IRFs; Monetary Policy Shock}\label{slide:dsge_irfs}
     \begin{figure}
@@ -293,6 +348,10 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     \end{flushright}
 \end{frame}
 
+% =======================================
+% DSGE PATAMETERS TABLE 4 8 12
+% =======================================
+
 \begin{frame}{DSGE Structural Parameters}\label{slide:dsge_params}
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_4_8_12.tex}}
@@ -301,6 +360,10 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
         \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
     \end{flushright}
 \end{frame}
+
+% =======================================
+% DSGE PARAMETERS TABLE 4 6 8 10 12
+% =======================================
 
 \begin{frame}{DSGE Structural Parameters All Lags}\label{slide:dsge_params_all}
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}
@@ -311,6 +374,9 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     \end{flushright}
 \end{frame}
 
+% =======================================
+% IMPLIED AVERAGE TIME TABLE 4 8 12
+% =======================================
 
 \begin{frame}{Implied Average Time between Re-Optimization}
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
@@ -318,16 +384,32 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     {\noindent\fbox{Image Path Broken or File Missing}}
 \end{frame}
 
+% =======================================
+% IMPLIED AVERAGE TIME TABLE 4 6 8 10 12
+% =======================================
+
+\begin{frame}{Implied Average Time between Re-Optimization}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\end{frame}
+
+% =======================================
+%  NEXT STEPS
+% =======================================
+
 \begin{frame}{Next Step}
-    In the ACEL2011 baseline exercise
+    In the ACEL2011 exercise
     \begin{itemize}
+        \item MonteCalvo of the Phillipcs curve slope components to simulate the Calvo Price Parametes' Standard Error
         \item Check how good distance between IRFs is minimized
         \item Check the estimated parameters likelihood function
         \item Leverage on Canova's tip; long-lag VARs mess up HD
-        \item Estimate the Historical Decomposition across different lag order
+        \item Long-Lag VARs are a good aproximation of Trend-Cycle VARs, are we specifying better the trend?
+        \item Make sure the VARs starts from the same point in time, we need to drop the first 12 data points fro each VAR for comparison pourposes
     \end{itemize}
 
-    New Exercise
+    Future Research
     \begin{itemize}
         \item Same exercise using \citet{Jarocinski_Karadi2020}
         \item Analyse the Long-Lag VAR results in both the
