@@ -37,19 +37,26 @@
     \footnotesize \textit{University of Padova} \\ 
     \footnotesize \textit{MSc Applied Economics}
 }
-\date{May 2026}
+\date{July 2026}
 
 \begin{document}
+
+% =======================================
+% TITLE
+% =======================================
 
 \begin{frame}
 \titlepage
 \end{frame}
 
+% =======================================
+% MOTIVATION
+% =======================================
+
 \begin{frame}{Motivation}
     \begin{itemize}
         \item VAR models can be used to estimate DSGE frameworks by IRFs minimization matching
     \end{itemize}
-    \pause
     
     \begin{itemize}  
         \item If the VAR is mispecified the DSGE might also be so
@@ -304,41 +311,11 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     \end{flushright}
 \end{frame}
 
-\begin{frame}{Implied Average Time between Re-Optimization}
-    \centering
-    \small 
-    
-    \begin{table}[htpb]
-        \centering
-        \renewcommand{\arraystretch}{1.1}
-        \begin{tabular}{lccc}
-            \toprule
-            \textbf{Model Specification} & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
-            \midrule
-            
-            \multicolumn{4}{l}{\textit{Homogeneous Capital Model}} \\
-            Calvo parameter ($\xi_{p, hom}$) & 0.82 & 0.82 & 0.90 \\
-            Implied duration (quarters)      & \textbf{5.6} & \textbf{5.6} & \textbf{9.6} \\
-            
-            \midrule
-            \multicolumn{4}{l}{\textit{Firm-Specific Capital Model}} \\
-            Calvo parameter ($\xi_{p, fs}$) & 0.33 & 0.64 & 0.89 \\
-            Implied duration (quarters)     & \textbf{1.5} & \textbf{2.8} & \textbf{9.0} \\
-        
-            \bottomrule
-        \end{tabular}
-    \end{table}
 
-    \vspace{0.2cm}
-    \begin{itemize}
-        \item \textbf{Baseline VAR ($p=4$)}: Homogeneous capital implies price changes every \textbf{5.6 quarters}.
-        \item \textbf{Firm-specific capital}: Drastically reduces this to \textbf{1.5 quarters}, matching microeconomic evidence.
-    \end{itemize}
-    
-    \vspace{0.2cm}
-    \raggedright
-    \tiny{\textit{Note:} Implied duration is calculated as $D = 1/(1 - \xi_p)$.}
-    
+\begin{frame}{Implied Average Time between Re-Optimization}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
 \end{frame}
 
 \begin{frame}{Next Step}
@@ -489,5 +466,12 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     \bibliography{biblio}
 \end{minipage}
 }
+
+% =========================================================
+% BIBLIOGRAFIA
+%\begin{frame}[allowframebreaks]{References}
+%    \bibliographystyle{plainnat}
+%    \bibliography{biblio}
+%\end{frame}
 
 \end{document}
