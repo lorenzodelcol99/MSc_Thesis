@@ -102,13 +102,13 @@ set(0, 'DefaultFigureVisible', 'on');
 disp('--------------------------------------------------');
 
 %% 6. Clean the results 
-% Crea un indice logico di quali righe sono sopravvissute
+% creating a logical index of which rows are non NaN
 valid_idx = ~isnan(sim_ksiph); 
 
 sim_ksiph_clean = sim_ksiph(valid_idx);
 sim_ksip_clean  = sim_ksip(valid_idx);
 
-% Filtra la matrice dei parametri tenendo solo le righe valide (tutte le 18 colonne)
+% Filtering the parameters matrix keping just the valir raws (all the 18 columns)
 simulated_params_clean = simulated_params(valid_idx, :); 
 
 num_successful = length(sim_ksiph_clean);
