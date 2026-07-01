@@ -28,7 +28,7 @@ vcv_file = fullfile(vcv_path, sprintf('Vmat_DSGE_lag_%d.mat', target_lag));
 load(vcv_file, 'Vmat_DSGE'); 
 
 %% 3. Setup the Simulation Parameters
-N_draws = 1000; % 10k as first try, when is going to be definitive I will set 100k of draws or even more, need to make some time calculation before
+N_draws = 10000; % 10k as first try, when is going to be definitive I will set 100k of draws or even more, need to make some time calculation before
 
 if iscolumn(xx)                                            % xx is the vector of the DSGE structural parameters
     xx = xx';                                              % rotating the xx row vector into a column vector 
