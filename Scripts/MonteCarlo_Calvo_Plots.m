@@ -5,7 +5,7 @@
 clear all; close all; clc;
 
 % 1. Set Path and Load Data
-target_lag = 12; % Change this dynamically to plot different lags
+target_lag = 4; % Change this dynamically to plot different lags
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 load_file = fullfile(load_dir, sprintf('MonteCalvo_lag_%d.mat', target_lag));
 
