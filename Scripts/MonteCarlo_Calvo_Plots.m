@@ -1,18 +1,18 @@
 % =========================================================================
-% Script: MonteCalvo_Plots.m
+% Script: MonteCarlo_Calvo_Plots.m
 % Visualizing the Monte Carlo Posterior Distributions
 % =========================================================================
 clear all; close all; clc;
 
 % 1. Set Path and Load Data
-target_lag = 4; % Change this dynamically to plot different lags
+target_lag = 12; % Change this dynamically to plot different lags
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 load_file = fullfile(load_dir, sprintf('MonteCalvo_lag_%d.mat', target_lag));
 
 % Load the results saved from the simulation
 load(load_file);
 
-% Clean the data (ensure no imaginary parts persist)
+%% Clean the data (ensure no imaginary parts persist)
 data_hom = real(sim_ksiph_clean);
 data_fs  = real(sim_ksip_clean);
 
@@ -69,5 +69,5 @@ grid on;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); % Clean axes
 
 % 3. Final Formatting: Super Title
-title_str = sprintf('Monte Carlo Simulation of Calvo Price Parameters: Homogeneous vs Firm-Specific Capital\n(Lag: %d | Total Draws: %d | Successful Draws: %d)', target_lag, N_draws, num_successful);
+title_str = sprintf('Monte Carlo Simulation of Calvo Price Parameters: Homogeneous vs Firm-Specific Capital\n(VAR Lag: %d | Total Draws: %d | Success Rate: %d)', target_lag, N_draws, success_rate);
 sgtitle(title_str, 'FontSize', 16, 'FontWeight', 'bold');

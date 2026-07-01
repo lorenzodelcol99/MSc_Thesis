@@ -4,7 +4,7 @@
 clear all; close all, clc;
 
 % --- 1. SET PATHS AND TARGET LAG ---
-target_lag = 4; % Change this dynamically
+target_lag = 6; % Change this dynamically
 acel_code_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Original_ACEL_Replication/ACEL 2011 Replication Package/acelcode/';
 results_path   = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
 vcv_path       = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/DSGE_VCV_Across_Lags/';
@@ -13,7 +13,7 @@ save_results_path = sprintf('/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/
 % Add ACEL directory to path so 'findksip' is found
 addpath(acel_code_path);
 
-% 2. Load the specific lag results
+%% 2. Load the specific lag results
 results_file = fullfile(results_path, sprintf('results_lag_%d.mat', target_lag));
 load(results_file); 
 
@@ -28,7 +28,7 @@ vcv_file = fullfile(vcv_path, sprintf('Vmat_DSGE_lag_%d.mat', target_lag));
 load(vcv_file, 'Vmat_DSGE'); 
 
 %% 3. Setup the Simulation Parameters
-N_draws = 1000000; % 10k as first try, when is going to be definitive I will set 100k of draws or even more, need to make some time calculation before
+N_draws = 1000; % 10k as first try, when is going to be definitive I will set 100k of draws or even more, need to make some time calculation before
 
 if iscolumn(xx)                                            % xx is the vector of the DSGE structural parameters
     xx = xx';                                              % rotating the xx row vector into a column vector 
@@ -101,27 +101,30 @@ end
 set(0, 'DefaultFigureVisible', 'on'); 
 disp('--------------------------------------------------');
 
-% 6. Clean the results 
+%% 6. Clean the results 
 sim_ksiph_clean = sim_ksiph(~isnan(sim_ksiph));
 sim_ksip_clean  = sim_ksip(~isnan(sim_ksip));
+
 
 num_successful = length(sim_ksiph_clean);
 success_rate = (num_successful / N_draws) * 100;
 
 disp(['Successful draws: ', num2str(num_successful), ' / ', num2str(N_draws), ' (', num2str(success_rate, '%.2f'), '%)']);
 
-% 7. Calculate results
+%% 7. Calculate results
 if num_successful > 0
-    SE_ksiph = std(sim_ksiph_clean);
-    SE_ksip  = std(sim_ksip_clean);
-
+    mean_ksiph = mean(sim_ksiph_clean);
+    mean_ksip  = mean(sim_ksip_clean);
+    SE_ksiph   = std(sim_ksiph_clean);
+    SE_ksip    = std(sim_ksip_clean);
+    
     disp('=== True Joint Monte Carlo Results ===');
-    disp(['Homogeneous Capital Calvo (xi_p,hom)   : ', num2str(mean(sim_ksiph_clean), '%.4f'), ' (SE: ', num2str(SE_ksiph, '%.4f'), ')']);
-    disp(['Firm-Specific Capital Calvo (xi_p,fs)  : ', num2str(mean(sim_ksip_clean), '%.4f'), ' (SE: ', num2str(SE_ksip, '%.4f'), ')']);
+    disp(['Homogeneous Capital Calvo (xi_p,hom)   : ', num2str(mean_ksiph, '%.4f'), ' (SE: ', num2str(SE_ksiph, '%.4f'), ')']);
+    disp(['Firm-Specific Capital Calvo (xi_p,fs)  : ', num2str(mean_ksip, '%.4f'), ' (SE: ', num2str(SE_ksip, '%.4f'), ')']);
 else
     disp('ERROR: No successful draws were obtained.');
 end
 
-% 8. Save the results
-save(save_results_path, 'sim_ksiph_clean', 'sim_ksip_clean', 'SE_ksiph', 'SE_ksip', 'num_successful', 'N_draws');
+%% 8. Save the results
+save(save_results_path, 'sim_ksiph_clean', 'sim_ksip_clean', 'mean_ksiph', 'mean_ksip', 'SE_ksiph', 'SE_ksip', 'success_rate', 'num_successful', 'N_draws');
 
