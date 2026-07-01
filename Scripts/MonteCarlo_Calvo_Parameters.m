@@ -102,13 +102,17 @@ set(0, 'DefaultFigureVisible', 'on');
 disp('--------------------------------------------------');
 
 %% 6. Clean the results 
-sim_ksiph_clean = sim_ksiph(~isnan(sim_ksiph));
-sim_ksip_clean  = sim_ksip(~isnan(sim_ksip));
+% Crea un indice logico di quali righe sono sopravvissute
+valid_idx = ~isnan(sim_ksiph); 
 
+sim_ksiph_clean = sim_ksiph(valid_idx);
+sim_ksip_clean  = sim_ksip(valid_idx);
+
+% Filtra la matrice dei parametri tenendo solo le righe valide (tutte le 18 colonne)
+simulated_params_clean = simulated_params(valid_idx, :); 
 
 num_successful = length(sim_ksiph_clean);
 success_rate = (num_successful / N_draws) * 100;
-
 disp(['Successful draws: ', num2str(num_successful), ' / ', num2str(N_draws), ' (', num2str(success_rate, '%.2f'), '%)']);
 
 %% 7. Calculate results
@@ -126,5 +130,5 @@ else
 end
 
 %% 8. Save the results
-save(save_results_path, 'sim_ksiph_clean', 'sim_ksip_clean', 'mean_ksiph', 'mean_ksip', 'SE_ksiph', 'SE_ksip', 'success_rate', 'num_successful', 'N_draws');
+save(save_results_path, 'simulated_params_clean', 'sim_ksiph_clean', 'sim_ksip_clean', 'mean_ksiph', 'mean_ksip', 'SE_ksiph', 'SE_ksip', 'success_rate', 'num_successful', 'N_draws');
 
