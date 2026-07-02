@@ -8,13 +8,8 @@ clear all; close all; clc;
 lags = [4, 6, 8, 10, 12]; 
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 
-% Definisci la directory di salvataggio
+% define the directory of the folder to save the results
 save_plot_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo_PDF_Plots/';
-
-% Crea la cartella se non esiste
-if ~exist(save_plot_dir, 'dir')
-    mkdir(save_plot_dir);
-end
 
 % Define modern colors outside the loop (no need to redefine every iteration)
 color_hom = [0 0.447 0.741]; % Blue
@@ -85,9 +80,7 @@ for i = 1:length(lags)
     sgtitle(title_str, 'FontSize', 16, 'FontWeight', 'bold');
     
     % 4. SAVE THE PLOT AS PDF
-    current_save_path = fullfile(save_plot_dir, sprintf('MonteCalvo_Plot_lag_%d.pdf', target_lag));
+    current_save_path = fullfile(save_plot_dir, sprintf('MonteCalvo_PDF_Plot_lag_%d.pdf', target_lag));
     exportgraphics(gcf, current_save_path, 'ContentType', 'vector', 'BackgroundColor', 'none');
     
-    % Opzionale: chiude la figura dopo averla salvata per non intasare lo schermo
-    % close(gcf); 
 end

@@ -8,6 +8,9 @@ clear all; close all; clc;
 lags = [4, 6, 8, 10, 12]; 
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 
+% define the directory of the folder to save the results
+save_plot_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo_CDF_Plots/';
+
 % Define modern colors outside the loop
 color_hom = [0 0.447 0.741]; % Blue
 color_fs  = [0.850 0.325 0.098]; % Orange
@@ -78,7 +81,7 @@ for i = 1:length(lags)
     title_str = sprintf('Cumulative Distribution Function (CDF): Homogeneous vs Firm-Specific Capital\n(VAR Lag: %d | Total Draws: %d | Success Rate: %.2f%%)', target_lag, N_draws, success_rate);
     sgtitle(title_str, 'FontSize', 16, 'FontWeight', 'bold');
     
-    % Optional: Automatically save the plot as a PNG
-    % save_plot_path = fullfile(load_dir, sprintf('MonteCalvo_CDF_lag_%d.png', target_lag));
-    % saveas(gcf, save_plot_path);
+    % 4. SAVE THE PLOT AS PDF
+    current_save_path = fullfile(save_plot_dir, sprintf('MonteCalvo_CDF_Plot_lag_%d.pdf', target_lag));
+    exportgraphics(gcf, current_save_path, 'ContentType', 'vector', 'BackgroundColor', 'none');
 end
