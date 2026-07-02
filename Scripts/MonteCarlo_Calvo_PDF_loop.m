@@ -8,6 +8,14 @@ clear all; close all; clc;
 lags = [4, 6, 8, 10, 12]; 
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 
+% Definisci la directory di salvataggio
+save_plot_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo_PDF_Plots/';
+
+% Crea la cartella se non esiste
+if ~exist(save_plot_dir, 'dir')
+    mkdir(save_plot_dir);
+end
+
 % Define modern colors outside the loop (no need to redefine every iteration)
 color_hom = [0 0.447 0.741]; % Blue
 color_fs  = [0.850 0.325 0.098]; % Orange
@@ -73,13 +81,13 @@ for i = 1:length(lags)
     set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off');
     
     % 3. Final Formatting: Super Title
-    % Note: Changed success_rate formatting from %d to %.2f%% to properly display floating-point percentages
     title_str = sprintf('Monte Carlo Simulation of Calvo Price Parameters: Homogeneous vs Firm-Specific Capital\n(VAR Lag: %d | Total Draws: %d | Success Rate: %.2f%%)', target_lag, N_draws, success_rate);
     sgtitle(title_str, 'FontSize', 16, 'FontWeight', 'bold');
     
-    % Optional: Automatically save the plot as a PNG
-    % save_plot_path = fullfile(load_dir, sprintf('MonteCalvo_Plot_lag_%d.png', target_lag));
-    % saveas(gcf, save_plot_path);
+    % 4. SAVE THE PLOT AS PDF
+    current_save_path = fullfile(save_plot_dir, sprintf('MonteCalvo_Plot_lag_%d.pdf', target_lag));
+    exportgraphics(gcf, current_save_path, 'ContentType', 'vector', 'BackgroundColor', 'none');
+    
+    % Opzionale: chiude la figura dopo averla salvata per non intasare lo schermo
+    % close(gcf); 
 end
-
-
