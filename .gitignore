@@ -35,4 +35,7 @@ slprj/
 *.snm
 *.toc
 *.run.xml
-*.synctex.gz
+*.synctex.gzOutput/MonteCarlo_Calvo/*.mat
+simforfilter.mat
+Output/MonteCarlo_Calvo/*.mat
+simforfilter.mat
