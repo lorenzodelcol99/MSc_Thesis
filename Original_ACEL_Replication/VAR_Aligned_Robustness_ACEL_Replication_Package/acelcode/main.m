@@ -118,22 +118,22 @@ end
 % =========================================================================
 % To ensure the estimation sample is identical across all lag choices, 
 % we force all VARs to start at the exact same date as the VAR(p_max).
-%p_max = 12;         % The maximum lag length in your exercise
-%p_current = nlags;  % The current lag chosen at the top of the script (line 38)
+p_max = 12;         % The maximum lag length in your exercise
+p_current = nlags;  % The current lag chosen at the top of the script (line 38)
 
-%if p_current < p_max
-%    obs_to_drop = p_max - p_current;
-%    % Drop the initial observations so mkimplrnew aligns perfectly
-%    vardata = vardata((obs_to_drop + 1):end, :); 
+if p_current < p_max
+    obs_to_drop = p_max - p_current;
+    % Drop the initial observations so mkimplrnew aligns perfectly
+    vardata = vardata((obs_to_drop + 1):end, :); 
     
-%    disp(' ');
-%    disp('--- SAMPLE ALIGNMENT ACTIVE ---');
-%    disp(['Targeting VAR(', num2str(p_max), ') estimation window.']);
-%    disp(['Current VAR has ', num2str(p_current), ' lags.']);
-%    disp(['Dropped the first ', num2str(obs_to_drop), ' observations from vardata.']);
-%    disp('-------------------------------');
-%    disp(' ');
-%end
+    disp(' ');
+    disp('--- SAMPLE ALIGNMENT ACTIVE ---');
+    disp(['Targeting VAR(', num2str(p_max), ') estimation window.']);
+    disp(['Current VAR has ', num2str(p_current), ' lags.']);
+    disp(['Dropped the first ', num2str(obs_to_drop), ' observations from vardata.']);
+    disp('-------------------------------');
+    disp(' ');
+end
 % =========================================================================
 
 
