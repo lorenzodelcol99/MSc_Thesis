@@ -9,6 +9,8 @@ close all;
 % The program also allows the user to explore robustness of the results
 % reported in ACEL to alternative specifications.
 
+% save('/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output_VAR_Alignment/VAR_Alignment_Long-Lag_Exercises_Results/VAR_Alignment_Results_Lag/VAR_Alignment_results_lag_XXXX.mat');
+
                                         %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
                                         %   User-controlled Paramaters             %
                                         %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
@@ -35,7 +37,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 4     % If estvar = 1, this controls number of lags in VAR
+nlags       = 8     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
