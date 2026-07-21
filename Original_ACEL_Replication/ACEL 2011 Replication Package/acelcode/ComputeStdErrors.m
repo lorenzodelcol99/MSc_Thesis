@@ -61,4 +61,3 @@ save fixparams par chk taux nepar nsteps Vhat;
   disp('Standard errors for the estimated parameters');
   xxse=StdErr
 
-

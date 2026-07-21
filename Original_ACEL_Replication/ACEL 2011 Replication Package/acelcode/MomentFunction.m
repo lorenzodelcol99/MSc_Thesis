@@ -2,6 +2,12 @@ function [ff,ErrFlagVal] = MomentFunction(allparams,comp_psihat,baseline,criteri
 
 ErrFlagVal = 0;
 
+% LORENZO DEL COL --> psihat is the estimated matrix of the Empirical (VAR) IRFs
+% nearpar = number of parameters inside xx' vector
+% psihat is the function that collects the Empirical (VAR's) IRFs
+% psiphihat is the mapping between the theoretical structural parameters and the DSGE's IRFs
+
+
 load fixparams;
 psihat = allparams(nepar+1:end);
 
@@ -56,10 +62,15 @@ if ErrFlagVal == 1
     return
 end
 
+% LORENZO DEL COL --> calcff: IRFs distance minimization procedure
+
 calcff = ([nozero(psihat) - nozero(psiphihat)].^2) ./ nozero(Vhat);
 calcff = calcff(:);
 ff = sum(calcff(find(~isnan(calcff))));
+
 if baseline == 1;
    ff
+   % LORENZO DEL COL: Save the final minimization components locally in acelcode folder
+   save Minimization_IRFs_lag_xx.mat psihat psiphihat Vhat calcff ff;
    %keyboard;
 end;
