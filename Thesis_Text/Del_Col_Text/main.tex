@@ -73,7 +73,131 @@ Explain the empirical strategy, models, and data you are using.
 
 % --- 4. RESULTS ---
 \section{Empirical Results}
-Present your findings, regression tables, and graphs here.
+\subsection{From the state-space solution to a VAR($\infty$)}
+
+\paragraph{The state-space solution.}
+Following \citet{Ravenna2007}, the recursive equilibrium law of motion of a
+linearised DSGE model is
+\begin{align}
+    y_t &= P x_{t-1} + Q z_t, \label{eq:R1}\\
+    x_t &= R x_{t-1} + S z_t, \label{eq:R2}\\
+    Z(L)\, z_t &= \varepsilon_t, \label{eq:R3}
+\end{align}
+where $x_t$ is the $n\times 1$ vector of endogenous states, $z_t$ the
+$m\times 1$ vector of exogenous states (structural shocks), $y_t$ the
+$r\times 1$ vector of controls, and $\varepsilon_t$ is $m\times 1$ white
+noise with $\mathbb{E}(\varepsilon_t\varepsilon_t')=\Sigma$ diagonal. The
+polynomial $Z(L)=[I-Z_1L-\dots-Z_qL^q]$ governs the persistence of the
+shocks.
+
+\paragraph{Step 1: eliminate the endogenous states.}
+Define $G(L)\equiv[I-RL]$ and write \eqref{eq:R2} as $G(L)x_t = Sz_t$.
+Assuming $G(L)$ invertible,
+\begin{equation}
+    x_{t-1} = G(L)^{-1} S L\, z_t .
+    \label{eq:Rstate}
+\end{equation}
+
+\paragraph{Step 2: the moving-average form.}
+Substituting \eqref{eq:Rstate} into \eqref{eq:R1}, and taking the observable
+vector to be $\widehat{Y}_t = y_t$ (the econometrician observes the controls
+but \emph{not} the states),
+\begin{equation}
+    y_t = Q z_t + P\,G(L)^{-1} S L\, z_t .
+    \label{eq:R21}
+\end{equation}
+This is a VMA($\infty$). The moving-average term is the direct consequence of
+$x_t$ being unobserved.
+
+\paragraph{Step 3: the VARMA (i.i.d.\ shocks).}
+Let $Z(L)=I$, so $z_t=\varepsilon_t$. Assume $Q$ is invertible, which requires
+$r=m$, and define the reduced-form innovations
+\begin{equation}
+    \eta_t \equiv Q\varepsilon_t = Q z_t ,
+\end{equation}
+so that $Q$ is the theoretical matrix mapping structural shocks into
+reduced-form innovations. Then \eqref{eq:R21} becomes
+$y_t = \eta_t + P G(L)^{-1} S Q^{-1} L\,\eta_t$. Using the
+determinant--adjoint identity $G(L)^{-1} = D_G(L)\,|G(L)|^{-1}$, where
+$|G(L)|$ is a scalar polynomial of order $n$ and the adjoint $D_G(L)$ is of
+order $n-1$, and multiplying through by $|G(L)|$:
+\begin{equation}
+    \underbrace{|G(L)|\,y_t}_{\text{AR part}}
+    = \underbrace{\Big[\,|G(L)|\,I + P D_G(L) S Q^{-1} L\,\Big]}_{\textstyle \equiv\, G^{*}(L)}\eta_t
+    \;=\; G^{*}(L)\,\eta_t .
+    \label{eq:R22}
+\end{equation}
+Equation \eqref{eq:R22} is a $\mathrm{VARMA}(n,n)$ in \emph{final equations
+form}: the autoregressive operator is scalar times the identity, so each
+component of $y_t$ depends only on its own lags. Since $|G(0)|=1$ and
+$G^{*}(0)=I$, the representation is unique.
+
+\paragraph{Step 4: inverting the MA part.}
+If $G^{*}(L)$ is invertible, premultiplying \eqref{eq:R22} by
+$G^{*}(L)^{-1}$ isolates the innovations:
+\begin{equation}
+    |G(L)|\,G^{*}(L)^{-1} y_t = \eta_t .
+    \label{eq:R23}
+\end{equation}
+Writing $G^{*}(L)^{-1} = D_{G^{*}}(L)\,|G^{*}(L)|^{-1}$, the adjoint
+$D_{G^{*}}(L)$ is of finite order, but the reciprocal of the scalar operator
+$|G^{*}(L)|$ expands as
+\begin{equation}
+    \frac{1}{1-aL} = \sum_{j=0}^{\infty} a^{j}L^{j},
+\end{equation}
+which is of infinite order unless $|G^{*}(L)|$ is constant. Hence:
+\begin{equation}
+\boxed{\;\text{the DSGE solution generically implies a VAR}(\infty);\;}
+\end{equation}
+a finite-order VAR($p$) exists \emph{if and only if} $|G^{*}(L)|$ is of degree
+zero in $L$, i.e.\ $G^{*}(L)$ is unimodular \citep[p.~245]{Lutkepohl1993}.
+
+\paragraph{Step 5: persistent shocks.}
+With $Z(L)\neq I$, define $\widetilde{Z}(L)\equiv Q Z(L) Q^{-1}$, so that
+$QZ(L)^{-1}\varepsilon_t = \widetilde{Z}(L)^{-1}\eta_t$. Then
+\begin{equation}
+    |\widetilde{Z}(L)|\,|G(L)|\,y_t
+    = G^{*}(L)\,D_{\widetilde{Z}}(L)\,\eta_t ,
+    \label{eq:R24}
+\end{equation}
+which, since $|\widetilde{Z}(L)|$ is of order $qm$, is a
+\begin{equation}
+    \mathrm{VARMA}\big(n+qm,\; n+q(m-1)\big)
+\end{equation}
+process. Shock persistence therefore \emph{raises} the autoregressive order
+required to represent the data.
+
+\paragraph{Step 6: the VAR($\infty$) in explicit form.}
+An equivalent and more transparent route (Corollary 2.2 in
+\citealp{Ravenna2007}) solves \eqref{eq:R1} for $z_{t-1} = Q^{-1}(y_{t-1}-Px_{t-1})$
+and substitutes into \eqref{eq:R2}, giving $H(L)x_t = SQ^{-1}y_{t-1}$ with
+\begin{equation}
+    H(L) \equiv \big[\,I-(R-SQ^{-1}P)L\,\big].
+\end{equation}
+If $H(L)$ is invertible, the observables satisfy
+\begin{equation}
+    y_t = P\sum_{j=0}^{\infty}\big[\,R-SQ^{-1}P\,\big]^{\,j} S Q^{-1}\,
+    y_{t-j-1} \;+\; \eta_t .
+    \label{eq:R26}
+\end{equation}
+Equation \eqref{eq:R26} \emph{is} the VAR($\infty$), written out: the
+coefficient matrix attached to $y_{t-j-1}$ is
+$P\,[R-SQ^{-1}P]^{\,j}\,SQ^{-1}$.
+
+\paragraph{Interpretation.}
+The matrix $R-SQ^{-1}P$ is the counterpart of $A-BD^{-1}C$ in
+\citet{FVRRS2005}; Ravenna notes that \eqref{eq:R26} ``is the derivation
+obtained in Fernandez-Villaverde et al.\ (2005)''. Two distinct questions
+follow. \emph{Existence}: the VAR($\infty$) is well defined if all
+eigenvalues of $R-SQ^{-1}P$ lie inside the unit circle --- the ``poor man's
+invertibility condition''. \emph{Accuracy}: the eigenvalue \emph{moduli}
+govern the geometric rate at which the coefficients in \eqref{eq:R26} decay,
+and hence the size of the bias incurred by truncating the lag structure at
+finite $p$. An eigenvalue close to unity implies coefficients that remain
+non-negligible at long lags, so that a short-lag VAR is a poor approximation
+to the model-consistent representation of the data.
+
+
 
 % --- 5. CONCLUSION ---
 \section{Conclusion}
