@@ -5,7 +5,7 @@
 clear all; close all; clc;
 
 % 1. Set Path and Define Lags
-lags = [4, 6, 8, 10, 12]; 
+lags = [4, 8, 12]; 
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 
 % define the directory of the folder to save the results
@@ -29,7 +29,17 @@ for i = 1:length(lags)
     
     % Load the results saved from the simulation
     load(load_file);
-    
+
+    % --- TEMPORARY FIX -----------------------------------------------------
+    % MonteCalvo_lag_4.mat was generated before 'success_rate' was added to
+    % the save line in MonteCarlo_Calvo_Parameters.m, so it is missing here.
+    % Once tonight's re-run overwrites it with success_rate included, this
+    % block becomes a no-op - delete it then.
+    if ~exist('success_rate', 'var')
+        success_rate = num_successful / N_draws * 100;
+    end
+    % -------------------------------------------------------------------------
+
     % Clean the data (ensure no imaginary parts persist)
     data_hom = real(sim_ksiph_clean);
     data_fs  = real(sim_ksip_clean);

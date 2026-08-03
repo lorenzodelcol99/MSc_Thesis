@@ -12,6 +12,7 @@ load_file = fullfile(load_dir, sprintf('MonteCalvo_lag_%d.mat', target_lag));
 % Load the results saved from the simulation
 load(load_file);
 
+success_rate= num_successful/N_draws *100;
 %% Clean the data (ensure no imaginary parts persist)
 data_hom = real(sim_ksiph_clean);
 data_fs  = real(sim_ksip_clean);
@@ -69,5 +70,5 @@ grid on;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); % Clean axes
 
 % 3. Final Formatting: Super Title
-title_str = sprintf('Monte Carlo Simulation of Calvo Price Parameters: Homogeneous vs Firm-Specific Capital\n(VAR Lag: %d | Total Draws: %d | Success Rate: %d)', target_lag, N_draws, success_rate);
+title_str = sprintf('Monte Carlo Simulation of Calvo Price Parameters: Homogeneous vs Firm-Specific Capital\n(VAR Lag: %d | Total Draws: %d | Success Rate: %.1f%%)', target_lag, N_draws, success_rate);
 sgtitle(title_str, 'FontSize', 16, 'FontWeight', 'bold');

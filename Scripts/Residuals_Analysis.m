@@ -49,61 +49,93 @@ load(estim_res_file);
 disp('Data loaded successfully.');
 
 
-%% --- STABILITY TEST: BUILT-IN LagOp METHOD ---
+%% --- STABILITY TEST: COMPANION MATRIX EIGENVALUES ---
 
-%%%%%%%%%%%%%%%% Stability of the VAR Test: Does the Wold Decomposition exist at each VAR lag choice? %%%%%%%%%%%%%%%%
-% Test if all the Eigenvalues of the Companion Matrix lie inside the Unit circle --> in a way that the Roots are greater than 1
+%%%%%%%%%%%%%%%% Stability of the VAR: does the Wold decomposition exist at each lag choice? %%%%%%%%%%%%%%%%
+% A VAR(p) is stable if all the eigenvalues of its companion matrix lie
+% INSIDE the unit circle. Equivalently, all the roots of det(Phi(L)) = 0 lie
+% OUTSIDE it, where the lag polynomial is
+%
+%       Phi(L) = I - Phi_1*L - Phi_2*L^2 - ... - Phi_p*L^p        <- note the MINUS signs
+%
+% This matters: EstMdl.AR stores the Phi_j from  y_t = c + Phi_1*y_{t-1} + ...
+% so they must be NEGATED before being handed to LagOp. Feeding LagOp the raw
+% (positive) matrices builds the wrong polynomial and can flag a perfectly
+% stable VAR as unstable.
+%
+% I report the largest eigenvalue modulus as well, not just a yes/no: a value
+% of 0.98 does not mean "the VAR is unstable", it means "there is a root very
+% close to unity" - which is exactly what one expects with the Federal Funds
+% Rate in the system.
 
+disp('Testing VAR stability via the companion matrix...');
 
-disp('Testing VAR stability using MATLAB 2025 built-in functions...');
-
-% Pre-allocate cell array
-stability_results = cell(num_lags, 2);
+stability_results = cell(num_lags, 4);
+all_eigenvalues   = cell(num_lags, 1);
 
 for i = 1:num_lags
     p = lags_to_test(i);
-    
-    % 1. Specify and estimate the model
-    Mdl = varm(num_vars, p);
+
+    % 1. Estimate the model
+    Mdl    = varm(num_vars, p);
     EstMdl = estimate(Mdl, Y, 'Display', 'off');
-    
-    % 2. Create the Lag Operator Polynomial
-    % We concatenate the Lag 0 matrix (an Identity matrix) with the estimated AR matrices
-    ARLagOp = LagOp([{eye(num_vars)} EstMdl.AR]);
-    
-    % 3. Check stability using the built-in function
-    if isStable(ARLagOp)
-        stability_results{i, 1} = ['VAR(', num2str(p), ')'];
+
+    % 2. Build the companion matrix
+    %    Top block    : [Phi_1 Phi_2 ... Phi_p]      (num_vars x num_vars*p)
+    %    Bottom block : [I 0] shifting the states down one period
+    Phi  = cat(2, EstMdl.AR{:});
+    Comp = [Phi ;
+            eye(num_vars*(p-1)), zeros(num_vars*(p-1), num_vars)];
+
+    % 3. Eigenvalues
+    lam     = eig(Comp);
+    max_mod = max(abs(lam));
+    all_eigenvalues{i} = lam;
+
+    % 4. Cross-check with LagOp, this time with the correct signs
+    AR_neg    = cellfun(@(A) -A, EstMdl.AR, 'UniformOutput', false);
+    ARLagOp   = LagOp([{eye(num_vars)} AR_neg]);
+    lagop_ans = isStable(ARLagOp);
+
+    stability_results{i, 1} = ['VAR(', num2str(p), ')'];
+    if max_mod < 1
         stability_results{i, 2} = 'Stable';
     else
-        stability_results{i, 1} = ['VAR(', num2str(p), ')'];
         stability_results{i, 2} = 'UNSTABLE';
     end
+    stability_results{i, 3} = max_mod;
+    stability_results{i, 4} = lagop_ans;   % must agree with column 2
 end
 
-% Format and display the table
 stability_table = cell2table(stability_results, ...
-    'VariableNames', {'Lag_Structure', 'Wold_Decomposition_Status'});
+    'VariableNames', {'Lag_Structure', 'Status', 'Max_Eigenvalue_Modulus', 'LagOp_Agrees'});
 
 disp('--- Stability Test Results ---');
 disp(stability_table);
 
+%% --- EIGENVALUES IN THE COMPLEX PLANE ---
+% Visual check: how close to the unit circle do the roots get?
 
+figure('Name', 'VAR companion eigenvalues', 'Color', 'w', 'Position', [100 100 1400 300]);
 
-% not trusting too much this piece of code, But it is highly possible that
-% I have an unstable VAR, remeber that I have the FFR, that are highly
-% persistent and probably unit root! Check the ACF graph, 25 quarters of
-% significance, that's unit root
+theta = linspace(0, 2*pi, 400);
 
-% Extract the Federal Funds Rate (9th column)
-ffr_data = Y(:, 9);
+for i = 1:num_lags
+    subplot(1, num_lags, i);
+    plot(cos(theta), sin(theta), 'k-', 'LineWidth', 1);        % unit circle
+    hold on;
+    lam = all_eigenvalues{i};
+    plot(real(lam), imag(lam), 'o', 'MarkerSize', 5, ...
+         'MarkerFaceColor', [0.85 0.33 0.10], 'MarkerEdgeColor', 'none');
+    axis equal; grid on;
+    xlim([-1.2 1.2]); ylim([-1.2 1.2]);
+    title(sprintf('VAR(%d)   max |\\lambda| = %.4f', ...
+                  lags_to_test(i), max(abs(lam))));
+    hold off;
+end
 
-% Generate the quick ACF plot
-figure('Name', 'ACF: Federal Funds Rate', 'Color', 'w');
-autocorr(ffr_data, 'NumLags', 40); 
-title('Autocorrelation Function: Federal Funds Rate');
-
-
+sgtitle('Companion matrix eigenvalues against the unit circle', ...
+        'FontWeight', 'bold');
 
 %% %%%%%%%%%%%%%% RESIDUAL ANALYSIS %%%%%%%%%%%%%%%%%
 

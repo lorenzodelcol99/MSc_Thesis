@@ -35,7 +35,13 @@ slprj/
 *.snm
 *.toc
 *.run.xml
-*.synctex.gzOutput/MonteCarlo_Calvo/*.mat
-simforfilter.mat
-Output/MonteCarlo_Calvo/*.mat
+*.synctex.gz
+
+# =========================
+# Large data files - excluded individually (NOT a blanket *.mat rule,
+# every other .mat file in the repo stays tracked)
+# =========================
+Output/MonteCarlo_Calvo/MonteCalvo_lag_4.mat
+Output/MonteCarlo_Calvo/MonteCalvo_lag_8.mat
+Output/MonteCarlo_Calvo/MonteCalvo_lag_12.mat
 simforfilter.mat

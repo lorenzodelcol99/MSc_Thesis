@@ -176,18 +176,68 @@ legend({'Fit gain (benefit)','AIC penalty','HQ penalty','SC penalty'}, ...
        'Location', 'northwest');
 xticks(lags(2:3)); grid on;
 
-%% 8. Save
+%% 8. Plot: Generalized Variance across lag choice (standalone)
+% Same information as the left panel of point 6, but on its own so it can be
+% saved and dropped straight into the thesis / a slide by itself.
+
+fig_gv = figure('Color','w','Position',[100 100 560 420]);
+plot(lags, logdet, '-o', 'LineWidth', 2, 'Color', col_fit, ...
+     'MarkerFaceColor', 'w', 'MarkerSize', 7);
+xlabel('Lag order p');
+ylabel('log det \Sigma   (Generalized Variance)');
+title('Generalized Variance across VAR lag orders');
+xticks(lags); grid on;
+
+%% 9. LaTeX-ready table of the Generalized Variance (point 3)
+% Builds the LaTeX source as text in memory. Nothing is written to disk here
+% - saving happens in point 10, together with the figure from point 8.
+
+latex_lines = {};
+latex_lines{end+1} = '\begin{table}[htpb]';
+latex_lines{end+1} = '    \centering';
+latex_lines{end+1} = '    \renewcommand{\arraystretch}{1.2}';
+latex_lines{end+1} = '    \caption{Generalized Variance across VAR lag orders}';
+latex_lines{end+1} = '    \label{tab:generalized_variance}';
+latex_lines{end+1} = '    \begin{tabular}{ccccc}';
+latex_lines{end+1} = '    \toprule';
+latex_lines{end+1} = '    \textbf{Lag order} & \textbf{$\log\det\hat{\Sigma}$} & \textbf{$\Delta$ vs.\ $p=4$} & \textbf{$\Delta$ Variance (\%)} & \textbf{$\Delta$ St.\,Dev.\ (\%)} \\';
+latex_lines{end+1} = '    \midrule';
+for i = 1:3
+    latex_lines{end+1} = sprintf('    $p = %d$ & %.4f & %.4f & %+.1f\\%% & %+.1f\\%% \\\\', ...
+        lags(i), logdet(i), Delta(i), var_pct(i), sd_pct(i));
+end
+latex_lines{end+1} = '    \bottomrule';
+latex_lines{end+1} = '    \end{tabular}';
+latex_lines{end+1} = '\end{table}';
+
+disp('--- LaTeX table (Generalized Variance) ---');
+disp(char(latex_lines));
+
+%% 10. Save: the Generalized Variance figure (point 8) and its LaTeX table (point 9)
 if ~exist(save_path, 'dir')
     mkdir(save_path);
 end
-writetable(gv_table, [save_path 'generalized_variance.csv']);
-writetable(results,  [save_path 'fit_vs_parameters.csv']);
-writetable(decomp,   [save_path 'fit_vs_parameters_decomposition.csv']);
-exportgraphics(figure(1), [save_path 'fit_vs_parameters.pdf'],     'ContentType', 'vector');
-exportgraphics(figure(2), [save_path 'fit_vs_parameters_net.pdf'], 'ContentType', 'vector');
-disp('Saved.');
 
-%% 9. Optional: how many independent sources of variation?
+exportgraphics(fig_gv, [save_path 'generalized_variance_across_lags.pdf'], 'ContentType', 'vector');
+
+tex_filename = [save_path 'generalized_variance_table.tex'];
+fileID = fopen(tex_filename, 'w');
+for i = 1:numel(latex_lines)
+    fprintf(fileID, '%s\n', latex_lines{i});
+end
+fclose(fileID);
+
+fprintf('Saved: %s\n', [save_path 'generalized_variance_across_lags.pdf']);
+fprintf('Saved: %s\n', tex_filename);
+
+% --- Optional extras (kept disabled, same as before) ---
+%writetable(gv_table, [save_path 'generalized_variance.csv']);
+%writetable(results,  [save_path 'fit_vs_parameters.csv']);
+%writetable(decomp,   [save_path 'fit_vs_parameters_decomposition.csv']);
+%exportgraphics(figure(1), [save_path 'fit_vs_parameters.pdf'],     'ContentType', 'vector');
+%exportgraphics(figure(2), [save_path 'fit_vs_parameters_net.pdf'], 'ContentType', 'vector');
+
+%% 11. Optional: how many independent sources of variation?
 % Not part of the fit comparison, and it needs the REDUCED FORM residuals:
 % erzout is orthogonalised, so its covariance is diagonal by construction and
 % its eigenvalues would carry no information about common factors.
@@ -196,11 +246,11 @@ disp('Saved.');
 % The DSGE has 3 structural shocks, so if the model were literally true the
 % reduced form covariance would be nearly rank 3.
 
-fprintf('\nShare of residual variance in the first 3 eigenvalues:\n');
-for i = 1:3
-    U     = E{i} / A0{i}';           % same as E{i} * inv(A0{i})', more stable
-    Su    = (U' * U) / T;
-    lam   = sort(eig(Su), 'descend');
-    share = 100 * sum(lam(1:3)) / sum(lam);
-    fprintf('   p = %2d  ->  %5.1f%%\n', lags(i), share);
-end
+%fprintf('\nShare of residual variance in the first 3 eigenvalues:\n');
+%for i = 1:3
+%    U     = E{i} / A0{i}';           % same as E{i} * inv(A0{i})', more stable
+%    Su    = (U' * U) / T;
+%    lam   = sort(eig(Su), 'descend');
+%    share = 100 * sum(lam(1:3)) / sum(lam);
+%    fprintf('   p = %2d  ->  %5.1f%%\n', lags(i), share);
+%end

@@ -5,7 +5,7 @@
 clear all; close all; clc;
 
 % 1. Set Path and Define Lags
-lags = [4, 6, 8, 10, 12]; 
+lags = [4, 8, 12]; 
 load_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_Calvo/';
 
 % define the directory of the folder to save the results
@@ -15,21 +15,31 @@ save_plot_dir = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/MonteCarlo_C
 color_hom = [0 0.447 0.741]; % Blue
 color_fs  = [0.850 0.325 0.098]; % Orange
 
-% 2. Loop Through Each Lag
+%% 2. Loop Through Each Lag
 for i = 1:length(lags)
     target_lag = lags(i);
     
     load_file = fullfile(load_dir, sprintf('MonteCalvo_lag_%d.mat', target_lag));
-    
+
     % Robustness check: skip iteration if the .mat file does not exist yet
     if ~exist(load_file, 'file')
         fprintf('File for lag %d not found. Skipping...\n', target_lag);
         continue;
     end
-    
+
     % Load the results saved from the simulation
     load(load_file);
-    
+
+    % --- TEMPORARY FIX -----------------------------------------------------
+    % MonteCalvo_lag_4.mat was generated before 'success_rate' was added to
+    % the save line in MonteCarlo_Calvo_Parameters.m, so it is missing here.
+    % Once tonight's re-run overwrites it with success_rate included, this
+    % block becomes a no-op - delete it then.
+    if ~exist('success_rate', 'var')
+        success_rate = num_successful / N_draws * 100;
+    end
+    % -------------------------------------------------------------------------
+
     % Clean the data (ensure no imaginary parts persist)
     data_hom = real(sim_ksiph_clean);
     data_fs  = real(sim_ksip_clean);
