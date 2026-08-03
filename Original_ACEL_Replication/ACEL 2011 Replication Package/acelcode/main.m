@@ -60,7 +60,7 @@ decomp      = 0;     % If estvar = 1, if unity, plot decomposition of historical
 
 ndraws      =1000;   % If estvar = 1, imp = 1; number of artificial data sets to use in bootstrapping
 %%%%% LORENZO DEL COL change line 63 (If I chanfge the VAR lags, need to change also this) PortmanteauLags = 0 to --> PortmanteauLags = XXXXX %%%%% 
-PortmanteauLags = [4 8 10 12];% If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
+PortmanteauLags = [16 20 24];% If estvar = 1, imp=1; var lag lengths for which multivariate q statistics are desired
 a           = 8;     % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with shortest period for band pass filter to let through
 b           = 32;    % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); component with longest period for band pass filter.
 lam         = 1600;  % If estvar = 1, (imp = 1 or vardecomp = 1, or ish = 1); parameter for HP filter.

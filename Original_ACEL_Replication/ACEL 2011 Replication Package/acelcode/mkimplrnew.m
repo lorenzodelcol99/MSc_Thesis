@@ -26,7 +26,7 @@ function [impzout,vdout,simdataout,erzout,azeroout,a0betazout,var_explode,V,D] =
 % the columns are the variables and the third dimension (the worksheet) are the different shocks. 
 % vdout  is the variance decompositions. 
 % simdataout is the historical decompositions. 
-% erzout are the residuals from the VAR
+%%%%%%%%%%%%%% erzout are the residuals from the VAR %%%%%%%%%%%%%%
 % azeroout the estimate of A0 matrix. 
 % a0betazout  the estimate of the inv(A0)*A(L) matrix. 
 % in other words the reduced form VAR is y(t) = a0betazout* y(t-1) + inv(Azeroout)*erz(t). 
