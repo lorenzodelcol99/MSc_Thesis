@@ -463,47 +463,6 @@ port_table = cell2table(port_rows, 'VariableNames', ...
 disp('--- Multivariate portmanteau test (ACEL, mkqmv.m) ---');
 disp(port_table);
 
-% -------------------------------------------------------------------------
-% ACTION REQUIRED IF ANY ROW IS INVALID
-% -------------------------------------------------------------------------
-if any_invalid
-    fprintf(2, '\n');
-    fprintf(2, '=================================================================\n');
-    fprintf(2, ' PORTMANTEAU TEST NOT USABLE AS SAVED - main.m MUST BE RE-RUN\n');
-    fprintf(2, '=================================================================\n');
-    fprintf(2, ' The runs that produced results_lag_p.mat used\n');
-    fprintf(2, '     PortmanteauLags = [4 6 8 10]\n');
-    fprintf(2, ' for EVERY lag order, so s <= p in most cells:\n');
-    fprintf(2, '     VAR(4) : s = 4 gives dof = 0            (1 of 4 invalid)\n');
-    fprintf(2, '     VAR(8) : s = 4, 6, 8 give dof <= 0      (3 of 4 invalid)\n');
-    fprintf(2, '     VAR(12): s = 4, 6, 8, 10 give dof < 0   (4 of 4 invalid)\n');
-    fprintf(2, '\n');
-    fprintf(2, ' FIX: in main.m line 63 set a grid that exceeds the LARGEST lag\n');
-    fprintf(2, ' order in the exercise (p = 12), and keep it the SAME for every\n');
-    fprintf(2, ' run so the three models face an identical test:\n');
-    fprintf(2, '\n');
-    fprintf(2, '     PortmanteauLags = [16 20 24];\n');
-    fprintf(2, '\n');
-    fprintf(2, ' Resulting degrees of freedom, K^2*(s-p) with K = 10:\n');
-    fprintf(2, '     VAR(4) : 1200, 1600, 2000\n');
-    fprintf(2, '     VAR(8) :  800, 1200, 1600\n');
-    fprintf(2, '     VAR(12):  400,  800, 1200\n');
-    fprintf(2, '\n');
-    fprintf(2, ' Then re-run main.m once per lag order (4, 8, 12), overwriting\n');
-    fprintf(2, ' results_lag_p.mat. NOTE: main.m currently holds [4 8 10 12],\n');
-    fprintf(2, ' which is still invalid for p = 12 - every entry has s <= 12.\n');
-    fprintf(2, '\n');
-    fprintf(2, ' Do NOT switch to a per-lag grid such as p+4: the tests would\n');
-    fprintf(2, ' then differ across models and could not be compared, which is\n');
-    fprintf(2, ' the whole point of the lag exercise.\n');
-    fprintf(2, '\n');
-    fprintf(2, ' Report the BOOTSTRAP p-value as the primary one: with T ~ 160\n');
-    fprintf(2, ' and dof in the hundreds, the asymptotic chi2 is unreliable, and\n');
-    fprintf(2, ' the bootstrap column already disagrees with it sharply.\n');
-    fprintf(2, '=================================================================\n\n');
-else
-    disp('All portmanteau cells satisfy s > p: the test is correctly sized.');
-end
 
 %% 2.E --- VISUALISING THE LJUNG-BOX P-VALUES ---
 %
@@ -601,21 +560,28 @@ fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
 % whether resid_source is 'reduced' or 'structural'. Titles/filenames below
 % are fixed accordingly rather than driven by resid_label/resid_tag.
 %
-% DOPO DEVO TENERE SOLO CRITICAL VALUES MADE BY BOOTSTRAP
-% E RIFLETTERE SU SRUCTURAL VS RF RESIDUALS (HERE ARE JUST STRUCTUAL)
-% (maybe I can modify the code and do the Portmanteau test with the RF residuals
+% BOOTSTRAP ONLY. The asymptotic p-value (Q(s) referred to chi2(K^2*(s-p)))
+% used to be shown alongside it, but 2.D already found it unreliable at
+% T ~ 160 with dof in the hundreds, and after the main.m re-run it collapses
+% to ~0 everywhere while the bootstrap does not - it was adding a second,
+% worse-behaved line rather than real information. Only the bootstrap p is
+% plotted: the share of ACEL's own 1000 simulated statistics at least as
+% large as the one observed on the actual residuals.
 %
-% Both p-values are shown, because 2.D found them disagreeing sharply wherever
-% both were valid: the asymptotic p (dashed) refers Q(s) to chi2(K^2*(s-p)),
-% unreliable at T ~ 160 with dof in the hundreds; 
-%
-% the bootstrap p (solid, the one to trust) is the share of ACEL's own 1000 simulated draws at least as
-% large as the observed statistic.
+% VAR(8) is drawn DASHED, VAR(4) and VAR(12) solid. This mirrors the
+% convention already used for the DSGE-vs-VAR IRF comparison. It is not just
+% styling: at p = 16/20/24 the bootstrap p-value for VAR(8) sits at exactly
+% 1.000 on every point, identical to VAR(12) - with matching line styles the
+% orange VAR(8) line would be fully painted over by blue VAR(12), drawn after
+% it in the loop, and would look like a missing series rather than an
+% overlapping one.
 %
 % This reuses port_rows from 2.D if present in the workspace (running the
 % whole script top to bottom); if 2.F is run on its own, it reloads the same
 % three fields itself so it does not depend on 2.D having executed first.
 
+if ~exist('port_rows', 'var')
+    port_rows = {};
     for i = 1:num_lags
         p = lags_to_test(i);
         g = load([base_path, 'results_lag_', num2str(p), '.mat'], ...
@@ -630,59 +596,59 @@ fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
                                    s_vec(j) > p};  %#ok<SAGROW>
         end
     end
+end
 
-% Pivot the long-format rows (one per VAR/s combination) into (lag order) x
-% (s) matrices, so each row of the matrix becomes one line in the plot.
+% Pivot the long-format rows (one per VAR/s combination) into a (lag order) x
+% (s) matrix, so each row becomes one line in the plot.
 s_all    = unique(cell2mat(port_rows(:, 2)))';
 n_s      = numel(s_all);
-asym_mat = nan(num_lags, n_s);
 boot_mat = nan(num_lags, n_s);
 
 for r = 1:size(port_rows, 1)
     i = find(lags_to_test == sscanf(port_rows{r,1}, 'VAR(%d)'), 1);
     j = find(s_all == port_rows{r,2}, 1);
-    asym_mat(i, j) = port_rows{r, 5};
     boot_mat(i, j) = port_rows{r, 6};
 end
 
-if any(isnan(asym_mat), 'all')
-    warning(['Some asymptotic portmanteau p-values are NaN (s <= p at that ' ...
-             'cell - see the 2.D warning). Re-run main.m with the suggested ' ...
-             'PortmanteauLags to fill every cell.']);
-end
-
 fig_port = figure('Name', 'Portmanteau p-values', 'Color', 'w', ...
-                  'Position', [150 150 720 460]);
+                  'Position', [150 150 700 460]);
 hold on;
 
+line_styles = {'-', '--', '-'};   % p = 4 solid, p = 8 dashed, p = 12 solid
 h_boot = gobjects(1, num_lags);
-h_asym = gobjects(1, num_lags);
 
-for i = 1:num_lags
+% Drawing order only, not the colour/style/legend mapping: p = 8 is plotted
+% LAST so its dashed style sits on top of p = 12's solid line rather than
+% underneath it. Where they coincide (see the header note), the gaps in the
+% dashes now show the solid blue line through them, which reads as "these two
+% overlap" instead of "VAR(8) is missing".
+draw_order = [find(lags_to_test == 4,  1), ...
+              find(lags_to_test == 12, 1), ...
+              find(lags_to_test == 8,  1)];
+
+for i = draw_order
     col = col_lag(min(i, size(col_lag,1)), :);
 
-    h_boot(i) = plot(s_all, boot_mat(i,:), '-o', 'LineWidth', 2, ...
-                     'MarkerSize', 5, 'MarkerFaceColor', 'w', 'Color', col);
-    h_asym(i) = plot(s_all, asym_mat(i,:), '--s', 'LineWidth', 1.2, ...
-                     'MarkerSize', 4, 'Color', col);
+    h_boot(i) = plot(s_all, boot_mat(i,:), ...
+                     'LineStyle', line_styles{min(i, numel(line_styles))}, ...
+                     'Marker', 'o', 'MarkerSize', 5, 'MarkerFaceColor', 'w', ...
+                     'LineWidth', 2, 'Color', col);
 end
 
 h_thr = yline(0.05, 'r:', 'LineWidth', 1.5);
 
 xlabel('Portmanteau truncation lag s');
-ylabel('p-value');
+ylabel('Bootstrap p-value');
 ylim([0 1.05]);
 xticks(s_all);
 grid on; box on;
-title('Multivariate portmanteau test (structural shocks, ACEL identification)', ...
+title('Multivariate portmanteau test, bootstrap p-values', ...
       'FontWeight', 'bold');
 
-legend_labels = [arrayfun(@(q) sprintf('Bootstrap p, VAR(%d)', q), lags_to_test, ...
-                          'UniformOutput', false), ...
-                 arrayfun(@(q) sprintf('Asymptotic p, VAR(%d)', q), lags_to_test, ...
+legend_labels = [arrayfun(@(q) sprintf('VAR(%d)', q), lags_to_test, ...
                           'UniformOutput', false), ...
                  {'5% threshold'}];
-legend([h_boot, h_asym, h_thr], legend_labels, 'Location', 'eastoutside');
+legend([h_boot, h_thr], legend_labels, 'Location', 'eastoutside');
 
 hold off;
 
