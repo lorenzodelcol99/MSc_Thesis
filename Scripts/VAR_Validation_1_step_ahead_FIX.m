@@ -1,292 +1,286 @@
 % =========================================================================
-% VAR_Validation_1_step_ahead.m
-% Script to validate VAR across p=4, p=6, p=8, p=10 and p=12
-% 1-step ahead forecast error analysis using the Canova/Ferroni Toolbox
+% VAR_Validation_and_Residual_Summary.m
+% (old name) VAR_Validation_1_step_ahead_FIX.m
+%
+% In-sample (one step ahead) validation of the VAR across p = 4, 8, 12:
+%   - RMSE of the residuals, by variable and by lag order
+%   - residual paths, VAR(4) against VAR(12)
+%   - RMSE against lag choice
+%
+% -------------------------------------------------------------------------
+% RESIDUAL SOURCE
+% -------------------------------------------------------------------------
+% residuals now come straight from the ACEL replication output
+% (results_lag_p.mat, produced by main.m calling mkimplrnew.m), exactly as in
+% Residuals_Analysis_FIX.m. (for more info check Residual_Analysis_FIX.m)
 % =========================================================================
 clear; clc; close all;
-disp('Initializing Empirical Macro Toolbox (EMT)...');
 
-% Add the Canova/Ferroni toolbox to the MATLAB path
-addpath('/Users/lorenzodelcol/Desktop/GIT/BVAR_/bvartools');
-disp('Loading historical dataset...');
 
-% Define the absolute path to your Output folder
-base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
-%save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/VAR_Residuals_RMSE_Estimates';
+%% 1. Settings, paths and variable labels
 
-% Extract only the raw historical data matrix from the baseline file
-data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
-Y = data_full_sample.vardata;
-disp('Historical data loaded successfully.')
+base_path      = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
+save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/VAR_Residuals_RMSE_Estimates';
 
-% Define the lag lengths to be evaluated sequentially
-lags_to_test = [4, 6, 8, 10, 12];
+lags_to_test = [4, 8, 12];
+num_lags     = numel(lags_to_test);
 
-% Define the h forecast horizon for h-step ahead forecast
-h = [1, 2, 3, 4];
-
-% Define the start of out of sample testing period
-% 120 it should be 1989:Q4 so that we include 6 years of Great Moderation in the training data
-% but the VAR12 has (12x11) + 1 = 133 parameters to estimate, so we need more than 133 observations to estimate it!
-T_start = 150;
-
-%% Full Sample VAR Evaluation: Benchmark Residuals
-num_vars = size(Y, 2);             % Size equal to the number of columns of the Y matrix
-num_lags = length(lags_to_test);   % Number of different lags that we need to test
-T_total = size(Y, 1);              % Extract total observations for time alignment
-
-% Creating an empty matrix to store the in-sample RMSE for each lag structure and aligned residuals 
-% (VAR 4 consumes the first 4 lags to initialise the estimation, the VAR 12 it consumes 12)
-RMSE_insample_benchmark = zeros(num_lags, num_vars); % 5 x 11 matrix
-stored_aligned_residuals = cell(num_lags, 1);        % 5 rows (num lags) x 1 column matrix (is a column vector)
-
-disp('Estimating in-sample benchmark residuals across all lag structures using EMT...');
-
-options.priors.name = 'Jeffrey'; % Jeffrey's prior, is an uninformative prior, is a flat prior, using this option 
-                                 % (which is the default in the EMT) is as if wee are estimating the VAR in the Frequentist approach
-options.K = 100;                 % number of bootstrap, set K = 100 to have a rapid check, the defaults is K=5000
-
-for i = 1:num_lags               % 1:num_lags it creates a row vector displaying the numebr of lags
-    
-    p = lags_to_test(i);         % selecting which one of the lags we need to usem the first, the second .. of the num_lags list
-    
-    % 1. Estimate the model on the FULL sample using EMT
-    BVAR_out = bvar_(Y, p, options);
-    
-    % 2. Extract the raw in-sample residuals 
-    e_hat_raw = BVAR_out.e_ols;  % extracting the fitted residuals (e_ols) from the output
-    
-    % 3. Calculate In-Sample RMSE
-    RMSE_insample_benchmark(i, :) = sqrt(mean(e_hat_raw.^2));
-    
-    % 4. Calculate the RMSE in PERCENTAGE POINTS
-    RMSE_insample_benchmark_perc(i, :) = RMSE_insample_benchmark(i, :) * 100 ;
-    
-    % --- 5. TIME ALIGNMENT ROUTINE ---
-    % Create a matrix of NaNs equal to the size of the original dataset
-    e_hat_aligned = NaN(T_total, num_vars);
-    % Insert the raw residuals starting AFTER the lag length 'p'
-    e_hat_aligned((p + 1):end, :) = e_hat_raw;
-    
-    % Store the aligned residuals in the cell array
-    stored_aligned_residuals{i} = e_hat_aligned;
-    
-    disp(['In-Sample RMSE Percentage Points computed for VAR(', num2str(p), ')']);
-end
-
-disp('--- In-Sample Benchmark RMSE PP (Full Sample) ---');
-
-% List contains exactly 10 varaibles matched with the 10 columns of Y (names exactly taken from ACEL2011)
+% The 10 variables, in the column order of vardata (names from ACEL2011).
 actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator', 'Capacity_Util', ...
                     'ln_Hours', 'ln(GDP/Hours) - ln_Real_Wages', 'ln_Consumption/GDP', ...
                     'ln_Investments/GDP', 'Fed_Funds_Rate', 'ln_GDP Deflator + ln_GDP - ln_MZM'};
+num_vars = numel(actual_var_names);
 
-row_names = strcat('VAR(', string(lags_to_test), ')');
+% Labels for the figures. MATLAB renders titles with the TeX interpreter, so
+% underscores would turn the next character into a subscript: these carry none.
+display_var_names = {'\Delta ln rel. price of investment', ...
+                     '\Delta ln GDP / hours', ...
+                     '\Delta ln GDP deflator', ...
+                     'Capacity utilisation', ...
+                     'ln hours', ...
+                     'ln(GDP/hours) - ln real wage', ...
+                     'ln consumption / GDP', ...
+                     'ln investment / GDP', ...
+                     'Federal funds rate', ...
+                     'Velocity: ln P + ln GDP - ln MZM'};
 
-% Using array2table for a cleaner console output
-disp(array2table(RMSE_insample_benchmark_perc, 'VariableNames', actual_var_names, 'RowNames', cellstr(row_names)));
+% Raw historical data. Identical in every results_lag_p.mat.
+disp('Loading historical dataset...');
+data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
+Y       = data_full_sample.vardata;
+T_total = size(Y, 1);
 
-%% Save Residuals and RMSE Data
-disp('Saving data...');
-% Construct the full file path safely
-save_file_path = fullfile(save_base_path, 'in_sample_benchmark_data.mat');
+fprintf('Historical data loaded: %d observations x %d variables.\n\n', T_total, num_vars);
 
-% Save the data
-save(save_file_path, ...
-     'stored_aligned_residuals', 'RMSE_insample_benchmark', ...
-     'RMSE_insample_benchmark_perc', 'actual_var_names', 'lags_to_test', 'num_vars');
-
-disp(['Data successfully saved to: ', save_file_path]);
-
-%% -------------------------------------------------------------------------
-% Formatting Setup (Global Palette)
-% -------------------------------------------------------------------------
-color_L4  = [0.4660, 0.6740, 0.1880]; % Green
-color_L6  = [0.4940, 0.1840, 0.5560]; % Purple
-color_L8  = [0.8500, 0.3250, 0.0980]; % Orange
-color_L10 = [0.6350, 0.0780, 0.1840]; % Dark Red
-color_L12 = [0.0000, 0.4470, 0.7410]; % Blue 
-line_styles = {'-', '--', ':', '-.', '-'};
-
-%% Plotting the Benchmark Residuals (Single Variable)
-disp('Generating residual plot...');
-
-% Find the array indices for the specific models you want to compare
-idx_p4 = find(lags_to_test == 4);
-idx_p12 = find(lags_to_test == 12);
-
-% --- DATE GENERATION ---
-% Extract the total number of observations (T_total) directly from the padded matrix
-T_total = size(stored_aligned_residuals{idx_p4}, 1);
-
-% Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
+% Quarterly dates, starting 1959:Q2
 time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
 
-% Define which variable column to plot (e.g., 9 is Fed Funds Rate)
-var_to_plot = 9; 
 
-figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
+%% 2.A Load the ACEL residuals and compute the in-sample RMSE
 
-% Plot the VAR(4) residuals against the time vector using standard formatting
-plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), ...
-    'LineWidth', 1.5, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
+disp('Loading ACEL VAR residuals and computing in-sample RMSE...')
+
+U                = cell(num_lags, 1);       % reduced form residuals, (T-p) x num_vars
+residuals_padded = cell(num_lags, 1);       % same, NaN-padded to T_total rows
+RMSE_insample    = zeros(num_lags, num_vars);
+
+for i = 1:num_lags
+    p = lags_to_test(i);
+
+    f = load([base_path, 'results_lag_', num2str(p), '.mat'], ...
+             'erzout', 'azeroout', 'nlags', 'nvars');
+
+    assert(f.nlags == p,        'results_lag_%d.mat reports nlags = %d.', p, f.nlags);
+    assert(f.nvars == num_vars, 'results_lag_%d.mat reports nvars = %d.', p, f.nvars);
+
+    % Reduced form residuals:  u(t) = inv(A0)*erz(t)  ->  U = E*inv(A0)'
+    U{i} = f.erzout / f.azeroout';
+
+    assert(size(U{i},1) == T_total - p, ...
+           'VAR(%d): %d residuals, expected %d.', p, size(U{i},1), T_total - p);
+
+    % In-sample RMSE, one number per variable
+    RMSE_insample(i, :) = sqrt(mean(U{i}.^2));
+
+    % Time alignment: ACEL drops the first p observations, so residual row 1
+    % is date p+1. Padding with NaN puts every lag order on the same T_total
+    % row grid, which is what lets VAR(4) and VAR(12) share one time axis in
+    % the plots below - MATLAB simply leaves a gap wherever a NaN sits.
+    residuals_padded{i} = NaN(T_total, num_vars);
+    residuals_padded{i}((p+1):end, :) = U{i};
+
+    fprintf('  VAR(%2d): %3d residuals\n', p, size(U{i},1));
+end
+
+%% 2.B RMSE in percentage points
+RMSE_insample_perc = RMSE_insample * 100;
+
+% --- Comparability check -------------------------------------------------
+% TO HAVE A FAIR COMPARISON, SEE THE ROBUSTNESS IN WHICH EVERY VAR IS ESTIMATED in the same T-12 SAMPLE
+
+% What this DOES isolate: given the already-estimated residuals, does scoring
+% every lag order on the SAME 159 dates change the RMSE much? If not, the
+% pattern across p is not an artefact of VAR(4)'s window including extra
+% (possibly noisier) early-1960s observations that VAR(12) never sees.
+pmax        = max(lags_to_test);
+RMSE_common = zeros(num_lags, num_vars);
+
+for i = 1:num_lags
+    p                = lags_to_test(i);
+    U_common         = U{i}((pmax - p + 1):end, :);
+    RMSE_common(i,:) = sqrt(mean(U_common.^2)) * 100;
+end
+
+max_gap = max(abs(RMSE_insample_perc - RMSE_common), [], 'all');
+fprintf(['\nCommon-sample check: largest gap between own-sample and ' ...
+         'common-sample RMSE = %.4f pp\n\n'], max_gap);
+
+
+%% 3. RMSE table
+
+row_names = cellstr(strcat('VAR(', string(lags_to_test), ')'));
+
+disp('--- In-sample RMSE, percentage points (reduced form residuals) ---');
+disp(array2table(RMSE_insample_perc, ...
+     'VariableNames', actual_var_names, 'RowNames', row_names));
+
+
+%% 4. Formatting setup (shared palette)
+% Same colours as the rest of the thesis: green / orange / blue for p = 4/8/12.
+col_lag = [0.4660 0.6740 0.1880;    % p =  4   green
+           0.8500 0.3250 0.0980;    % p =  8   orange
+           0.0000 0.4470 0.7410];   % p = 12   blue
+% The residual comparisons below contrast the shortest and the longest lag
+% order. The indices are looked up rather than hardcoded, so editing
+% lags_to_test cannot silently break them.
+idx_p4  = find(lags_to_test == 4,  1);
+idx_p12 = find(lags_to_test == 12, 1);
+
+%% 5. Residual path for a single variable (VAR(4) vs VAR(12))
+
+disp('Generating single-variable residual plot...');
+
+var_to_plot = 9;    % 9 = Federal funds rate
+
+fig_one = figure('Name', ['Residual comparison: ', actual_var_names{var_to_plot}], ...
+                 'Color', 'w');
+
+plot(time_vector, residuals_padded{idx_p4}(:, var_to_plot), ...
+     'LineWidth', 1.5, 'Color', col_lag(1,:), 'LineStyle', '-', ...
+     'DisplayName', 'VAR p = 4');
 hold on;
+plot(time_vector, residuals_padded{idx_p12}(:, var_to_plot), ...
+     'LineWidth', 1.5, 'Color', col_lag(3,:), 'LineStyle', '--', ...
+     'DisplayName', 'VAR p = 12');
 
-% Plot the VAR(12) residuals against the time vector using standard formatting
-plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), ...
-    'LineWidth', 1.5, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
-
-% Add a horizontal zero line for visual reference
 yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
 
-% Title using the dynamic variable name
-title(['In-Sample Residuals for ', actual_var_names{var_to_plot}], 'Interpreter', 'none');
+title(['In-sample residuals: ', display_var_names{var_to_plot}]);
 xlabel('Year');
-ylabel('Error');
+ylabel('Residual');
 legend('Location', 'best');
 grid on;
 hold off;
 
-%% Plotting the Benchmark Residuals (All Variables In Isolation)
+safe_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
+exportgraphics(fig_one, ...
+    fullfile(save_base_path, sprintf('InSample_Residuals_%s.pdf', safe_name)), ...
+    'ContentType', 'vector');
+fprintf('  Saved: InSample_Residuals_%s.pdf\n', safe_name);
+
+
+%% 6. Residual paths, every variable in isolation
+% Ten separate figures, one per variable. Useful for inspecting a single
+% series closely; comment this cell out if the window count gets annoying,
+% section 7 carries the same content on one page.
+
 disp('Generating residual plots for all variables in isolation...');
 
-% Find the array indices for the specific models you want to compare
-idx_p4 = find(lags_to_test == 4);
-idx_p12 = find(lags_to_test == 12);
+for v = 1:num_vars
 
-% --- DATE GENERATION ---
-% Extract the total number of observations (T_total) directly from the padded matrix
-T_total = size(stored_aligned_residuals{idx_p4}, 1);
+    fig_v = figure('Name', ['Residual comparison: ', actual_var_names{v}], 'Color', 'w');
 
-% Create a datetime vector starting from 1959:Q2 (April 1, 1959) progressing by one quarter
-time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
-
-% Loop through all 10 variables
-for var_to_plot = 1:num_vars
-    
-    figure('Name', ['Residual Comparison: ', actual_var_names{var_to_plot}], 'Color', 'w');
-    
-    % Plot the VAR(4) residuals against the time vector using standard formatting
-    plot(time_vector, stored_aligned_residuals{idx_p4}(:, var_to_plot), ...
-        'LineWidth', 1.5, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
+    plot(time_vector, residuals_padded{idx_p4}(:, v), ...
+         'LineWidth', 1.5, 'Color', col_lag(1,:), 'LineStyle', '-', ...
+         'DisplayName', 'VAR p = 4');
     hold on;
-    
-    % Plot the VAR(12) residuals against the time vector using standard formatting
-    plot(time_vector, stored_aligned_residuals{idx_p12}(:, var_to_plot), ...
-        'LineWidth', 1.5, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
-    
-    % Add a horizontal zero line for visual reference
+    plot(time_vector, residuals_padded{idx_p12}(:, v), ...
+         'LineWidth', 1.5, 'Color', col_lag(3,:), 'LineStyle', '--', ...
+         'DisplayName', 'VAR p = 12');
+
     yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
-    
-    % Title using the dynamic variable name
-    title(['In-Sample Residuals for ', actual_var_names{var_to_plot}], 'Interpreter', 'none');
+
+    title(['In-sample residuals: ', display_var_names{v}]);
     xlabel('Year');
-    ylabel('Error');
+    ylabel('Residual');
     legend('Location', 'best');
     grid on;
     hold off;
-    
-    % --- Optional Automated Image Saving (PDF format) ---
-    %safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
-    %file_name = sprintf('InSample_Residuals_%s.pdf', safe_var_name);
-    %save_path = fullfile(save_base_path, file_name);
-    %exportgraphics(gcf, save_path, 'ContentType', 'vector');
-    
+
+    safe_name = regexprep(actual_var_names{v}, '[^\w]', '_');
+    exportgraphics(fig_v, ...
+        fullfile(save_base_path, sprintf('InSample_Residuals_%s.pdf', safe_name)), ...
+        'ContentType', 'vector');
 end
 
-disp('All individual residual plots have been generated.');
+fprintf('  Saved %d individual residual plots.\n', num_vars);
 
 
-%% Big Plot of the Benchmark Residuals
-disp('Generating residual plots...');
+%% 7. All variables on one page (VAR(4) vs VAR(12))
 
-% Find the array indices for the specific models you want to compare
-idx_p4 = find(lags_to_test == 4);
-idx_p12 = find(lags_to_test == 12);
+disp('Generating the combined residual figure...');
 
-% --- DATE GENERATION ---
-% Create a datetime vector starting from 1959:Q2 (April 1, 1959)
-% progressing by one quarter (3 months) for the length of T_total
-time_vector = datetime(1959, 4, 1) + calmonths(3 * (0:T_total-1)');
+fig_all = figure('Name', 'Residual comparison: VAR(4) vs VAR(12)', 'Color', 'w', ...
+                 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
 
-% Create a large figure window to comfortably fit all subplots
-figure('Name', 'Residual Comparison: VAR(4) vs VAR(12)', 'Color', 'w', 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
-
-% Create a tiled layout grid (4 rows, 3 columns is perfect for 11 variables)
 t = tiledlayout(4, 3, 'TileSpacing', 'compact', 'Padding', 'compact');
-title(t, 'In-Sample Residuals: VAR(4) vs VAR(12)', 'FontWeight', 'bold', 'FontSize', 14);
+title(t, 'In-sample residuals: VAR(4) vs VAR(12)', 'FontWeight', 'bold', 'FontSize', 14);
 
-% Loop through all variables
 for v = 1:num_vars
-    nexttile; % Move to the next plot in the grid
-    
-    % Plot the VAR(4) residuals against the time vector
-    plot(time_vector, stored_aligned_residuals{idx_p4}(:, v), ...
-        'LineWidth', 1.2, 'Color', color_L4, 'LineStyle', line_styles{1}, 'DisplayName', 'VAR p = 4');
+    nexttile;
+
+    plot(time_vector, residuals_padded{idx_p4}(:, v), ...
+         'LineWidth', 1.2, 'Color', col_lag(1,:), 'LineStyle', '-', ...
+         'DisplayName', 'VAR p = 4');
     hold on;
-    
-    % Plot the VAR(12) residuals against the time vector
-    plot(time_vector, stored_aligned_residuals{idx_p12}(:, v), ...
-        'LineWidth', 1.2, 'Color', color_L12, 'LineStyle', line_styles{5}, 'DisplayName', 'VAR p = 12');
-    
-    % Add a horizontal zero line for visual reference
+    plot(time_vector, residuals_padded{idx_p12}(:, v), ...
+         'LineWidth', 1.2, 'Color', col_lag(3,:), 'LineStyle', '--', ...
+         'DisplayName', 'VAR p = 12');
+
     yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
-    
-    % Title each subplot using the actual economic variable names defined earlier
-    title(actual_var_names{v}, 'Interpreter', 'none');
-    
-    % Add the legend ONLY to the first tile to avoid cluttering the graphic
+
+    title(display_var_names{v});
+    grid on;
+
+    % Legend on the first tile only, otherwise it is repeated ten times
     if v == 1
         legend('Location', 'best');
     end
-    
-    grid on;
+
     hold off;
 end
 
-% Add a shared X-axis label at the bottom of the grid
 xlabel(t, 'Year');
 
-% --- Optional Automated Image Saving (PDF format) ---
-    %safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
-    %file_name = sprintf('InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf', safe_var_name);
-    %save_path = fullfile(save_base_path, file_name);
-    %exportgraphics(gcf, save_path, 'ContentType', 'vector');
+exportgraphics(fig_all, ...
+    fullfile(save_base_path, 'InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf'), ...
+    'ContentType', 'vector');
+disp('  Saved: InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf');
 
-%% Plotting In-Sample RMSE vs Lag Length
-disp('Generating In-Sample RMSE plots...');
 
-% Initialize a standard white figure window
-figure('Name', 'In-Sample RMSE by Lag', 'Color', 'w', 'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+%% 8. In-sample RMSE against lag length
 
-% Define the X-axis
-lags_x = [4, 6, 8, 10, 12]; 
+disp('Generating the RMSE vs lag length figure...');
 
-% Loop through all variables
+fig_rmse = figure('Name', 'In-sample RMSE by lag', 'Color', 'w', ...
+                  'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+
 for v = 1:num_vars
-    
-    % Create a 4x3 grid and place the plot in the v-th position
+
     subplot(4, 3, v);
-    
-    % Plot the data with round markers ('-ko' is a solid black line with circle markers)
-    plot(lags_x, RMSE_insample_benchmark_perc(:, v), '-ko', 'LineWidth', 1.5, 'MarkerFaceColor', 'k');
-    
-    % Add titles and format the axes
-    title(actual_var_names{v}, 'Interpreter', 'none');
+
+    % The x axis is read from lags_to_test rather than from a second hardcoded
+    % list: the old version kept its own lags_x = [4 6 8 10 12], which would
+    % silently go out of step with lags_to_test.
+    plot(lags_to_test, RMSE_insample_perc(:, v), '-ko', ...
+         'LineWidth', 1.5, 'MarkerFaceColor', 'k');
+
+    title(display_var_names{v});
     grid on;
-    xticks(lags_x);
-    xlim([3, 13]); 
+    xticks(lags_to_test);
+    xlim([min(lags_to_test) - 1, max(lags_to_test) + 1]);
+    xlabel('Lag order (p)');
     ylabel('RMSE (pp)');
-    
+
 end
 
-% Add a master title to the entire figure
-sgtitle('In-Sample RMSE vs. Lag Length', 'FontWeight', 'bold', 'FontSize', 14);
+sgtitle('In-sample RMSE vs lag length (reduced form residuals)', ...
+        'FontWeight', 'bold', 'FontSize', 14);
 
-% --- Optional Automated Image Saving (PDF format) ---
-    safe_var_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
-    file_name = sprintf('InSample_RMSE__Across_Lags_All_Variables.pdf', safe_var_name);
-    save_path = fullfile(save_base_path, file_name);
-    exportgraphics(gcf, save_path, 'ContentType', 'vector');
-
-
+% Fixed file name. The old version spliced in safe_var_name, which at this
+% point still held whatever value was left over from the loop in section 6,
+% and passed it through a sprintf format string that had no %s to receive it.
+exportgraphics(fig_rmse, ...
+    fullfile(save_base_path, 'InSample_RMSE__Across_Lags_All_Variables.pdf'), ...
+    'ContentType', 'vector');
+disp('  Saved: InSample_RMSE__Across_Lags_All_Variables.pdf');

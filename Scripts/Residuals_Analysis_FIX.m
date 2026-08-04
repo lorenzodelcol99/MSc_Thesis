@@ -1,17 +1,10 @@
 % =========================================================================
 % Residuals_Analysis_FIX.m
 %
-% Diagnostics on the VAR residuals: are they unforecastable?
-%   - White noise test -> ACF of the residuals -> Box-Pierce / Ljung-Box
-%   - Benchmark test   -> is the residual variance below the unconditional
-%                         variance of the series?
-%   - Regression test  -> regress the residuals on omitted lagged covariates
-%
 % -------------------------------------------------------------------------
-% RESIDUAL PROVENANCE
+% RESIDUALS Source
 % -------------------------------------------------------------------------
-% The residuals are are taken directly from the ACEL replication output (results_lag_p.mat, produced by main.m calling
-% mkimplrnew.m), so the specification is exactly theirs.
+% The residuals are are taken from ACEL replication output (results_lag_p.mat, produced by main.m calling mkimplrnew.m)
 %
 % mkimplrnew returns erzout, which are the STRUCTURAL shocks, not the reduced
 % form residuals. From the header of mkimplrnew.m:
@@ -27,10 +20,9 @@
 %   U{i}  reduced form residuals  -> DEFAULT for the diagnostics
 %   E{i}  structural shocks       -> for the robustness display
 %
-% Why the reduced form is the default: A0 is re-estimated at every lag order,
-% so E(p) = A0(p)*U(p) mixes the effect of lag truncation with the effect of a
-% changing identification. U(p) is the one step ahead forecast error and is
-% identification free, which is the object the truncation question is about.
+% Using the Reduced Form residuals U(p) which is the object the truncation
+% question is about. Putting aside the Identification Strategy we are not
+% considering the Identification Bias
 % =========================================================================
 clear; clc; close all;
 
@@ -41,30 +33,20 @@ base_path      = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Ex
 save_base_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Residual_Analysis_Output/';
 
 
-% Lag orders under comparison. results_lag_6.mat and results_lag_10.mat also
-% exist if the intermediate steps are ever wanted.
 lags_to_test = [4, 8, 12];
 num_lags     = numel(lags_to_test);
 
-% Which residual definition the diagnostics run on: 'reduced' or 'structural'.
-% Flipping this single line reproduces every table and figure on the other
-% object, which is how the robustness check is produced.
+% Which residual definition the diagnostics run on: 'reduced' or 'structural'
+% Flipping this single line reproduces every table and figure on the other object
 resid_source = 'reduced';
 
 % The 10 variables, in the column order of vardata (names from ACEL2011).
-% Defined explicitly here: they used to arrive through a blanket load(), see
-% the note in point 2.
 actual_var_names = {'d_ln_Rel_Price_Inv', 'd_ln_GDP/Hours', 'd_ln GDP Deflator', 'Capacity_Util', ...
                     'ln_Hours', 'ln(GDP/Hours) - ln_Real_Wages', 'ln_Consumption/GDP', ...
                     'ln_Investments/GDP', 'Fed_Funds_Rate', 'ln_GDP Deflator + ln_GDP - ln_MZM'};
 num_vars = numel(actual_var_names);
 
-% Labels for FIGURES. The names above are identifier style, full of
-% underscores, and MATLAB renders axis and heatmap labels with the TeX
-% interpreter: every underscore turns the next character into a subscript, so
-% 'd_ln_Rel_Price_Inv' came out as a row of scattered subscripts. These
-% versions carry no underscores, so they are safe under TeX, and \Delta
-% typesets properly. actual_var_names is kept for the console tables.
+% Labels for latex figures 
 display_var_names = {'\Delta ln rel. price of investment', ...
                      '\Delta ln GDP / hours', ...
                      '\Delta ln GDP deflator', ...
@@ -76,29 +58,19 @@ display_var_names = {'\Delta ln rel. price of investment', ...
                      'Federal funds rate', ...
                      'Velocity: ln P + ln GDP - ln MZM'};
 
-assert(numel(display_var_names) == num_vars, ...
-       'display_var_names has %d entries, expected %d.', numel(display_var_names), num_vars);
-
-% Raw historical data. It is identical in every results_lag_p.mat, so the
-% baseline file is as good as any.
-disp('Loading historical dataset...');
+% Raw historical data. It is identical in every results_lag_p.mat, so the baseline file is as good as any.
 data_full_sample = load([base_path, 'results_lag_4.mat'], 'vardata');
-Y       = data_full_sample.vardata;
-T_total = size(Y, 1);
+Y                = data_full_sample.vardata;
+T_total          = size(Y, 1);
 
 assert(size(Y,2) == num_vars, ...
-       'vardata has %d columns but %d variable names were supplied.', size(Y,2), num_vars);
-fprintf('Historical data loaded: %d observations x %d variables.\n\n', T_total, num_vars);
+       'vardata has %d columns but %d variable names were supplied.', size(Y,2), num_vars)
+fprintf('Historical data loaded: %d observations x %d variables.\n\n', T_total, num_vars)
 
 
 %% 2. Load the ACEL VAR output and build both residual definitions
-% This replaces the old  load('in_sample_benchmark_data.mat').  That blanket
-% load was also silently overwriting lags_to_test with the [4 6 8 10 12]
-% vector stored inside that file, so the sections below were not running on
-% 4/8/12 at all. Loading named fields only, as done here, makes that
-% impossible.
 
-disp('Loading ACEL VAR residuals...');
+disp('Loading ACEL VAR residuals...')
 
 E           = cell(num_lags, 1);   % structural shocks            (erzout)
 U           = cell(num_lags, 1);   % reduced form residuals
@@ -149,13 +121,6 @@ switch lower(resid_source)
         error('resid_source must be ''reduced'' or ''structural''.');
 end
 
-% resid_tag is appended to every output file name, so flipping resid_source
-% cannot silently overwrite the figures produced under the other convention.
-
-% Temporary bridge: the sections further down still refer to the old name.
-% Delete this line once they have been converted to use 'residuals'.
-stored_aligned_residuals = residuals;
-
 fprintf('\nDiagnostics will run on: %s.\n', resid_label);
 fprintf('Lag orders: %s\n\n', mat2str(lags_to_test));
 
@@ -163,41 +128,8 @@ fprintf('Lag orders: %s\n\n', mat2str(lags_to_test));
 %% 1.A --- STABILITY TEST: COMPANION MATRIX EIGENVALUES ---
 %
 % Stability of the VAR: does the Wold decomposition exist at each lag choice?
-%
-% A VAR(p) is stable if every eigenvalue of its companion matrix lies INSIDE
-% the unit circle. Equivalently, every root of det(Phi(L)) = 0 lies OUTSIDE
-% it, where the lag polynomial is
-%
-%       Phi(L) = I - Phi_1*L - Phi_2*L^2 - ... - Phi_p*L^p  
-%
-% The previous version re-estimated the VAR with varm()/estimate() purely to
-% recover the Phi_j. That was a THIRD estimator sitting next to ACEL's VAR and
-% the bvar_ one, and it answered the stability question for a model that is
-% not the model producing the IRFs. It is no longer needed: ACEL already
-% returns the reduced form coefficients in a0betazout, loaded as AR{i} in
-% point 2, so the companion matrix is built from ACEL's own estimates.
-%
-% This also removes the sign trap entirely. The old LagOp construction needed
-% the Phi_j to be NEGATED before being handed over, because LagOp expects the
-% coefficients of Phi(L) as written above; feeding it the raw (positive)
-% matrices builds the wrong polynomial and flags a perfectly stable VAR as
-% unstable. Working directly with the companion matrix sidesteps the issue.
-%
-% mkimplrnew.m does exactly the same thing internally (lines 220-221):
-%
-%       bigA        = [betaz'; kron(eye(nvars),eye(nlags-1)) zeros(...)];
-%       var_explode = sum(abs(eig(bigA))>1);
-%
-% and var_explode is saved inside results_lag_p.mat. It is loaded in point 2
-% and used here as an independent cross-check: the count of roots outside the
-% circle must match it exactly, and the table reports whether it does.
-%
-% The largest modulus is reported, not just a yes/no verdict. A value of 0.99
-% does not mean "the VAR is unstable", it means there is a root very close to
-% unity, which is exactly what one expects with the Federal Funds Rate in the
-% system.
 
-disp('Testing VAR stability via the companion matrix (ACEL coefficients)...');
+disp('Testing VAR stability via the companion matrix (ACEL coefficients)...')
 
 K = num_vars;
 stability_results = cell(num_lags, 6);
@@ -257,14 +189,7 @@ else
 end
 
 %% 1.B --- EIGENVALUES IN THE COMPLEX PLANE ---
-% Visual check: how close to the unit circle do the roots get, and which ones
-% cross it. Explosive roots are drawn in red and slightly larger, so the move
-% from stable at p=4 to mildly explosive at p=8 and p=12 is visible at a
-% glance rather than having to be read off the table.
-
-% Shared lag palette. The Ljung-Box section further down still defines its own
-% copy (color_L4 / color_L8 / color_L12); they can be consolidated into point 1
-% once the remaining sections are converted.
+% Visual check: how close to the unit circle do the roots get, and which ones cross it
 col_lag = [0.4660 0.6740 0.1880;    % p =  4   green
            0.8500 0.3250 0.0980;    % p =  8   orange
            0.0000 0.4470 0.7410];   % p = 12   blue
@@ -319,19 +244,7 @@ disp('Saved: Companion_Eigenvalues_Unit_Circle.pdf');
 % to absorb, which is precisely the symptom of lag truncation.
 %
 % One figure per lag order, ten subplots (one per variable) on a 4x3 grid.
-%
-% The two identical loops that used to sit here have been merged into one.
-% They were byte-for-byte the same except that the second also saved: every
-% figure was therefore drawn twice, and the first, on-screen set was discarded.
-%
-% On rmmissing(): the bvar_ residuals were NaN-padded at the start so they
-% would line up with Y, and the NaNs had to be stripped before autocorr().
-% The ACEL residuals carry no padding - erzout already begins at date p+1,
-% which is what sample_rows{i} records - so there is nothing left to strip.
 
-disp(['Generating ACF plots (', resid_label, ')...']);
-
-% How many autocorrelation lags to compute (20 quarters = 5 years is standard)
 acf_lags = 20;
 
 for i = 1:num_lags
@@ -360,8 +273,6 @@ for i = 1:num_lags
                     resid_label, p, size(R,1)), ...
             'FontWeight', 'bold', 'FontSize', 14);
 
-    % resid_tag in the file name: without it, re-running with
-    % resid_source = 'structural' would overwrite the reduced form figures.
     file_name = sprintf('ACF_Residuals_%s_VAR_%d.pdf', resid_tag, p);
     exportgraphics(fig_acf, fullfile(save_base_path, file_name), ...
                    'ContentType', 'vector');
@@ -375,22 +286,14 @@ end
 % Ljung-Box test
 %   H0: the first m autocorrelations are all zero  (residual is white noise)
 %   H1: at least one of them is not
-% so LARGE p-values are the good outcome: we do NOT want to reject.
-%
-% This block runs the test on one (lag order, variable) pair only. It computes
-% nothing that 2.C does not recompute for all 30 pairs; it exists so the
-% output of a single call can be inspected in full before trusting the loop.
-% Change target_idx / var_index to look at a different cell.
 %
 % -------------------------------------------------------------------------
 % CAVEAT ON THE DEGREES OF FREEDOM - applies to 2.B and 2.C alike
 % -------------------------------------------------------------------------
 % lbqtest refers the statistic to a chi2(m), where m is the number of
 % autocorrelations tested. For residuals from a FITTED model the classical
-% correction is chi2(m - number of estimated coefficients): each VAR equation
-% estimates p*K coefficients, so the correction would need m - p*K degrees of
-% freedom. Here p*K is 40, 80 and 120 against m <= 20, so the correction is
-% not merely unused, it is infeasible at these dimensions.
+% correction is chi2(m - number of estimated coefficients)
+% Unfeasible as k >> m --> LB do not converge
 %
 % Consequence: the test as run is LENIENT. The critical values are larger than
 % they should be, so the test under-rejects. Rejections are therefore strong
@@ -431,9 +334,7 @@ fprintf('  Rejections at 5%%: %d out of %d autocorrelation orders.\n\n', ...
 
 %% 2.C --- LJUNG-BOX ACROSS ALL VARIABLES AND LAG ORDERS ---
 %
-% Same test as 2.B, run over every (lag order, variable) pair and every
-% autocorrelation order from 1 to 20. See the degrees of freedom caveat in
-% 2.B: these p-values are lenient by construction.
+% See the degrees of freedom caveat in 2.B: these p-values are lenient by construction.
 
 disp('Computing Ljung-Box statistics across all variables and lag structures...');
 
@@ -489,8 +390,8 @@ disp('Results stored in LB_h, LB_pvalues, LB_stats, LB_cValues.');
 
 %% 2.D --- MULTIVARIATE PORTMANTEAU (Q) TEST ---
 %
-% The correctly sized version of 2.B / 2.C. One test on the whole system
-% instead of ten univariate ones, and referable to ACEL's own bootstrap
+% CORRECT TEST in this setting TO CHECK IF THE RESIDUALS ARE WHITE NOISE 
+% One test on the whole system instead of ten univariate ones, and referable to ACEL's own bootstrap
 % distribution instead of the asymptotic chi2.
 %
 % ACEL compute it inside mkimplrnewci.m (lines 61-63 for the data, 132-133 for
@@ -606,9 +507,7 @@ end
 
 %% 2.E --- VISUALISING THE LJUNG-BOX P-VALUES ---
 %
-% One panel per variable, one line per VAR lag order, p-value against the
-% autocorrelation order being tested. Everything ABOVE the red 0.05 line is a
-% non-rejection, i.e. the good outcome.
+% RECALL THE PROBLEM RELATED TO ASYMPTOHITCS OF THE CHI SQUARED OF THE LB STATISTIC 
 %
 % Read it as: if lengthening the VAR is absorbing serial correlation, the
 % lines for p = 8 and p = 12 should sit above the p = 4 line.
@@ -691,6 +590,108 @@ exportgraphics(fig_lb, ...
 fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
 
 
+%% 2.F --- PORTMANTEAU P-VALUES ACROSS LAG ORDERS ---
+%
+% Single-panel counterpart to 2.E, for the multivariate portmanteau test.
+% One panel, one line per VAR order, x-axis = s (the portmanteau truncation lag).
+%
+% NOTE: unlike every other section in this script, this one does NOT follow
+% resid_source. ACEL computes the portmanteau statistic on erzout regardless
+% (mkimplrnewci.m line 54: uz = trerzout;), so these numbers are identical
+% whether resid_source is 'reduced' or 'structural'. Titles/filenames below
+% are fixed accordingly rather than driven by resid_label/resid_tag.
+%
+% DOPO DEVO TENERE SOLO CRITICAL VALUES MADE BY BOOTSTRAP
+% E RIFLETTERE SU SRUCTURAL VS RF RESIDUALS (HERE ARE JUST STRUCTUAL)
+% (maybe I can modify the code and do the Portmanteau test with the RF residuals
+%
+% Both p-values are shown, because 2.D found them disagreeing sharply wherever
+% both were valid: the asymptotic p (dashed) refers Q(s) to chi2(K^2*(s-p)),
+% unreliable at T ~ 160 with dof in the hundreds; 
+%
+% the bootstrap p (solid, the one to trust) is the share of ACEL's own 1000 simulated draws at least as
+% large as the observed statistic.
+%
+% This reuses port_rows from 2.D if present in the workspace (running the
+% whole script top to bottom); if 2.F is run on its own, it reloads the same
+% three fields itself so it does not depend on 2.D having executed first.
+
+    for i = 1:num_lags
+        p = lags_to_test(i);
+        g = load([base_path, 'results_lag_', num2str(p), '.mat'], ...
+                 'PortmanteauLags', 'PortStatData', 'PortStatSim');
+        s_vec = g.PortmanteauLags(:)';
+        for j = 1:numel(s_vec)
+            qstat  = g.PortStatData(1, j);
+            asym_p = g.PortStatData(2, j);
+            boot_p = mean(g.PortStatSim(:, j) >= qstat);
+            port_rows(end+1, :) = {sprintf('VAR(%d)', p), s_vec(j), qstat, ...
+                                   g.PortStatData(3, j), asym_p, boot_p, ...
+                                   s_vec(j) > p};  %#ok<SAGROW>
+        end
+    end
+
+% Pivot the long-format rows (one per VAR/s combination) into (lag order) x
+% (s) matrices, so each row of the matrix becomes one line in the plot.
+s_all    = unique(cell2mat(port_rows(:, 2)))';
+n_s      = numel(s_all);
+asym_mat = nan(num_lags, n_s);
+boot_mat = nan(num_lags, n_s);
+
+for r = 1:size(port_rows, 1)
+    i = find(lags_to_test == sscanf(port_rows{r,1}, 'VAR(%d)'), 1);
+    j = find(s_all == port_rows{r,2}, 1);
+    asym_mat(i, j) = port_rows{r, 5};
+    boot_mat(i, j) = port_rows{r, 6};
+end
+
+if any(isnan(asym_mat), 'all')
+    warning(['Some asymptotic portmanteau p-values are NaN (s <= p at that ' ...
+             'cell - see the 2.D warning). Re-run main.m with the suggested ' ...
+             'PortmanteauLags to fill every cell.']);
+end
+
+fig_port = figure('Name', 'Portmanteau p-values', 'Color', 'w', ...
+                  'Position', [150 150 720 460]);
+hold on;
+
+h_boot = gobjects(1, num_lags);
+h_asym = gobjects(1, num_lags);
+
+for i = 1:num_lags
+    col = col_lag(min(i, size(col_lag,1)), :);
+
+    h_boot(i) = plot(s_all, boot_mat(i,:), '-o', 'LineWidth', 2, ...
+                     'MarkerSize', 5, 'MarkerFaceColor', 'w', 'Color', col);
+    h_asym(i) = plot(s_all, asym_mat(i,:), '--s', 'LineWidth', 1.2, ...
+                     'MarkerSize', 4, 'Color', col);
+end
+
+h_thr = yline(0.05, 'r:', 'LineWidth', 1.5);
+
+xlabel('Portmanteau truncation lag s');
+ylabel('p-value');
+ylim([0 1.05]);
+xticks(s_all);
+grid on; box on;
+title('Multivariate portmanteau test (structural shocks, ACEL identification)', ...
+      'FontWeight', 'bold');
+
+legend_labels = [arrayfun(@(q) sprintf('Bootstrap p, VAR(%d)', q), lags_to_test, ...
+                          'UniformOutput', false), ...
+                 arrayfun(@(q) sprintf('Asymptotic p, VAR(%d)', q), lags_to_test, ...
+                          'UniformOutput', false), ...
+                 {'5% threshold'}];
+legend([h_boot, h_asym, h_thr], legend_labels, 'Location', 'eastoutside');
+
+hold off;
+
+exportgraphics(fig_port, ...
+    fullfile(save_base_path, 'Portmanteau_PValues_Across_Lags.pdf'), ...
+    'ContentType', 'vector');
+disp('  Saved: Portmanteau_PValues_Across_Lags.pdf');
+
+
 %% 3.A --- RESIDUALS VERSUS UNCONDITIONAL STANDARD DEVIATION ---
 %
 % Basic benchmark: does the VAR beat the unconditional mean? The residual is
@@ -698,20 +699,7 @@ fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
 % deviation is the error you would make by always forecasting the sample mean.
 % A ratio below 1 says the VAR is worth estimating.
 %
-% -------------------------------------------------------------------------
-% ALIGNMENT FIX
-% -------------------------------------------------------------------------
-% The previous version located the sample with
-%
-%       valid_indices = ~isnan(current_res);
-%       y_clean       = Y(valid_indices, v);
-%
-% which worked only because the bvar_ residuals were NaN-padded at the front.
-% The ACEL residuals contain no NaNs, so valid_indices is all true and of
-% length T-p: Y(valid_indices,v) then silently returned rows 1..T-p instead of
-% rows p+1..T, and the residuals were compared against a subsample shifted by
-% p quarters. sample_rows{i}, built in point 2, is the correct index set.
-%
+
 % The denominator is computed on the matched subsample, so it varies slightly
 % with p (the samples differ by at most 8 of 171 observations). The spread is
 % printed below so it can be verified to be negligible.
@@ -724,11 +712,13 @@ if strcmpi(resid_source, 'structural')
              'resid_source = ''reduced'' for this section.']);
 end
 
+
+
 disp('Computing standard deviations of residuals vs unconditional data...');
 
 sd_residuals     = zeros(num_vars, num_lags);
 sd_unconditional = zeros(num_vars, num_lags);
-SD_ratio         = zeros(num_vars, num_lags);   % was grown inside the loop
+SD_ratio         = zeros(num_vars, num_lags);
 
 for i = 1:num_lags
 
@@ -772,9 +762,7 @@ disp(sd_resid_table);
 fprintf('--- Unconditional standard deviation of the series (matched subsample) ---\n');
 disp(sd_uncond_table);
 
-% The old heading read "Ratio of Residual Standard Deviation to Unconditional
-% Variance". It is the ratio of two standard deviations, not of a standard
-% deviation to a variance. Corrected here and in the heatmap title.
+
 fprintf('--- Ratio: residual SD / unconditional SD  (below 1 = VAR beats the mean) ---\n');
 disp(SD_ratio_table);
 
