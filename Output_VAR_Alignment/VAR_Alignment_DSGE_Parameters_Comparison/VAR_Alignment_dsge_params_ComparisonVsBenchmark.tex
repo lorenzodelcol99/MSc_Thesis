@@ -1,0 +1,40 @@
+% Requires \usepackage{booktabs} and \usepackage{array}
+\begin{table}[htpb]
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.15}
+    \caption{DSGE structural parameters: VAR-alignment robustness against the baseline}
+    \label{tab:dsge_params_alignment_vs_benchmark}
+    \begin{tabular}{l ccc !{\vrule width 1pt} ccc}
+    \toprule
+     & \multicolumn{3}{c!{\vrule width 1pt}}{\textbf{VAR alignment}} & \multicolumn{3}{c}{\textbf{Benchmark}} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+    \textbf{Parameter} & $p=4$ & $p=8$ & $p=12$ & $p=4$ & $p=8$ & $p=12$ \\
+    \midrule \multicolumn{7}{c}{\textit{Structural Estimated Frictions}} \\
+    Price markup ($\lambda_f$) & 1.0100 & 1.0100 & 1.0100 & 1.0100 & 1.0100 & 1.0100 \\
+     & (-) & (-) & (-) & (-) & (-) & (-) \\
+    Wage stickiness ($\xi_w$) & 0.6968*** & 0.6059*** & 0.4838*** & 0.7221*** & 0.5617*** & 0.4838*** \\
+     & (0.1437) & (0.1010) & (0.0757) & (0.1506) & (0.1142) & (0.0757) \\
+    Phillips curve slope ($\gamma$) & 0.0320* & 0.0580 & 0.0129*** & 0.0402 & 0.0402 & 0.0129*** \\
+     & (0.0184) & (0.0462) & (0.0042) & (0.0246) & (0.0598) & (0.0042) \\
+    Capacity util. cost ($\sigma_a$) & 1.7405 & 0.1912 & 0.0042 & 1.9938 & 0.1175 & 0.0042 \\
+     & (4.5280) & (0.8913) & (0.0230) & (2.6066) & (0.6299) & (0.0230) \\
+    Habit formation ($b$) & 0.6956*** & 0.7117*** & 0.8596*** & 0.7066*** & 0.6935*** & 0.8596*** \\
+     & (0.0537) & (0.0454) & (0.0203) & (0.0463) & (0.0570) & (0.0203) \\
+    Inv. adj. cost ($S^{\prime\prime}$) & 3.1915 & 5.6111 & 6.8431*** & 3.2807* & 3.0372* & 6.8431*** \\
+     & (2.5697) & (4.6727) & (2.3306) & (1.8874) & (1.5506) & (2.3306) \\
+    Money demand elast. ($\epsilon$) & 0.8580*** & 0.9859*** & 0.8346*** & 0.8077*** & 0.7531*** & 0.8346*** \\
+     & (0.1943) & (0.2388) & (0.1944) & (0.2111) & (0.1473) & (0.1944) \\
+    \midrule \multicolumn{7}{c}{\textit{Implied Price Stickiness}} \\
+    Homogeneous capital ($\xi_{p, hom}$) & 0.8392 & 0.7890 & 0.8958 & 0.8213 & 0.8213 & 0.8958 \\
+     & [0.0479] & [0.0574] & [0.0139] & (0.0479) & (0.0574) & (0.0139) \\
+    Firm-specific capital ($\xi_{p, fs}$) & 0.3862 & 0.5326 & 0.8884 & 0.3372 & 0.6448 & 0.8884 \\
+     & [0.1503] & [0.1285] & [0.0220] & (0.1503) & (0.1285) & (0.0220) \\
+    \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} Standard errors in parentheses. Significance: *** $p<0.01$, ** $p<0.05$, * $p<0.10$. The left block re-estimates the exercise with every VAR aligned on a common sample; the right block reproduces the baseline of Table~\ref{tab:dsge_params_comparison_4_8_12}. The Calvo price parameters $\xi_{p,hom}$ and $\xi_{p,fs}$ are not estimated directly: they are recovered numerically from the estimated structural parameters, so their standard errors come from a 1{,}000{,}000-draw Monte Carlo of the joint distribution of the estimated structural parameters rather than from the minimum-distance step. That Monte Carlo was run on the BASELINE estimates only. The figures in square brackets under the VAR-alignment block therefore repeat the baseline Monte Carlo standard errors and are reported purely as a yardstick for the size of the left-right gap; they are not standard errors of the aligned estimates.}
+\end{table}

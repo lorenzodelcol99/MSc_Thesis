@@ -356,34 +356,6 @@ disp('  Saved: InSample_RMSE__Across_Lags_All_Variables.pdf');
 % Logs because det(Sigma) for a 10-variable system is astronomically small and
 % because differences in logs read directly as proportional changes.
 %
-% -------------------------------------------------------------------------
-% TWO DEPARTURES FROM Residual_Summary_and_IC.m - BOTH DELIBERATE
-% -------------------------------------------------------------------------
-% 1. REDUCED FORM, not structural. The old script fed erzout straight into
-%    det(Sigma) and justified it with the comment "with a unit-diagonal
-%    recursive structure det(Sigma_structural) = det(Sigma_reduced_form)".
-%    That premise is false here. A0 has unit diagonal but is NOT triangular:
-%    rows 1 and 2 carry the long-run restrictions and have entries above the
-%    diagonal, so det(A0) is not 1. Numerically it is 4.90, 13.30 and 20.71 at
-%    p = 4, 8, 12. Since
-%
-%       log det Sigma_erz = log det Sigma_u + 2*log|det A0|
-%
-%    and det(A0) GROWS with p, the structural version quietly gives back part
-%    of the fit improvement: it reports a 66.5% fall in typical residual
-%    variance from p=4 to p=12 where the reduced form reports 74.9%. Using U
-%    also keeps this section identification-free, consistent with the rest of
-%    the script.
-%
-% 2. COMMON SAMPLE. Every lag order is evaluated on the same T_common dates
-%    (U_common from section 2.B), so the determinants are comparable. Note the
-%    same caveat as for the RMSE: this equalises the SCORING window only, the
-%    coefficients behind each U were still estimated on that VAR's own full
-%    window. See the separate re-estimation robustness check.
-%
-% The information criteria that used to follow in Residual_Summary_and_IC.m
-% (AIC / HQ / SC, all of the form log det Sigma + penalty*p*K^2) are not
-% carried over.
 
 disp('Computing the generalized variance across lag orders...');
 

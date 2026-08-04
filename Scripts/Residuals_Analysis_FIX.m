@@ -280,115 +280,7 @@ for i = 1:num_lags
 
 end
 
-
-%% 2.B --- LJUNG-BOX: SINGLE CASE SPOT CHECK ---
-%
-% Ljung-Box test
-%   H0: the first m autocorrelations are all zero  (residual is white noise)
-%   H1: at least one of them is not
-%
-% -------------------------------------------------------------------------
-% CAVEAT ON THE DEGREES OF FREEDOM - applies to 2.B and 2.C alike
-% -------------------------------------------------------------------------
-% lbqtest refers the statistic to a chi2(m), where m is the number of
-% autocorrelations tested. For residuals from a FITTED model the classical
-% correction is chi2(m - number of estimated coefficients)
-% Unfeasible as k >> m --> LB do not converge
-%
-% Consequence: the test as run is LENIENT. The critical values are larger than
-% they should be, so the test under-rejects. Rejections are therefore strong
-% evidence of residual autocorrelation; non-rejections are weak evidence of
-% its absence, and should not be read as "the VAR is well specified".
-%
-% ACEL themselves handled this differently, with a multivariate portmanteau
-% statistic and bootstrapped critical values: results_lag_p.mat already
-% contains PortmanteauLags, PortStatData and PortStatSim (1000 draws). That is
-% the properly sized version of this test if it is ever needed.
-
-disp('Ljung-Box spot check on a single (lag order, variable) pair...');
-
-% Which cell to inspect: index into lags_to_test, and column of the residuals
-target_idx = 1;                  % 1 -> VAR(4)
-var_index  = 1;                  % 1 -> d_ln_Rel_Price_Inv
-
-acf_lags_to_test = 1:20;         % autocorrelation orders under test
-
-res_check = residuals{target_idx}(:, var_index);
-
-fprintf('  VAR(%d), %s, %s (T = %d)\n', ...
-        lags_to_test(target_idx), actual_var_names{var_index}, ...
-        resid_label, numel(res_check));
-
-[h_lb, pValue_lb, stat_lb, cValue_lb] = lbqtest(res_check, 'Lags', acf_lags_to_test);
-
-% Displayed as a table: the old version pushed four 20-element vectors through
-% num2str, which wrapped across the console and was unreadable.
-spot_check_table = table(acf_lags_to_test(:), stat_lb(:), cValue_lb(:), ...
-                         pValue_lb(:), h_lb(:), ...
-    'VariableNames', {'ACF_Lag', 'LB_Stat', 'Crit_Value_5pct', 'p_value', 'Reject_H0'});
-
-disp(spot_check_table);
-fprintf('  Rejections at 5%%: %d out of %d autocorrelation orders.\n\n', ...
-        sum(h_lb), numel(h_lb));
-
-
-%% 2.C --- LJUNG-BOX ACROSS ALL VARIABLES AND LAG ORDERS ---
-%
-% See the degrees of freedom caveat in 2.B: these p-values are lenient by construction.
-
-disp('Computing Ljung-Box statistics across all variables and lag structures...');
-
-acf_lags_to_test = 1:20;
-num_acf_lags     = numel(acf_lags_to_test);
-
-% Pre-allocate the four outputs.
-% Dimensions: (VAR lag order, variable, ACF lag order) = 3 x 10 x 20
-LB_h       = zeros(num_lags, num_vars, num_acf_lags);
-LB_pvalues = zeros(num_lags, num_vars, num_acf_lags);
-LB_stats   = zeros(num_lags, num_vars, num_acf_lags);
-LB_cValues = zeros(num_lags, num_vars, num_acf_lags);
-
-for i = 1:num_lags
-
-    R = residuals{i};                    % T x num_vars for this lag order
-
-    for v = 1:num_vars
-
-        % Passing the whole vector 1:20 returns a vector of results in one call
-        [h_dec, pVals, stats, cVals] = lbqtest(R(:, v), 'Lags', acf_lags_to_test);
-
-        LB_h(i, v, :)       = h_dec;
-        LB_pvalues(i, v, :) = pVals;
-        LB_stats(i, v, :)   = stats;
-        LB_cValues(i, v, :) = cVals;
-
-    end
-end
-
-% Compact summary: how much of the (variable x ACF order) grid rejects white
-% noise at each lag order. If lengthening the VAR is absorbing the serial
-% correlation, this share should fall as p grows.
-n_cells      = num_vars * num_acf_lags;
-reject_count = zeros(num_lags, 1);
-reject_any   = zeros(num_lags, 1);
-
-for i = 1:num_lags
-    slice_h         = squeeze(LB_h(i, :, :));         % num_vars x num_acf_lags
-    reject_count(i) = sum(slice_h(:));
-    reject_any(i)   = sum(any(slice_h, 2));           % variables rejecting somewhere
-end
-
-LB_summary = table(lags_to_test(:), reject_count, 100*reject_count/n_cells, ...
-                   reject_any, ...
-    'VariableNames', {'VAR_Lag', 'Rejections_5pct', 'Pct_of_Grid', 'Vars_Rejecting'});
-
-fprintf('\n--- Ljung-Box summary (%s), %d cells per lag order ---\n', ...
-        resid_label, n_cells);
-disp(LB_summary);
-
-disp('Results stored in LB_h, LB_pvalues, LB_stats, LB_cValues.');
-
-%% 2.D --- MULTIVARIATE PORTMANTEAU (Q) TEST ---
+%% 2.B --- MULTIVARIATE PORTMANTEAU (Q) TEST ---
 %
 % CORRECT TEST in this setting TO CHECK IF THE RESIDUALS ARE WHITE NOISE 
 % One test on the whole system instead of ten univariate ones, and referable to ACEL's own bootstrap
@@ -463,102 +355,10 @@ port_table = cell2table(port_rows, 'VariableNames', ...
 disp('--- Multivariate portmanteau test (ACEL, mkqmv.m) ---');
 disp(port_table);
 
-
-%% 2.E --- VISUALISING THE LJUNG-BOX P-VALUES ---
-%
-% RECALL THE PROBLEM RELATED TO ASYMPTOHITCS OF THE CHI SQUARED OF THE LB STATISTIC 
-%
-% Read it as: if lengthening the VAR is absorbing serial correlation, the
-% lines for p = 8 and p = 12 should sit above the p = 4 line.
-%
-% Remember the caveat from 2.B: these p-values come from an uncorrected
-% chi2(m) and are therefore lenient. Section 2.D is the correctly sized test.
-
-disp('Generating Ljung-Box p-value plots...');
-
-% Same palette as 1.B, repeated so this cell can also be run on its own.
-col_lag = [0.4660 0.6740 0.1880;    % p =  4   green
-           0.8500 0.3250 0.0980;    % p =  8   orange
-           0.0000 0.4470 0.7410];   % p = 12   blue
-
-line_styles = {'-', '--', '-'};
-
-fig_lb = figure('Name', 'Ljung-Box p-values', 'Color', 'w', ...
-                'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
-
-acf_x   = 1:num_acf_lags;           % autocorrelation orders on the x axis
-h_lines = gobjects(1, num_lags);    % line handles for the legend
-h_thr   = gobjects(1, 1);           % threshold handle for the legend
-
-for v = 1:num_vars
-    subplot(4, 3, v);
-    hold on;
-
-    for i = 1:num_lags
-
-        % squeeze() flattens the 1 x 1 x num_acf_lags slice into a vector
-        current_pvals = squeeze(LB_pvalues(i, v, :));
-
-        hp = plot(acf_x, current_pvals, ...
-                  'LineStyle', line_styles{min(i, numel(line_styles))}, ...
-                  'Marker', 'o', 'MarkerSize', 3, 'LineWidth', 1.5, ...
-                  'Color', col_lag(min(i, size(col_lag,1)), :));
-
-        if v == 1
-            h_lines(i) = hp;
-        end
-    end
-
-    % 5% threshold. Drawn with plot() rather than yline() so it is an ordinary
-    % Line object and can be put in the legend. The old version wrote the
-    % label 'Threshold (0.05)' onto all ten panels, which was pure clutter.
-    ht = plot([1 num_acf_lags], [0.05 0.05], 'r--', 'LineWidth', 1.5);
-    if v == 1
-        h_thr = ht;
-    end
-
-    title(display_var_names{v});
-    ylim([0 1.05]);
-    xlim([1 num_acf_lags]);
-    xticks(2:2:num_acf_lags);
-    grid on;
-    xlabel('ACF lag');
-    ylabel('p-value');
-
-    hold off;
-end
-
-% Subplot 12 is free: park the legend there.
-ax12 = subplot(4, 3, 12);
-axis(ax12, 'off');
-
-legend_labels = [{'5% threshold'}, ...
-                 arrayfun(@(q) sprintf('VAR p = %d', q), lags_to_test, ...
-                          'UniformOutput', false)];
-
-lgd = legend(ax12, [h_thr, h_lines], legend_labels, 'Location', 'west');
-lgd.FontSize   = 11;
-lgd.NumColumns = 1;
-
-sgtitle(sprintf('Ljung-Box p-values, %s   (H0: residuals are white noise)', resid_label), ...
-        'FontWeight', 'bold', 'FontSize', 14);
-
-exportgraphics(fig_lb, ...
-    fullfile(save_base_path, sprintf('Ljung_Box_P_Values_%s.pdf', resid_tag)), ...
-    'ContentType', 'vector');
-fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
-
-
-%% 2.F --- PORTMANTEAU P-VALUES ACROSS LAG ORDERS ---
+%% 2.C --- PORTMANTEAU P-VALUES ACROSS LAG ORDERS ---
 %
 % Single-panel counterpart to 2.E, for the multivariate portmanteau test.
 % One panel, one line per VAR order, x-axis = s (the portmanteau truncation lag).
-%
-% NOTE: unlike every other section in this script, this one does NOT follow
-% resid_source. ACEL computes the portmanteau statistic on erzout regardless
-% (mkimplrnewci.m line 54: uz = trerzout;), so these numbers are identical
-% whether resid_source is 'reduced' or 'structural'. Titles/filenames below
-% are fixed accordingly rather than driven by resid_label/resid_tag.
 %
 % BOOTSTRAP ONLY. The asymptotic p-value (Q(s) referred to chi2(K^2*(s-p)))
 % used to be shown alongside it, but 2.D already found it unreliable at
@@ -567,18 +367,6 @@ fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
 % worse-behaved line rather than real information. Only the bootstrap p is
 % plotted: the share of ACEL's own 1000 simulated statistics at least as
 % large as the one observed on the actual residuals.
-%
-% VAR(8) is drawn DASHED, VAR(4) and VAR(12) solid. This mirrors the
-% convention already used for the DSGE-vs-VAR IRF comparison. It is not just
-% styling: at p = 16/20/24 the bootstrap p-value for VAR(8) sits at exactly
-% 1.000 on every point, identical to VAR(12) - with matching line styles the
-% orange VAR(8) line would be fully painted over by blue VAR(12), drawn after
-% it in the loop, and would look like a missing series rather than an
-% overlapping one.
-%
-% This reuses port_rows from 2.D if present in the workspace (running the
-% whole script top to bottom); if 2.F is run on its own, it reloads the same
-% three fields itself so it does not depend on 2.D having executed first.
 
 if ~exist('port_rows', 'var')
     port_rows = {};
@@ -656,6 +444,7 @@ exportgraphics(fig_port, ...
     fullfile(save_base_path, 'Portmanteau_PValues_Across_Lags.pdf'), ...
     'ContentType', 'vector');
 disp('  Saved: Portmanteau_PValues_Across_Lags.pdf');
+
 
 
 %% 3.A --- RESIDUALS VERSUS UNCONDITIONAL STANDARD DEVIATION ---
@@ -760,3 +549,196 @@ exportgraphics(fig_sd, ...
     fullfile(save_base_path, sprintf('Standard_Deviation_Ratios_%s.pdf', resid_tag)), ...
     'ContentType', 'vector');
 fprintf('  Saved: Standard_Deviation_Ratios_%s.pdf\n', resid_tag);
+
+%% 4.A --- LJUNG-BOX: SINGLE CASE SPOT CHECK ---
+%
+% Ljung-Box test
+%   H0: the first m autocorrelations are all zero  (residual is white noise)
+%   H1: at least one of them is not
+%
+% -------------------------------------------------------------------------
+% CAVEAT ON THE DEGREES OF FREEDOM - applies to 2.B and 2.C alike
+% -------------------------------------------------------------------------
+% lbqtest refers the statistic to a chi2(m), where m is the number of
+% autocorrelations tested. For residuals from a FITTED model the classical
+% correction is chi2(m - number of estimated coefficients)
+% Unfeasible as k >> m --> LB do not converge
+%
+% Consequence: the test as run is LENIENT. The critical values are larger than
+% they should be, so the test under-rejects. Rejections are therefore strong
+% evidence of residual autocorrelation; non-rejections are weak evidence of
+% its absence, and should not be read as "the VAR is well specified".
+%
+% ACEL themselves handled this differently, with a multivariate portmanteau
+% statistic and bootstrapped critical values: results_lag_p.mat already
+% contains PortmanteauLags, PortStatData and PortStatSim (1000 draws). That is
+% the properly sized version of this test if it is ever needed.
+
+disp('Ljung-Box spot check on a single (lag order, variable) pair...');
+
+% Which cell to inspect: index into lags_to_test, and column of the residuals
+target_idx = 1;                  % 1 -> VAR(4)
+var_index  = 1;                  % 1 -> d_ln_Rel_Price_Inv
+
+acf_lags_to_test = 1:20;         % autocorrelation orders under test
+
+res_check = residuals{target_idx}(:, var_index);
+
+fprintf('  VAR(%d), %s, %s (T = %d)\n', ...
+        lags_to_test(target_idx), actual_var_names{var_index}, ...
+        resid_label, numel(res_check));
+
+[h_lb, pValue_lb, stat_lb, cValue_lb] = lbqtest(res_check, 'Lags', acf_lags_to_test);
+
+% Displayed as a table: the old version pushed four 20-element vectors through
+% num2str, which wrapped across the console and was unreadable.
+spot_check_table = table(acf_lags_to_test(:), stat_lb(:), cValue_lb(:), ...
+                         pValue_lb(:), h_lb(:), ...
+    'VariableNames', {'ACF_Lag', 'LB_Stat', 'Crit_Value_5pct', 'p_value', 'Reject_H0'});
+
+disp(spot_check_table);
+fprintf('  Rejections at 5%%: %d out of %d autocorrelation orders.\n\n', ...
+        sum(h_lb), numel(h_lb));
+
+
+%% 4.B --- LJUNG-BOX ACROSS ALL VARIABLES AND LAG ORDERS ---
+%
+% See the degrees of freedom caveat in 2.B: these p-values are lenient by construction.
+
+disp('Computing Ljung-Box statistics across all variables and lag structures...');
+
+acf_lags_to_test = 1:20;
+num_acf_lags     = numel(acf_lags_to_test);
+
+% Pre-allocate the four outputs.
+% Dimensions: (VAR lag order, variable, ACF lag order) = 3 x 10 x 20
+LB_h       = zeros(num_lags, num_vars, num_acf_lags);
+LB_pvalues = zeros(num_lags, num_vars, num_acf_lags);
+LB_stats   = zeros(num_lags, num_vars, num_acf_lags);
+LB_cValues = zeros(num_lags, num_vars, num_acf_lags);
+
+for i = 1:num_lags
+
+    R = residuals{i};                    % T x num_vars for this lag order
+
+    for v = 1:num_vars
+
+        % Passing the whole vector 1:20 returns a vector of results in one call
+        [h_dec, pVals, stats, cVals] = lbqtest(R(:, v), 'Lags', acf_lags_to_test);
+
+        LB_h(i, v, :)       = h_dec;
+        LB_pvalues(i, v, :) = pVals;
+        LB_stats(i, v, :)   = stats;
+        LB_cValues(i, v, :) = cVals;
+
+    end
+end
+
+% Compact summary: how much of the (variable x ACF order) grid rejects white
+% noise at each lag order. If lengthening the VAR is absorbing the serial
+% correlation, this share should fall as p grows.
+n_cells      = num_vars * num_acf_lags;
+reject_count = zeros(num_lags, 1);
+reject_any   = zeros(num_lags, 1);
+
+for i = 1:num_lags
+    slice_h         = squeeze(LB_h(i, :, :));         % num_vars x num_acf_lags
+    reject_count(i) = sum(slice_h(:));
+    reject_any(i)   = sum(any(slice_h, 2));           % variables rejecting somewhere
+end
+
+LB_summary = table(lags_to_test(:), reject_count, 100*reject_count/n_cells, ...
+                   reject_any, ...
+    'VariableNames', {'VAR_Lag', 'Rejections_5pct', 'Pct_of_Grid', 'Vars_Rejecting'});
+
+fprintf('\n--- Ljung-Box summary (%s), %d cells per lag order ---\n', ...
+        resid_label, n_cells);
+disp(LB_summary);
+
+disp('Results stored in LB_h, LB_pvalues, LB_stats, LB_cValues.');
+%% 4.C --- VISUALISING THE LJUNG-BOX P-VALUES ---
+%
+% RECALL THE PROBLEM RELATED TO ASYMPTOHITCS OF THE CHI SQUARED OF THE LB STATISTIC 
+%
+% Read it as: if lengthening the VAR is absorbing serial correlation, the
+% lines for p = 8 and p = 12 should sit above the p = 4 line.
+%
+% Remember the caveat from 2.B: these p-values come from an uncorrected
+% chi2(m) and are therefore lenient. Section 2.D is the correctly sized test.
+
+disp('Generating Ljung-Box p-value plots...');
+
+% Same palette as 1.B, repeated so this cell can also be run on its own.
+col_lag = [0.4660 0.6740 0.1880;    % p =  4   green
+           0.8500 0.3250 0.0980;    % p =  8   orange
+           0.0000 0.4470 0.7410];   % p = 12   blue
+
+line_styles = {'-', '--', '-'};
+
+fig_lb = figure('Name', 'Ljung-Box p-values', 'Color', 'w', ...
+                'Units', 'normalized', 'Position', [0.1 0.1 0.8 0.8]);
+
+acf_x   = 1:num_acf_lags;           % autocorrelation orders on the x axis
+h_lines = gobjects(1, num_lags);    % line handles for the legend
+h_thr   = gobjects(1, 1);           % threshold handle for the legend
+
+for v = 1:num_vars
+    subplot(4, 3, v);
+    hold on;
+
+    for i = 1:num_lags
+
+        % squeeze() flattens the 1 x 1 x num_acf_lags slice into a vector
+        current_pvals = squeeze(LB_pvalues(i, v, :));
+
+        hp = plot(acf_x, current_pvals, ...
+                  'LineStyle', line_styles{min(i, numel(line_styles))}, ...
+                  'Marker', 'o', 'MarkerSize', 3, 'LineWidth', 1.5, ...
+                  'Color', col_lag(min(i, size(col_lag,1)), :));
+
+        if v == 1
+            h_lines(i) = hp;
+        end
+    end
+
+    % 5% threshold. Drawn with plot() rather than yline() so it is an ordinary
+    % Line object and can be put in the legend. The old version wrote the
+    % label 'Threshold (0.05)' onto all ten panels, which was pure clutter.
+    ht = plot([1 num_acf_lags], [0.05 0.05], 'r--', 'LineWidth', 1.5);
+    if v == 1
+        h_thr = ht;
+    end
+
+    title(display_var_names{v});
+    ylim([0 1.05]);
+    xlim([1 num_acf_lags]);
+    xticks(2:2:num_acf_lags);
+    grid on;
+    xlabel('ACF lag');
+    ylabel('p-value');
+
+    hold off;
+end
+
+% Subplot 12 is free: park the legend there.
+ax12 = subplot(4, 3, 12);
+axis(ax12, 'off');
+
+legend_labels = [{'5% threshold'}, ...
+                 arrayfun(@(q) sprintf('VAR p = %d', q), lags_to_test, ...
+                          'UniformOutput', false)];
+
+lgd = legend(ax12, [h_thr, h_lines], legend_labels, 'Location', 'west');
+lgd.FontSize   = 11;
+lgd.NumColumns = 1;
+
+sgtitle(sprintf('Ljung-Box p-values, %s   (H0: residuals are white noise)', resid_label), ...
+        'FontWeight', 'bold', 'FontSize', 14);
+
+exportgraphics(fig_lb, ...
+    fullfile(save_base_path, sprintf('Ljung_Box_P_Values_%s.pdf', resid_tag)), ...
+    'ContentType', 'vector');
+fprintf('  Saved: Ljung_Box_P_Values_%s.pdf\n', resid_tag);
+
+
+

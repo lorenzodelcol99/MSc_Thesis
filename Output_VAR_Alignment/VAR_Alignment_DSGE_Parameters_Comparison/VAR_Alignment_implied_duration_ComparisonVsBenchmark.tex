@@ -1,0 +1,31 @@
+% Requires \usepackage{booktabs} and \usepackage{array}
+\begin{table}[htpb]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Implied average time between price re-optimisations: VAR-alignment robustness against the baseline}
+    \label{tab:implied_duration_alignment_vs_benchmark}
+    \begin{tabular}{l ccc !{\vrule width 1pt} ccc}
+        \toprule
+         & \multicolumn{3}{c!{\vrule width 1pt}}{\textbf{VAR alignment}} & \multicolumn{3}{c}{\textbf{Benchmark}} \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        \textbf{Model specification} & $p=4$ & $p=8$ & $p=12$ & $p=4$ & $p=8$ & $p=12$ \\
+        \midrule
+
+        \multicolumn{7}{l}{\textit{Homogeneous capital model}} \\
+        Calvo parameter ($\xi_{p, hom}$) & 0.84 & 0.79 & 0.90 & 0.82 & 0.82 & 0.90 \\
+        Implied duration (quarters) & \textbf{6.2} & \textbf{4.7} & \textbf{9.6} & \textbf{5.6} & \textbf{5.6} & \textbf{9.6} \\
+
+        \midrule
+        \multicolumn{7}{l}{\textit{Firm-specific capital model}} \\
+        Calvo parameter ($\xi_{p, fs}$) & 0.39 & 0.53 & 0.89 & 0.34 & 0.64 & 0.89 \\
+        Implied duration (quarters) & \textbf{1.6} & \textbf{2.1} & \textbf{9.0} & \textbf{1.5} & \textbf{2.8} & \textbf{9.0} \\
+
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} Implied duration is $D = 1/(1 - \xi_p)$, in quarters. The left block re-estimates the exercise with every VAR aligned on a common sample; the right block reproduces the baseline. At $p=12$ the two coincide by construction, since aligning on the longest lag order leaves that specification unchanged. No standard errors are reported: $D$ is a strongly convex function of $\xi_p$, so a delta-method interval would be unreliable precisely where $\xi_p$ approaches unity and the Monte Carlo distributions of $\xi_p$ are markedly non-normal.}
+\end{table}
