@@ -38,9 +38,12 @@
 % Stesso colore gia' usato nelle slide (Thesis_Slides/main.tex).
 \definecolor{PadovaRed}{HTML}{B20E10}
 
-% --- CITATIONS & LINKS (VERSIONE "ROSSO PADOVA", a differenza di Lami che le ha nere) ---
+% --- CITATIONS & LINKS ---
+% Solo le citazioni nel testo (\citet/\citep) sono rosso Padova.
+% Indice, riferimenti interni (sezioni/figure/tabelle) e link restano neri,
+% a differenza della versione precedente che coloriva di rosso anche quelli.
 \usepackage{natbib}
-\usepackage[colorlinks=true, citecolor=PadovaRed, linkcolor=PadovaRed, urlcolor=PadovaRed]{hyperref}
+\usepackage[colorlinks=true, citecolor=PadovaRed, linkcolor=black, urlcolor=black]{hyperref}
 
 \begin{document}
 
@@ -49,26 +52,32 @@
 % titolo, autore con nota a pie' pagina, data, poi abstract con
 % Keywords/JEL Codes nello stesso blocco indentato)
 % =============================================================
-\title{The Short, the Long, and the Consequences of VAR Analysis\\ for Structural DSGE Estimation
+\title{The Short, the Long, and the Consequences of VAR Analysis for Structural DSGE Estimation
 \thanks{I am indebted to Efrem Castelnuovo for his invaluable guidance and support.}}
-\author{Lorenzo Del Col\thanks{University of Padova. Contact: lorenzo.delcol@studenti.unipd.it}}
+\author{Lorenzo Del Col$^{\xi}$}
 \date{October, 2026} % <- da aggiornare con la data di laurea
 
 \maketitle
 \thispagestyle{empty}
 
+% Nota a pie' pagina accanto al nome, marcata con $\xi$ invece della
+% croce (dagger) automatica di \thanks - vedi commento in fondo al file
+% se vuoi capire il trucco usato.
+{\renewcommand{\thefootnote}{\ensuremath{\xi}}%
+\footnotetext{University of Padova. Contact: lorenzo.delcol@studenti.unipd.it}}
+
 \begin{abstract}
-    Truncation bias could be a severe problem regarding structural VAR analysis. 
-    \citet{Long_Lag2025} claims that the role of lag choice in SVAR is crucial to correctly identify IRFs, and they claim that choosing long lags solve the bias and, 
-    surprisingly, this reduce the variance of the point estimate. \citet{CEE2005} is a classic paper that studies the effects of monetary policy shock in the economy. 
-    Particularly their DSGE is calibrated ex-ante using matching the model's IRFs with the ones estimated from the VAR analysis. The aim of this thesis is to perform the \citet{Long_Lag2025} exercise, 
-    see if and how the IRFs changes, analys how the DSGE model calibration vary and if the model is consistent to this new empirical way to estimate the VARs. If so, we want to understand more about the 
-    claimed variance reduction caused by the solution of the truncation bias how works in the Frequentist and Bayesian world.
-
+    \cite{Long_Lag2025} advocate the use of long lags VARs for structural analysis, claiming that the truncation bias is a severe problem for the IRFs estimation.
+    VARs can be used to create additional moments to estimate DSGE models minimizing the distance between their IRFs and therfore estimating the underlying structural parameters.
+    In this study we ask what are the consequencies of enriching the lag structure of a VAR used for DSGE estimation.
+    I replicate the results of \cite{ACEL2011} and I find that the both IRFs and Structural parameters are sensible to the chosen lag lenght.
+    Matching the DSGE with a VAR(12) instead of the baseline VAR(4), I find that the Calvo Price parameters that differencieate the observationally equivalent \cite{ACEL2011} model between firm specific capital vs homogeneous capital are no longer statistically different from each other. 
+    The implied duration of the Calvo Price parameter is 2.5 times higher than the baseline, re opening the micro-macro discrepancy in price stickiness.
+    
     \vspace{0.3cm}
-    \noindent\textbf{Keywords:} \todo[inline]{es. VAR, Lag Length, Truncation Bias, DSGE Estimation, Minimum Distance}
-
-    \noindent\textbf{JEL Codes:} \todo[inline]{es. C32, C52, E32}
+    \noindent\textbf{Keywords:} Truncation Bias, Long Lag VARs, DSGE Estimation, Minimum Distance, IRFs
+    \\
+    \noindent\textbf{JEL Codes:} C32, C52, E32
 \end{abstract}
 
 \newpage
@@ -80,26 +89,55 @@
 \setcounter{page}{1}
 
 % =============================================================
-% CORPO DELLA TESI - struttura vuota su cui scrivere.
-% Sottosezioni dell'Introduction ricalcano quelle di Lami
-% (Main Contributions / Related Literature / Outline): tienile,
-% rinominale o eliminale come preferisci.
+% Thesis Corpus
 % =============================================================
 
 \section{Introduction}
+Introduzione è la parte più importante e difficile, magari la abbozzo e poi la riscrivo alla fine.
+
 \subsection{Research Question}
+I analyse the consequences of enriching the lag structure of a VAR used to estiamte a DSGE with IRFs minimum distance estimation. 
+I replciate \cite{ACEL2011} and find that the both IRFs and Structural parameters are sensible to the chosen lag lenght.
+
 
 \subsection{Main Contributions}
+The Calvo Price parameters that differencieate the observationally equivalent \cite{ACEL2011} model between firm specific capital vs homogeneous capital are no longer statistically different from each other.
+This go against their main conclusion that the firm specific capital model is the one that better fit the data.
 
+(Maybe the Capital Adjustment Cost variable that since \cite{ACEL2011} researchers have started to use, is not fundamental to explain inflation intertia. )
 \subsection{Related Literature}
+Long Lag VARs \cite{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}
+\\
+IRFs (VARs and LPs) \cite{Ludwig2026, Li_PlagborgMoller_Wolf2024, Jorda2005}
+\\
+State Space rappresentation of DSGE \cite{Ravenna2007, FVRRS2005, Forni_Gambetti_Sala2016, Theodoridis2011, Giacomini2013}
+
 
 \subsection{Outline}
+The rest of the work is organised as follows. In Section 2 I present the Truncation Bias problem, the theory that maps DSGE into VAR(inf) that suggests to increase the lag lenght.
+In section 3 I summaryse breafly the \cite{ACEL2011} DSGE. In section 4 I present the empirical results and in section 5 I conclude.
+
+
 
 \section{Theoretical Framework}
+The Truncation Bias problem, expalind easy as \cite{Long_Lag2025}.
 
-\section{Methodology}
+Simple theoretical derivation describing that even if the \cite{ACEL2011} is stochastich singular (and defend the fact that the most of the SVAR analysis is done with stochastig singular models (more observables than shocks), \cite{Forni_Gambetti_Sala2016})
+and explain that the solution of the DSGE in State Space can be representate as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist. 
+
+\section{Theoretical Model}
+Then a breif descriptio of the \cite{ACEL2011} DSGE
+using the replication package from (ALEL NBER 2005 WORKING PAPER) 
+
 
 \section{Empirical Results}
+\subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
+
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
 
 \section{Conclusion}
 
@@ -119,16 +157,6 @@ Detail where the reader can find your code (e.g., a GitHub link).
 
 \section{Additional Tables}
 \label{app:tables}
-
-
-\subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
-
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-
-\FloatBarrier
-
 
 \section{Additional Figures}
 \label{app:figures}
