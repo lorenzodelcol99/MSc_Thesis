@@ -1,20 +1,22 @@
-\documentclass[12pt, a4paper]{article} % Changed to a4paper
-
+\documentclass[12pt, a4paper]{article}
 % --- MARGINS & LANGUAGE ---
 \usepackage[margin=1in]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
 % --- SPACING ---
-\usepackage{setspace} 
-\onehalfspacing % Standard 1.5 spacing for academic theses
-%\doublespacing % Uncomment for 2.0 spacing if requested by supervisor
+% il corpo del testo e' a interlinea singola, non 1.5. Se il regolamento
+% del corso di laurea richiede 1.5, commenta \singlespacing e scommenta
+% \onehalfspacing.
+\usepackage{setspace}
+\singlespacing
+%\onehalfspacing
+%\doublespacing
 
 % --- MATH & FONTS ---
 \usepackage{amsmath}
-\usepackage{amssymb} 
-\usepackage[retainorgcmds]{IEEEtrantools}
-\usepackage{mathptmx}   % Times New Roman for text and math
+\usepackage{amssymb}
+\usepackage{mathptmx}   
 \usepackage{bm}         % For bold math symbols
 \usepackage{microtype}  % Improves text justification and typography
 
@@ -24,184 +26,82 @@
 \usepackage{subfig}
 \usepackage{booktabs}   % For professional looking tables
 \usepackage{placeins}   % Keeps figures inside their proper sections
-\usepackage{underscore}
+% NB: il pacchetto "underscore" (che permetteva di scrivere underscore  letterali nel testo senza "\_") e' stato rimosso: e' incompatibile con  le chiavi bibliografiche che contengono un underscore (es. Long_Lag2025, DeGraeve_Westermark2013) e mandava in errore silenzioso ogni \citet/\citep su quelle voci. Se ti serve un underscore letterale nel testo, scrivi "\_".
 
 % --- CODE & UTILITIES ---
-\usepackage{listings}   
-\usepackage{verbatim}   
-\usepackage{color}  
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{xcolor}     % serve il modello colore HTML per il rosso Padova
 \usepackage[colorinlistoftodos]{todonotes}
 
-% --- CITATIONS & LINKS (THE "BLACK" VERSION) ---
+% --- ROSSO ISTITUZIONALE UNIVERSITA' DI PADOVA ---
+% Stesso colore gia' usato nelle slide (Thesis_Slides/main.tex).
+\definecolor{PadovaRed}{HTML}{B20E10}
+
+% --- CITATIONS & LINKS (VERSIONE "ROSSO PADOVA", a differenza di Lami che le ha nere) ---
 \usepackage{natbib}
-% 'hidelinks' removes all red/blue colors from citations and URLs, 
-% keeping them standard black text while remaining clickable.
-\usepackage[hidelinks]{hyperref} 
+\usepackage[colorlinks=true, citecolor=PadovaRed, linkcolor=PadovaRed, urlcolor=PadovaRed]{hyperref}
 
 \begin{document}
 
-% --- TITLE PAGE ---
-\title{\textbf{The Short, the Long, and the Consequences of VAR Analysis For Structural DSGE Estimation}\\{\small \textbf{Master's Degree in Applied Economics; Economic Data Analytics \\University of Padova; Supervisor Prof. Efrem Castelnuovo}}}
-\author{Lorenzo Del Col}
-\date{\today} % Automatically prints today's date, or hardcode it like: March 20th, 2026
+% =============================================================
+% FRONTESPIZIO "IN MODALITA' PAPER" (replica dello stile dei paper:
+% titolo, autore con nota a pie' pagina, data, poi abstract con
+% Keywords/JEL Codes nello stesso blocco indentato)
+% =============================================================
+\title{The Short, the Long, and the Consequences of VAR Analysis\\ for Structural DSGE Estimation
+\thanks{I am indebted to Efrem Castelnuovo for his invaluable guidance and support.}}
+\author{Lorenzo Del Col\thanks{University of Padova. Contact: lorenzo.delcol@studenti.unipd.it}}
+\date{October, 2026} % <- da aggiornare con la data di laurea
+
 \maketitle
+\thispagestyle{empty}
 
-% --- ABSTRACT ---
 \begin{abstract}
-    Truncation bias could be a severe problem regarding structural VAR analysis (De Greave and Westermark ) (DGW2025) claims that the role of lag choice in SVAR is crucial to correctly identify IRFs, and they claim that choosing long lags solve the bias and, surprisingly, this reduce the variance of the point estimate. CEE2005 is a classic paper that studies the effects of monetary policy shock in the economy. Particularly their DSGE is calibrated ex-ante using matching the model's IRFs with the ones estimated from the VAR analysis. The aim of this thesis is to perform the (DGW2025) exercise, see if and how the IRFs changes, analys how the DSGE model calibration vary and if the model is consistent to this new empirical way to estimate the VARs. If so, we want to understand more about the claimed variance reduction caused by the solution of the truncation bias how works in the Frequentist and Bayesian world.
+    Truncation bias could be a severe problem regarding structural VAR analysis. 
+    \citet{Long_Lag2025} claims that the role of lag choice in SVAR is crucial to correctly identify IRFs, and they claim that choosing long lags solve the bias and, 
+    surprisingly, this reduce the variance of the point estimate. \citet{CEE2005} is a classic paper that studies the effects of monetary policy shock in the economy. 
+    Particularly their DSGE is calibrated ex-ante using matching the model's IRFs with the ones estimated from the VAR analysis. The aim of this thesis is to perform the \citet{Long_Lag2025} exercise, 
+    see if and how the IRFs changes, analys how the DSGE model calibration vary and if the model is consistent to this new empirical way to estimate the VARs. If so, we want to understand more about the 
+    claimed variance reduction caused by the solution of the truncation bias how works in the Frequentist and Bayesian world.
+
+    \vspace{0.3cm}
+    \noindent\textbf{Keywords:} \todo[inline]{es. VAR, Lag Length, Truncation Bias, DSGE Estimation, Minimum Distance}
+
+    \noindent\textbf{JEL Codes:} \todo[inline]{es. C32, C52, E32}
 \end{abstract}
-\newpage
 
-% --- TABLE OF CONTENTS ---
+\newpage
+\thispagestyle{empty}
 \tableofcontents
+
 \newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
-% --- 1. INTRODUCTION ---
+% =============================================================
+% CORPO DELLA TESI - struttura vuota su cui scrivere.
+% Sottosezioni dell'Introduction ricalcano quelle di Lami
+% (Main Contributions / Related Literature / Outline): tienile,
+% rinominale o eliminale come preferisci.
+% =============================================================
+
 \section{Introduction}
-Provide the background of your topic, state the research problem, and outline the structure of your thesis here.
-Maybe I have switched the latex writing in VS Code
 \subsection{Research Question}
-Clearly define what your thesis aims to solve or investigate.
 
-% --- 2. LITERATURE REVIEW / THEORETICAL FRAMEWORK ---
+\subsection{Main Contributions}
+
+\subsection{Related Literature}
+
+\subsection{Outline}
+
 \section{Theoretical Framework}
-Discuss the existing literature and the theoretical models that underpin your research.
 
-% --- 3. METHODOLOGY ---
 \section{Methodology}
-Explain the empirical strategy, models, and data you are using.
 
-% --- 4. RESULTS ---
 \section{Empirical Results}
-\subsection{From the state-space solution to a VAR($\infty$)}
 
-\paragraph{The state-space solution.}
-Following \citet{Ravenna2007}, the recursive equilibrium law of motion of a
-linearised DSGE model is
-\begin{align}
-    y_t &= P x_{t-1} + Q z_t, \label{eq:R1}\\
-    x_t &= R x_{t-1} + S z_t, \label{eq:R2}\\
-    Z(L)\, z_t &= \varepsilon_t, \label{eq:R3}
-\end{align}
-where $x_t$ is the $n\times 1$ vector of endogenous states, $z_t$ the
-$m\times 1$ vector of exogenous states (structural shocks), $y_t$ the
-$r\times 1$ vector of controls, and $\varepsilon_t$ is $m\times 1$ white
-noise with $\mathbb{E}(\varepsilon_t\varepsilon_t')=\Sigma$ diagonal. The
-polynomial $Z(L)=[I-Z_1L-\dots-Z_qL^q]$ governs the persistence of the
-shocks.
-
-\paragraph{Step 1: eliminate the endogenous states.}
-Define $G(L)\equiv[I-RL]$ and write \eqref{eq:R2} as $G(L)x_t = Sz_t$.
-Assuming $G(L)$ invertible,
-\begin{equation}
-    x_{t-1} = G(L)^{-1} S L\, z_t .
-    \label{eq:Rstate}
-\end{equation}
-
-\paragraph{Step 2: the moving-average form.}
-Substituting \eqref{eq:Rstate} into \eqref{eq:R1}, and taking the observable
-vector to be $\widehat{Y}_t = y_t$ (the econometrician observes the controls
-but \emph{not} the states),
-\begin{equation}
-    y_t = Q z_t + P\,G(L)^{-1} S L\, z_t .
-    \label{eq:R21}
-\end{equation}
-This is a VMA($\infty$). The moving-average term is the direct consequence of
-$x_t$ being unobserved.
-
-\paragraph{Step 3: the VARMA (i.i.d.\ shocks).}
-Let $Z(L)=I$, so $z_t=\varepsilon_t$. Assume $Q$ is invertible, which requires
-$r=m$, and define the reduced-form innovations
-\begin{equation}
-    \eta_t \equiv Q\varepsilon_t = Q z_t ,
-\end{equation}
-so that $Q$ is the theoretical matrix mapping structural shocks into
-reduced-form innovations. Then \eqref{eq:R21} becomes
-$y_t = \eta_t + P G(L)^{-1} S Q^{-1} L\,\eta_t$. Using the
-determinant--adjoint identity $G(L)^{-1} = D_G(L)\,|G(L)|^{-1}$, where
-$|G(L)|$ is a scalar polynomial of order $n$ and the adjoint $D_G(L)$ is of
-order $n-1$, and multiplying through by $|G(L)|$:
-\begin{equation}
-    \underbrace{|G(L)|\,y_t}_{\text{AR part}}
-    = \underbrace{\Big[\,|G(L)|\,I + P D_G(L) S Q^{-1} L\,\Big]}_{\textstyle \equiv\, G^{*}(L)}\eta_t
-    \;=\; G^{*}(L)\,\eta_t .
-    \label{eq:R22}
-\end{equation}
-Equation \eqref{eq:R22} is a $\mathrm{VARMA}(n,n)$ in \emph{final equations
-form}: the autoregressive operator is scalar times the identity, so each
-component of $y_t$ depends only on its own lags. Since $|G(0)|=1$ and
-$G^{*}(0)=I$, the representation is unique.
-
-\paragraph{Step 4: inverting the MA part.}
-If $G^{*}(L)$ is invertible, premultiplying \eqref{eq:R22} by
-$G^{*}(L)^{-1}$ isolates the innovations:
-\begin{equation}
-    |G(L)|\,G^{*}(L)^{-1} y_t = \eta_t .
-    \label{eq:R23}
-\end{equation}
-Writing $G^{*}(L)^{-1} = D_{G^{*}}(L)\,|G^{*}(L)|^{-1}$, the adjoint
-$D_{G^{*}}(L)$ is of finite order, but the reciprocal of the scalar operator
-$|G^{*}(L)|$ expands as
-\begin{equation}
-    \frac{1}{1-aL} = \sum_{j=0}^{\infty} a^{j}L^{j},
-\end{equation}
-which is of infinite order unless $|G^{*}(L)|$ is constant. Hence:
-\begin{equation}
-\boxed{\;\text{the DSGE solution generically implies a VAR}(\infty);\;}
-\end{equation}
-a finite-order VAR($p$) exists \emph{if and only if} $|G^{*}(L)|$ is of degree
-zero in $L$, i.e.\ $G^{*}(L)$ is unimodular \citep[p.~245]{Lutkepohl1993}.
-
-\paragraph{Step 5: persistent shocks.}
-With $Z(L)\neq I$, define $\widetilde{Z}(L)\equiv Q Z(L) Q^{-1}$, so that
-$QZ(L)^{-1}\varepsilon_t = \widetilde{Z}(L)^{-1}\eta_t$. Then
-\begin{equation}
-    |\widetilde{Z}(L)|\,|G(L)|\,y_t
-    = G^{*}(L)\,D_{\widetilde{Z}}(L)\,\eta_t ,
-    \label{eq:R24}
-\end{equation}
-which, since $|\widetilde{Z}(L)|$ is of order $qm$, is a
-\begin{equation}
-    \mathrm{VARMA}\big(n+qm,\; n+q(m-1)\big)
-\end{equation}
-process. Shock persistence therefore \emph{raises} the autoregressive order
-required to represent the data.
-
-\paragraph{Step 6: the VAR($\infty$) in explicit form.}
-An equivalent and more transparent route (Corollary 2.2 in
-\citealp{Ravenna2007}) solves \eqref{eq:R1} for $z_{t-1} = Q^{-1}(y_{t-1}-Px_{t-1})$
-and substitutes into \eqref{eq:R2}, giving $H(L)x_t = SQ^{-1}y_{t-1}$ with
-\begin{equation}
-    H(L) \equiv \big[\,I-(R-SQ^{-1}P)L\,\big].
-\end{equation}
-If $H(L)$ is invertible, the observables satisfy
-\begin{equation}
-    y_t = P\sum_{j=0}^{\infty}\big[\,R-SQ^{-1}P\,\big]^{\,j} S Q^{-1}\,
-    y_{t-j-1} \;+\; \eta_t .
-    \label{eq:R26}
-\end{equation}
-Equation \eqref{eq:R26} \emph{is} the VAR($\infty$), written out: the
-coefficient matrix attached to $y_{t-j-1}$ is
-$P\,[R-SQ^{-1}P]^{\,j}\,SQ^{-1}$.
-
-\paragraph{Interpretation.}
-The matrix $R-SQ^{-1}P$ is the counterpart of $A-BD^{-1}C$ in
-\citet{FVRRS2005}; Ravenna notes that \eqref{eq:R26} ``is the derivation
-obtained in Fernandez-Villaverde et al.\ (2005)''. Two distinct questions
-follow. \emph{Existence}: the VAR($\infty$) is well defined if all
-eigenvalues of $R-SQ^{-1}P$ lie inside the unit circle --- the ``poor man's
-invertibility condition''. \emph{Accuracy}: the eigenvalue \emph{moduli}
-govern the geometric rate at which the coefficients in \eqref{eq:R26} decay,
-and hence the size of the bias incurred by truncating the lag structure at
-finite $p$. An eigenvalue close to unity implies coefficients that remain
-non-negligible at long lags, so that a short-lag VAR is a poor approximation
-to the model-consistent representation of the data.
-
-
-
-% --- 5. CONCLUSION ---
 \section{Conclusion}
-Summarize the main takeaways, discuss the policy implications, and mention any limitations of your work.
 
 \clearpage
 
@@ -220,26 +120,6 @@ Detail where the reader can find your code (e.g., a GitHub link).
 \section{Additional Tables}
 \label{app:tables}
 
-\subsection{DSGE Parameters Table: all lags}
-
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_all_lags.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_all_lags.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-
-\FloatBarrier
-Investment adjustment cost in VAR with 6 lags has a point estimate of 2413 with a standard deviation of 7400. 
-This is a good result in the sense that matches perfectly the ACEL2005 working paper, they estimate the baseline model with a VAR with 6 lags as robustness.
-The second thing that we can learn from this is that probably the likelihood function of this parameter int he underlying DSGE model, when matched with a VAR 6 is complitely flat.
-The maximum likelihood estimator is not able to find a maximum point
-
-
-\subsection{Implied Duration from Calvo Price Table: all lags}
-
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-
-\FloatBarrier
 
 \subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
 
@@ -249,30 +129,6 @@ The maximum likelihood estimator is not able to find a maximum point
 
 \FloatBarrier
 
-\subsection{VAR ALIGNMENT DSGE Parameters Table: all lags}
-
-\IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_DSGE_Params_Table_A4_all_lags.tex}
-    {\input{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_DSGE_Params_Table_A4_all_lags.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-
-\FloatBarrier
-Phillips Curve Slope in VAR 10 is a monster, is 0.6 omplitely messed up.
-
-\IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_implied_duration_A4_all_lags.tex}
-    {\input{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_implied_duration_A4_all_lags.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-
-\FloatBarrier
-Results are robust to this exercise, no major changes, but this exercise exacerbates the Phillips Curve Slope of the DSGE when estimated 
-matching with the VAR 6 and expecially 10. When using the VAR 10 the DSGE Phillips curve is tremendously hig 0.6 --> this is the driver of the low implied time from the calvo parameter, 
-hence the ACEL result seems to to be robust by increasing the lag choice, an expecially there are some problems with the Phillips curve when chooising 6 and 10 lags
-
-\subsection{Decomposition of Variance across different lags}
-
-%\IfFileExists{../../Output/Long-Lag_Exercise_Results/Decomposition_of_Variance/table_4.tex}
-%    {\input{../../Output/Long-Lag_Exercise_Results/Decomposition_of_Variance/table_4.tex}}
-%    {\noindent\fbox{Image Path Broken or File Missing}}
-%\FloatBarrier
 
 \section{Additional Figures}
 \label{app:figures}
@@ -286,743 +142,6 @@ hence the ACEL result seems to to be robust by increasing the lag choice, an exp
     \caption{Raw Historical Series}
     \label{fig:raw_series}
 \end{figure}
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 VAR Across different lag structures: Monetary Policy Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 4}
-    \label{fig:mp_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 6}
-    \label{fig:mp_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 8}
-    \label{fig:mp_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 10}
-    \label{fig:mp_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP/MP_lag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 12}
-    \label{fig:mp_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 VAR Across different lag structures: Embodied Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 4}
-    \label{fig:et_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 6}
-    \label{fig:et_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 8}
-    \label{fig:et_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 10}
-    \label{fig:et_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET/ET_lag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 12}
-    \label{fig:et_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 VAR Across different lag structures: Neutral Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 4}
-    \label{fig:nt_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 6}
-    \label{fig:nt_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 8}
-    \label{fig:nt_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 10}
-    \label{fig:nt_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT/NT_lag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 12}
-    \label{fig:nt_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-
-\subsection{ACEL 2005 DSGE Matched with VAR 4, compared with VAR estimated across different lag structures: Monetary Policy Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:basic_mp_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 6}
-    \label{fig:basic_mp_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 8}
-    \label{fig:basic_mp_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 10}
-    \label{fig:basic_mp_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 12}
-    \label{fig:basic_mp_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 DSGE Matched with VAR 4, compared with VAR estimated across different lag structures: Embodied Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:basic_et_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 6}
-    \label{fig:basic_et_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 8}
-    \label{fig:basic_et_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 10}
-    \label{fig:basic_et_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 12}
-    \label{fig:basic_et_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 DSGE Matched with VAR 4, compared with VAR estimated across different lag structures: Neutral Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:basic_nt_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 6}
-    \label{fig:basic_nt_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 8}
-    \label{fig:basic_nt_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 10}
-    \label{fig:basic_nt_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 12}
-    \label{fig:basic_nt_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-
-\subsection{ACEL 2005 DSGE Matched and compared with VAR estimated across different lag structures: Monetary Policy Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:new_mp_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 6 compared to VAR lag 6}
-    \label{fig:new_mp_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 8 compared to VAR lag 8}
-    \label{fig:new_mp_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 10 compared to VAR lag 10}
-    \label{fig:new_mp_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_matched_new_DSGE/MP_newDSGE_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock DSGE matched with VAR lag 12 compared to VAR lag 12}
-    \label{fig:new_mp_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 DSGE Matched and compared with VAR estimated across different lag structures: Embodied Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:new_et_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 6 compared to VAR lag 6}
-    \label{fig:new_et_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 8 compared to VAR lag 8}
-    \label{fig:new_et_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 10 compared to VAR lag 10}
-    \label{fig:new_et_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_matched_new_DSGE/ET_newDSGE_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock DSGE matched with VAR lag 12 compared to VAR lag 12}
-    \label{fig:new_et_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\clearpage
-\subsection{ACEL 2005 DSGE Matched and compared with VAR estimated across different lag structures: Neutral Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_4.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_4.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 4 compared to VAR lag 4}
-    \label{fig:new_nt_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_6.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_6.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 6 compared to VAR lag 6}
-    \label{fig:new_nt_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_8.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_8.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 8 compared to VAR lag 8}
-    \label{fig:new_nt_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_10.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_10.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 10 compared to VAR lag 10}
-    \label{fig:new_nt_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock DSGE matched with VAR lag 12 compared to VAR lag 12}
-    \label{fig:new_nt_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\subsection{VAR Residual Analysis}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR Residuals Comparison: VAR(4) vs VAR(12)}
-    \label{fig:var_residuals}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE__Across_Lags_All_Variables.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE__Across_Lags_All_Variables.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR RMSE Comparison across different lag structures}
-    \label{fig:var_residuals}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/Residual_Analysis_Output/Ljung_Box_P_Values_Across_VAR_lags.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/Residual_Analysis_Output/Ljung_Box_P_Values_Across_VAR_lags.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Ljung-Box P-Values Across VAR Lags}
-    \label{fig:ljung_box}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/Residual_Analysis_Output/Standard_Deviation_Ratios.pdf}
-        {\includegraphics[width=1\linewidth]{../../Output/Residual_Analysis_Output/Standard_Deviation_Ratios.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{Standard Deviation Ratios}
-    \label{fig:std_dev_ratios}
-\end{figure}
-
-\FloatBarrier
-
-\subsection{ACEL 2005 VAR Across different lag structures Progressively Comparison: Monetary Policy Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 4}
-    \label{fig:VAR_mp_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 6}
-    \label{fig:VAR_mp_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 8}
-    \label{fig:VAR_mp_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 10}
-    \label{fig:VAR_mp_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Monetary_policy_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Monetary Policy Shock lag 12}
-    \label{fig:VAR_mp_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-\subsection{ACEL 2005 VAR Across different lag structures Progressively Comparison: Embodied Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 4}
-    \label{fig:VAR_et_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 6}
-    \label{fig:VAR_et_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 8}
-    \label{fig:VAR_et_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 10}
-    \label{fig:VAR_et_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Embodied Technology Shock lag 12}
-    \label{fig:VAR_et_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-\subsection{ACEL 2005 VAR Across different lag structures Progressively Comparison: Neutral Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 4}
-    \label{fig:VAR_nt_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 6}
-    \label{fig:VAR_nt_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 8}
-    \label{fig:VAR_nt_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 10}
-    \label{fig:VAR_nt_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{Neutral Technology Shock lag 12}
-    \label{fig:VAR_nt_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-
-\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Monetary Policy Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Monetary Policy Shock lag 4}
-    \label{fig:DSGE_mp_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Monetary Policy Shock lag 6}
-    \label{fig:DSGE_mp_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Monetary Policy Shock lag 8}
-    \label{fig:DSGE_mp_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Monetary Policy Shock lag 10}
-    \label{fig:DSGE_mp_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Monetary_Policy_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Monetary Policy Shock lag 12}
-    \label{fig:DSGE_mp_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Embodied Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Embodied Technology Shock lag 4}
-    \label{fig:DSGE_et_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Embodied Technology Shock lag 6}
-    \label{fig:DSGE_et_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Embodied Technology Shock lag 8}
-    \label{fig:DSGE_et_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Embodied Technology Shock lag 10}
-    \label{fig:DSGE_et_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Embodied_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Embodied Technology Shock lag 12}
-    \label{fig:DSGE_et_baseline_lag12}
-\end{figure}
-
-\FloatBarrier
-\subsection{ACEL 2005 DSGE Across different lag structures Progressively Comparison: Neutral Technology Shock}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_1_UpToLag_4.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Neutral Technology Shock lag 4}
-    \label{fig:DSGE_nt_baseline_lag4}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_2_UpToLag_6.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Neutral Technology Shock lag 6}
-    \label{fig:DSGE_nt_baseline_lag6}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_3_UpToLag_8.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Neutral Technology Shock lag 8}
-    \label{fig:DSGE_nt_baseline_lag8}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_4_UpToLag_10.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Neutral Technology Shock lag 10}
-    \label{fig:DSGE_nt_baseline_lag10}
-\end{figure}
-
-\begin{figure}[htpb]
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}
-    {\includegraphics[width=1\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots/Neutral_Technology_Shock/Step_5_UpToLag_12.pdf}}{\fbox{Image Path Broken or File Missing}}
-    \caption{DSGE Neutral Technology Shock lag 12}
-    \label{fig:DSGE_nt_baseline_lag12}
-\end{figure}
-
 \FloatBarrier
 
 \end{document}

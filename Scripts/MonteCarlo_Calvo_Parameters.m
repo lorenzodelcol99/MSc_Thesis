@@ -4,7 +4,7 @@
 clear all; close all, clc;
 
 % --- 1. SET PATHS AND TARGET LAG ---
-target_lag = 12; % Change this dynamically
+target_lag = 4; % Change this dynamically
 acel_code_path = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Original_ACEL_Replication/ACEL 2011 Replication Package/acelcode/';
 results_path   = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/Results_Lag/';
 vcv_path       = '/Users/lorenzodelcol/Desktop/GIT/MSc_Thesis/Output/Long-Lag_Exercise_Results/DSGE_VCV_Across_Lags/';

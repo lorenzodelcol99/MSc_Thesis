@@ -1,0 +1,166 @@
+\documentclass[11pt]{beamer}
+\usetheme{default}
+\usefonttheme{serif}
+
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[round, authoryear]{natbib}
+\usepackage{booktabs}
+\usepackage{amssymb} 
+
+% Pacchetto fondamentale per separare le slide extra dal conteggio totale
+\usepackage{appendixnumberbeamer}
+
+% --- Rosso Istituzionale Università di Padova ---
+\definecolor{PadovaRed}{HTML}{B20E10} 
+\usecolortheme[named=PadovaRed]{structure} 
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{} 
+
+% --- FOOTLINE CUSTOM: Pagina X di Y (non conta le pause e si ferma prima dell'appendice) ---
+\setbeamertemplate{footline}{%
+  \hfill\usebeamerfont{footline}\insertframenumber{} / \insertmainframenumber\hspace*{2ex}\vspace*{1ex}%
+}
+
+% --- Informazioni Presentazione ---
+\author[Del Col]{Lorenzo Del Col}
+\title[Master's Thesis]{The Short, the Long, and the Consequences of VAR Analysis For Structural DSGE Estimation}
+\newcommand{\email}{lorenzo.delcol@studenti.unipd.it}
+
+\institute[]{
+    \small Supervisor: Professor Efrem Castelnuovo \\
+    \vspace{0.3cm}
+    \footnotesize \textit{University of Padova} \\ 
+    \footnotesize \textit{MSc Applied Economics}
+}
+\date{August 2026}
+
+\begin{document}
+
+% =======================================
+% TITLE
+% =======================================
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+% =======================================
+% MOTIVATION
+% =======================================
+
+\begin{frame}{Motivation}
+    \begin{itemize}
+        \item VAR models can be used to estimate DSGE frameworks by IRFs minimization matching
+    \end{itemize}
+    
+    \begin{itemize}  
+        \item If the VAR is mispecified the DSGE might also be so
+    \end{itemize}
+    \vspace{0.1cm}
+    
+    \textbf{Why it is relevant?}
+    \pause
+    \begin{itemize}
+        \item \textit{``The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks.''}
+        \vspace{0.1cm}
+        \hfill {\small \textbf{\citet{ACEL2011}, p. 3, fn. 10} }
+        \pause
+
+        \item \textit{``If the VAR adequately caputeres the DGP, IRFs are optimal at all horizons. 
+        \\
+        If the \textbf{VAR is mispecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
+        \vspace{0.1cm}
+        \hfill {\small \textbf{\citet{Ramey2016}, p. 83} }
+        \pause
+        
+        \item VARs and DSGEs are instruments used by central banks to make policy decisions
+        \item Misspecification can deliver distorted results mis informing the central banker
+    \end{itemize}
+
+\end{frame}
+
+% =======================================
+% RESEARCH QUESTION
+% =======================================
+
+\begin{frame}{This Paper}\label{slide:this_paper}
+    \textbf{Research Question:}
+    \begin{itemize}
+        \item \textcolor{PadovaRed}{Can VAR truncation bias have significant implications for DSGE estimation?}
+    \end{itemize}
+    
+    \vspace{0.4cm}
+    \textbf{What we do:}
+    \begin{itemize}
+        \item Test if well established facts in the literature are sensitive to the chosen lag structure
+    \end{itemize}
+    \pause
+    
+    \vspace{0.4cm}    
+    \textbf{Findings:}
+    \begin{itemize}
+        \item Both VAR based IRFs and structural DSGE parameter estimates are significantly affected by the inclusion of longer lags
+    \end{itemize}
+    \begin{center}
+        \hyperlink{slide:var_irfs}{\beamerbutton{VAR IRFs}} \quad
+        \hyperlink{slide:dsge_irfs}{\beamerbutton{DSGE IRFs}} \quad
+        \hyperlink{slide:dsge_params}{\beamerbutton{DSGE Parameters}}
+    \end{center}
+\end{frame}
+
+% =======================================
+% RELATED LITERATURE
+% =======================================
+
+
+% =======================================
+%  Thanks!
+% =======================================
+
+\begin{frame}
+\begin{center}
+    \Large Thanks a lot for your attention! \\
+    \vspace{1cm}
+    \normalsize \email
+\end{center}
+\end{frame}
+
+% =========================================================
+% APPENDICE
+% =========================================================
+\appendix
+
+\begin{frame}{VAR IRFs; Monetary Policy Shock}
+\begin{figure}
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
+    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+
+% =========================================================
+% TRUCCO PER NASCONDERE LA BIBLIOGRAFIA
+\setbox0=\vbox{
+\begin{minipage}{\textwidth}
+    \bibliographystyle{apalike}
+    \bibliography{biblio}
+\end{minipage}
+}
+
+% =========================================================
+% BIBLIOGRAFIA
+%\begin{frame}[allowframebreaks]{References}
+%    \bibliographystyle{plainnat}
+%    \bibliography{biblio}
+%\end{frame}
+
+\end{document}

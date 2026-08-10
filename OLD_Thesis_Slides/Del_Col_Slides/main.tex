@@ -363,19 +363,6 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
 \end{frame}
 
 % =======================================
-% DSGE PARAMETERS TABLE 4 6 8 10 12
-% =======================================
-
-\begin{frame}{DSGE Structural Parameters All Lags}\label{slide:dsge_params_all}
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_beamer_all_lags.tex}}
-    {\fbox{Missing file: dsge\_params\_table\_beamer\_all\_lags.tex}}
-    \begin{flushright}
-        \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
-    \end{flushright}
-\end{frame}
-
-% =======================================
 % IMPLIED AVERAGE TIME TABLE 4 8 12
 % =======================================
 
@@ -385,15 +372,6 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     {\noindent\fbox{Image Path Broken or File Missing}}
 \end{frame}
 
-% =======================================
-% IMPLIED AVERAGE TIME TABLE 4 6 8 10 12
-% =======================================
-
-\begin{frame}{Implied Average Time between Re-Optimization}
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_all_lags.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-\end{frame}
 
 % =======================================
 %  NEXT STEPS
@@ -403,18 +381,10 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
     In the ACEL2011 exercise
     \begin{itemize}
         \item MonteCalvo of the Phillipcs curve slope components to simulate the Calvo Price Parametes' Standard Error
-        \item Check how good distance between IRFs is minimized
         \item Check the estimated parameters likelihood function
         \item Leverage on Canova's tip; long-lag VARs mess up HD
         \item Long-Lag VARs are a good aproximation of Trend-Cycle VARs, are we specifying better the trend?
         \item Make sure the VARs starts from the same point in time, we need to drop the first 12 data points fro each VAR for comparison pourposes
-    \end{itemize}
-
-    Future Research
-    \begin{itemize}
-        \item Same exercise using \citet{Jarocinski_Karadi2020}
-        \item Analyse the Long-Lag VAR results in both the
-        Frequentist and Bayesian approach
     \end{itemize}
 \end{frame}
 
@@ -439,105 +409,6 @@ Only the Firm-specific capital model reconcile the micro-macro pricing conflict
         {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
     \label{fig:placeholder4}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Monetary Policy Shock; DSGE4 vs VAR4}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}
-        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_4.pdf}}
-        {\fbox{Missing file: MP\_DSGE4\_lag\_4.pdf}}
-    \caption{MP: DSGE4 Vs VAR4}
-    \label{fig:placeholder5}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Monetary Policy Shock; DSGE4 vs VAR8}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}
-        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_8.pdf}}
-        {\fbox{Missing file: MP\_DSGE4\_lag\_8.pdf}}
-    \caption{MP: DSGE4 Vs VAR8}
-    \label{fig:placeholder6}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Monetary Policy Shock; DSGE4 vs VAR12}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/MP_basic_DSGE/MP_DSGE4_lag_12.pdf}}
-        {\fbox{Missing file: MP\_DSGE4\_lag\_12.pdf}}
-    \caption{MP: DSGE4 Vs VAR12}
-    \label{fig:placeholder7}
-\end{figure}
-\end{frame}
-
-\begin{frame}{VAR IRFs; Neutral Technology Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
-    \label{fig:placeholder8}
-\end{figure}
-\end{frame}
-
-\begin{frame}{DSGE IRFs; Neutral Technology Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Comparison_4_8_12_Plots/Neutral_Technology_Shock/DSGE_Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: DSGE\_Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs DSGE Matched/IRF Comparison: Neutral Technology Shock}
-    \label{fig:placeholder9}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Neutral Technology Shock; DSGE4 vs VAR12}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_basic_DSGE/NT_DSGE4_lag_12.pdf}}
-        {\fbox{Missing file: NT\_DSGE4\_lag\_12.pdf}}
-    \caption{NT: DSGE4 Vs VAR12}
-    \label{fig:placeholder10}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Neutral Technology Shock; DSGE12 vs VAR12}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/NT_matched_new_DSGE/NT_newDSGE_lag_12.pdf}}
-        {\fbox{Missing file: NT\_newDSGE\_lag\_12.pdf}}
-    \caption{NT: DSGE12 Matched with VAR12}
-    \label{fig:placeholder11}
-\end{figure}
-\end{frame}
-
-\begin{frame}{VAR IRFs; Embodied Technology Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
-    \label{fig:placeholder12}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Embodied Technology Shock; DSGE4 vs VAR12}
-\begin{figure}
-    \centering
-    \IfFileExists{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}
-        {\includegraphics[width=1.05\linewidth]{../../Output/LDC_ACEL2011_Impulse_Response_Matching/ET_basic_DSGE/ET_DSGE4_lag_12.pdf}}
-        {\fbox{Missing file: ET\_DSGE4\_lag\_12.pdf}}
-    \caption{ET: DSGE4 Vs VAR12}
-    \label{fig:placeholder13}
 \end{figure}
 \end{frame}
 
