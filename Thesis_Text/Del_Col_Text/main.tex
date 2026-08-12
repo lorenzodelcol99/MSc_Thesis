@@ -14,9 +14,11 @@
 %\doublespacing
 
 % --- MATH & FONTS ---
+% Font di Canova e Fosso (2025): e' il Computer Modern di default di LaTeX,
+% non Times - confermato dai font incorporati nel loro PDF (CMR12, CMBX12,
+% ecc.). Niente da caricare: basta NON usare mathptmx (rimosso).
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{mathptmx}   
 \usepackage{bm}         % For bold math symbols
 \usepackage{microtype}  % Improves text justification and typography
 
@@ -93,40 +95,89 @@
 % =============================================================
 
 \section{Introduction}
-Introduzione è la parte più importante e difficile, magari la abbozzo e poi la riscrivo alla fine.
 
-\subsection{Research Question}
+\subsection{Motivation}
+Dynamic Stochastic General Equilibrium (DSGE) models can be mapped in the form of State Space representation, which then can be retrived as Vector AutoRegressions (VAR) of infinite order.
+Impulse Response Function Matching Estimation (IRFME) is a limited informaiton approach that minimises the distance between VARs' IRFs and the one implied by a DSGE model.
+This technique requires that sample and theoretical IRFs are identified by restriction implied by the DSGE model, which requires a SVAR representation, so that the IRFs are informative fro the DSGE parameters \cite{Hall_Inoue_Nason_Rossi2012}.
+If the reducced form VAR (RF-VAR) adequately captures the Data Generating Process (DGP), IRFs are optimal at each horizon. But if the RF-VAR is misspecified, the specification error naturally spill to strucutral statistics and will be compounded at each horizon, \cite{Ramey2016, Canova_Fosso2025}.
+\\
+Since is not feasible to estimate a VAR($\infty$) as samples are finite, researchers truncate the VAR which becomes misspecified, and more mispecified the smaller the chosen lag lenght \cite{Long_Lag2025, Humble_VARs_2026}
+“all VAR researchers should be concerned about lag truncation, regardless of the horizon of interest dictated by the research question. Truncation affects inference at all horizons, including the very short ones ($h \leq p$)” \cite{Long_Lag2025}
+"The overarching implication of our investigation is that, contrary to conventional wisdom, long-lag VARs are feasible in practice. Applied research should use them broadly because they safeguard against the significant problem that lag truncation implies for structural economic conclusions." \cite{Long_Lag2025}.
+"it is up to the researcher to show that her structural results are robust to significant increases in the lag length, far beyond the lag lengths typically considered in current practice." \cite{Long_Lag2025}
+
+
+\subsection{Contribution and Results}
 I analyse the consequences of enriching the lag structure of a VAR used to estiamte a DSGE with IRFs minimum distance estimation. 
 I replciate \cite{ACEL2011} and find that the both IRFs and Structural parameters are sensible to the chosen lag lenght.
 
 
-\subsection{Main Contributions}
-The Calvo Price parameters that differencieate the observationally equivalent \cite{ACEL2011} model between firm specific capital vs homogeneous capital are no longer statistically different from each other.
+The Calvo Price parameters that differenciate the observationally equivalent \cite{ACEL2011} model between firm specific capital vs homogeneous capital are no longer statistically different from each other.
 This go against their main conclusion that the firm specific capital model is the one that better fit the data.
 
-(Maybe the Capital Adjustment Cost variable that since \cite{ACEL2011} researchers have started to use, is not fundamental to explain inflation intertia. )
+(Maybe the Capital Adjustment Cost variable that since \cite{ACEL2011} researchers have started to use, is not fundamental to explain inflation inertia. )
+
 \subsection{Related Literature}
+I contribute in XXX breanches of research. The first is the one that study ...
 Long Lag VARs \cite{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}
 \\
+The second branch lies between the fast growing debate between Local Projections and VARs
 IRFs (VARs and LPs) \cite{Ludwig2026, Li_PlagborgMoller_Wolf2024, Jorda2005}
 \\
 State Space rappresentation of DSGE \cite{Ravenna2007, FVRRS2005, Forni_Gambetti_Sala2016, Theodoridis2011, Giacomini2013}
 
 
 \subsection{Outline}
-The rest of the work is organised as follows. In Section 2 I present the Truncation Bias problem, the theory that maps DSGE into VAR(inf) that suggests to increase the lag lenght.
-In section 3 I summaryse breafly the \cite{ACEL2011} DSGE. In section 4 I present the empirical results and in section 5 I conclude.
+The rest of the work is organised as follows. In Section 2 I present the Truncation Bias problem, the theory that maps DSGE into VAR(inf) that suggests to increase the lag length.
+In section 3 I summaryse briefly the \cite{ACEL2011} DSGE. In section 4 I present the empirical results and in section 5 I conclude.
 
 
 
-\section{Theoretical Framework}
-The Truncation Bias problem, expalind easy as \cite{Long_Lag2025}.
+\section{Truncation Bias: Illustration of the Problem}
+VARs has at least three source of bias: Small Sample Bias (cit uno degli anni 50, l'ho visto penso su Chari et al 2008, anche loro li posso citare qua), Identification Bias \cite{Forni_Gambetti_Sala2016}, and Truncation Bias \cite{Long_Lag2025, Baumeister2025, Humble_VARs_2026, ChariKehoeMcGrattan2008, Ravenna2007}, which is the principal focus of this work.
 
-Simple theoretical derivation describing that even if the \cite{ACEL2011} is stochastich singular (and defend the fact that the most of the SVAR analysis is done with stochastig singular models (more observables than shocks), \cite{Forni_Gambetti_Sala2016})
-and explain that the solution of the DSGE in State Space can be representate as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist. 
+To explain it, I follow the single equation and then generalization to a VAR example used by \cite{Long_Lag2025}.
+\\
+Let's consider a DGP 
+\begin{equation}
+    y_t = x_{1t} \beta_1 + x_{2t} \beta_2 + \epsilon_t
+\end{equation}
+where the variable $y_t$ is determined by two exogenous variables, $x_{1t}$ and $x_{2t}$ and a shock $\epsilon_t$.
+If $y_t$ is estimated with a regression omitting one of the two exogenous variables, say $x_{2t}$,
+\begin{equation}
+    y_t = x_{1t} b_1 + e_t
+\end{equation}
+the omission leads to biaesd point estimate (unless $x_{1t} \perp x_{2t}$). 
+\begin{equation}
+    \mathbb{E}(b_1) \neq \beta_1
+\end{equation}
+with an always upwardly biased variance estimate.
+\begin{equation}
+    s^2 > \sigma^2
+\end{equation}
+Translating this to VARs 
+\begin{equation}
+    Y_t = B_1Y_{t-1} + ... + B_pY_{t-p} + U_t, \mathbb{E}[U_tU'_t] = \Sigma_U
+\end{equation}
+\begin{equation}
+    B(L) = B_1L + ... + B_pL^p
+\end{equation}
+which has $p << p^* $, where $p^*$ denotes the true unknown lag length, the VAR will suffer from truncation bias.
+Lag truncation cause bias in reduced form coefficients $B(L)$ and in the reduced form variance covariance matrix $\Sigma_U$. Which are both ingredients of IRFs
+\begin{equation}
+    IRF = f( B(L); \Sigma_U)
+\end{equation}
+If the components are biased by lag truncation, so will the IRFs.
+\cite{Long_Lag2025} explores the trivial solution to truncation bias, that is the dramatic increase of lag length. They find evidence against the conventional wisdom that uncertainty would become pervasive as the lag choice would increase the number of parameters rapidly, hence reducing the degrees of freedom and making confidence interval width prohibitively large. But the standard intuition is only part of the story, because increasing the lag choice not only reduces the misspecification in the well known bias reduction, but also it reduces the variance. This reduction in variance works against the imprecision resulting from increased parametrization \cite{Long_Lag2025}.
+
+
+\section{DSGE State Space Representation and VARMA}
+Simple theoretical derivation describing that even if the \cite{ACEL2011} is stochastic singular (and defend the fact that most of the SVAR analysis is done with stochastic singular models (more observables than shocks), \cite{Forni_Gambetti_Sala2016})
+and explain that the solution of the DSGE in State Space can be represented as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist. 
 
 \section{Theoretical Model}
-Then a breif descriptio of the \cite{ACEL2011} DSGE
+Then a breif description of the \cite{ACEL2011} DSGE
 using the replication package from (ALEL NBER 2005 WORKING PAPER) 
 
 
