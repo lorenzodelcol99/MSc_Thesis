@@ -9,8 +9,8 @@
 % del corso di laurea richiede 1.5, commenta \singlespacing e scommenta
 % \onehalfspacing.
 \usepackage{setspace}
-\singlespacing
-%\onehalfspacing
+%\singlespacing
+\onehalfspacing
 %\doublespacing
 
 % --- MATH & FONTS ---
@@ -77,7 +77,7 @@
     The implied duration of the Calvo Price parameter is 2.5 times higher than the baseline, re opening the micro-macro discrepancy in price stickiness.
     
     \vspace{0.3cm}
-    \noindent\textbf{Keywords:} Truncation Bias, Long Lag VARs, DSGE Estimation, Minimum Distance, IRFs
+    \noindent\textbf{Keywords:} Truncation Bias, Long Lag VARs, DSGE Estimation, IRFs, Minimum Distance Matching
     \\
     \noindent\textbf{JEL Codes:} C32, C52, E32
 \end{abstract}
@@ -97,6 +97,8 @@
 \section{Introduction}
 
 \subsection{Motivation}
+An important goal of monetary business cycle theoretical research is to explain the empirical evidence on the impact of economic shocks on macroeconomic variables.
+To study how monetary policy affects the economy, macroeconomics isolate changes in interest rate that are not systematic responses to economic conditions, but occur in a nonsystematic way. Since systematic variation in monetary policy is endogenous, understanding the causal effect of monetary policy on the economy requires considering such nonsystematic “monetary policy shocks” even if they are small or infrequent. \cite{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}
 Dynamic Stochastic General Equilibrium (DSGE) models can be mapped in the form of State Space representation, which then can be retrived as Vector AutoRegressions (VAR) of infinite order.
 Impulse Response Function Matching Estimation (IRFME) is a limited informaiton approach that minimises the distance between VARs' IRFs and the one implied by a DSGE model.
 This technique requires that sample and theoretical IRFs are identified by restriction implied by the DSGE model, which requires a SVAR representation, so that the IRFs are informative fro the DSGE parameters \cite{Hall_Inoue_Nason_Rossi2012}.
@@ -114,7 +116,7 @@ I replciate \cite{ACEL2011} and find that the both IRFs and Structural parameter
 
 
 The Calvo Price parameters that differenciate the observationally equivalent \cite{ACEL2011} model between firm specific capital vs homogeneous capital are no longer statistically different from each other.
-This go against their main conclusion that the firm specific capital model is the one that better fit the data.
+This goes against their main conclusion that firm specific capital model is the one that better fit the data.
 
 (Maybe the Capital Adjustment Cost variable that since \cite{ACEL2011} researchers have started to use, is not fundamental to explain inflation inertia. )
 
@@ -125,7 +127,9 @@ Long Lag VARs \cite{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, Antol
 The second branch lies between the fast growing debate between Local Projections and VARs
 IRFs (VARs and LPs) \cite{Ludwig2026, Li_PlagborgMoller_Wolf2024, Jorda2005}
 \\
-State Space rappresentation of DSGE \cite{Ravenna2007, FVRRS2005, Forni_Gambetti_Sala2016, Theodoridis2011, Giacomini2013}
+The third, State Space rappresentation of DSGE \cite{Ravenna2007, FVRRS2005, Forni_Gambetti_Sala2016, Theodoridis2011, Giacomini2013}
+\\
+The fourth, fundamentalness and non-fundamentalness, information sufficiency and deficiency \cite{Forni_Gambetti_Sala2016} (LIPPI RIECHILIN 1993 ECC) 
 
 
 \subsection{Outline}
@@ -177,11 +181,55 @@ Simple theoretical derivation describing that even if the \cite{ACEL2011} is sto
 and explain that the solution of the DSGE in State Space can be represented as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist. 
 
 \section{Theoretical Model}
-Then a breif description of the \cite{ACEL2011} DSGE
-using the replication package from (ALEL NBER 2005 WORKING PAPER) 
+\cite{ACEL2011} noticed that macro modelers to account for inertia in inflation, were used to embed implausible assumption on a priori grounds or even directly in conclift with micro data. For example, there are many New-Keynesian models in which non optimizer firms index their prices in lagged inflation that are able to account for inflation inertia. But assuming that firms re optimise their price every six quarters or even less. In other versions of NK models in which non optimisers firms are not allowed to index to past inflation, the implied duration is even greater i.e. firms change prices every two years.
+\\
+This long implied duration of prices for the non optimiser firms is in contrast with the micro literature which argue that firms change prices more frequently than once every two quarters. \textcolor{red}{(THEY CITE: This property contrasts sharply with findings in Bils and Klenow (2004), Golosov and Lucas (2007) and Klenow and Kryvtsov (2008). some more recent literature can be cited here.)}.
+\\
+\cite{ACEL2005WP} create a model, with non optimiser firms that index their prices to lagged inflation, which is consistent with the evidence that inflation is inertial, even though firms re optimise prices on average every 1.5 quarters.
+They are able to model aggregate inflation even if firms re optimise prices frequently. The inertia is explained by the fact that, when firms do change prices, they do it by a small amount because each firm's short run marginal cost curve is increasing in its own output. And this positive dependency reflects on the assumption that in any given period, a firm's capital stock is predetermined.
+\\
+In their model firm's capital stock is pre-determined, and all the factors of production, including capital, cannot be instantly transferred across firms. 
+The assumption behind is that capital is completely firm-specific, and can be changed over time by varying the rate of investment.
+This feature was not standard in business cycle models.
+
+\cite{ACEL2011} conduct the analysis using two versions of the \cite{CEE2005} DSGE in which, in one model the capital is \textit{homogenoeous} as in standard models, whereas in the other is \textit{firm-specific}.
+The CEE model is a special case of ACEL when only monetary shocks are considererd \cite{Hall_Inoue_Nason_Rossi2012}.
+In the log-linearized equilibrium equations the two models are equivalent except for the equation that relates inflation to the firms' marginal costs. The form of this equation is identical in both the models: the change in inflaiton at time t is equal to discounted expected change in inflation at time $t + 1$ plus a reducef form coefficient $\gamma$, being the Phillips Curve slope, multiplying the time t economy-wide average marginal cost.
+The two models are observationally equivalent, and the difference lies in the mapping between the structural parameters inside the Phillips Curve.
+\begin{equation}
+    \Delta\hat{\pi}_t = \mathbb{E}[\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t | \Omega_t]
+\end{equation}
+where
+\begin{equation}
+    \gamma = \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p} \chi
+\end{equation}
+and $\Delta$ is the first difference operator. The information set $\Omega_t$ includes the current realization of the technology shocks, but not the current realization of the innovations to monetary policy. The variable $s_t$ denotes the economy-wide average marginal cost of production, in units of the final good.
+It can be re-written as
+\begin{equation}
+    \Delta\hat{\pi}_t = \mathbb{E}[\beta\Delta\hat{\pi}_{t+1} + \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p} \chi | \Omega_t]
+\end{equation}
+From \textcolor{red}{(ACEL2004 VEDERE CHE PAER è E CITARLO)}. in the \textit{homogeneous} capital model, $\chi = 1$, whereas, in the \textit{firm-specific} capital model $\chi$ is a particular non-linear function of the parameters of the model.
+The two models are parametrised in terms of $\gamma$ rather than $\xi_p$. This guartees that the list of structural parameters remains identical and the two models are observationally equivalent with respect to aggregate prices and quantities. This means that there is no need to take a stand on which model version we are working with at the estimation stage of our analysis \cite{ACEL2011}. 
+\\
+To choose the model parameter values of the the models they use limited information estimation technique IRFME following \cite{CEE2005} \textcolor{red}{citare ROTOBERG AND WOODFORD 1997 E QUALCHE ALTRO}, miminise the differences between the dynamic response to shocks in the model and the analog objects estimated using a ten variables VAR of post-war U.S. time series.
+IRFME is used not only when there is stochastic singularity, but also when the modeler want to take a positon on the identification of a subset of shocks, not every shock in the system. \textcolor{red}{(CIT EFREM IN UNA MAIL, trovare una citazione di un paper)}
+The VAR identification assumptions are such that satisfy the one from the economic model: only tech shocks can affect productivity in the long run; capital embodied technology shock is the only one that can affect price of investment goods in the long run, and monetary policy shock can have contemporaneous effects only on the interest rate as in standard zero short run restrictions.
+
+
+\\
+\textbf{MY DISCUSSION} The quality of the estimation strategy depends on the ability of identified VARs to generate reliable estimates of the dynamic response of economic variables to shocks \citea[footnote 10, pag 3.]{ACEL2011}.
+\cite{Ramey2016}[pag. 83] "if the VAR adequately captures the DGP, IRFs are optimal at all horizons. If the VAR is misspecificed, however, then the specification errors will ve computed at each horizon"
+\cite{Long_Lag2025} says that is responsibility of the short-lag VAR users to demonstrate if their results are robust to long-lag VARs.
+
+
 
 
 \section{Empirical Results}
+Descrizione dei risultati che trovo dai miei esercizi long lag VARs.
+Immagini IRFs, DSGE Parameters table and implied time duration.
+
+Generalized variance and so on and so forth.
+
 \subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
@@ -206,9 +254,11 @@ using the replication package from (ALEL NBER 2005 WORKING PAPER)
 \label{app:code}
 Detail where the reader can find your code (e.g., a GitHub link).
 
-\section{Additional Tables}
+\section{Full Description of ACEL Model}
 \label{app:tables}
 
+\section{MonteCalvo}
+MonteCarlo simulation for the SE of the Implied Calvo Parameters, derived by a simulation of a joint normal because in the IRFME they use the Deltha Method which assumse joint normality
 \section{Additional Figures}
 \label{app:figures}
 
