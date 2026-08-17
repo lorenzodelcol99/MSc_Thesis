@@ -55,7 +55,7 @@
 % Keywords/JEL Codes nello stesso blocco indentato)
 % =============================================================
 \title{The Short, the Long, and the Consequences of VAR Analysis for Structural DSGE Estimation
-\thanks{I am indebted to Efrem Castelnuovo for his invaluable guidance and support.}}
+\thanks{.}}
 \author{Lorenzo Del Col$^{\xi}$}
 \date{October, 2026} % <- da aggiornare con la data di laurea
 
@@ -98,7 +98,7 @@
 
 \subsection{Motivation}
 An important goal of monetary business cycle theoretical research is to explain the empirical evidence on the impact of economic shocks on macroeconomic variables.
-To study how monetary policy affects the economy, macroeconomics isolate changes in interest rate that are not systematic responses to economic conditions, but occur in a nonsystematic way. Since systematic variation in monetary policy is endogenous, understanding the causal effect of monetary policy on the economy requires considering such nonsystematic “monetary policy shocks” even if they are small or infrequent. \cite{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}
+To study how monetary policy affects the economy, macroeconomics isolate changes in interest rate that are not systematic responses to economic conditions, but occur in a nonsystematic way. Since systematic variation in monetary policy is endogenous, understanding the causal effect of monetary policy on the economy requires considering such nonsystematic “monetary policy shocks” even if they are small or infrequent. \cite{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.
 Dynamic Stochastic General Equilibrium (DSGE) models can be mapped in the form of State Space representation, which then can be retrived as Vector AutoRegressions (VAR) of infinite order.
 Impulse Response Function Matching Estimation (IRFME) is a limited informaiton approach that minimises the distance between VARs' IRFs and the one implied by a DSGE model.
 This technique requires that sample and theoretical IRFs are identified by restriction implied by the DSGE model, which requires a SVAR representation, so that the IRFs are informative fro the DSGE parameters \cite{Hall_Inoue_Nason_Rossi2012}.
@@ -139,7 +139,7 @@ In section 3 I summaryse briefly the \cite{ACEL2011} DSGE. In section 4 I presen
 
 
 \section{Truncation Bias: Illustration of the Problem}
-VARs has at least three source of bias: Small Sample Bias (cit uno degli anni 50, l'ho visto penso su Chari et al 2008, anche loro li posso citare qua), Identification Bias \cite{Forni_Gambetti_Sala2016}, and Truncation Bias \cite{Long_Lag2025, Baumeister2025, Humble_VARs_2026, ChariKehoeMcGrattan2008, Ravenna2007}, which is the principal focus of this work.
+VARs have at least three sources of bias: Small Sample Bias \textcolor{red}{(cit uno degli anni 50, l'ho visto penso su Chari et al 2008, anche loro li posso citare qua)}, Identification Bias \cite{Forni_Gambetti_Sala2016}, and Truncation Bias \cite{Long_Lag2025, Baumeister2025, Humble_VARs_2026, ChariKehoeMcGrattan2008, Ravenna2007}, which is the principal focus of this work.
 
 To explain it, I follow the single equation and then generalization to a VAR example used by \cite{Long_Lag2025}.
 \\
@@ -177,8 +177,8 @@ If the components are biased by lag truncation, so will the IRFs.
 
 
 \section{DSGE State Space Representation and VARMA}
-Simple theoretical derivation describing that even if the \cite{ACEL2011} is stochastic singular (and defend the fact that most of the SVAR analysis is done with stochastic singular models (more observables than shocks), \cite{Forni_Gambetti_Sala2016})
-and explain that the solution of the DSGE in State Space can be represented as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist. 
+\textcolor{red}{Simple theoretical derivation describing that even if the \cite{ACEL2011} is stochastic singular (and defend the fact that most of the SVAR analysis is done with stochastic singular models (more observables than shocks), \cite{Forni_Gambetti_Sala2016})
+and explain that the solution of the DSGE in State Space can be represented as a VARMA \cite{Ravenna2007}, hence the use of VAR with long lags is justified even if the ABC and D \cite{FVRRS2005} representation of the VAR($\infty$) does not exist.} 
 
 \section{Theoretical Model}
 \cite{ACEL2011} noticed that macro modelers to account for inertia in inflation, were used to embed implausible assumption on a priori grounds or even directly in conclift with micro data. For example, there are many New-Keynesian models in which non optimizer firms index their prices in lagged inflation that are able to account for inflation inertia. But assuming that firms re optimise their price every six quarters or even less. In other versions of NK models in which non optimisers firms are not allowed to index to past inflation, the implied duration is even greater i.e. firms change prices every two years.
@@ -212,23 +212,72 @@ From \textcolor{red}{(ACEL2004 VEDERE CHE PAER è E CITARLO)}. in the \textit{ho
 The two models are parametrised in terms of $\gamma$ rather than $\xi_p$. This guartees that the list of structural parameters remains identical and the two models are observationally equivalent with respect to aggregate prices and quantities. This means that there is no need to take a stand on which model version we are working with at the estimation stage of our analysis \cite{ACEL2011}. 
 \\
 To choose the model parameter values of the the models they use limited information estimation technique IRFME following \cite{CEE2005} \textcolor{red}{citare ROTOBERG AND WOODFORD 1997 E QUALCHE ALTRO}, miminise the differences between the dynamic response to shocks in the model and the analog objects estimated using a ten variables VAR of post-war U.S. time series.
-IRFME is used not only when there is stochastic singularity, but also when the modeler want to take a positon on the identification of a subset of shocks, not every shock in the system. \textcolor{red}{(CIT EFREM IN UNA MAIL, trovare una citazione di un paper)}
+IRFME is used not only when there is stochastic singularity, but also when the modeler want to take a positon on the identification of a subset of shocks, not every shock in the system. \textcolor{red}{(CIT EFREM IN UNA MAIL, trovare una citazione di un paper)}.
 The VAR identification assumptions are such that satisfy the one from the economic model: only tech shocks can affect productivity in the long run; capital embodied technology shock is the only one that can affect price of investment goods in the long run, and monetary policy shock can have contemporaneous effects only on the interest rate as in standard zero short run restrictions.
 
 
-\\
-\textbf{MY DISCUSSION} The quality of the estimation strategy depends on the ability of identified VARs to generate reliable estimates of the dynamic response of economic variables to shocks \citea[footnote 10, pag 3.]{ACEL2011}.
-\cite{Ramey2016}[pag. 83] "if the VAR adequately captures the DGP, IRFs are optimal at all horizons. If the VAR is misspecificed, however, then the specification errors will ve computed at each horizon"
+
+
+\textbf{MY DISCUSSION} The quality of the estimation strategy depends on the ability of identified VARs to generate reliable estimates of the dynamic response of economic variables to shocks \citep[footnote 10, p.~3]{ACEL2011}.
+\citep[p.~83]{Ramey2016} "if the VAR adequately captures the DGP, IRFs are optimal at all horizons. If the VAR is misspecificed, however, then the specification errors will ve computed at each horizon"
 \cite{Long_Lag2025} says that is responsibility of the short-lag VAR users to demonstrate if their results are robust to long-lag VARs.
 
 
 
 
 \section{Empirical Results}
-Descrizione dei risultati che trovo dai miei esercizi long lag VARs.
+\textcolor{red}{Descrizione dei risultati che trovo dai miei esercizi long lag VARs.
 Immagini IRFs, DSGE Parameters table and implied time duration.
+Generalized variance and so on and so forth.}
 
-Generalized variance and so on and so forth.
+\subsection{VAR IRFs Across Point estimates agains CI of VAR4 comaprison across Lag Lengths : lags 4 8 12}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Monetary_Policy_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Monetary_Policy_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR IRFs: Point Estimates Against VAR(4) CI, Comparison Across Lags 4, 8, 12}
+    \label{fig:var_irfs_pe_ci_var4}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{VAR IRFs Across Lag Lengths: lags 4 8 12}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR IRFs Comparison Across Lags 4, 8, 12}
+    \label{fig:var_irfs_lags_4_8_12}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{DSGE IRFs Across Lag Lengths: lags 4 8 12}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{DSGE IRFs Comparison Across Lags 4, 8, 12}
+    \label{fig:dsge_irfs_lags_4_8_12}
+\end{figure}
+
+\FloatBarrier
+
+
+\subsection{DSGE Structural Parameters Comparison Across Lag Lengths: lags 4 8 12}
+
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
+
 
 \subsection{Implied Duration from Calvo Price Table: lags 4 8 12}
 
@@ -237,6 +286,83 @@ Generalized variance and so on and so forth.
     {\noindent\fbox{Image Path Broken or File Missing}}
 
 \FloatBarrier
+
+
+
+\subsection{Portmanteau P-Values Across Lag Lengths: lags 4 8 12}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Portmanteau P-Values Across Lags}
+    \label{fig:portmanteau_pvalues}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Standadrd Deviation Ratios}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Standard Deviation Ratios (Reduced Form)}
+    \label{fig:sd_ratios}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{Generalized Variance}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Generalized Variance Across Lags}
+    \label{fig:generalized_variance}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{In Sample Residuals Fed Funds Rates}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{In-Sample Residuals: Fed Funds Rate}
+    \label{fig:insample_residuals_ffr}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{In Sample RMSE Across Lags}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{In-Sample RMSE Across Lags, All Variables}
+    \label{fig:insample_rmse_lags}
+\end{figure}
+
+\FloatBarrier
+
+\subsection{In Sample RMSE Table Across Lags}
+
+\IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}
+    {\input{../../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+\FloatBarrier
+
+
 
 \section{Conclusion}
 
@@ -254,15 +380,9 @@ Generalized variance and so on and so forth.
 \label{app:code}
 Detail where the reader can find your code (e.g., a GitHub link).
 
-\section{Full Description of ACEL Model}
-\label{app:tables}
+\section{Data Source}
+I am using the replicaiton code available for \cite{ACEL2011}, which is the National Bureau of Economic Research working paper version of 2005 \cite{ACEL2005WP}.
 
-\section{MonteCalvo}
-MonteCarlo simulation for the SE of the Implied Calvo Parameters, derived by a simulation of a joint normal because in the IRFME they use the Deltha Method which assumse joint normality
-\section{Additional Figures}
-\label{app:figures}
-
-\clearpage
 \subsection{ACEL 2005 VAR Variables}
 \begin{figure}[htpb]
     \centering
@@ -272,5 +392,14 @@ MonteCarlo simulation for the SE of the Implied Calvo Parameters, derived by a s
     \label{fig:raw_series}
 \end{figure}
 \FloatBarrier
+
+\section{Full Description of ACEL Model}
+\label{app:tables}
+
+\section{MonteCalvo}
+\textcolor{red}{MonteCarlo simulation for the SE of the Implied Calvo Parameters, derived by a simulation of a joint normal because in the IRFME they use the Deltha Method which assumse joint normality}
+\section{Additional Figures}
+\label{app:figures}
+
 
 \end{document}
