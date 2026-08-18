@@ -55,7 +55,7 @@
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item VAR models can be used to estimate DSGE frameworks by IRFs minimization matching
+        \item VARs can be used to estimate DSGE frameworks by IRFs minimization matching
     \end{itemize}
     
     \begin{itemize}  
@@ -66,16 +66,16 @@
     \textbf{Why it is relevant?}
     \pause
     \begin{itemize}
-        \item \textit{``The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks.''}
+        \item \textit{"The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks."}
         \vspace{0.1cm}
-        \hfill {\small \textbf{\textcolor{PadovaRed}{Altig et al. (2011)} p. 3, fn. 10} }
+        \hfill {\small \textbf{Altig et al. (2011) p. 3, fn. 10} }
         \pause
 
         \item \textit{``If the VAR adequately caputeres the DGP, IRFs are optimal at all horizons. 
         \\
         If the \textbf{VAR is mispecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
-        \hfill {\small \textbf{\textcolor{PadovaRed}{Ramey (2016)} p. 83} }
+        \hfill {\small \textbf{\citet{Ramey2016}, p. 83} }
         \pause
         
         \item VARs and DSGEs are instruments used by central banks to make policy decisions
@@ -116,7 +116,238 @@
 % =======================================
 % RELATED LITERATURE
 % =======================================
+\begin{frame}{Related Literature}
+    \textbf{Long-Lag VARs:}
+    \begin{itemize}
+        \item {\small \citep{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}}
+    \end{itemize}
+    \textbf{Truncation Bias:}
+    \begin{itemize}
+        \item {\small \citep{Ravenna2007, Long_Lag2025, ChariKehoeMcGrattan2008, Humble_VARs_2026}}
+    \end{itemize}
+    \textbf{DSGE State Space representation into VAR($\infty$)}
+    \begin{itemize}
+        \item {\small \citep{FVRRS2005, Ravenna2007, Giacomini2013, Theodoridis2011, Forni_Gambetti_Sala2016}}
+    \end{itemize}
+    \textbf{IRFs:}
+    \begin{itemize}
+        \item {\small \citep{Ludwig2026, Baumeister2025, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025, Plagborg-Moller_Wolf2021, Li_PlagborgMoller_Wolf2024, Jorda2025Comment}}
+    \end{itemize}
+    \textbf{DSGE IRFs matching with VARs}
+    \begin{itemize}
+        \item {\small \citep{CEE2005, ACEL2011, Hall_Inoue_Nason_Rossi2012}} % Qua devo citare anceh ROTOMBERG & WOODFORD 1997
+    \end{itemize}
+    
+\end{frame}
 
+% =======================================
+% ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
+% =======================================
+
+\begin{frame}{Illustration of the problem: Truncation Bias}
+    \begin{equation}
+        Y_t = B_1Y_{t-1} + \cdots + B_pY_{t-p} + u_t, \qquad \mathbb{E}(u_t u_t') = \Sigma
+    \end{equation}
+
+    \begin{equation}
+        B(L) = B_1L + \cdots + B_pL^p
+    \end{equation}
+
+    \begin{itemize}
+        \item The VAR with $p < p^{*}$ suffers from truncation bias.\footnote{Where $p^{*}$ denotes the DGP true lag length.}
+
+        \item Lag truncation biases the reduced form coefficients $B(L)$ and the reduced form variance covariance matrix $\Sigma$, which are the two main ingredients for IRF estimation.
+    \end{itemize}
+
+    \begin{equation}
+        \mathrm{IRF} = f\bigl(B(L),\Sigma\bigr)
+    \end{equation}
+\end{frame}
+
+% =======================================
+% DSGE, State Space and VAR($\infty$) Representation
+% =======================================
+\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
+\begin{itemize}
+    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
+    
+    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
+\end{itemize}
+\vspace{0.4cm} 
+
+\pause
+\begin{itemize}
+    \item \textbf{Should the VAR's lag order increased?}
+\end{itemize}
+
+\end{frame}
+
+% =======================================
+% LONG LAG 1
+% =======================================
+
+\begin{frame}{Long-Lag}
+    \citep{Long_Lag2025} demontrates that increasing the lag structure improves IRFs estimates obtaining:
+    \pause
+    \vspace{0.4cm}
+    
+    \textbf{Lower Bias}
+    \begin{itemize}
+        \item By reducing the truncation bias misspecification at each horizon
+    \end{itemize}
+    \pause
+
+    \vspace{0.4cm}
+    \textbf{Lower Variance}
+    \begin{itemize}
+        \item Misspecification reduction lowers the variance of the residuals
+        \item This variance reduction counteracts the imprecision caused by increased parametrisation
+    \end{itemize}
+\end{frame}
+
+% =======================================
+% LONG LAG 2
+% =======================================
+
+\begin{frame}{Long-Lag}
+    \begin{figure}
+        \centering
+        \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+            {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+            {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
+        \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+% LONG LAG BENEFITS
+% =======================================
+
+\begin{frame}{Long-Lag Benefits}
+    The variance-reducing effect of lower misspecification often dominates the penalty of increased parameterisation.
+    \vspace{0.4cm}
+    
+    Compared to short-lag VARs, Long-Lag VARs have:
+    \begin{itemize}
+        \item Reduced truncation bias
+        \item More precise inference
+        \item Lower MSE
+        \item Better coverage
+    \end{itemize}
+\end{frame}
+
+% =======================================
+% REPLICATION EXERCISE
+% =======================================
+
+\begin{frame}{Replication Exercise}
+    Framework:
+    \begin{itemize}
+        \item \textbf{\citet{ACEL2011}}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
+    \end{itemize}
+
+    VAR:
+    \begin{itemize}
+        \item Medium scale VAR: 10 variables
+        \item Monetary Policy, Neutral and Embodied Technology shocks
+        \item Sample period 1959:Q2-2001:Q4
+    \end{itemize}
+    
+    Exercise:
+    \begin{itemize}
+        \item I re-estimate the VAR increasing lag order
+        \item Re-estimate the DSGE by IRFs matching
+        \vspace{0.2cm}
+
+        \item \textbf{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}
+    \end{itemize}
+\end{frame}
+
+% =======================================
+% ACEL'S MECHANISM 1
+% =======================================
+
+\begin{frame}{ACEL's DSGE Mechanism}
+    Classic NK models account for inflation inertia by assuming that firms re-optimise their prices every six quarters or even less often
+    \begin{itemize}
+        \item In \citet{ACEL2005WP} inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
+        \item Inertia is explained by the fact that, when firms re-optimise, they do it by a small amount because each firm's short run marginal cost is increasing in its own output
+        \item The key assumption is that, in any given period, a firm's capital stock is pre-determined and firm-specific
+    \end{itemize}
+
+    \vspace{0.5cm}
+    They build two models on \citet{CEE2005}:
+    \begin{itemize}
+        \item Homogeneous capital
+        \item Firm-specific capital
+    \end{itemize}
+\end{frame}
+
+% =======================================
+% ACEL'S MECHANISM 2
+% =======================================
+
+\begin{frame}{ACEL's DSGE Mechanism (Cont'd)}
+\begin{itemize}
+    \item When log-linearized, the only difference in the characterizing equilibrium equations lies in the Phillips Curve
+\end{itemize}
+
+\begin{align}
+    \Delta\hat{\pi}_t &= \mathbb{E} [\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t|\Omega_t]
+    \label{eq:Phillips_Curve}
+    \\
+    \gamma &= \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\chi
+    \label{eq:Phillips_Curve_Slope}
+\end{align}
+
+\begin{itemize}
+    \item $\hat{s}_t$ is the economy-wide marginal cost, $\gamma$ the Phillips Curve slope, $\xi_p$ the Calvo price stickiness parameter
+    \item $\chi$ reduces the sensitivity of inflation to marginal costs in the firm-specific capital model
+    \item The two models are observationally equivalent in terms of prices and quantities: macro data identify $\gamma$, so the difference between the two models lies in the implied $\xi_p$
+\end{itemize}
+\end{frame}
+
+% =======================================
+% ACEL'S MECHANISM 3
+% =======================================
+
+\begin{frame}{ACEL's DSGE Mechanism (Cont'd)}
+\begin{itemize}
+    \item In the \textbf{Homogeneous} model, $\chi = 1$: $\gamma$ depends only on $\beta$ and $\xi_p$
+    \item In the \textbf{Firm-specific} model, $\chi < 1$ and captures two forces that make a firm move its price \textit{less} when it can reset:
+    \begin{itemize}
+        \item the costlier it is to vary capital utilization, the steeper the firm's own marginal cost curve
+        \item the more elastic the firm's demand, the larger the fall in output (and hence in marginal cost) after a price increase
+    \end{itemize}
+    \vspace{0.3cm}
+    \item So $\chi$ governs \textbf{how much} a firm moves its price
+    \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
+\end{itemize}
+ Since $\gamma$ is estimated by aggregate data, a smaller $\chi$ must be imply a smaller $\xi_p$
+\end{frame}
+
+% =======================================
+% ACEL'S RESULTS
+% =======================================
+
+\begin{frame}{ACEL(2005) Results}
+    The estimated $\gamma$ is 0.040, which implies:
+    \begin{itemize}
+        \item \textbf{Homogeneous} capital: $\xi_p = 0.82$, firms change prices every 5.6 quarters
+        \item \textbf{Firm-specific} capital: firms change prices every 1.5 quarters
+    \end{itemize}
+    The gap arises because firms' demand curves are highly elastic and their marginal cost curves are very steep: the same $\gamma$ is delivered by frequent but small price adjustments.
+\\
+\vspace{0.1cm}
+\textbf{Only the firm-specific capital model reconciles the micro-macro pricing conflict}
+\vspace{0.5cm}
+\pause
+
+\begin{itemize}
+    \item \textbf{\textcolor{PadovaRed}{Are these results robust to an enriched lag structure of the VAR?}}
+\end{itemize}
+\end{frame}
 
 % =======================================
 %  Thanks!
