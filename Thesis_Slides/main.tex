@@ -9,14 +9,20 @@
 \usepackage{listings}
 \usepackage[round, authoryear]{natbib}
 \usepackage{booktabs}
-\usepackage{amssymb} 
+\usepackage{amssymb}
+\usepackage{placeins} % serve per \FloatBarrier, usato più avanti nel file
 
 % Pacchetto fondamentale per separare le slide extra dal conteggio totale
 \usepackage{appendixnumberbeamer}
 
 % --- Rosso Istituzionale Università di Padova ---
-\definecolor{PadovaRed}{HTML}{B20E10} 
-\usecolortheme[named=PadovaRed]{structure} 
+\definecolor{PadovaRed}{HTML}{B20E10}
+\usecolortheme[named=PadovaRed]{structure}
+
+% Nelle SLIDE le citazioni restano nere (a differenza della tesi, dove sono
+% rosso Padova): il tema colore "structure" sopra tingerebbe di rosso anche
+% le citazioni di default, quindi lo forziamo esplicitamente a nero qui.
+\hypersetup{citecolor=black}
 
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{} 
@@ -75,7 +81,7 @@
         \\
         If the \textbf{VAR is mispecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
-        \hfill {\small \textbf{\citep{Ramey2016}, p. 83} }
+        \hfill {\small \textbf{Ramey (2016) p. 83} }
         \pause
         
         \item VARs and DSGEs are instruments used by central banks to make policy decisions
@@ -117,29 +123,37 @@
 % RELATED LITERATURE
 % =======================================
 \begin{frame}{Related Literature}
+    %OTHER POSSIBLE VERSION SET-UP
+    %\textbf{Long-Lag VARs:}
+    %\begin{itemize}
+    %    \item \textbf{Long-Lag VARs:}
+    %    \\
+    %    {\small \citep{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}}
+    %    \begin{itemize}
+    %        \item \textcolor{PadovaRed}{Contribution: Long-Lag ACEL's VAR }
+    %    \end{itemize}
+    %\end{itemize}
     \textbf{Long-Lag VARs:}
     \begin{itemize}
-        \item {\small \citep{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}}
+        \item {\small De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026)}
     \end{itemize}
     \textbf{Truncation Bias:}
     \begin{itemize}
-        \item {\small \citep{Ravenna2007, Long_Lag2025, ChariKehoeMcGrattan2008, Humble_VARs_2026}}
+        \item {\small Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026)}
     \end{itemize}
     \textbf{DSGE State Space representation into VAR($\infty$)}
     \begin{itemize}
-        \item {\small \citep{FVRRS2005, Ravenna2007, Giacomini2013, Theodoridis2011, Forni_Gambetti_Sala2016}}
+        \item {\small Fernández-Villaverde et al., (2005); Ravenna, (2007); Giacomini, (2013); Theodoridis, (2011); Forni et al., (2016)}
     \end{itemize}
     \textbf{IRFs:}
     \begin{itemize}
-        \item {\small \citep{Ludwig2026, Baumeister2025, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025, Plagborg-Moller_Wolf2021, Li_PlagborgMoller_Wolf2024, Jorda2025Comment}}
+        \item {\small Ludwig, (2026); Baumeister, (2025); Olea et al., (2025); Plagborg-Møller and Wolf, (2021); Li et al., (2024); Jordà, (2025)}
     \end{itemize}
     \textbf{DSGE IRFs matching with VARs}
     \begin{itemize}
-        \item {\small \citep{CEE2005, ACEL2011, Hall_Inoue_Nason_Rossi2012}} % Qua devo citare anceh ROTOMBERG & WOODFORD 1997
+        \item {\small Christiano et al., (2005); Altig et al., (2011); Rossi et al., (2012)} % Qua devo citare anche ROTOMBERG & WOODFORD 1997
     \end{itemize}
-    
 \end{frame}
-
 % =======================================
 % ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
 % =======================================
@@ -187,7 +201,7 @@
 % =======================================
 
 \begin{frame}{Long-Lag VARs}
-    \citep{Long_Lag2025} demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
+    De Graeve and Westermark, (2025) demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
     \pause
     \vspace{0.4cm}
     
@@ -244,7 +258,7 @@
 \begin{frame}{Replication Exercise}
     Framework:
     \begin{itemize}
-        \item \textbf{\citep{ACEL2011}}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
+        \item \textbf{Altig et al., (2011)}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
     \end{itemize}
 
     VAR:
@@ -271,13 +285,13 @@
 \begin{frame}{ACEL's DSGE Mechanism}
     Classic NK models account for inflation inertia by assuming that firms re-optimise their prices every six quarters or even less often
     \begin{itemize}
-        \item In \citep{ACEL2005WP} inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
+        \item In Altig et al., (2005) inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
         \item Inertia is explained by the fact that, when firms re-optimise, they do it by a small amount because each firm's short run marginal cost is increasing in its own output
         \item The key assumption is that, in any given period, a firm's capital stock is pre-determined and firm-specific
     \end{itemize}
 
     \vspace{0.5cm}
-    They build two models on \citep{CEE2005}:
+    They build two models on Christiano et al., (2005):
     \begin{itemize}
         \item Homogeneous capital
         \item Firm-specific capital
@@ -349,13 +363,111 @@
 \end{itemize}
 \end{frame}
 
+
+% =======================================
+% VAR IRFs MP
+% =======================================
+\begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
+    \begin{figure}
+        \centering
+        \only<1>{%
+            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}
+                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}}
+                {\fbox{Missing file: Step\_1\_UpToLag\_4.pdf}}
+        }%
+        \only<2>{%
+            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}
+                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}}
+                {\fbox{Missing file: Step\_2\_UpToLag\_8.pdf}}
+        }%
+        \only<3>{%
+            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+                {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+        }%
+        \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{lags up to 4}\only<2>{lags up to 8}\only<3>{lags up to 12}}
+        \label{fig:placeholder2}
+    \end{figure}
+    \begin{flushright}
+        \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
+    \end{flushright}
+\end{frame}
+
+
+
+% =======================================
+%  Comments on VAR IRFs MP Shock
+% =======================================
+\begin{frame}{Comment: VAR IRFs; Monetary Policy Shock across lags}
+After a positive (easing) monetary policy shock:
+    \begin{itemize}
+    \item Sign and magnitudes did not change
+    \item The formation and the top of the humps accour with much delay as the lag choice increase
+    \item Does inflaiton have the price puzzle? No if we have the ACEL theoretical model in mind
+\end{itemize}
+Overall:
+\\
+point estimates across lags are included in the baseline CI
+\vspace{0.2cm}
+
+\textbf{\textcolor{PadovaRed}{What about the DSGE's structural parameters?}}
+\end{frame}
+
+% =======================================
+%  DSGE Structural Parameters Table
+% =======================================
+\begin{frame}{DSGE Structural Parameters}\label{slide:dsge_params}
+    \IfFileExists{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}
+    {\input{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\end{frame}
+
+% =======================================
+%  Implied Duration
+% =======================================
+\begin{frame}{Implied Duration}
+    \IfFileExists{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}
+    {\input{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+    % il file incluso imposta \scriptsize dentro un \begin{table} non
+    % raggruppato: lo resettiamo qui esplicitamente (senza usare un {...}
+    % attorno all'\input, che manda in confusione lo stack colori di Beamer
+    % e tinge di rosso la tabella, vedi commit precedente)
+    \normalsize
+\begin{itemize}
+    \item Frim Specific model's Calvo Price parameter converges to the Homogeneous one
+    \item Back to the micro-macro implied price duration missmatch
+\end{itemize}
+
+
+\end{frame}
+
+% =======================================
+%  Conclusions
+% =======================================
+\begin{frame}{Conclusions}
+    Following the advices from the Long-Lag VARs literature.
+    \\
+    Replicating ACEL et. al., (2005), enriching the VAR lag structure I find that:
+    \begin{itemize}
+        \item Firm specificity of capital seems not the key variable usefull to explain inflation inertia
+        \item The ACEL's findings are not robust to long-lag VARs
+        \vspace{0.5cm}
+        \item Long-Lag VARs can have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
+    \end{itemize} 
+    
+    
+\end{frame}
+
+
+
 % =======================================
 %  Thanks!
 % =======================================
 
 \begin{frame}
 \begin{center}
-    \Large Thanks a lot for your attention! \\
+    \Large \textbf{\textcolor{PadovaRed}{Thanks a lot for your attention!}} \\
     \vspace{1cm}
     \normalsize \email
 \end{center}
@@ -366,13 +478,178 @@
 % =========================================================
 \appendix
 
-\begin{frame}{VAR IRFs; Monetary Policy Shock}
+% =======================================
+%  DSGE IRFs: MP
+% =======================================
+\begin{frame}{DSGE IRFs; Monetary Policy Shock}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+            {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+        \caption{DSGE IRFs Long Lag Progressively Plots 4 8 12 }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+%  VAR IRFs All CI: MP
+% =======================================
+\begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
 \begin{figure}
     \centering
     \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  VAR IRFs: NT
+% =======================================
+\begin{frame}{VAR IRFs All CI; Neutral Technology Shock}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+    \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  VAR IRFs: ET
+% =======================================
+\begin{frame}{VAR IRFs All CI; Embodied Technology Shock}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+    \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+% RESIDUAL ANALYSIS
+
+% =======================================
+% RMSE Image
+% =======================================
+\begin{frame}{RMSE Image}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
+            {\fbox{Missing file: InSample\_RMSE\_Across\_Lags\_All\_Variables.pdf}}
+        \caption{In SampleRMSE Comparison Across lags }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+% RMSE Table
+% =======================================
+\begin{frame}{RMSE Table}
+\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}
+    {\input{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\end{frame}
+
+% =======================================
+% Generalized Variance Table
+% =======================================
+\begin{frame}{Generalized Variance Table}
+\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}
+    {\input{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\end{frame}
+
+% =======================================
+% Generalized Variance Image
+% =======================================
+\begin{frame}{Generalized Variance Table}
+\begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}}
+            {\fbox{Missing file: Generalized\_Variance\_Across\_Lags.pdf}}
+        \caption{Generalized Variance Across lags }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+
+% =======================================
+% Portmanteau P-Values Across lags 
+% =======================================
+\begin{frame}{Portmanteau P-Values Across lags }
+\begin{figure}
+        \centering
+        \IfFileExists{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}}
+            {\fbox{Missing file: Portmanteau\_PValues\_Across\_Lags.pdf}}
+        \caption{Portmanteau P-Values Across lags}
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+% Standard Deviation Ratios ReducedForm
+% =======================================
+\begin{frame}{Standard Deviation Ratios ReducedForm}
+\begin{figure}
+        \centering
+        \IfFileExists{../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}}
+            {\fbox{Missing file: Standard\_Deviation\_Ratios\_ReducedForm.pdf}}
+        \caption{Standard Deviation Ratios ReducedForm}
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+%  MonteCalvo VAR 4
+% =======================================
+\begin{frame}{MonteCalvo}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}}
+        {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_4.pdf}}
+    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(4)}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  MonteCalvo VAR 8
+% =======================================
+\begin{frame}{MonteCalvo}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}}
+        {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_8.pdf}}
+    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(8)}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  MonteCalvo VAR 12
+% =======================================
+\begin{frame}{MonteCalvo}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}}
+        {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_12.pdf}}
+    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(12)}
     \label{fig:placeholder4}
 \end{figure}
 \end{frame}
