@@ -63,7 +63,7 @@
     \end{itemize}
     \vspace{0.1cm}
     
-    \textbf{Why it is relevant?}
+    \textbf{\textcolor{PadovaRed}{Why it is relevant?}}
     \pause
     \begin{itemize}
         \item \textit{"The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks."}
@@ -75,7 +75,7 @@
         \\
         If the \textbf{VAR is mispecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
-        \hfill {\small \textbf{\citet{Ramey2016}, p. 83} }
+        \hfill {\small \textbf{\citep{Ramey2016}, p. 83} }
         \pause
         
         \item VARs and DSGEs are instruments used by central banks to make policy decisions
@@ -91,7 +91,7 @@
 \begin{frame}{This Paper}\label{slide:this_paper}
     \textbf{Research Question:}
     \begin{itemize}
-        \item \textcolor{PadovaRed}{Can VAR truncation bias have significant implications for DSGE estimation?}
+        \item {\textcolor{PadovaRed}{Can VAR \textbf{truncation bias} have significant implications for DSGE estimation?}}
     \end{itemize}
     
     \vspace{0.4cm}
@@ -177,7 +177,7 @@
 
 \pause
 \begin{itemize}
-    \item \textbf{Should the VAR's lag order increased?}
+    \item \textcolor{PadovaRed}{\textbf{Should the VAR's lag order increased?}}
 \end{itemize}
 
 \end{frame}
@@ -186,8 +186,8 @@
 % LONG LAG 1
 % =======================================
 
-\begin{frame}{Long-Lag}
-    \citep{Long_Lag2025} demontrates that increasing the lag structure improves IRFs estimates obtaining:
+\begin{frame}{Long-Lag VARs}
+    \citep{Long_Lag2025} demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
     \pause
     \vspace{0.4cm}
     
@@ -209,11 +209,11 @@
 % LONG LAG 2
 % =======================================
 
-\begin{frame}{Long-Lag}
+\begin{frame}{Long-Lag VARs}
     \begin{figure}
         \centering
-        \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
-            {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
             {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
         \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
         \label{fig:placeholder1}
@@ -224,7 +224,7 @@
 % LONG LAG BENEFITS
 % =======================================
 
-\begin{frame}{Long-Lag Benefits}
+\begin{frame}{Long-Lag VARs Benefits}
     The variance-reducing effect of lower misspecification often dominates the penalty of increased parameterisation.
     \vspace{0.4cm}
     
@@ -244,7 +244,7 @@
 \begin{frame}{Replication Exercise}
     Framework:
     \begin{itemize}
-        \item \textbf{\citet{ACEL2011}}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
+        \item \textbf{\citep{ACEL2011}}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
     \end{itemize}
 
     VAR:
@@ -260,7 +260,7 @@
         \item Re-estimate the DSGE by IRFs matching
         \vspace{0.2cm}
 
-        \item \textbf{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}
+        \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}}
     \end{itemize}
 \end{frame}
 
@@ -271,13 +271,13 @@
 \begin{frame}{ACEL's DSGE Mechanism}
     Classic NK models account for inflation inertia by assuming that firms re-optimise their prices every six quarters or even less often
     \begin{itemize}
-        \item In \citet{ACEL2005WP} inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
+        \item In \citep{ACEL2005WP} inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
         \item Inertia is explained by the fact that, when firms re-optimise, they do it by a small amount because each firm's short run marginal cost is increasing in its own output
         \item The key assumption is that, in any given period, a firm's capital stock is pre-determined and firm-specific
     \end{itemize}
 
     \vspace{0.5cm}
-    They build two models on \citet{CEE2005}:
+    They build two models on \citep{CEE2005}:
     \begin{itemize}
         \item Homogeneous capital
         \item Firm-specific capital
@@ -324,7 +324,7 @@
     \item So $\chi$ governs \textbf{how much} a firm moves its price
     \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
 \end{itemize}
- Since $\gamma$ is estimated by aggregate data, a smaller $\chi$ must be imply a smaller $\xi_p$
+ Since $\gamma$ is estimated by aggregate data, a smaller $\chi$ imply a smaller $\xi_p$
 \end{frame}
 
 % =======================================
@@ -369,8 +369,8 @@
 \begin{frame}{VAR IRFs; Monetary Policy Shock}
 \begin{figure}
     \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+    \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
     \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
     \label{fig:placeholder4}
