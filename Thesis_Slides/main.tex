@@ -565,7 +565,7 @@ With VAR(12)
 \begin{itemize}
     \item Strange effect in long run in Output, Average Hours, Consumption and Investment
     \item Almost no effect in Inflation
-    \item \item Some IRFs are not included in the baseline CI
+    \item Some IRFs are not included in the baseline CI
 \end{itemize}
 \end{frame}
 % =======================================
@@ -580,7 +580,7 @@ With VAR(12)
         \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
             {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
             {\fbox{Missing file: InSample\_RMSE\_Across\_Lags\_All\_Variables.pdf}}
-        \caption{In SampleRMSE Comparison Across lags }
+        \caption{In Sample RMSE Comparison Across lags }
         \label{fig:placeholder1}
     \end{figure}
 \end{frame}
@@ -593,8 +593,10 @@ With VAR(12)
     {\input{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
 \begin{itemize}
+    \small
     \item RMSE of the RF residuals $u_t = A_0^{-1}\varepsilon_t$, in percentage points 
-    \item Each lag order evaluated on its own estimation sample (167, 163 and 159 observations for $p=4,8,12$)
+    \item Lag orders evaluated on its own sample (T = 167, 163, 159)
+    \item Restricting every lag order to the common last 159 observations changes no entry by more than 0.0927 pp.
 \end{itemize}
 
 \end{frame}
