@@ -6,6 +6,7 @@
 \usepackage[british]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{tikz} % serve per i riquadri rossi sovrapposti alle IRF (tikzpicture)
 \usepackage{listings}
 \usepackage[round, authoryear]{natbib}
 \usepackage{booktabs}
@@ -114,7 +115,6 @@
     \end{itemize}
     \begin{center}
         \hyperlink{slide:var_irfs}{\beamerbutton{VAR IRFs}} \quad
-        \hyperlink{slide:dsge_irfs}{\beamerbutton{DSGE IRFs}} \quad
         \hyperlink{slide:dsge_params}{\beamerbutton{DSGE Parameters}}
     \end{center}
 \end{frame}
@@ -263,7 +263,7 @@
 
     VAR:
     \begin{itemize}
-        \item Medium scale VAR: 10 variables
+        \item Short and Long-Run Cholesky, medium scale 10 variables
         \item Monetary Policy, Neutral and Embodied Technology shocks
         \item Sample period 1959:Q2-2001:Q4
     \end{itemize}
@@ -370,27 +370,38 @@
 \begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
     \begin{figure}
         \centering
+        \begin{tikzpicture}
         \only<1>{%
-            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}
-                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}}
-                {\fbox{Missing file: Step\_1\_UpToLag\_4.pdf}}
+            \node[anchor=south west,inner sep=0] (img) at (0,0) {%
+                \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}
+                    {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_1_UpToLag_4.pdf}}
+                    {\fbox{Missing file: Step\_1\_UpToLag\_4.pdf}}
+            };
         }%
         \only<2>{%
-            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}
-                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}}
-                {\fbox{Missing file: Step\_2\_UpToLag\_8.pdf}}
+            \node[anchor=south west,inner sep=0] (img) at (0,0) {%
+                \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}
+                    {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_2_UpToLag_8.pdf}}
+                    {\fbox{Missing file: Step\_2\_UpToLag\_8.pdf}}
+            };
         }%
         \only<3>{%
-            \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
-                {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
-                {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+            \node[anchor=south west,inner sep=0] (img) at (0,0) {%
+                \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+                    {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+                    {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+            };
         }%
+        % --- riquadri rossi su Output (y), Fed Funds (i), Inflation (pi) ---
+        \begin{scope}[x={(img.south east)},y={(img.north west)}]
+            \draw[red, thick, rounded corners] (-0.01,0.73) rectangle (0.315,0.96); % Output
+            \draw[red, thick, rounded corners] (-0.01,0.48) rectangle (0.315,0.72); % Fed Funds
+            \draw[red, thick, rounded corners] (0.685,0.73) rectangle (1.01,0.96); % Inflation
+        \end{scope}
+        \end{tikzpicture}
         \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{lags up to 4}\only<2>{lags up to 8}\only<3>{lags up to 12}}
         \label{fig:placeholder2}
     \end{figure}
-    \begin{flushright}
-        \hyperlink{slide:this_paper}{\beamerreturnbutton{Back}}
-    \end{flushright}
 \end{frame}
 
 
@@ -399,15 +410,15 @@
 %  Comments on VAR IRFs MP Shock
 % =======================================
 \begin{frame}{Comment: VAR IRFs; Monetary Policy Shock across lags}
-After a positive (easing) monetary policy shock:
+After a negative (easing) monetary policy shock:
     \begin{itemize}
     \item Sign and magnitudes did not change
-    \item The formation and the top of the humps accour with much delay as the lag choice increase
+    \item Formation and the top of the humps accour with much delay
     \item Does inflaiton have the price puzzle? No if we have the ACEL theoretical model in mind
 \end{itemize}
 Overall:
 \\
-point estimates across lags are included in the baseline CI
+Point estimates across lags are included in the baseline CI
 \vspace{0.2cm}
 
 \textbf{\textcolor{PadovaRed}{What about the DSGE's structural parameters?}}
@@ -450,8 +461,8 @@ point estimates across lags are included in the baseline CI
     \\
     Replicating ACEL et. al., (2005), enriching the VAR lag structure I find that:
     \begin{itemize}
-        \item Firm specificity of capital seems not the key variable usefull to explain inflation inertia
-        \item The ACEL's findings are not robust to long-lag VARs
+        \item Firm specificity of capital seems not the key concept to explain inflation inertia
+        \item ACEL's evidence on firm specific capital is not robust to long-lag VARs
         \vspace{0.5cm}
         \item Long-Lag VARs can have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
     \end{itemize} 
@@ -509,7 +520,7 @@ point estimates across lags are included in the baseline CI
 % =======================================
 %  VAR IRFs: NT
 % =======================================
-\begin{frame}{VAR IRFs All CI; Neutral Technology Shock}
+\begin{frame}{VAR IRFs; Neutral Technology Shock}
 \begin{figure}
     \centering
     \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
@@ -521,9 +532,21 @@ point estimates across lags are included in the baseline CI
 \end{frame}
 
 % =======================================
+% COMMENT: VAR IRFs: NT
+% =======================================
+\begin{frame}{Comment: VAR IRFs: NT}
+With VAR(12)
+\begin{itemize}
+    \item No effect in the short and long run in Output, Average Hours and Consumption
+    \item No effect in the long run in Investments
+    \item Some IRFs are not included in the baseline CI
+\end{itemize}
+\end{frame}
+
+% =======================================
 %  VAR IRFs: ET
 % =======================================
-\begin{frame}{VAR IRFs All CI; Embodied Technology Shock}
+\begin{frame}{VAR IRFs; Embodied Technology Shock}
 \begin{figure}
     \centering
     \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
@@ -534,6 +557,17 @@ point estimates across lags are included in the baseline CI
 \end{figure}
 \end{frame}
 
+% =======================================
+% COMMENT: VAR IRFs: ET
+% =======================================
+\begin{frame}{Comment: VAR IRFs: ET}
+With VAR(12)
+\begin{itemize}
+    \item Strange effect in long run in Output, Average Hours, Consumption and Investment
+    \item Almost no effect in Inflation
+    \item \item Some IRFs are not included in the baseline CI
+\end{itemize}
+\end{frame}
 % =======================================
 % RESIDUAL ANALYSIS
 
@@ -558,21 +592,17 @@ point estimates across lags are included in the baseline CI
 \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}
     {\input{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-\end{frame}
+\begin{itemize}
+    \item RMSE of the RF residuals $u_t = A_0^{-1}\varepsilon_t$, in percentage points 
+    \item Each lag order evaluated on its own estimation sample (167, 163 and 159 observations for $p=4,8,12$)
+\end{itemize}
 
-% =======================================
-% Generalized Variance Table
-% =======================================
-\begin{frame}{Generalized Variance Table}
-\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}
-    {\input{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
 \end{frame}
 
 % =======================================
 % Generalized Variance Image
 % =======================================
-\begin{frame}{Generalized Variance Table}
+\begin{frame}{Generalized Variance}
 \begin{figure}
         \centering
         \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}
@@ -581,6 +611,21 @@ point estimates across lags are included in the baseline CI
         \caption{Generalized Variance Across lags }
         \label{fig:placeholder1}
     \end{figure}
+\end{frame}
+
+
+% =======================================
+% Generalized Variance Table
+% =======================================
+\begin{frame}{Generalized Variance}
+\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}
+    {\input{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\begin{itemize}
+    \item $\hat{\Sigma}$ is the covariance matrix of the RF-VAR residuals
+    \item Evaluated on the common sample of 159 observations
+\end{itemize}
+ 
 \end{frame}
 
 
