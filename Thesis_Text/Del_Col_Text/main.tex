@@ -36,9 +36,9 @@
 \definecolor{PadovaRed}{HTML}{B20E10}
 
 % --- SEGNAPOSTO PER LA STESURA ---
-% \tbd{...} marca cio' che resta da scrivere o verificare. Per produrre la versione
-% "pulita" da mandare a Efrem basta ridefinire il comando come \long\def\tbd#1{}
+% \tbd{...} (ToBeDone) marca cio' che resta da scrivere o verificare. 
 % NB: serve \long\def (non \newcommand) perche' i blocchi TBD contengono piu'
+% Per produrre la versione "pulita" basta ridefinire il comando come \long\def\tbd#1{}
 % paragrafi, e \textcolor non accetta \par nel proprio argomento.
 \long\def\tbd#1{{\color{PadovaRed}\textbf{[TBD:} #1\textbf{]}}}
 
@@ -49,10 +49,10 @@
 \begin{document}
 
 % =============================================================
-% FRONTESPIZIO "IN MODALITA' PAPER"
+% FRONTESPIZIO
 % =============================================================
-\title{The Short, the Long, and the Consequences of VAR Analysis for Structural DSGE Estimation
-\thanks{I am grateful to my supervisor, Professor Efrem Castelnuovo, for his guidance. All errors are my own.}}
+\title{Does VAR Truncation Bias have implication on DSGE Structural Parameters when using IRF matching estimator?
+\thanks{...}}
 \author{Lorenzo Del Col$^{\xi}$}
 \date{October, 2026}
 
@@ -64,27 +64,18 @@
 
 \begin{abstract}
 \noindent
-Impulse response function matching estimation (IRFME) recovers the structural parameters
-of a DSGE model by minimising the distance between model-implied impulse responses and
-those estimated from an identified VAR. The strategy is deliberately limited-information:
-it does not require the DSGE to be the data generating process, only that the VAR deliver
-consistent estimates of the moments being matched. This paper asks what happens to that
-second requirement when the VAR is lag-truncated. Replicating \citet{ACEL2011} and
-re-estimating their model on VARs with $p=4$, $8$ and $12$ lags, I find that both the
-estimated impulse responses and the implied structural parameters change materially.
-The Calvo price parameters that distinguish the observationally equivalent firm-specific
-and homogeneous capital versions of the model converge to one another, from $0.34$ against
-$0.82$ at $p=4$ to $0.89$ against $0.90$ at $p=12$. The implied duration of price contracts
-in the firm-specific model rises from $1.5$ to $9.0$ quarters, re-opening the micro--macro
-discrepancy in price stickiness that firm-specific capital was introduced to resolve.
-The mechanism runs through the estimated cost of varying capital utilisation, which collapses
-by three orders of magnitude as lags are added: this is precisely the parameter region in
-which \citet{ACEL2011} themselves acknowledge that firm-specific capital loses its ability
-to rationalise frequent price re-optimisation.
+Yes. Following \citet{Long_Lag2025} and \citet{Baumeister2025}, I increase the lag length of
+the VAR in \citet{ACEL2005WP} to re-estimate their DSGE. Moving from $p=4$ to $p=12$ lags, I
+find that both the VAR and DSGE impulse responses, and the implied structural parameters,
+change substantially. The Calvo price parameters that distinguish the observationally
+equivalent firm-specific and homogeneous capital versions of the model converge to one
+another, from $0.34$ against $0.82$ at $p=4$ to $0.89$ against $0.90$ at $p=12$. The implied
+duration of price contracts in the firm-specific model rises from $1.5$ to $9.0$ quarters,
+equal to that of the homogeneous capital model, re-opening the micro--macro discrepancy in
+price stickiness that firm-specific capital was introduced to resolve.
 
     \vspace{0.3cm}
-    \noindent\textbf{Keywords:} Truncation Bias, Long-Lag VARs, DSGE Estimation, Impulse
-    Response Matching, Nominal Rigidities
+    \noindent\textbf{Keywords:} Truncation Bias, Long-Lag VARs, DSGE Estimation, IRF Minimum Distance , Nominal Rigidities
     \\
     \noindent\textbf{JEL Codes:} C32, C52, E32
 \end{abstract}
@@ -108,7 +99,7 @@ to rationalise frequent price re-optimisation.
 An important goal of monetary business cycle research is to explain the empirical evidence
 on the impact of economic shocks on macroeconomic variables. Because the systematic component
 of policy is endogenous, identifying the causal effect of monetary policy requires isolating
-the non-systematic component --- the monetary policy shock --- even though it is small and
+the non-systematic component, the monetary policy shock, even though it is small and
 infrequent \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.
 
 A large class of estimated DSGE models is taken to the data through this channel. Impulse
@@ -123,16 +114,25 @@ That attractiveness rests entirely on one maintained assumption: that the VAR de
 \emph{consistent} estimates of the moments being matched. If the reduced-form VAR adequately
 captures the data generating process, impulse responses are optimal at all horizons; if the
 VAR is misspecified, the specification error propagates to the structural statistics and
-compounds at each horizon \citep{Ramey2016, Canova_Fosso2025}. \citet{ACEL2011} say as much
+compounds at each horizon \citep{Ramey2016, Canova_Fosso2025}
+\cite{Ravenna2007} "The bias introduced by truncation can lead to bias in the identification 
+of the structural shock."
+\citet{ACEL2011} say as much
 themselves: ``the quality of our estimation strategy depends on the ability of identified
 VARs to generate reliable estimates of the dynamic response of economic variables to
 shocks''.\footnote{\citet[][footnote 10, p.~3]{ACEL2011}.}
 
 Since a VAR($\infty$) cannot be estimated on a finite sample, researchers truncate. The
 resulting VAR($p$) is misspecified, and increasingly so the smaller is $p$
-\citep{Long_Lag2025, Humble_VARs_2026, Ravenna2007}. \citet{Long_Lag2025} show that the
-conventional objection to longer lags --- that the additional parametrisation makes
-confidence intervals prohibitively wide --- is incomplete, because reducing misspecification
+\citep{Long_Lag2025, Humble_VARs_2026, Ravenna2007}. 
+\cite{Ravenna2007} "the problem facing economistis is whether the number of lags $p$ to be 
+included is reasonable given the lenght of economics time series over which VARs are
+estimated. When estimating a VAR consistent with DSGE business cycle models it is
+standard to assume that including few lags is sufficient to provide a reasonable
+approximation to the exact infinite order VAR representation!
+\citet{Long_Lag2025} show that the
+conventional objection to longer lags, that the additional parametrisation makes
+confidence intervals prohibitively wide, is incomplete, because reducing misspecification
 reduces not only bias but also variance. Their conclusion is addressed explicitly to applied
 researchers: ``it is up to the researcher to show that her structural results are robust to
 significant increases in the lag length, far beyond the lag lengths typically considered in
@@ -210,7 +210,11 @@ un modello stimato di riferimento, non in un esempio calibrato.}
 \citet{ACEL2011}, \citet{Hall_Inoue_Nason_Rossi2012}, \citet{Theodoridis2011}. Cosa fanno:
 sviluppano e valutano la strategia limited-information. Contributo mio: mostro che la sua
 pretesa robustezza poggia su un'assunzione --- la consistenza del VAR --- che la troncatura
-viola sistematicamente.}
+viola sistematicamente.
+\cite{Ravenna2007} "In the case of zero identification bias, Fig. 4 shows that the impulse response function
+from a correctly identified VAR(p) with p! 6 and 12 is accurate up to the pth lag (the
+error depicted in the plot converges to zero as the approximating VAR lag order p becomes
+large)." h<p before \cite{Plagborg-Moller_Wolf2021}}
 
 \tbd{Valutare se serve un quarto blocco su LP contro VAR (\citet{Plagborg-Moller_Wolf2021},
 \citet{Li_PlagborgMoller_Wolf2024}, \citet{Ludwig2026},
@@ -234,7 +238,7 @@ results. Section \ref{sec:conclusion} concludes.
 
 VARs are subject to at least three sources of bias: small-sample bias, identification bias
 \citep{Forni_Gambetti_Sala2016}, and truncation bias \citep{Long_Lag2025, Ravenna2007,
-ChariKehoeMcGrattan2008, Humble_VARs_2026}. This paper is concerned with the third, and with
+ChariKehoeMcGrattan2008, Humble_VARs_2026}. This paper is concerned with the latter, and with
 the way it contaminates the second.
 
 \subsection{A simple illustration}
@@ -291,8 +295,9 @@ identification generates a testable prediction, which I take to the data in Sect
 \ref{sec:results_tech}.
 
 \subsection{Why longer lags help}
+\label{sec:whylonger}
 
-\citet{Long_Lag2025} explore the obvious remedy --- increasing $p$ substantially --- and find
+\citet{Long_Lag2025} explore the obvious remedy, increasing $p$ substantially, and find
 evidence against the conventional wisdom that uncertainty becomes prohibitive. The standard
 intuition is only part of the story: raising the lag order reduces misspecification, and
 reducing misspecification lowers not only bias but also the variance of the residuals. This
@@ -339,7 +344,180 @@ confrontare LP e VAR a lag fissato mette a confronto un modello grande e uno pic
 quattro righe, non di piu'.}
 
 % =============================================================
-% 3. THE MODEL                                       [target: 4 pp]
+% 3. Stochastic singularity and the absence of a VAR representation
+% =============================================================
+\section{Stochastic singularity and the absence of a VAR representation}
+\label{sec:Stochastic}
+
+\subsection{When does a DSGE admit a VAR representation?}
+
+The log-linearised solution of a DSGE model can be written in state-space (or ABCD) form, and
+\citet{FVRRS2005} provide a simple condition --- the \emph{Poor Man's Invertibility Condition}
+(PMC) --- under which that state-space system can be inverted into a VAR($\infty$) in the
+observables. The condition is that the eigenvalues of $A - BD^{-1}C$ lie inside the unit
+circle. The notation already reveals the maintained assumption: $D^{-1}$ must exist, so $D$
+must be square. In economic terms, the model must have exactly as many structural shocks as
+observable variables.
+
+This is not a technicality that can be waved away. When the number of shocks falls short of
+the number of observables the system is \emph{stochastically singular}: a $K$-dimensional
+process driven by $r < K$ shocks has a spectral density of rank $r$, its Wold representation
+is $y_t = \Psi(L)\varepsilon_t$ with $\Psi$ of dimension $K \times r$, and there is no
+non-singular $K$-dimensional white noise. The reduced-form covariance matrix $\Sigma_u$ is
+singular, $\Sigma_u^{-1}$ does not exist, and a VARMA or VAR($\infty$) representation in the
+standard sense is not defined. \citet{Ravenna2007} states the practical implication directly:
+when the number of shocks is smaller than the number of observables the system is singular,
+``preventing likelihood estimation of the VAR'', and recovering a non-singular VAR
+representation requires dropping observables until the two counts coincide.
+
+\subsection{How the literature has dealt with singularity}
+
+\citet{Long_Lag2025} generate artificial data from three well-known DSGE models --- the RBC
+models of \citet{ChariKehoeMcGrattan2008} and \citet{CEV2006}, and \citet{SM2007} --- and
+estimate VARs on that data across short and long lag choices. Their design is explicit about
+the restriction just described: ``invertibility is never a problem; all the models we consider
+are fundamental'', and ``all our experiments are based on two-shock models and two-variable
+VARs''.\footnote{\citet[][p.~10]{Long_Lag2025}.} The two RBC models satisfy this by
+construction. The Smets--Wouters model does not: it carries seven structural shocks, so
+confronting it with a two-variable VAR would leave the system singular. Their solution is to
+reduce the model, retaining ``only monetary policy and preference shocks'', until the number
+of shocks matches the number of variables in the VAR.\footnote{Note the direction of the
+adjustment: the binding constraint is the size of the VAR laboratory, which is fixed at two
+variables throughout, so squareness is restored by discarding \emph{shocks}, not observables.
+Discarding observables is the alternative route, and is the one suggested by
+\citet{FVRRS2005} and \citet{Ravenna2007}.} In either direction, the operation is the same:
+squareness is imposed so that truncation bias can be studied in isolation from singularity
+and invertibility.
+
+There is, however, a strand of the literature arguing that this requirement is far stronger
+than the analysis actually needs. \citet{Forni_Gambetti_Sala2016} observe that
+``fundamentalness is extremely and unnecessarily restrictive'', because ``in several cases
+fundamentalness is not needed. The researcher is often interested in assessing the
+transmission mechanisms of a single shock.'' What matters, in their view, ``is not whether we
+have fundamentalness or not, but whether we have enough information to get a reasonably good
+approximation for the specific shocks of interest''. They also note the cost of insisting on
+it: ``if the number of variables in the VAR is smaller than the number of shocks in the DSGE,
+fundamentalness cannot hold (and the PMC is not even defined). Since modern DSGE models have
+several shocks, small VARs are automatically ruled out. This is unpleasant, since small VARs
+are useful tools, especially for short samples.''
+
+This is precisely the position that IRF matching occupies. The strategy does not require the
+DSGE to be the data generating process for all observables: it requires the VAR to be
+informative about the transmission of the shocks being matched. Section \ref{sec:methodology}
+develops this point.
+
+\subsection{The present exercise: singular, and at the parametrisation frontier}
+
+The VAR in \citet{ACEL2011} confronts three structural shocks --- monetary policy, neutral
+technology and capital-embodied technology --- with ten observable variables. The system is
+therefore stochastically singular, the PMC is not defined for it, and there is no exact
+VAR($\infty$) representation of the DSGE that the VAR is being used to estimate. This is the
+first respect in which the present exercise departs from \citet{Long_Lag2025}: rather than
+restoring squareness by design, I study the consequences of lag truncation in a setting where
+singularity is a feature of the model being estimated and cannot be assumed away.
+
+The second departure is one of scale, and it works in the opposite direction to what one might
+expect. Because the three data generating processes in \citet{Long_Lag2025} are two-variable
+systems, their VARs remain cheaply parametrised even at long lag lengths, and increasing $p$
+costs relatively little in degrees of freedom. The ACEL VAR does not enjoy that luxury. With
+$K=10$ variables, a constant and $p$ lags, each equation carries $10p+1$ coefficients, and the
+sample runs from 1959:Q2 to 2001:Q4, that is $171$ quarterly observations before lags are
+consumed. Table \ref{tab:df_budget} reports the resulting budget.
+
+\begin{table}[htpb]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Degrees of freedom across lag orders}
+    \label{tab:df_budget}
+    \begin{tabular}{lccc}
+    \toprule
+    & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
+    \midrule
+    Usable observations $T$          & 167 & 163 & 159 \\
+    Coefficients per equation $k$    & 41  & 81  & 121 \\
+    Degrees of freedom $T-k$         & 126 & 82  & 38  \\
+    Observations per parameter $T/k$ & 4.07 & 2.01 & 1.31 \\
+    Coefficients, full system        & 410 & 810 & 1{,}210 \\
+    \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \centering
+    \scriptsize{\textit{Note:} Each equation contains $10p+1$ coefficients ($K=10$ variables,
+    $p$ lags, one constant). The raw sample contains $171$ quarterly observations
+    (1959:Q2--2001:Q4), of which $p$ are consumed as initial conditions. Ordinary least squares
+    requires $10p+1 < 171-p$, that is $p \leq 15$; at $p=15$ only five degrees of freedom per
+    equation remain.}
+\end{table}
+
+At $p=12$ the system carries $1{,}210$ coefficients, each equation is estimated on $159$
+observations with $121$ regressors, and only $38$ degrees of freedom survive. The exercise is
+close to the algebraic ceiling: ordinary least squares requires $10p+1 < 171-p$, so no lag
+order above $p=15$ is feasible at all, and $p=15$ would leave five degrees of freedom per
+equation. Tripling the lag length relative to the ACEL baseline is therefore not a
+conservative perturbation --- it is very nearly the largest perturbation the data permit.
+
+This makes the exercise a demanding test of the central claim in \citet{Long_Lag2025}. Their
+argument is that longer lags reduce misspecification, that reduced misspecification lowers the
+variance of the residuals, and that this variance reduction can offset the imprecision caused
+by additional parameters. In a two-variable system the offset has ample room to operate. Here
+it does not: the parametrisation grows by a factor of three in a system already large relative
+to the sample. If confidence intervals were going to explode anywhere, they would explode here.
+
+They do not. Figure \ref{fig:var_irfs_ci_all_lags} plots the impulse responses to a monetary
+policy shock at each lag order together with their own $95$ percent bootstrap confidence
+bands.%
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+    {\includegraphics[width=\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR impulse responses to a monetary policy shock across lag orders, each with its
+    own $95$ percent bootstrap confidence band.}
+    \label{fig:var_irfs_ci_all_lags}
+\end{figure}
+\FloatBarrier The bands at $p=12$ are not wider than those at $p=4$; for several variables ---
+inflation, the federal funds rate, the real wage, velocity and the relative price of
+investment --- they are visibly narrower, despite the threefold increase in parametrisation
+documented in Table \ref{tab:df_budget}. The same pattern appears in the structural estimates:
+the Phillips curve slope is estimated roughly six times more precisely at $p=12$ than at $p=4$
+(Section \ref{sec:results_params}). The variance-reduction mechanism of \citet{Long_Lag2025}
+therefore operates even at the parametrisation frontier, which is a considerably more
+demanding test than the two-variable systems in which it was originally demonstrated.
+
+\tbd{Quantificare invece di limitarsi a ``visibly narrower'': calcolare la larghezza media
+della banda per variabile e lag order, e riportare il rapporto medio $p=12$ contro $p=4$.
+Serve una riga di numeri nel testo, non solo il rimando alla figura.}
+
+Two features of how these bands are constructed matter for interpreting them. First, they are
+bootstrap bands in which \emph{the entire VAR is re-estimated on each artificial sample}, so
+the uncertainty induced by estimating $1{,}210$ coefficients is fully propagated into the
+reported intervals rather than being conditioned away. Had the estimator been unstable at
+$p=12$, the re-estimated responses would have varied wildly across draws and the bands would
+have widened accordingly. Second, draws yielding an explosive companion matrix are discarded
+and redrawn, so the bands condition on stationarity.
+\tbd{Riportare la frequenza di draw esplosivi (\texttt{count\_var\_expl} in
+\texttt{mkimplrnewci.m}) ai tre lag order: e' una diagnostica di stabilita' gratuita e un
+lettore attento la chiedera'.}
+
+An obvious objection is that this is simply overfitting: a VAR with $121$ regressors per
+equation fits the sample closely, the estimated residuals shrink, and confidence bands
+computed from those residuals shrink with them. The objection has to be taken seriously,
+because in-sample it cannot be dismissed --- reduced misspecification and overfitting have the
+same in-sample signature, namely a smaller residual variance. What can be said here is that
+the bootstrap re-estimation described above rules out the mechanical part of the concern,
+since parameter uncertainty is not being suppressed. What it cannot rule out is that the
+residual variance itself is understated, because the bootstrap resamples from the fitted
+residuals of the very model under scrutiny. Distinguishing the two requires evidence that is
+not in-sample: this is precisely what \citet{Long_Lag2025} supply, through coverage rates
+computed in a controlled environment where the true responses are known, and what motivates
+the bias--variance discussion in Section \ref{sec:whylonger}.
+
+
+
+% =============================================================
+% 4. THE MODEL                                       [target: 4 pp]
 % =============================================================
 \section{The Theoretical Model}
 \label{sec:model}
@@ -426,38 +604,7 @@ la Sezione \ref{sec:results} si riorganizza attorno a essa.}
 \section{Econometric Methodology}
 \label{sec:methodology}
 
-\subsection{Stochastic singularity and the absence of a VAR representation}
 
-ACEL confront three structural shocks --- monetary policy, neutral technology and
-capital-embodied technology --- with a ten-variable VAR. The model is therefore stochastically
-singular, and the consequence is worth stating plainly. A ten-dimensional process driven by
-three shocks has a spectral density of rank three: its Wold representation is
-$y_t = \Psi(L)\varepsilon_t$ with $\Psi$ of dimension $10\times 3$. There is no non-singular
-ten-dimensional white noise, $\Sigma_u$ is singular, and a VARMA or VAR($\infty$)
-representation in the standard sense is simply not defined.
-
-Both standard references handle this by restricting attention to the square case.
-\citet{FVRRS2005} derive a VARMA representation only when the number of observables equals the
-number of states, a step that requires inverting the observation matrix. \citet{Ravenna2007}
-is explicit about the general case: when the number of shocks falls short of the number of
-observables the system is singular, ``preventing likelihood estimation of the VAR'', and
-obtaining a non-singular VAR representation requires dropping observables until the two counts
-coincide.
-
-The appropriate conclusion is not that the exercise is ill-posed, but that the existence of an
-exact VAR representation is the wrong question to ask. If ACEL's DSGE were literally the data
-generating process of their ten observables, the sample covariance matrix would have rank
-three and seven of the series would be exact linear combinations of the other three. No one
-believes this. The model is a partial description of the data, and stochastic singularity is
-the mathematical signature of that partiality --- which is precisely why it must be estimated
-by limited-information methods.
-
-\tbd{Valutare se aggiungere un paragrafo sulla letteratura sui sistemi ``tall'' (piu'
-osservabili che shock): Anderson e Deistler, Forni-Hallin-Lippi-Zaffaroni. Attenzione, e' a
-doppio taglio: da un lato le funzioni di trasferimento alte sono genericamente zeroless e
-quindi fondamentali, il che aiuta; dall'altro ammettono genericamente un VAR di ordine finito,
-il che indebolirebbe la motivazione. Se apro il tema devo gestirlo, non ignorarlo. Forse
-meglio in appendice, o omesso del tutto.}
 
 \subsection{Impulse response matching}
 
