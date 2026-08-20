@@ -144,7 +144,7 @@ end
 %  Estimate The VAR, if you want to    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-if estvar == 1 || decomp ==1 || vardecomp == 1
+if Chi_Parameter_Table_A4 == 1 || decomp ==1 || vardecomp == 1
     nvars   = size(vardata,2);
     %   identify a price of investment shock, a tech shock and a fed funds shock. (Fed Funds is the 9th variable in the VAR.)
     ffshk = 9;
