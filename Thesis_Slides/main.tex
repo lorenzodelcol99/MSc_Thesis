@@ -35,7 +35,7 @@
 
 % --- Informazioni Presentazione ---
 \author[Del Col]{Lorenzo Del Col}
-\title[Master's Thesis]{The Short, the Long, and the Consequences of VAR Analysis For Structural DSGE Estimation}
+\title[Master's Thesis]{Can Short VARs Lead to Biased DSGE Estimations?}
 \newcommand{\email}{lorenzo.delcol@studenti.unipd.it}
 
 \institute[]{
@@ -62,30 +62,23 @@
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item VARs can be used to estimate DSGE frameworks by IRFs minimization matching
+        \item VARs are often used to estimate DSGE frameworks by IRFs minimization matching
     \end{itemize}
     
-    \begin{itemize}  
-        \item If the VAR is mispecified the DSGE might also be so
-    \end{itemize}
-    \vspace{0.1cm}
-    
-    \textbf{\textcolor{PadovaRed}{Why it is relevant?}}
     \pause
     \begin{itemize}
         \item \textit{"The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks."}
         \vspace{0.1cm}
         \hfill {\small \textbf{Altig et al. (2011) p. 3, fn. 10} }
         \pause
-
-        \item \textit{``If the VAR adequately caputeres the DGP, IRFs are optimal at all horizons. 
+        
+        \item \textit{``If the VAR adequately captures the DGP, IRFs are optimal at all horizons. 
         \\
-        If the \textbf{VAR is mispecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
+        If the \textbf{VAR is misspecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
         \hfill {\small \textbf{Ramey (2016) p. 83} }
         \pause
         
-        \item VARs and DSGEs are instruments used by central banks to make policy decisions
         \item Misspecification can deliver distorted results mis informing the central banker
     \end{itemize}
 
@@ -102,7 +95,7 @@
     \end{itemize}
     
     \vspace{0.4cm}
-    \textbf{What we do:}
+    \textbf{What it is done:}
     \begin{itemize}
         \item Test if well established facts in the literature are sensitive to the chosen lag structure
     \end{itemize}
@@ -446,7 +439,7 @@ Point estimates across lags are included in the baseline CI
     % e tinge di rosso la tabella, vedi commit precedente)
     \normalsize
 \begin{itemize}
-    \item Frim Specific model's Calvo Price parameter converges to the Homogeneous one
+    \item Firm Specific model's Calvo Price parameter converges to the Homogeneous one
     \item Back to the micro-macro implied price duration missmatch
 \end{itemize}
 
