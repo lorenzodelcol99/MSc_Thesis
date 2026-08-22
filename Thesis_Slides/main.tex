@@ -7,6 +7,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{tikz} % serve per i riquadri rossi sovrapposti alle IRF (tikzpicture)
+\usetikzlibrary{calc} % serve per la sintassi $(coord)+(dx,dy)$ usata nei riquadri sulle tabelle
+% Coordinate "invisibile" agganciata al flusso del testo/tabella, richiamabile
+% in seguito da un tikzpicture[remember picture,overlay] separato: usata per
+% evidenziare righe specifiche di una tabella LaTeX nativa (non un'immagine).
+\newcommand{\tikzmark}[1]{\tikz[remember picture] \node[coordinate] (#1) {};}
 \usepackage{listings}
 \usepackage[round, authoryear]{natbib}
 \usepackage{booktabs}
@@ -72,9 +77,7 @@
         \hfill {\small \textbf{Altig et al. (2011) p. 3, fn. 10} }
         \pause
         
-        \item \textit{``If the VAR adequately captures the DGP, IRFs are optimal at all horizons. 
-        \\
-        If the \textbf{VAR is misspecified}, however, then the \textbf{specification errors will be computed at each horizon}''}
+        \item \textit{If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
         \hfill {\small \textbf{Ramey (2016) p. 83} }
         \pause
@@ -95,21 +98,35 @@
     \end{itemize}
     
     \vspace{0.4cm}
-    \textbf{What it is done:}
+    \textbf{What it's done:}
     \begin{itemize}
-        \item Test if well established facts in the literature are sensitive to the chosen lag structure
+        \item Revisit ACEL RoED (2011) contribution by estimating Homogeneous vs Firm Specific versions of their DSGE with VARs with different dynamic structures
     \end{itemize}
     \pause
     
     \vspace{0.4cm}    
     \textbf{Findings:}
     \begin{itemize}
-        \item Both VAR based IRFs and structural DSGE parameter estimates are significantly affected by the inclusion of longer lags
+        \item Increasing the VAR lag structure cast doubds on the importance of Variable Capital Utilization to explain inflation inertia
+        \item Lag choice can have implicationtions for optimal policy desing
     \end{itemize}
     \begin{center}
         \hyperlink{slide:var_irfs}{\beamerbutton{VAR IRFs}} \quad
         \hyperlink{slide:dsge_params}{\beamerbutton{DSGE Parameters}}
     \end{center}
+\end{frame}
+
+% =======================================
+% ROADMAP
+% =======================================
+\begin{frame}{Roadmap}
+    \begin{itemize}
+        \item Related Literature
+        \item ACEL model
+        \item DSGE as VAR($\infty$)
+        \item Truncation Bias
+        \item Results
+    \end{itemize}
 \end{frame}
 
 % =======================================
@@ -138,153 +155,37 @@
     \begin{itemize}
         \item {\small Fernández-Villaverde et al., (2005); Ravenna, (2007); Giacomini, (2013); Theodoridis, (2011); Forni et al., (2016)}
     \end{itemize}
-    \textbf{IRFs:}
-    \begin{itemize}
-        \item {\small Ludwig, (2026); Baumeister, (2025); Olea et al., (2025); Plagborg-Møller and Wolf, (2021); Li et al., (2024); Jordà, (2025)}
-    \end{itemize}
     \textbf{DSGE IRFs matching with VARs}
     \begin{itemize}
-        \item {\small Christiano et al., (2005); Altig et al., (2011); Rossi et al., (2012)} % Qua devo citare anche ROTOMBERG & WOODFORD 1997
-    \end{itemize}
-\end{frame}
-% =======================================
-% ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
-% =======================================
-
-\begin{frame}{Illustration of the problem: Truncation Bias}
-    \begin{equation}
-        Y_t = B_1Y_{t-1} + \cdots + B_pY_{t-p} + u_t, \qquad \mathbb{E}(u_t u_t') = \Sigma
-    \end{equation}
-
-    \begin{equation}
-        B(L) = B_1L + \cdots + B_pL^p
-    \end{equation}
-
-    \begin{itemize}
-        \item The VAR with $p < p^{*}$ suffers from truncation bias.\footnote{Where $p^{*}$ denotes the DGP true lag length.}
-
-        \item Lag truncation biases the reduced form coefficients $B(L)$ and the reduced form variance covariance matrix $\Sigma$, which are the two main ingredients for IRF estimation.
-    \end{itemize}
-
-    \begin{equation}
-        \mathrm{IRF} = f\bigl(B(L),\Sigma\bigr)
-    \end{equation}
-\end{frame}
-
-% =======================================
-% DSGE, State Space and VAR($\infty$) Representation
-% =======================================
-\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
-\begin{itemize}
-    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
-    
-    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
-\end{itemize}
-\vspace{0.4cm} 
-
-\pause
-\begin{itemize}
-    \item \textcolor{PadovaRed}{\textbf{Should the VAR's lag order increased?}}
-\end{itemize}
-
-\end{frame}
-
-% =======================================
-% LONG LAG 1
-% =======================================
-
-\begin{frame}{Long-Lag VARs}
-    De Graeve and Westermark, (2025) demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
-    \pause
-    \vspace{0.4cm}
-    
-    \textbf{Lower Bias}
-    \begin{itemize}
-        \item By reducing the truncation bias misspecification at each horizon
-    \end{itemize}
-    \pause
-
-    \vspace{0.4cm}
-    \textbf{Lower Variance}
-    \begin{itemize}
-        \item Misspecification reduction lowers the variance of the residuals
-        \item This variance reduction counteracts the imprecision caused by increased parametrisation
+        \item {\small Rotemberg and Woodford (1997); Christiano et al., (2005); Boivin and Giannoni (2006); Altig et al., (2011); Rossi et al., (2012)}
     \end{itemize}
 \end{frame}
 
-% =======================================
-% LONG LAG 2
-% =======================================
-
-\begin{frame}{Long-Lag VARs}
-    \begin{figure}
-        \centering
-        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
-            {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
-        \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
 
 % =======================================
-% LONG LAG BENEFITS
+% CEE and ACEL Motivation
 % =======================================
 
-\begin{frame}{Long-Lag VARs Benefits}
-    The variance-reducing effect of lower misspecification often dominates the penalty of increased parameterisation.
-    \vspace{0.4cm}
-    
-    Compared to short-lag VARs, Long-Lag VARs have:
+\begin{frame}{CEE and ACEL's DSGE Motivation}
     \begin{itemize}
-        \item Reduced truncation bias
-        \item More precise inference
-        \item Lower MSE
-        \item Better coverage
-    \end{itemize}
-\end{frame}
-
-% =======================================
-% REPLICATION EXERCISE
-% =======================================
-
-\begin{frame}{Replication Exercise}
-    Framework:
-    \begin{itemize}
-        \item \textbf{Altig et al., (2011)}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
-    \end{itemize}
-
-    VAR:
-    \begin{itemize}
-        \item Short and Long-Run Cholesky, medium scale 10 variables
-        \item Monetary Policy, Neutral and Embodied Technology shocks
-        \item Sample period 1959:Q2-2001:Q4
-    \end{itemize}
-    
-    Exercise:
-    \begin{itemize}
-        \item I re-estimate the VAR increasing lag order
-        \item Re-estimate the DSGE by IRFs matching
-        \vspace{0.2cm}
-
-        \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}}
+        \item Standard NK models replicate inflation persistence with levels of price stikiness, inconsistent with micro data evidence 
+        \item CEE JPE (2005) and ACEL RoED (2011) seminal works introduced the concept of \textbf{firm specific capital} to model inflation persistence,
+    mechanism supported by IRF matching with VAR(4)
     \end{itemize}
 \end{frame}
 
 % =======================================
 % ACEL'S MECHANISM 1
 % =======================================
-
 \begin{frame}{ACEL's DSGE Mechanism}
-    Classic NK models account for inflation inertia by assuming that firms re-optimise their prices every six quarters or even less often
-    \begin{itemize}
+        \begin{itemize}
         \item In Altig et al., (2005) inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
         \item Inertia is explained by the fact that, when firms re-optimise, they do it by a small amount because each firm's short run marginal cost is increasing in its own output
         \item The key assumption is that, in any given period, a firm's capital stock is pre-determined and firm-specific
     \end{itemize}
 
     \vspace{0.5cm}
-    They build two models on Christiano et al., (2005):
+    They build two models on Christiano et al. JPE, (2005):
     \begin{itemize}
         \item Homogeneous capital
         \item Firm-specific capital
@@ -338,7 +239,7 @@
 % ACEL'S RESULTS
 % =======================================
 
-\begin{frame}{ACEL(2005) Results}
+\begin{frame}{ACEL (2005) Results}
     The estimated $\gamma$ is 0.040, which implies:
     \begin{itemize}
         \item \textbf{Homogeneous} capital: $\xi_p = 0.82$, firms change prices every 5.6 quarters
@@ -355,6 +256,151 @@
     \item \textbf{\textcolor{PadovaRed}{Are these results robust to an enriched lag structure of the VAR?}}
 \end{itemize}
 \end{frame}
+
+
+% =======================================
+% DSGE, State Space and VAR($\infty$) Representation
+% =======================================
+\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
+\begin{itemize}
+    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
+    \item Standard lag choice by SVAR researchers is 4 for quarterly data and 12 for monthly
+    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
+    
+    \item VARs are typically small systems with few lags often interpret as models of the entire economy, IRFs are highly sensitive to variable and lag choice
+\end{itemize}
+
+\vspace{0.4cm} 
+
+\pause
+\begin{itemize}
+    \item \textcolor{PadovaRed}{\textbf{Should the VAR lag order be increased to overcome Truncation Bias implications?}}
+\end{itemize}
+
+\end{frame}
+
+% =======================================
+% ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
+% =======================================
+
+\begin{frame}{Illustration of the problem: Truncation Bias}
+    \begin{equation}
+        Y_t = B_1Y_{t-1} + \cdots + B_pY_{t-p} + u_t, \qquad \mathbb{E}(u_t u_t') = \Sigma
+    \end{equation}
+
+    \begin{equation}
+        B(L) = B_1L + \cdots + B_pL^p
+    \end{equation}
+
+    \begin{itemize}
+        \item The VAR with $p < p^{*}$ suffers from truncation bias.\footnote{Where $p^{*}$ denotes the DGP true lag length.}
+
+        \item Lag truncation biases the reduced form coefficients $B(L)$ and the reduced form variance covariance matrix $\Sigma$, which are the two main ingredients for IRF estimation.
+    \end{itemize}
+
+    \begin{equation}
+        \mathrm{IRF} = f\bigl(B(L),\Sigma\bigr)
+    \end{equation}
+\end{frame}
+
+% =======================================
+% LONG LAG 1
+% =======================================
+
+\begin{frame}{Long-Lag VARs}
+    De Graeve and Westermark, (2025) demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
+    \pause
+    \vspace{0.4cm}
+    
+    \textbf{Lower Bias}
+    \begin{itemize}
+        \item By reducing the truncation bias misspecification at each horizon
+    \end{itemize}
+    \pause
+
+    \vspace{0.4cm}
+    \textbf{Lower Variance}
+    \begin{itemize}
+        \item Misspecification reduction lowers the variance of the residuals
+        \item This variance reduction counteracts the imprecision caused by increased parametrisation
+    \end{itemize}
+\end{frame}
+
+
+
+% =======================================
+% LONG LAG 2 BENEFITS
+% =======================================
+
+\begin{frame}{Long-Lag VARs Benefits}
+    The variance-reducing effect of lower misspecification often dominates the penalty of increased parameterisation.
+    \vspace{0.4cm}
+    
+    Compared to short-lag VARs, Long-Lag VARs have:
+    \begin{itemize}
+        \item Reduced truncation bias
+        \item More precise inference
+        \item Lower MSE
+        \item Better coverage
+    \end{itemize}
+\end{frame}
+
+% =======================================
+% Residuals' Variance Reduction
+% =======================================
+
+\begin{frame}{Residuals' Variance Reduction }
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+            {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
+        \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+% RMSE Image
+% =======================================
+\begin{frame}{RMSE}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
+            {\fbox{Missing file: InSample\_RMSE\_Across\_Lags\_All\_Variables.pdf}}
+        \caption{In Sample RMSE Comparison Across lags }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
+% =======================================
+% REPLICATION EXERCISE
+% =======================================
+
+\begin{frame}{Replication Exercise}
+    Framework:
+    \begin{itemize}
+        \item \textbf{Altig et al., (2011)}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
+    \end{itemize}
+
+    VAR:
+    \begin{itemize}
+        \item Short and Long-Run restrictions, medium scale 10 variables
+        \item Monetary Policy, Neutral and Embodied Technology shocks
+        \item Sample period 1959:Q2-2001:Q4
+    \end{itemize}
+    
+    Exercise:
+    \begin{itemize}
+        \item I re-estimate the VAR increasing lag order
+        \item Re-estimate the DSGE by IRFs matching
+        \vspace{0.2cm}
+
+        \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}}
+    \end{itemize}
+\end{frame}
+
 
 
 % =======================================
@@ -392,11 +438,37 @@
             \draw[red, thick, rounded corners] (0.685,0.73) rectangle (1.01,0.96); % Inflation
         \end{scope}
         \end{tikzpicture}
-        \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{lags up to 4}\only<2>{lags up to 8}\only<3>{lags up to 12}}
+        \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{4 lags}\only<2>{8 lags}\only<3>{12 lags}}
         \label{fig:placeholder2}
     \end{figure}
 \end{frame}
 
+% =======================================
+%  VAR IRFs All CI: MP
+% =======================================
+\begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
+    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  Comment on CI
+% =======================================
+\begin{frame}{Confidence Intervals Shrinks!}
+    \begin{itemize}
+        \item With respect to De Graeve and Westermark (2025) examples, this exercise have a medium scale VAR; 10 variables + constant
+        \item Estimating the VAR 12 we reach the feasible limit of the degrees of freedom T-k = 30 and total numebr of coefficients $n + n^2 p = 1210$
+        \item Bootstrap Confidence Intervals actually shrinks! 
+        \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
+        "Misspecification reduction not only leads to Bias-Variance trade off, but it reduces variance" 
+    \end{itemize}
+\end{frame}
 
 
 % =======================================
@@ -406,7 +478,7 @@
 After a negative (easing) monetary policy shock:
     \begin{itemize}
     \item Sign and magnitudes did not change
-    \item Formation and the top of the humps accour with much delay
+    \item Formation and the top of the humps accour with much delay 
     \item Does inflaiton have the price puzzle? No if we have the ACEL theoretical model in mind
 \end{itemize}
 Overall:
@@ -424,6 +496,12 @@ Point estimates across lags are included in the baseline CI
     \IfFileExists{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}
     {\input{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
+    \begin{tikzpicture}[remember picture, overlay]
+        \only<2->{\draw[red, thick, rounded corners]
+            ($(philTL)+(-0.15,0.25)$) rectangle ($(philBR)+(0.15,-0.08)$);}
+        \only<3->{\draw[red, thick, rounded corners]
+            ($(calvoTL)+(-0.15,0.25)$) rectangle ($(calvoBR)+(0.15,-0.08)$);}
+    \end{tikzpicture}
 \end{frame}
 
 % =======================================
@@ -433,10 +511,6 @@ Point estimates across lags are included in the baseline CI
     \IfFileExists{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}
     {\input{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    % il file incluso imposta \scriptsize dentro un \begin{table} non
-    % raggruppato: lo resettiamo qui esplicitamente (senza usare un {...}
-    % attorno all'\input, che manda in confusione lo stack colori di Beamer
-    % e tinge di rosso la tabella, vedi commit precedente)
     \normalsize
 \begin{itemize}
     \item Firm Specific model's Calvo Price parameter converges to the Homogeneous one
@@ -454,10 +528,11 @@ Point estimates across lags are included in the baseline CI
     \\
     Replicating ACEL et. al., (2005), enriching the VAR lag structure I find that:
     \begin{itemize}
+        \item Capacity Utilization Cost, crucial variable to justify the firm specific model, dramatically shrinks to 0
         \item Firm specificity of capital seems not the key concept to explain inflation inertia
         \item ACEL's evidence on firm specific capital is not robust to long-lag VARs
         \vspace{0.5cm}
-        \item Long-Lag VARs can have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
+        \item Long-Lag VARs migth have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
     \end{itemize} 
     
     
@@ -496,19 +571,7 @@ Point estimates across lags are included in the baseline CI
     \end{figure}
 \end{frame}
 
-% =======================================
-%  VAR IRFs All CI: MP
-% =======================================
-\begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
-    \label{fig:placeholder4}
-\end{figure}
-\end{frame}
+
 
 % =======================================
 %  VAR IRFs: NT
@@ -564,19 +627,6 @@ With VAR(12)
 % =======================================
 % RESIDUAL ANALYSIS
 
-% =======================================
-% RMSE Image
-% =======================================
-\begin{frame}{RMSE Image}
-    \begin{figure}
-        \centering
-        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
-            {\fbox{Missing file: InSample\_RMSE\_Across\_Lags\_All\_Variables.pdf}}
-        \caption{In Sample RMSE Comparison Across lags }
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
 
 % =======================================
 % RMSE Table

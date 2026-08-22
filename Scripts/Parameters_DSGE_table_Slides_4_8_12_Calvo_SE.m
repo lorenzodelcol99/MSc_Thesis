@@ -58,9 +58,23 @@ for i = 1:size(param_map, 1)
     elseif strcmp(t, 'par')
         fprintf(fileID, '    %s & %.4f & %.4f & %.4f \\\\\n    & (-) & (-) & (-) \\\\\n', n, data4.par(v), data8.par(v), data12.par(v));
     elseif strcmp(t, 'xx')
-        fprintf(fileID, '    %s & %s & %s & %s \\\\\n    & (%.4f) & (%.4f) & (%.4f) \\\\\n', n, ...
-            format_pe(data4.xx(v), data4.xxse(v)), format_pe(data8.xx(v), data8.xxse(v)), format_pe(data12.xx(v), data12.xxse(v)), ...
-            data4.xxse(v), data8.xxse(v), data12.xxse(v));
+        % \tikzmark anchors: used by the Beamer slide (slide:dsge_params) to
+        % draw progressive-reveal red highlight boxes around this row without
+        % relying on hardcoded pixel/fraction coordinates (this is a native
+        % LaTeX table, not a rasterized image, so its layout can shift).
+        % Box 1 now spans BOTH rows Phillips curve slope + Capacity util.
+        % cost: top-left mark on the gamma row, bottom-right mark on the
+        % sigma_a row (see slide:dsge_params in Thesis_Slides/main.tex).
+        row_prefix = ''; row_suffix = '';
+        if v == 18 % Phillips curve slope (gamma) -- top-left of box 1
+            row_prefix = '\tikzmark{philTL}';
+        end
+        fprintf(fileID, '    %s%s & %s & %s & %s \\\\\n', row_prefix, n, ...
+            format_pe(data4.xx(v), data4.xxse(v)), format_pe(data8.xx(v), data8.xxse(v)), format_pe(data12.xx(v), data12.xxse(v)));
+        if v == 15 % Capacity util. cost (sigma_a) -- bottom-right of box 1
+            row_suffix = '\tikzmark{philBR}';
+        end
+        fprintf(fileID, '    & (%.4f) & (%.4f) & (%.4f)%s \\\\\n', data4.xxse(v), data8.xxse(v), data12.xxse(v), row_suffix);
     elseif strcmp(t, 'implied')
         % Calvo parameters are not estimated directly: they are solved for
         % numerically from the structural parameters, so their standard
@@ -68,9 +82,16 @@ for i = 1:size(param_map, 1)
         % Field naming: ksiph -> SE_ksiph, ksip -> SE_ksip
         se_field = ['SE_' v];
 
-        fprintf(fileID, '    %s & %.4f & %.4f & %.4f \\\\\n    & (%.4f) & (%.4f) & (%.4f) \\\\\n', ...
-            n, data4.(v), data8.(v), data12.(v), ...
-            MonteCalvo_4.(se_field), MonteCalvo_8.(se_field), MonteCalvo_12.(se_field));
+        row_prefix = ''; row_suffix = '';
+        if strcmp(v, 'ksiph') % Homogeneous capital: top-left of the "implied stickiness" box
+            row_prefix = '\tikzmark{calvoTL}';
+        elseif strcmp(v, 'ksip') % Firm-specific capital: bottom-right of the box
+            row_suffix = '\tikzmark{calvoBR}';
+        end
+
+        fprintf(fileID, '    %s%s & %.4f & %.4f & %.4f \\\\\n    & (%.4f) & (%.4f) & (%.4f)%s \\\\\n', ...
+            row_prefix, n, data4.(v), data8.(v), data12.(v), ...
+            MonteCalvo_4.(se_field), MonteCalvo_8.(se_field), MonteCalvo_12.(se_field), row_suffix);
     end
 end
 
