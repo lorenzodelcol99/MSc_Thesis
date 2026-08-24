@@ -40,7 +40,7 @@
 
 % --- Informazioni Presentazione ---
 \author[Del Col]{Lorenzo Del Col}
-\title[Master's Thesis]{Can Short VARs Lead to Biased DSGE Estimations?}
+\title[Master's Thesis]{DSGE Model Estimation via VAR IRF Matching:  The Short and Long of It }
 \newcommand{\email}{lorenzo.delcol@studenti.unipd.it}
 
 \institute[]{
@@ -373,6 +373,21 @@
     \end{figure}
 \end{frame}
 
+
+% =======================================
+% Portmanteau P-Values Across lags 
+% =======================================
+\begin{frame}{Portmanteau P-Values Across lags }
+\begin{figure}
+        \centering
+        \IfFileExists{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}}
+            {\fbox{Missing file: Portmanteau\_PValues\_Across\_Lags.pdf}}
+        \caption{Portmanteau P-Values Across lags}
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
+
 % =======================================
 % REPLICATION EXERCISE
 % =======================================
@@ -673,19 +688,7 @@ With VAR(12)
 \end{frame}
 
 
-% =======================================
-% Portmanteau P-Values Across lags 
-% =======================================
-\begin{frame}{Portmanteau P-Values Across lags }
-\begin{figure}
-        \centering
-        \IfFileExists{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}}
-            {\fbox{Missing file: Portmanteau\_PValues\_Across\_Lags.pdf}}
-        \caption{Portmanteau P-Values Across lags}
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
+
 
 % =======================================
 % Standard Deviation Ratios ReducedForm
