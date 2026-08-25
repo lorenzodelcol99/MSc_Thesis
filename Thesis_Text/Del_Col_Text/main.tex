@@ -194,13 +194,7 @@ precisely into that region.
 \textbf{Impulse response matching and DSGE estimation.} 
 \\
 \subsection{Outline}
-Section \ref{sec:truncation} illustrates the truncation bias problem, separates its two
-channels following \citet{Ravenna2007}, and reviews the case for longer lags. Section
-\ref{sec:model} presents the ACEL model and the role of firm-specific capital in reconciling
-micro and macro evidence on price setting. Section \ref{sec:methodology} describes the
-econometric strategy: why a stochastically singular DSGE is estimated by limited-information
-methods, and what that strategy assumes. Section \ref{sec:results} presents the empirical
-results. Section \ref{sec:conclusion} concludes.
+Section 
 
 % =============================================================
 % 2. THE MODEL                                       [target: 4 pp]
@@ -248,7 +242,35 @@ The two models are parametrised in terms of $\gamma$ rather than $\xi_p$. Given 
 parameters they are then observationally equivalent with respect to aggregate prices and
 quantities, so that no stand need be taken on which version is being estimated. What
 distinguishes them is the value of $\xi_p$ that a given $\gamma$ implies.
+\\
+The real rigidity parameter $\chi$ measures the strategic complementarity in price
+setting of \citet{BallRomer1990}. It takes values in $(0,1]$, and the closer it lies
+to zero the stronger the attenuation: a firm that is able to reset its price moves it
+by less, for a given movement in economy-wide marginal cost. In the homogeneous
+capital model $\chi = 1$ and the attenuation is absent. In the firm-specific model
+$\chi$ is a non-linear function of the structural parameters.
 
+In particular $\chi$ depends on some calibrated parameters, $[a,\beta, \delta, \lambda_f]$ which are respectively,
+capital component in the Cobb-Douglas production function, time preference parameter, (DELTA?) and the average price markup.
+And two estimated parameters, $[\sigma_a; S'']$, which are, the Capacity utilization cost and Investment adjustment cost.
+
+This logic suggest that, for a fixed value of $\xi_p$, the larger $\sigma_a$, the lower is $\gamma$ \footnote{vast set of literature suggest that the Phillips curve slope is low}.
+But other things equal, a lower $\xi_p$ implies a higher $\gamma$. This implies that for a given value of $\gamma$
+, $\xi_p$ is a decreasing function of $\sigma_a$.
+
+$\sigma_a$ is he key parameter that governs the flexibility of capital utilization, and $1/\sigma_a$ is the elasticity 
+of capacity utilization with respect to the rental rate of capital. This parameters is crucial to distinguish the two models.
+\\
+In homogeneous capital model, firms can adjust their level of capital freely, and suggest that should be $\sigma_a$ close to 0 with the elasticiy being close to infinity.
+In the stark opposit direction, if the capital is firm specific firms should have some friction in adjusting its level,
+so $\sigma_a$ should be greater than 0 implying a rigid elasticity.
+\\
+This is where the mechanism is fragile, and ACEL say so themselves: ``to the extent
+that capital utilization rates can easily be varied, the assumption of firm-specific
+capital loses its ability to rationalize low values of
+$\xi_p$''.\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and macro
+evidence rests, in the end, on a single estimated parameter, and therefore on the
+empirical target from which that estimate is drawn.
 
 
 % =============================================================
@@ -343,8 +365,7 @@ The Chi parameter
 
 \section{Data}
 \label{app:data}
-\tbd{Tabella con le dieci variabili: definizione, fonte, trasformazione.
-Sul modello della Table A.1 di Lami.}
+
 
 \begin{figure}[htpb]
     \centering
