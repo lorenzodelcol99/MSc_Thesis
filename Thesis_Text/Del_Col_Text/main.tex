@@ -264,22 +264,94 @@ But other things equal, a lower $\xi_p$ implies a higher $\gamma$. This determin
 \\
 In this sense, a flat Phillips curve is a problem in the homogenoues capital model.
 A low value of $\gamma$ implies that, given that there $\chi = 1$, the Clavo price stickiness parameter $\xi_p$ 
-need to be very high, implying irrealistic implied time duration of prices which are in conflict with micro evidence.
+need to be very high, implying irrealistic implied time duration of prices, that is $D = \frac{1}{(1-\xi_p)}$ 
+which are in stark conflict with micro evidence.
 \\
-The flexibility of capital utilization is governed from $\sigma_a$ parameter, and $1/\sigma_a$ is the elasticity 
-of capacity utilization with respect to the rental rate of capital. 
-The quality of the estimation of the firm specific capital model lies on having a high value of 
-capacity utilisation cost of capital $\sigma_a$ in a way to obtain a low value of price stikyness.
+
+The flexibility of capital utilisation is governed by $\sigma_a$, and $1/\sigma_a$ is
+the elasticity of utilisation with respect to the rental rate of capital. Its role is
+easiest to see by following a firm that has just cut its price and must now meet
+higher demand. Extra labour can be hired at the going wage, but extra capital services
+can only come from running the capital the firm already holds more intensively, and
+$\sigma_a$ is what that costs. If $\sigma_a$ is high that margin is expensive, so most
+of the additional output has to be produced by adding labour to a quantity of capital
+services that barely moves. The firm's own marginal cost then rises sharply with its own output, and
+a firm that anticipates this cuts its price by less in the first place. That restraint
+is what $\chi$ records, and it is why the firm-specific model needs a high $\sigma_a$:
+only then is $\chi$ far enough below one for a low $\gamma$ to be consistent with a
+low $\xi_p$.
+
+It is worth being precise here, because $\sigma_a$ is a single parameter, estimated
+once, and does not take different values across the two models. What differs is
+whether it reaches $\chi$ at all. Under homogeneous capital the firm buys capital
+services on a market at the going rental rate, so its own marginal cost does not
+depend on its own output and $\chi = 1$ whatever $\sigma_a$ happens to be. Under
+firm-specific capital the firm is tied to the capital it already owns, and $\sigma_a$
+determines how much that constraint is actually binding.
+
+The limiting case makes the point. If $\sigma_a$ is close to zero, utilisation is
+almost free to vary, so a firm tied to its own capital can still draw from it whatever
+volume of capital services it needs, at negligible cost. Owning the capital rather
+than renting it then makes no practical difference: the firm's own marginal cost is as
+flat as it would be with a market for capital services, $\chi$ returns to one, and the
+firm-specific model collapses onto the homogeneous one. Firm specificity is an
+assumption about ownership, but its economic content comes entirely from the cost of
+varying utilisation, and without that cost the constraint exists in name only.
 \\
-In homogeneous capital model, firms can adjust their level of capital freely, and suggest that should be $\sigma_a$ close to 0 with the elasticiy being close to infinity.
-In the stark opposit direction, if the capital is firm specific, firms should have some friction in adjusting its level,
-hence, $\sigma_a$ should be strongly greater than 0 implying a rigid elasticity.
-\\
+
 This is where the mechanism is fragile, and \cite{ACEL2011} say themselves so: "to the extent
 that capital utilization rates can easily be varied, the assumption of firm-specific
 capital loses its ability to rationalize low values of
 $\xi_p$".\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and macro
 evidence rests, in the end, lies on a single estimated parameter.
+
+\subsection{DSGE estimation via IRF matching}
+Folowing \cite{RotembergWoodford1997, CEE2005, Iacoviello2005, BoivinGiannoni2006}, \cite{ACEL2005WP} 
+use a limited information approach that minimizes the distance between sample and DSGE model generated impulse responses,
+this is called Impulse Response Function Matching Estimator (IRFME) \cite{Hall_Inoue_Nason_Rossi2012}.
+This procedure select and estimate the model's structural parameters that produce the DSGE IRFs, which
+minimises the distance with IRFs created from the SVAR. 
+
+Using an IRFME implies that the researcher is focusing to match on some limited aspects of the DSGE \cite{Giacomini2013}; 
+it is choosing an identification strategy for the reduced form VAR in a way that is consistent with the key determinants of the DSGE.
+The VAR and theoretical IRFs are identified by restrictions implied by the DSGE. Which means that the DSGE 
+admits a structural VAR representation, in this way, sample moments of the VAR are informative for the 
+theoretical model's structural parameters \cite{Hall_Inoue_Nason_Rossi2012}.
+
+The authors use a four lag medium scale VAR with 10 quarterly series and 3 shocks: Monetary Policy Shock identified with 
+short run Cholesky restriction, and Embodied and Neutral Technology shocks with long run identification à la 
+\cite{Shapiro_Watson88}. As well summarised by \cite{Hall_Inoue_Nason_Rossi2012}, the theoretical model impose that 
+the tech shocks are the only one allowed to affect productivity in the long run. 
+In particular, only Capital Embodied shock can affects the price of investment goods.
+Finally, Monetary Policy shock affects quantities and prices only within a quarter. 
+The VAR is identified such its IRFs respects the DSGE restrictions and estimate the structural parameters.
+
+\subsection{SVAR and IRF minimum distance}
+The Reduced Form VAR 
+\begin{equation}
+    Y_t = A_1Y_{t-1} + ... + A_pY_{t-p} + U_t
+\end{equation}
+The ten dimensional vector $Y_t$:
+\textcolor{red}{continuare derivazione RF-VAR to SVAR, rimandare all'appendix la descrizione delle varaibili, 
+scrivere le solite cose di U e W e $\Sigma_u$ ecc, poi copiare da acelWP il vettore Yt. 
+Vedere e scrivere cose su Identificaiton strategy, usare WP2005 che scrive bene. 
+ricordarsi di accennare Delta Method in IRFME, perchè è il motivo che giustifica 
+la joint normal distr. dei parametri strutturali nel MonteCalvo.
+Infine, ricordarsi di mostrare come funziona IRFME; match di Point Estimates at h horizons.
+That need to be the last thing so I can cite Valery Ramey, ACEL footnote 10, and that is 
+the perfect link to start to make questions about truncation bias, misspecificatin, optimatily, p<h ecc}
+
+\subsection{Estimating the Parameters of the Equilibrium Model}
+Using \cite{ACEL2005WP} notation, let $\zeta$ denote the model parameters that are aimed to be estimated, and $\Psi(\zeta)$ be the mapping 
+from the structural parameters $\zeta$ to the model IRFs. The SVAR IRFs estimates are denoted as $\hat{\Psi}$.
+The number of horizons choose of the IRF matched are 20, excluding those that are zero by assumption.
+The IRFME then can be written as:
+\begin{equation}
+    \hat{\zeta} = argmin(\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))
+\end{equation}
+Where \textcolor{red}{describe}
+
+
 
 
 % =============================================================
