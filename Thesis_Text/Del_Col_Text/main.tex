@@ -212,19 +212,21 @@ frequent. \tbd{Citare Bils and Klenow (2004), Golosov and Lucas (2007), Klenow a
 (2008), che sono i riferimenti di ACEL. Valutare se aggiungere evidenza micro piu' recente.
 Da aggiungere a biblio.bib.}
 
-\citet{ACEL2005WP} propose a resolution. In their model inflation is inertial even though
+\citet{ACEL2005WP}\footnote{The replicaiton code made available from the authors is NBER working paper from 2005. Hence, I replicate and refere to those results.} 
+propose a resolution. In their model inflation is inertial even though
 firms re-optimise on average every $1.5$ quarters. Inertia arises not because firms change
 prices rarely, but because when they do they change them by a small amount: each firm's
 short-run marginal cost is increasing in its own output, which dampens the optimal price
-adjustment. The assumption delivering this is that capital is predetermined within the period
-and firm-specific, so that factors of production cannot be instantly reallocated across firms.
+adjustment. The underlying assumption that drives this result is that capital is predetermined within the period
+and firm-specific, so that factors of production cannot be instantly and costlessly reallocated across firms.
 
 \subsection{Homogeneous and firm-specific capital}
 
-ACEL conduct the analysis using two versions of the \citet{CEE2005} model: one in which
-capital is homogeneous, as in standard formulations, and one in which it is firm-specific.
+\cite{ACEL2005WP} conduct the analysis using two versions of the \citet{CEE2005} model: one in which
+capital is homogeneous, as in standard formulations, and the other in which it is firm-specific.
+
 Once log-linearised, the only difference between the two sets of equilibrium conditions lies
-in the equation relating inflation to marginal cost,
+in the equation relating inflation to marginal cost, the New Keynesian Phillisp Curve,
 \begin{equation}
     \Delta\hat{\pi}_t = \mathbb{E}\bigl[\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t \mid \Omega_t\bigr],
     \label{eq:phillips}
@@ -237,40 +239,47 @@ the slope $\gamma$ maps into the structural parameters as
 \end{equation}
 The information set $\Omega_t$ contains the current realisation of the technology shocks but
 not that of the monetary policy innovation.
+The two models are parametrised in terms of $\gamma$ rather than $\xi_p$. 
 
-The two models are parametrised in terms of $\gamma$ rather than $\xi_p$. Given the remaining
-parameters they are then observationally equivalent with respect to aggregate prices and
+Given the remaining parameters they are then observationally equivalent with respect to aggregate prices and
 quantities, so that no stand need be taken on which version is being estimated. What
-distinguishes them is the value of $\xi_p$ that a given $\gamma$ implies.
+distinguishes them is the value of $\xi_p$ given $\gamma$ implies.
 \\
+
 The real rigidity parameter $\chi$ measures the strategic complementarity in price
 setting of \citet{BallRomer1990}. It takes values in $(0,1]$, and the closer it lies
-to zero the stronger the attenuation: a firm that is able to reset its price moves it
+to zero the stronger the attenuation. That is, a firm that is able to reset its price moves it
 by less, for a given movement in economy-wide marginal cost. In the homogeneous
 capital model $\chi = 1$ and the attenuation is absent. In the firm-specific model
 $\chi$ is a non-linear function of the structural parameters.
 
 In particular $\chi$ depends on some calibrated parameters, $[a,\beta, \delta, \lambda_f]$ which are respectively,
-capital component in the Cobb-Douglas production function, time preference parameter, (DELTA?) and the average price markup.
-And two estimated parameters, $[\sigma_a; S'']$, which are, the Capacity utilization cost and Investment adjustment cost.
+capital component in the Cobb-Douglas production function, time preference parameter, capital depreciation rate, and the average price markup.
+And two estimated parameters, $[\sigma_a; S'']$, which are the Capacity utilisation cost and Investment adjustment cost.
 
-This logic suggest that, for a fixed value of $\xi_p$, the larger $\sigma_a$, the lower is $\gamma$ \footnote{vast set of literature suggest that the Phillips curve slope is low}.
-But other things equal, a lower $\xi_p$ implies a higher $\gamma$. This implies that for a given value of $\gamma$
+The \cite{ACEL2011} logic suggest that, for a fixed value of $\xi_p$, the larger $\sigma_a$, the lower is $\gamma$, in line
+with the vast set of literature that suggests that the Phillips curve slope is low.
+But other things equal, a lower $\xi_p$ implies a higher $\gamma$. This determine that for a given value of $\gamma$
 , $\xi_p$ is a decreasing function of $\sigma_a$.
-
-$\sigma_a$ is he key parameter that governs the flexibility of capital utilization, and $1/\sigma_a$ is the elasticity 
-of capacity utilization with respect to the rental rate of capital. This parameters is crucial to distinguish the two models.
+\\
+In this sense, a flat Phillips curve is a problem in the homogenoues capital model.
+A low value of $\gamma$ implies that, given that there $\chi = 1$, the Clavo price stickiness parameter $\xi_p$ 
+need to be very high, implying irrealistic implied time duration of prices which are in conflict with micro evidence.
+\\
+The flexibility of capital utilization is governed from $\sigma_a$ parameter, and $1/\sigma_a$ is the elasticity 
+of capacity utilization with respect to the rental rate of capital. 
+The quality of the estimation of the firm specific capital model lies on having a high value of 
+capacity utilisation cost of capital $\sigma_a$ in a way to obtain a low value of price stikyness.
 \\
 In homogeneous capital model, firms can adjust their level of capital freely, and suggest that should be $\sigma_a$ close to 0 with the elasticiy being close to infinity.
-In the stark opposit direction, if the capital is firm specific firms should have some friction in adjusting its level,
-so $\sigma_a$ should be greater than 0 implying a rigid elasticity.
+In the stark opposit direction, if the capital is firm specific, firms should have some friction in adjusting its level,
+hence, $\sigma_a$ should be strongly greater than 0 implying a rigid elasticity.
 \\
-This is where the mechanism is fragile, and ACEL say so themselves: ``to the extent
+This is where the mechanism is fragile, and \cite{ACEL2011} say themselves so: "to the extent
 that capital utilization rates can easily be varied, the assumption of firm-specific
 capital loses its ability to rationalize low values of
-$\xi_p$''.\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and macro
-evidence rests, in the end, on a single estimated parameter, and therefore on the
-empirical target from which that estimate is drawn.
+$\xi_p$".\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and macro
+evidence rests, in the end, lies on a single estimated parameter.
 
 
 % =============================================================
