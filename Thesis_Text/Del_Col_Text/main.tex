@@ -196,6 +196,7 @@ precisely into that region.
 \subsection{Outline}
 Section 
 
+\clearpage
 % =============================================================
 % 2. THE MODEL                                       [target: 4 pp]
 % =============================================================
@@ -306,6 +307,10 @@ $\xi_p$".\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and 
 evidence rests, in the end, lies on a single estimated parameter.
 
 \subsection{DSGE estimation via IRF matching}
+Theoretical models are usefull to economists and policymakers only if they are able to reproduce important
+feauters of the observed data. Which is a property that critically depends on the values that model's 
+parameters have attached, and also on how the researcher decide to estimate them \cite{Theodoridis2011}.
+
 Folowing \cite{RotembergWoodford1997, CEE2005, Iacoviello2005, BoivinGiannoni2006}, \cite{ACEL2005WP} 
 use a limited information approach that minimizes the distance between sample and DSGE model generated impulse responses,
 this is called Impulse Response Function Matching Estimator (IRFME) \cite{Hall_Inoue_Nason_Rossi2012}.
@@ -420,17 +425,28 @@ depends on the ability of identified VARs to generate reliable estimates of the
 dynamic response of economic variables to shocks"} p. 3, fn. 10.
 
 % =============================================================
-% 4. TRUNCATION BIAS                                 [target: 5 pp]
+% 3. TRUNCATION BIAS and LONG-LAG VARs                         
 % =============================================================
 \section{Truncation Bias and the Case for Long-Lag VARs}
 \label{sec:truncation}
 
-VARs are subject to at least three sources of bias: small-sample bias, identification bias
-\citep{Forni_Gambetti_Sala2016}, and truncation bias \citep{Long_Lag2025, Ravenna2007,
-ChariKehoeMcGrattan2008, Humble_VARs_2026}. This paper is concerned with the latter, and with
-the way it contaminates the second.
+Many DSGE's log linearised solution can be mapped in State Space representation, and then under some assumption
+can be re-written as VAR($\infty$) \cite{FVRRS2005}. Standard lag choice by SVAR practitioner is to 
+use forecasting information criteria (IC) such as AIC BIC, but the most common choice is 
+use conventions, that is, 4 lags for quarterly data and 12 for monthly data \cite{Long_Lag2025}.
+If a DSGE is estimated using an IRF matching tecnique, using a short lag VAR it might be problematic
+as the DSGE is estimated by a biased by truncation VAR.
+VARs are typically small systems with few lags often interpreted as models of the entire economy, 
+IRFs are highly sensitive to variable and lag choice \cite{Humble_VARs_2026,Long_Lag2025}.
 
-\subsection{A simple illustration}
+Truncation Bias it might be a potential problem for structual inference.
+
+%VARs are subject to at least three sources of bias: small-sample bias, identification bias
+%\citep{Forni_Gambetti_Sala2016}, and truncation bias \citep{Long_Lag2025, Ravenna2007,
+%ChariKehoeMcGrattan2008, Humble_VARs_2026}. This paper is concerned with the latter, and with
+%the way it contaminates the second.
+
+\subsection{Illustration of the problem: Truncation Bias}
 
 Following \citet{Long_Lag2025}, consider a data generating process in which $y_t$ depends on
 two exogenous variables,
@@ -459,9 +475,22 @@ covariance matrix $\Sigma_u$. Since impulse responses are a function of both,
 \end{equation}
 they inherit the bias.
 
+\subsection{Long-Lag VARs}
+\begin{itemize}
+    \item full gas on \cite{Long_Lag2025,Baumeister2025}
+    \item misspecification reduction as key object of interest
+    \item benefits
+    \item degrees of freedom
+    \item structural implications: 
+        \begin{itemize}
+            \item VARs: \cite{Baumeister2025} vs \cite{Jorda2024long_run_mp}
+            \item VARs: \cite{Long_Lag2025} vs Miranda-Agrippino and Ricco 2021
+            \item DSGE: \cite{Long_Lag2025} the three montecarlo exercise on \cite{ChariKehoeMcGrattan2008, CEV2006, SM2007} 
+        \end{itemize}
+\end{itemize}
 
 % =============================================================
-% 5. EMPIRICAL RESULTS                              [target: 11 pp]
+% 4. EMPIRICAL RESULTS                              [target: 11 pp]
 % =============================================================
 \section{Empirical Results}
 \label{sec:results}
