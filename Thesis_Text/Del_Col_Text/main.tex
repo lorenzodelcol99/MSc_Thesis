@@ -269,9 +269,9 @@ which are in stark conflict with micro evidence.
 \\
 
 The flexibility of capital utilisation is governed by $\sigma_a$, and $1/\sigma_a$ is
-the elasticity of utilisation with respect to the rental rate of capital. Its role is
+the elasticity of utilisation with respect to the rental rate of capital. \textcolor{red}{Its role is
 easiest to see by following a firm that has just cut its price and must now meet
-higher demand. Extra labour can be hired at the going wage, but extra capital services
+higher demand. FORSE E' MEGLIO GIRARE IL DISCORSO E PORLO COME SE L'IMPRESA VORREBBE AUMENTARE IL PREZZO} Extra labour can be hired at the going wage, but extra capital services
 can only come from running the capital the firm already holds more intensively, and
 $\sigma_a$ is what that costs. If $\sigma_a$ is high that margin is expensive, so most
 of the additional output has to be produced by adding labour to a quantity of capital
@@ -318,41 +318,106 @@ The VAR and theoretical IRFs are identified by restrictions implied by the DSGE.
 admits a structural VAR representation, in this way, sample moments of the VAR are informative for the 
 theoretical model's structural parameters \cite{Hall_Inoue_Nason_Rossi2012}.
 
+\cite{Theodoridis2011} points on \textcolor{red}{Canova (1994) and (2005)} tought that; many DSGE economistis prefer to use 
+partial information estimators rather than full information ones, like maximum likelihood, because they 
+prefere estimates that minimise the economic distance rather than statistical fit criteria.
+Because structual IRF matching estimates deliver selected DSGE moments-statistic as close as possible to 
+those observed in the data.
+The economist can assess how well the estimated model replicates these targets allowing the researcher 
+to identify possible modelling weaknesses and to infer usefull economic conclusions.
+\\
+
 The authors use a four lag medium scale VAR with 10 quarterly series and 3 shocks: Monetary Policy Shock identified with 
 short run Cholesky restriction, and Embodied and Neutral Technology shocks with long run identification à la 
-\cite{Shapiro_Watson88}. As well summarised by \cite{Hall_Inoue_Nason_Rossi2012}, the theoretical model impose that 
-the tech shocks are the only one allowed to affect productivity in the long run. 
+\cite{Shapiro_Watson88}. As well summarised by \cite{Hall_Inoue_Nason_Rossi2012}, the theoretical proposed by
+\cite{ACEL2005WP}  impose that the tech shocks are the only one allowed to affect productivity in the long run. 
 In particular, only Capital Embodied shock can affects the price of investment goods.
 Finally, Monetary Policy shock affects quantities and prices only within a quarter. 
 The VAR is identified such its IRFs respects the DSGE restrictions and estimate the structural parameters.
 
 \subsection{SVAR and IRF minimum distance}
-The Reduced Form VAR 
+The SVAR can be recovered by imposing structure on the reduced form,
 \begin{equation}
-    Y_t = A_1Y_{t-1} + ... + A_pY_{t-p} + U_t
+    B_0^{-1}B_0Y_t = B_0^{-1}B_1Y_{t-1} + \dots + B_0^{-1}B_pY_{t-p} + B_0^{-1}w_t,
 \end{equation}
-The ten dimensional vector $Y_t$:
-\textcolor{red}{continuare derivazione RF-VAR to SVAR, rimandare all'appendix la descrizione delle varaibili, 
-scrivere le solite cose di U e W e $\Sigma_u$ ecc, poi copiare da acelWP il vettore Yt. 
-Vedere e scrivere cose su Identificaiton strategy, usare WP2005 che scrive bene. 
-ricordarsi di accennare Delta Method in IRFME, perchè è il motivo che giustifica 
-la joint normal distr. dei parametri strutturali nel MonteCalvo.
-Infine, ricordarsi di mostrare come funziona IRFME; match di Point Estimates at h horizons.
-That need to be the last thing so I can cite Valery Ramey, ACEL footnote 10, and that is 
-the perfect link to start to make questions about truncation bias, misspecificatin, optimatily, p<h ecc}
+which matches the RF-VAR term by term once $A_i = B_0^{-1}B_i$ for each lag $i$ and
+\begin{equation}
+    u_t = B_0^{-1}w_t .
+    \label{eq:u-w-map}
+\end{equation}
+Equation \eqref{eq:u-w-map} is the bridge between the two representations: the
+reduced-form residuals are a linear combination of the structural shocks. Taking
+variances on both sides,
+\begin{equation}
+    \Sigma_u = B_0^{-1}\Sigma_w\bigl(B_0^{-1}\bigr)' .
+    \label{eq:sigma-map}
+\end{equation}
+$\Sigma_w$ is the variance-covariance matrix of the structural shocks $w_t$. These
+are assumed mutually orthogonal and normalised to unit variance, so $\Sigma_w = I_K$
+by construction. This is a normalisation, not an assumption about the economy: what
+is estimated is not the scale of each shock, but how a given shock propagates through
+the system, which is entirely encoded in $B_0^{-1}$.
+
+$Y_t$ is the ten-dimensional vector of quarterly series used by \citet{ACEL2005WP,ACEL2011},
+\begin{equation}
+    Y_t =
+    \begin{pmatrix}
+        \Delta\ln(\text{relative price of investment}_t) \\
+        \Delta\ln(\text{GDP}_t/\text{Hours}_t) \\
+        \Delta\ln(\text{GDP deflator}_t) \\
+        \text{Capacity utilisation}_t \\
+        \ln(\text{Hours}_t) \\
+        \ln(\text{GDP}_t/\text{Hours}_t) - \ln(W_t/P_t) \\
+        \ln(C_t/\text{GDP}_t) \\
+        \ln(I_t/\text{GDP}_t) \\
+        \text{Federal funds rate}_t \\
+        \ln(\text{GDP deflator}_t) + \ln(\text{GDP}_t) - \ln(\text{MZM}_t)
+    \end{pmatrix} .
+    \label{eq:Yt}
+\end{equation}
+All the variables are quarterly series from the 1959Q2 - 2001Q4 period, more details on data 
+are described in Appendix \ref{app:data}.
+
+Identification combines a short-run and a long-run restriction. The monetary policy
+shock is identified recursively, following \citet{CEE2005}: the interest rate reacts
+to lagged variables and to a subset of fast-moving contemporaneous variables, but the
+shock is assumed orthogonal to that information set, which amounts to zero
+restrictions on $B_0$. The two technology shocks are identified through long-run
+restrictions in the tradition of \citet{Shapiro_Watson88}: both
+neutral and capital-embodied technology shocks are the only shocks allowed to affect
+the long-run level of labour productivity, and the capital-embodied shock alone is
+allowed to affect the long-run relative price of investment. The full derivation
+is in Appendix \ref{app:identification}.
+
+These restrictions identify three shocks out of ten. \citet{ACEL2005WP} note that the
+remaining six are left unlabelled. This SVAR identifies selected aspects that are consistent
+with the DSGE's shocks. IRFME matches the IRFs of the three identified shocks, 
+not on those not identified.
 
 \subsection{Estimating the Parameters of the Equilibrium Model}
-Using \cite{ACEL2005WP} notation, let $\zeta$ denote the model parameters that are aimed to be estimated, and $\Psi(\zeta)$ be the mapping 
+Using \cite{ACEL2005WP,ACEL2011} notation, let $\zeta$ denote the strucutal model parameters that are aimed to be estimated, and $\Psi(\zeta)$ be the mapping 
 from the structural parameters $\zeta$ to the model IRFs. The SVAR IRFs estimates are denoted as $\hat{\Psi}$.
-The number of horizons choose of the IRF matched are 20, excluding those that are zero by assumption.
+
 The IRFME then can be written as:
 \begin{equation}
-    \hat{\zeta} = argmin(\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))
+    \hat{\zeta} = \underset{\zeta}{\arg\min} \, (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))
 \end{equation}
-Where \textcolor{red}{describe}
+The IRF matching is done horizon by horizon: the estimator compares the VAR
+point estimate of each impulse response at each of the first 20 horizons, excluding
+those set to zero by identification, against the model-implied counterpart. 
+Here, V is a diagonal matrix composed by the sample variances along the diagonal $\hat{\Psi}$.
+Those variances, compose the condifence intervals around the point estimates of the SVAR IRFs.
+With this choice of V, the estimated model's structural parameters $\hat{\zeta}$ are the value 
+of ${\zeta}$ that ensures that the $\hat{\Psi}$ DSGE's IRFs lies as much as possible inside the VAR IRFs' confidence intervals.
+Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed using the Deltha method, 
+more detail in the Appendix \ref{app:delta_method}
 
-
-
+The minimum distance estimator relies on the ability of the VAR to estimate the IRFs.
+\cite{Ramey2016} p. 83 point the attention on potential issues in general VAR practice:
+ \textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"}.
+This is clear to the author which claim \cite{ACEL2011} \textit{"The quality of our strategy (IRF matching) 
+depends on the ability of identified VARs to generate reliable estimates of the
+dynamic response of economic variables to shocks"} p. 3, fn. 10.
 
 % =============================================================
 % 4. TRUNCATION BIAS                                 [target: 5 pp]
@@ -457,6 +522,20 @@ The Chi parameter
     \label{fig:raw_series}
 \end{figure}
 \FloatBarrier
+
+\section{Identification strategy}
+\label{app:identification}
+Equation \eqref{eq:sigma-map} also shows why identification requires restrictions.
+$\Sigma_u$ has $K(K+1)/2$ distinct elements, but $B_0^{-1}$ has $K^2$ free entries, so
+$K(K-1)/2$ restrictions on $B_0$ are needed before $B_0^{-1}$ can be recovered from
+$\Sigma_u$. Being numerically sufficient is not enough: the restrictions have to be
+economically motivated, and it is exactly this requirement that the DSGE is used to
+satisfy.
+
+
+\section{Delta Method}
+\label{app:delta_method}
+
 
 \section{The ACEL Model: Full Derivation}
 \label{app:model}
