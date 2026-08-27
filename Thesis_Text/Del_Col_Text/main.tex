@@ -209,7 +209,7 @@ Section
 in inflation, standard models require firms to re-optimise prices infrequently --- every six
 quarters, and in versions without indexation to past inflation even every two years. This sits
 uneasily with the microeconometric evidence, which finds price changes considerably more
-frequent. \tbd{Citare Bils and Klenow (2004), Golosov and Lucas (2007), Klenow and Kryvtsov
+frequent. \textcolor{red}{Citare Bils and Klenow (2004), Golosov and Lucas (2007), Klenow and Kryvtsov
 (2008), che sono i riferimenti di ACEL. Valutare se aggiungere evidenza micro piu' recente.
 Da aggiungere a biblio.bib.}
 
@@ -418,11 +418,11 @@ Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed u
 more detail in the Appendix \ref{app:delta_method}
 
 The minimum distance estimator relies on the ability of the VAR to estimate the IRFs.
-\cite{Ramey2016} p. 83 point the attention on potential issues in general VAR practice:
- \textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"}.
-This is clear to the author which claim \cite{ACEL2011} \textit{"The quality of our strategy (IRF matching) 
+\textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"} 
+point the attention on potential issues in general VAR practice \cite{Ramey2016} p. 83.
+This is clear to the author which claim \textit{"The quality of our strategy (IRF matching) 
 depends on the ability of identified VARs to generate reliable estimates of the
-dynamic response of economic variables to shocks"} p. 3, fn. 10.
+dynamic response of economic variables to shocks"} \cite{ACEL2011} p. 3, fn. 10.
 
 % =============================================================
 % 3. TRUNCATION BIAS and LONG-LAG VARs                         
@@ -430,21 +430,16 @@ dynamic response of economic variables to shocks"} p. 3, fn. 10.
 \section{Truncation Bias and the Case for Long-Lag VARs}
 \label{sec:truncation}
 
-Many DSGE's log linearised solution can be mapped in State Space representation, and then under some assumption
-can be re-written as VAR($\infty$) \cite{FVRRS2005}. Standard lag choice by SVAR practitioner is to 
-use forecasting information criteria (IC) such as AIC BIC, but the most common choice is 
-use conventions, that is, 4 lags for quarterly data and 12 for monthly data \cite{Long_Lag2025}.
+Many DSGE's log linearised solution can be mapped in State Space representation, and then, under some assumption
+can be re-written as VAR($\infty$) \cite{FVRRSS2007}. Standard lag choice by SVAR practitioner is to 
+use forecasting information criteria (IC) such as AIC or BIC, but the most common choice is 
+use conventions, that is, 4 lags for quarterly data and 12 for monthly data.
 If a DSGE is estimated using an IRF matching tecnique, using a short lag VAR it might be problematic
 as the DSGE is estimated by a biased by truncation VAR.
 VARs are typically small systems with few lags often interpreted as models of the entire economy, 
 IRFs are highly sensitive to variable and lag choice \cite{Humble_VARs_2026,Long_Lag2025}.
 
 Truncation Bias it might be a potential problem for structual inference.
-
-%VARs are subject to at least three sources of bias: small-sample bias, identification bias
-%\citep{Forni_Gambetti_Sala2016}, and truncation bias \citep{Long_Lag2025, Ravenna2007,
-%ChariKehoeMcGrattan2008, Humble_VARs_2026}. This paper is concerned with the latter, and with
-%the way it contaminates the second.
 
 \subsection{Illustration of the problem: Truncation Bias}
 
@@ -467,27 +462,75 @@ The same logic carries over to a VAR. Let
     \qquad \mathbb{E}[u_t u_t'] = \Sigma_u ,
     \label{eq:var}
 \end{equation}
-with $B(L) = B_1 L + \dots + B_p L^p$ and $p \ll p^{*}$, where $p^{*}$ denotes the true lag
-order. Truncation biases both the autoregressive coefficients $B(L)$ and the reduced-form
-covariance matrix $\Sigma_u$. Since impulse responses are a function of both,
+with 
+\begin{equation}
+    B(L) = B_1 L + \dots + B_p L^p
+\end{equation} 
+where $p \ll p^{*}$, where $p^{*}$ denotes the true lag order.
+\\
+
+Truncation biases both the autoregressive coefficients $B(L)$ and the reduced-form
+covariance matrix $\Sigma_u$.
+Since impulse responses are a function of both, they inherit the bias.
 \begin{equation}
     \mathrm{IRF} = f\bigl(B(L), \Sigma_u\bigr),
 \end{equation}
-they inherit the bias.
+
+The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
+links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
+theoretical ones, in order to estimate the model's strucural parameters. Sample IRFs are the objective that the
+estimator wants to mimic, but if they are misspecified, the estimator is targeting the strucutal parameters to 
+an object that is biased, consequently obtaining potentially distorted estimates of the strucutal parameters.
+
+In light of recent research branch \cite{Li_PlagborgMoller_Wolf2024, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}, 
+they dissmiss the use of VARs in of Local Projections (LP), where almost every argument against VARs 
+lies on being VARs lag truncated. 
+While Long-Lag VARs have excellent theoretical properties \cite{Plagborg-Moller_Wolf2021}, are considered
+unworkable in practice due high variance concerns.
+Which is what typically keeps practitioners away from using long lags is the standard intuition that unceirtany 
+becomes perveasive. In the sense conentional wisdom thiks that, as the lags increases 
+the number of parameters rapidly escalate, therby reducing the degrees of freedom and making confidence 
+interval width prohibitevely large.
+
+\cite{Long_Lag2025} explore the trivial solution to short lag VARs, that is, dramatic increase in the 
+lag lenght.
 
 \subsection{Long-Lag VARs}
-\begin{itemize}
-    \item full gas on \cite{Long_Lag2025,Baumeister2025}
-    \item misspecification reduction as key object of interest
-    \item benefits
-    \item degrees of freedom
-    \item structural implications: 
-        \begin{itemize}
-            \item VARs: \cite{Baumeister2025} vs \cite{Jorda2024long_run_mp}
-            \item VARs: \cite{Long_Lag2025} vs Miranda-Agrippino and Ricco 2021
-            \item DSGE: \cite{Long_Lag2025} the three montecarlo exercise on \cite{ChariKehoeMcGrattan2008, CEV2006, SM2007} 
-        \end{itemize}
-\end{itemize}
+They're central point is that standard intuition is just a portion of the story. \textit{"in face of misspecification due to 
+lag truncation, increasing the lag length can actually reduce unceirtanty"} \cite{Long_Lag2025} p. 2.
+
+As the dynamic structure increases, lag truncation decrease, consequently misspecification reduces.
+Misspecification reduction has a double effect, the first being the well-known bias reduction, while 
+the second is the variance reduction that works against the imprecision coming from the increased parametrisation.
+This trade off it applies to all truncate VARs, no matter what the identification strategy is.
+
+To reveal the Long-Lag VARs properties \cite{Long_Lag2025} generate data of realistic samples size 
+from three DSGE with a MonteCarlo, to estimate VARs of different lag lenght.
+The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore (CKM), \cite{CEV2007} (CEV) and \cite{SM2007} (SM).
+All these models as are well knwon, CKM is the most known critique 
+on truncation bias effects on IFRs identified with long-run restrictions.
+Whereas CEV defence the use shrot run restriction, and SM becasue uses many macro frictions frequently disscussed in macro.
+They work under some assumptions; that the identification restriction is correct. 
+The DSGE are fundamental in the \cite{FVRRSS2007} sense, so invertivility is never a problem.
+Under this assumption these models have an exact VAR($infty$) representation.
+
+With the MonteCarlo they generate $1000$ datasets of realistic macro sample size for quarterly data, $T = 200$,
+and they estimate the bivariate VARs \footnote{For \cite{SM2007}, they reduce the number of variables from 7 to 2 
+to maitanin consistency with the other two exercises. They keep GDP-growth and interest rates.}
+representations of the DSGE choosing different increasing the lag choice 
+When comparing VARs of different lag-lenght, they restrict the sample of effective observations as $T = 170$ 
+ensuting that lag inizialization does not affect sample size.\footins{\textcolor{red}{Cosa che io non farò, e difenderò
+dicendo che tanto le stime non cambiano di molto, e che anzi rimandono consistenti, o che comunque in generale
+in pratica poi si usano tutti i dati disponibili, non si butta via niente, quindi se poi ai fatti uno deve 
+decidere tra un VAR 4 e un VAR 12 non si mette, nel VAR 4, a buttare via 8 osservazioni per avere lo stesso numero
+di osservazioni del lag 12, meglio usare tutti i dati. in particolare questo discorso vale ancora di più 
+nel momento in cui si aumenta drasticamente il numero di lag (come negli esercizi di \cite{Long_Lag2025}, e non nel mio)} }
+Unceirtanty bands are computed as in (Sims and Zha 1999, Canova 2007, Hulig 2005.), in this sense 
+thy use a the Normal-Inverse Wishart prior, which have good aproximation to frequentist bootstapped intervals.
+It doesn't different weigth on short vs. long lags as would do other prios like the Minnesota one.
+
+
+
 
 % =============================================================
 % 4. EMPIRICAL RESULTS                              [target: 11 pp]
