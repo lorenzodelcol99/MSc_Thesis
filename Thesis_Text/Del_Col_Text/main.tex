@@ -496,41 +496,100 @@ interval width prohibitevely large.
 lag lenght.
 
 \subsection{Long-Lag VARs}
-They're central point is that standard intuition is just a portion of the story. \textit{"in face of misspecification due to 
+Their central point is that standard intuition is just a portion of the story, \textit{"in face of misspecification due to 
 lag truncation, increasing the lag length can actually reduce unceirtanty"} \cite{Long_Lag2025} p. 2.
 
 As the dynamic structure increases, lag truncation decrease, consequently misspecification reduces.
 Misspecification reduction has a double effect, the first being the well-known bias reduction, while 
 the second is the variance reduction that works against the imprecision coming from the increased parametrisation.
-This trade off it applies to all truncate VARs, no matter what the identification strategy is.
+This trade off it applies to all truncated VARs, no matter what the identification strategy is.
+\\
 
-To reveal the Long-Lag VARs properties \cite{Long_Lag2025} generate data of realistic samples size 
-from three DSGE with a MonteCarlo, to estimate VARs of different lag lenght.
+To reveal Long-Lag VARs properties \cite{Long_Lag2025} generate data, with a MonteCarlo, of realistic samples size 
+from three DSGE, to estimate VARs of different lag length.
 The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore (CKM), \cite{CEV2007} (CEV) and \cite{SM2007} (SM).
-All these models as are well knwon, CKM is the most known critique 
+Are alle choose as well knwon, CKM is the most known critique in the literature 
 on truncation bias effects on IFRs identified with long-run restrictions.
-Whereas CEV defence the use shrot run restriction, and SM becasue uses many macro frictions frequently disscussed in macro.
-They work under some assumptions; that the identification restriction is correct. 
-The DSGE are fundamental in the \cite{FVRRSS2007} sense, so invertivility is never a problem.
-Under this assumption these models have an exact VAR($infty$) representation.
+Whereas CEV defend the use short run restriction, and SM becasue uses many macro frictions frequently disscussed in macro.
+They work under the assumptions that the identification restriction is correct. 
+And the DSGE are fundamental in the \cite{FVRRSS2007} sense, so invertivility is never a problem.
+Under these ipotesis these models have an exact VAR($\infty$) representation.
 
 With the MonteCarlo they generate $1000$ datasets of realistic macro sample size for quarterly data, $T = 200$,
 and they estimate the bivariate VARs \footnote{For \cite{SM2007}, they reduce the number of variables from 7 to 2 
 to maitanin consistency with the other two exercises. They keep GDP-growth and interest rates.}
-representations of the DSGE choosing different increasing the lag choice 
+representations of the DSGE choosing different increasing the lag choice.
 When comparing VARs of different lag-lenght, they restrict the sample of effective observations as $T = 170$ 
-ensuting that lag inizialization does not affect sample size.\footins{\textcolor{red}{Cosa che io non farò, e difenderò
+ensuting that lag inizialization does not affect sample size.\footnote{\textcolor{red}{Cosa che io non farò, e difenderò
 dicendo che tanto le stime non cambiano di molto, e che anzi rimandono consistenti, o che comunque in generale
 in pratica poi si usano tutti i dati disponibili, non si butta via niente, quindi se poi ai fatti uno deve 
 decidere tra un VAR 4 e un VAR 12 non si mette, nel VAR 4, a buttare via 8 osservazioni per avere lo stesso numero
 di osservazioni del lag 12, meglio usare tutti i dati. in particolare questo discorso vale ancora di più 
 nel momento in cui si aumenta drasticamente il numero di lag (come negli esercizi di \cite{Long_Lag2025}, e non nel mio)} }
-Unceirtanty bands are computed as in (Sims and Zha 1999, Canova 2007, Hulig 2005.), in this sense 
-thy use a the Normal-Inverse Wishart prior, which have good aproximation to frequentist bootstapped intervals.
-It doesn't different weigth on short vs. long lags as would do other prios like the Minnesota one.
+Unceirtanty bands are computed as in \textcolor{red}{(Sims and Zha 1999, Canova 2007, Hulig 2005.)}, in this sense 
+it is used a the Normal-Inverse Wishart prior, which have good aproximation to frequentist bootstapped intervals.
+It does not weigth differently short vs. long lags as would do other prios like the Minnesota one.
+
+\subsection{Long-Lag Benefits}
+\cite{Long_Lag2025} analyse how the truncated VARs of the three DSGE with VAR($\infty$) 
+representation behave. 
+The results are much in favor for long-lag VARs.
+The variance-reducing effect of lower misspecification often dominates the penalty of increased parametrisation.
+In a nutshell, Long-Lag VARs, they reduced truncation bias, have more 
+precise inference, reduced MSE and better coverage.
+
+Short-lag VARs have maximum unceirtanty for horizons where unceirtanty is not mecchanically low.
+For longer horizons, short-lag VARs have minimum CI width, this because a VAR($p$) cannot propagate much 
+beyond horizon $p$, VARs with lag length extrapolate impulse responses for 
+horizons $h > p$ from the first $h$ autocovariances \cite{Baumeister2025}. 
+Therefore unceirtanty cannot propagate much beyond that horizon either.
+
+Unceirtany does not explode with the lag lenght p, instead for VARs with very long lags, confidence bands 
+are roughly in the same ballpark as those of short-lag VARs.
 
 
+Long-Lag VARs have comparable coverage and comparable MSE than short-lag VARs. combined with 
+the tendency to produce smaller biases, long-lag VARs have favorable properties compared to standard short-lag VARS.
 
+\cite{Long_Lag2025} propose also an exercise that decompose the unceirtanty effects creating hypotetical IRFs
+that are composed by long-lag estimates of the point estimates, while using short-lag estimates of variance covariance matrix
+$IRF = f(B_{30}(L), \Sigma_4)$. Such IRFs can be interpreted as isolating the effect of increased parametrisation.
+
+The standard intuition whould suggest that long-lag length makes the entire distribution shift outward,
+through the additional unceirtanty created by the strong increase of parameters.
+In their exercise find that the increased parametrisation does not invariably increase unceirtanty 
+us at odds both with standard intuition (less degrees of freedom) and with the well known omittet variable result.
+
+Standard intuition seems on increased parametrisation is partially correct and obviously part of the story, but 
+\cite{Long_Lag2025} finds that misspecification reduction tends to have more substantial variance effects.
+
+Given that macroeconomist almost never have the luxury of knowing the true DGP as in 
+the just reviewed the MonteCarlo exercise. \cite{Baumeister2025} (in the discussion of \cite{Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}) 
+and also \cite{Long_Lag2025} ask if long-lag VARs are a viable methodology in sample data revisiting some well 
+known empirical studies.
+
+\cite{Long_Lag2025} revisti (Galì (1999); Chang and Hong (2006) (with uninformative priors)) and (\cite{MirandaAgrippinoRicco2021})
+\cite{Baumeister2025} re estimate \cite{Jorda2024long_run_mp} BVAR with 60 monthly lags and complitely break 
+down their result on long run effects of monetary policy.
+
+\cite{Antolin-Diaz_Surico2025} use a very long-lag VAR to asses long-run effects question, 
+they activly are using VAR for making strucutral inference on h periods while using $p=h$ lags.
+
+
+\subsection{Chosing the Lag Lenght}
+The one lessons that comes from \cite{Long_Lag2025,Baumeister2025} on lag choice selections is that, 
+for making structural inference with VARs, the lag lenght $p$ shoul be chosen consistenly with the 
+horizon of interest of the research question. For a VAR($p$)nference is largely uninformative at horizons $h > p$ 
+since the VAR($p$) cannot propagate much beyond the horizon $p$. Because it implies that lag truncation 
+leads to unveirtanty being meccanicaly underestimated at those longer horizons.
+\textit{Coupled with potentially significant truncation bias, the short-lag VAR researcher runs 
+the risk of becoming relatively certain about the wrong point estimate. Hence, if the research 
+question centers on long horizon effects the VAR better include lags that extend that far.” } 
+\cite{Long_Lag2025} p. 2.
+
+\textcolor{red}{qua devo unire \cite{Long_Lag2025,Baumeister2025}, e se riesco anche \cite{Ludwig2026},
+ed infine anche solite cit rispetto a truncation bias that affects IRFs at every horizon, including 
+those at h < p.}
 
 % =============================================================
 % 4. EMPIRICAL RESULTS                              [target: 11 pp]
