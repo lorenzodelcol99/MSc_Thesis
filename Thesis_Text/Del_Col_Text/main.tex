@@ -535,7 +535,7 @@ It does not weigth differently short vs. long lags as would do other prios like 
 representation behave. 
 The results are much in favor for long-lag VARs.
 The variance-reducing effect of lower misspecification often dominates the penalty of increased parametrisation.
-In a nutshell, Long-Lag VARs, they reduced truncation bias, have more 
+In a nutshell, Long-Lag VARs, reduce truncation bias, have more 
 precise inference, reduced MSE and better coverage.
 
 Short-lag VARs have maximum unceirtanty for horizons where unceirtanty is not mecchanically low.
@@ -568,13 +568,28 @@ the just reviewed the MonteCarlo exercise. \cite{Baumeister2025} (in the discuss
 and also \cite{Long_Lag2025} ask if long-lag VARs are a viable methodology in sample data revisiting some well 
 known empirical studies.
 
-\cite{Long_Lag2025} revisti (Galì (1999); Chang and Hong (2006) (with uninformative priors)) and (\cite{MirandaAgrippinoRicco2021})
+\cite{Long_Lag2025} \textcolor{red}{revist (Galì (1999); Chang and Hong (2006)} (with uninformative priors)) and (\cite{MirandaAgrippinoRicco2021})
 \cite{Baumeister2025} re estimate \cite{Jorda2024long_run_mp} BVAR with 60 monthly lags and complitely break 
 down their result on long run effects of monetary policy.
 
 \cite{Antolin-Diaz_Surico2025} use a very long-lag VAR to asses long-run effects question, 
 they activly are using VAR for making strucutral inference on h periods while using $p=h$ lags.
 
+\subsection{Model size}
+The variance trade-off documented by \cite{Long_Lag2025} applies to all untruncated reduced form VARs.
+Id does not depend on the number variables in the VAR, not in the identifying assuption or wheater the researcher 
+is using a Bayesian or Frequentist method.
+
+The Frequentist researcher migth bump into a degrees of freedom problem.
+An $n$-variable VAR($p$) has $n + n^2p$ coefficients, and $\frac{n(n+1)}{2}$ elements in the variance 
+covariance matrix. As the lag grows, the number of parameters to estiamte will grow, and the higher is 
+the number of variables in the VAR, the faster will happen.
+At some point the number of parameters to estimate will be greater than the number of available data points.
+It is shown by \cite{Long_Lag2025} that the degrees of freedom limit is far from being reached by 
+small scale VAR with one year of lags. In this work replicating \cite{ACEL2005WP} we stand in the Frequentist side 
+and I won't , 
+and given the dimension of VAR, I am going to show that even being close to the limit, 
+it is possible to estimate long(er)-lag VARs which have structural implications.
 
 \subsection{Chosing the Lag Lenght}
 The one lessons that comes from \cite{Long_Lag2025,Baumeister2025} on lag choice selections is that, 
@@ -586,6 +601,29 @@ leads to unveirtanty being meccanicaly underestimated at those longer horizons.
 the risk of becoming relatively certain about the wrong point estimate. Hence, if the research 
 question centers on long horizon effects the VAR better include lags that extend that far.” } 
 \cite{Long_Lag2025} p. 2.
+
+What emerges from \cite{Long_Lag2025} leverage that the results that came from implementing enriched lag 
+struture are solely to take into consideration for structural inference works.
+None fo the results imply that long-lag VARs are advised to use for forecasting matters.
+In these type of exercises parsimony hedges against overfitting, that is a matter of 
+poor performance in forecasting unseen data.
+But if one wants to draw structural concusions, IRFs analysis or use VARs to estimate DSGEs with a IRFME,
+then, misspecification concerns are essential.
+
+In these sense, if structural inference is the objective of the work, 
+it may be ill-advised to trust lag-selection criteria with purely focus 
+on forecasting and parsimony as AIC and BIC. 
+Connecting to \cite{ACEL2005WP}, their IC suggest to use 2 lags, the half of the choice taken by the authors.
+Both \cite{Baumeister2025,Long_Lag2025} points on the necessarity to leave forecasting IC for lag selection 
+when the structural inference is the aim of the work, and \cite{GonzalezCasasus_Schorfheide2025} are proposing 
+a criteria that acknowledge the model will also be used for structual inference.
+
+But it is not necessary to wait for state of the art IC to implement long lag VARs.
+\textit{"A simplier heuristic approach would be to plot the structural moments central to the research question 
+against lag length. If the structural conclusion dramatically change as the lag lenght increases,
+that is clearly indicating that truncation is important to the question at hand"} \cite{Long_Lag2025} p. 12.
+
+\textit{"The presumption that adding more lags necessarly leads to prohibitively large unceirtanty is hereby disproven"} \cite{Long_Lag2025} p. 12.
 
 \textcolor{red}{qua devo unire \cite{Long_Lag2025,Baumeister2025}, e se riesco anche \cite{Ludwig2026},
 ed infine anche solite cit rispetto a truncation bias that affects IRFs at every horizon, including 
