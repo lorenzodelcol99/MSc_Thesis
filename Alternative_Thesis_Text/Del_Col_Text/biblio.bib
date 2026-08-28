@@ -1,3 +1,15 @@
+@techreport{ACEL2005WP,
+   author = {David Altig and Lawrence J. Christiano and Martin Eichenbaum and Jesper Lindé},
+   title = {Firm-Specific Capital, Nominal Rigidities and the Business Cycle},
+   institution = {National Bureau of Economic Research},
+   type = {NBER Working Paper},
+   number = {11034},
+   year = {2005},
+   month = {1},
+   note = {Working paper predecessor of the published version (Review of Economic Dynamics, 2011)},
+   abstract = {This paper formulates and estimates a three-shock U.S. business cycle model. The estimated model accounts for a substantial fraction of the cyclical variation in output and is consistent with the observed inertia in inflation. This is true even though firms in the model re-optimize prices on average once every 1.8 quarters. The key feature of our model underlying this result is that capital is firm-specific.}
+}
+
 @article{ACEL2011,
    author = {David Altig and Lawrence J. Christiano and Martin Eichenbaum and Jesper Lindé},
    title = {Firm-Specific Capital, Nominal Rigidities and the Business Cycle},
@@ -42,12 +54,36 @@
    abstract = {We develop a novel method for the identification of monetary policy shocks. By applying natural language processing techniques to documents that Federal Reserve staff prepare in advance of policy decisions, we capture the Fed's information set. Using machine learning techniques, we then predict changes in the target interest rate conditional on this information set and obtain a measure of monetary policy shocks as the residual.}
 }
 
+@article{BallRomer1990,
+   author = {Laurence Ball and David Romer},
+   title = {Real Rigidities and the Non-Neutrality of Money},
+   journal = {Review of Economic Studies},
+   year = {1990},
+   volume = {57},
+   number = {2},
+   pages = {183-203},
+   doi = {10.2307/2297377},
+   abstract = {This paper examines the role of real rigidities in generating substantial non-neutrality of money from small nominal frictions. We show that real rigidities alone do not produce large real effects of nominal shocks, and nominal rigidities alone do not either; but the interaction of real and nominal rigidities can generate large non-neutralities. Real rigidities, which make a firm's desired price depend strongly on other firms' prices, amplify the output effects of a given degree of nominal stickiness.}
+}
+
 @article{Baumeister2025,
    author = {Christiane Baumeister},
    title = {Discussion of "Local Projections or VARs? A Primer for Macroeconomists"},
    journal = {NBER Working Paper Series},
    year = {2025},
    abstract = {In this paper, Montiel Olea, Plagborg-Møller, Qian, and Wolf provide a very useful summary of their recent research agenda that compares the benefits of vector autoregressions (VARs) and local projections (LPs) as alternative ways for conducting impulse response analysis, the main tool for quantifying the dynamic causal effects of one-time shocks on macroeconomic outcomes.}
+}
+
+@article{BoivinGiannoni2006,
+   author = {Jean Boivin and Marc Giannoni},
+   title = {Has Monetary Policy Become More Effective?},
+   journal = {Review of Economics and Statistics},
+   year = {2006},
+   volume = {88},
+   number = {3},
+   pages = {445-462},
+   doi = {10.1162/rest.88.3.445},
+   abstract = {This paper documents that the volatility of output and inflation in response to monetary policy shocks has declined substantially since the early 1980s, and asks whether this reflects a more effective monetary policy or smaller economic disturbances. Estimating a structural model over the pre- and post-1980 periods, the authors find that the change in the estimated policy rule, rather than a reduction in the variance of exogenous shocks, accounts for most of the increased effectiveness of monetary policy.}
 }
 
 @article{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff,
@@ -117,15 +153,17 @@
    abstract = {Macroeconomic research often relies on structural vector autoregressions, (S)VARs, to uncover empirical regularities. Critics argue the method goes awry due to lag truncation: short lag lengths imply a poor approximation to important data-generating processes (e.g. DSGE models). Empirically, short lag length is deemed necessary as increased parametrization induces excessive uncertainty. The paper shows that this argument is incomplete. Longer lag length simultaneously reduces misspecification, which in turn reduces variance.}
 }
 
-@techreport{FVRRS2005,
-   author = {Jesús Fernández-Villaverde and Juan Rubio-Ramírez and Thomas J. Sargent},
-   title = {A, B, C's (and D)'s for Understanding VARs},
-   institution = {National Bureau of Economic Research},
-   type = {NBER Technical Working Paper},
-   number = {308},
-   year = {2005},
-   month = {5},
-   abstract = {This paper studies the connection between two popular representations of a dynamic economic model: the state-space (or ABCD) representation used in solving and simulating economic models, and the vector autoregressive (VAR) representation used for empirical analysis. We provide a simple condition for checking when the two representations are equivalent.}
+@article{FVRRSS2007,
+   author = {Jesús Fernández-Villaverde and Juan F. Rubio-Ramírez and Thomas J. Sargent and Mark W. Watson},
+   title = {ABCs (and Ds) of understanding VARs},
+   journal = {American Economic Review},
+   volume = {97},
+   number = {3},
+   pages = {1021--1026},
+   year = {2007},
+   month = {6},
+   publisher = {American Economic Association},
+   abstract = {The dynamics of a linear (or linearized) dynamic stochastic economic model can be expressed in terms of matrices (A, B, C, D) that define a state space system for a vector of observables. An associated state space system (A, ^ B,C, ^D) determines a vector autoregression for those same observables. We present a simple condition for checking when these two state space systems match up and when they do not when there are equal numbers of economic and VAR shocks. We illustrate our condition with a permanent income example. (JEL C32, E32)}
 }
 
 @book{Lutkepohl1993,
@@ -155,6 +193,36 @@
    volume = {21},
    pages = {1-72},
    abstract = {We analyze the quality of VAR-based procedures for estimating the response of the economy to a shock, assessing whether VAR-based confidence intervals accurately reflect the actual degree of sampling uncertainty associated with impulse response estimates, and the size of the bias in VAR-based impulse responses relative to those confidence intervals.}
+}
+
+% NB: stesso paper di CEV2006 sopra (Christiano, Eichenbaum, Vigfusson,
+% "Assessing Structural VARs", NBER Macroeconomics Annual, vol. 21). Il
+% volume e' nominalmente "2006" ma e' stato pubblicato nel 2007 (vedi il
+% file PDF fornito, "Assessing Structural VARs CEV 2007.pdf"), da cui la
+% chiave CEV2007 qui sotto. Voce aggiunta su richiesta esplicita; le due
+% chiavi (CEV2006 e CEV2007) restano entrambe nel file, e' una scelta
+% tua quale usare in \citet{} -- se preferisci evitare il duplicato,
+% dimmelo e consolido su una sola.
+@article{CEV2007,
+   author = {Lawrence J. Christiano and Martin Eichenbaum and Robert Vigfusson},
+   title = {Assessing Structural VARs},
+   journal = {NBER Macroeconomics Annual},
+   year = {2007},
+   volume = {21},
+   pages = {1-72},
+   abstract = {We analyze the quality of VAR-based procedures for estimating the response of the economy to a shock, assessing whether VAR-based confidence intervals accurately reflect the actual degree of sampling uncertainty associated with impulse response estimates, and the size of the bias in VAR-based impulse responses relative to those confidence intervals.}
+}
+
+@article{SM2007,
+   author = {Frank Smets and Rafael Wouters},
+   title = {Shocks and Frictions in {US} Business Cycles: A {B}ayesian {DSGE} Approach},
+   journal = {American Economic Review},
+   year = {2007},
+   volume = {97},
+   number = {3},
+   pages = {586-606},
+   doi = {10.1257/aer.97.3.586},
+   abstract = {We estimate a dynamic stochastic general equilibrium model with sticky prices and wages, and habit formation, for the US economy using seven macroeconomic time series in a Bayesian framework. The model incorporates several real and nominal frictions and seven orthogonal structural shocks, allowing it to capture the covariance dynamics of output, consumption, investment, hours, wages, inflation and the interest rate. We compare its forecasting performance to standard and Bayesian VARs, and use it to identify the relative importance of different shocks for business cycle fluctuations.}
 }
 
 @techreport{FernandezVillaverde2026,
@@ -200,7 +268,7 @@
 }
 
 @article{Hall_Inoue_Nason_Rossi2012,
-   author = {Alastair R. Hall and Atsushi Inoue and James M. Nason and Barbara Rossi},
+   author = {Barbara Rossi and Alastair R. Hall and Atsushi Inoue and James M. Nason},
    title = {Information Criteria for Impulse Response Function Matching Estimation of DSGE Models},
    journal = {Journal of Econometrics},
    year = {2012},
@@ -209,6 +277,16 @@
    pages = {499-518},
    doi = {10.1016/j.jeconom.2012.05.019},
    abstract = {This paper proposes information criteria to select the impulse responses to be matched, the number of lags in the vector autoregression from which the impulse responses are estimated, and the number of shocks that impinge on the model economy, within the impulse response matching approach to estimating DSGE models.}
+}
+
+@techreport{Humble_VARs_2026,
+   author = {Régis Barnichon and Geert Mesters and Emi Nakamura and Jón Steinsson},
+   title = {Humble VARs},
+   institution = {University of California, Berkeley},
+   type = {Working Paper},
+   year = {2026},
+   month = {7},
+   abstract = {Macroeconomic VARs are often interpreted as models of the entire economy, yet in practice they are typically small systems with few variables and lags. As a result, estimated impulse responses are often highly sensitive to lag length and variable selection. We argue that VARs for impulse response analysis should therefore be viewed more modestly: rather than representing the whole economy, they should only be expected to approximately capture the transmission of the shock of interest. We propose Conditional Cross-Validation (CCV), a criterion for choosing VARs optimized for impulse response estimation. Different VARs can be selected based on the outcome variable, horizon (short- vs. long-run), or the researcher's loss function.}
 }
 
 @article{Jarocinski_Karadi2020,
@@ -223,8 +301,8 @@
    abstract = {We disentangle monetary policy shocks from information shocks by exploiting their different effects on interest rates and stock prices. A central bank's announcement that raises interest rates and stock prices conveys positive information about the economy. An announcement that raises interest rates but depresses stock prices is a pure monetary policy shock. We find that these two shocks have highly significantly different effects on the economy.}
 }
 
-@article{Jordà2005,
-   author = {Òscar Jordà},
+@article{Jorda2005,
+   author = {Jord{\`a}, {\`O}scar},
    title = {Estimation and Inference of Impulse Responses by Local Projections},
    journal = {American Economic Review},
    year = {2005},
@@ -235,7 +313,7 @@
    abstract = {This paper introduces methods to compute impulse responses without specification and estimation of the underlying multivariate dynamic system. The central idea consists in estimating local projections at each period of interest rather than extrapolating into increasingly distant horizons from a given model, as it is done with vector autoregressions (VAR). The advantages of local projections are numerous...}
 }
 
-@article{Jordà2024long_run_mp,
+@article{Jorda2024long_run_mp,
    author = {Oscar Jordà and Sanjay R. Singh and Alan M. Taylor},
    title = {The Long-Run Effects of Monetary Policy},
    journal = {The Review of Economics and Statistics},
@@ -245,7 +323,7 @@
 }
 
 @unpublished{Jorda2025Comment,
-   author = {Òscar Jordà},
+   author = {Jord{\`a}, {\`O}scar},
    title = {Comment: Local Projections or VARs? A Primer for Macroeconomists},
    note = {Discussion of Montiel Olea, Plagborg-Møller, Qian, and Wolf (2025), prepared for the NBER Macroeconomics Annual},
    year = {2025},
@@ -273,7 +351,7 @@
 
 
 @techreport{Montiel-Olea_Plagborg-Moller_Qian_Wolf2025,
-   author = {José Luis Montiel Olea and Mikkel Plagborg-Møller and Eric Qian and Christian K. Wolf},
+   author = {José Luis Montiel-Olea and Mikkel Plagborg-Møller and Eric Qian and Christian K. Wolf},
    title = {Local Projections or VARs? A Primer for Macroeconomists},
    institution = {National Bureau of Economic Research},
    type = {NBER Working Paper},
@@ -281,6 +359,19 @@
    year = {2025},
    month = {5},
    abstract = {We provide a practical guide to the choice between local projections (LPs) and vector autoregressions (VARs) for the estimation of impulse responses in macroeconomics, summarizing the theoretical equivalence results, the finite-sample bias-variance trade-off, and practical recommendations for applied researchers.}
+}
+
+@article{MirandaAgrippinoRicco2021,
+   author = {Silvia Miranda-Agrippino and Giovanni Ricco},
+   title = {The transmission of monetary policy shocks},
+   journal = {American Economic Journal: Macroeconomics},
+   volume = {13},
+   number = {3},
+   pages = {74--107},
+   year = {2021},
+   month = {7},
+   publisher = {American Economic Association},
+   abstract = {Commonly used instruments for the identification of monetary policy disturbances are likely to combine the true policy shock with information about the state of the economy due to the information disclosed through the policy action. We show that this signaling effect of monetary policy can give rise to the empirical puzzles reported in the literature, and propose a new high-frequency instrument for monetary policy shocks that accounts for informational rigidities. We find that a monetary tightening is unequivocally contractionary, with deterioration of domestic demand, labor and credit market conditions as well as of asset prices and agents’ expectations. (JEL D82, D84, E32, E43, E52, E58, G12)}
 }
 
 @article{Plagborg-Moller_Wolf2021,
@@ -315,6 +406,42 @@
    pages = {2048-2064},
    doi = {10.1016/j.jmoneco.2006.09.002},
    abstract = {This paper studies the conditions under which a DSGE model admits a finite-order VAR representation of its equilibrium law of motion, and the consequences for the use of structural VARs to estimate the effects of shocks and to evaluate DSGE models.}
+}
+
+@incollection{RotembergWoodford1997,
+   author = {Julio J. Rotemberg and Michael Woodford},
+   title = {An Optimization-Based Econometric Framework for the Evaluation of Monetary Policy},
+   booktitle = {NBER Macroeconomics Annual 1997},
+   editor = {Ben S. Bernanke and Julio J. Rotemberg},
+   publisher = {MIT Press},
+   year = {1997},
+   volume = {12},
+   pages = {297-346},
+   abstract = {This paper develops a small structural econometric model, derived from the optimizing behaviour of households and firms, for use in the quantitative evaluation of monetary policy rules. Grounding the structural relations in individual optimization allows the analysis to respond to the Lucas critique and to derive a utility-based welfare criterion for comparing alternative policies.}
+}
+
+@article{Shapiro_Watson88,
+   author = {Matthew Shapiro and Mark Watson},
+   title = {Sources of Businss Cycle Fluctuations},
+   journal = {NBER, Macroeconomi Annuals 1988},
+   year = {1988},
+   volume = {},
+   number = {},
+   pages = {},
+   doi = {},
+   abstract = {}
+}
+
+@article{Iacoviello2005,
+   author = {Matteo Iacoviello},
+   title = {House Prices, Borrowing Constraints, and Monetary Policy in the Business Cycle},
+   journal = {American Economic Review},
+   year = {2005},
+   volume = {95},
+   number = {3},
+   pages = {739-764},
+   doi = {10.1257/0002828054201477},
+   abstract = {This paper develops and estimates a monetary business cycle model with nominal loans and collateral constraints tied to housing values. Demand shocks move housing and nominal prices in the same direction, and are amplified and propagated over time. The financial accelerator is not uniform: nominal debt dampens supply shocks, stabilizing the economy under interest rate control. Structural estimation supports two key model features: collateral effects dramatically improve the response of aggregate demand to housing price shocks, and nominal debt improves the sluggish response of output to inflation surprises.}
 }
 
 @techreport{Theodoridis2011,

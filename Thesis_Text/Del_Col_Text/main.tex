@@ -184,8 +184,6 @@ $\xi_p$''.\footnote{\citet[][p.~227]{ACEL2011}.} Long-lag VARs push the estimate
 precisely into that region.
 
 \subsection{Related Literature}
-% [target: ~1 pp. Tre blocchi, ogni paper una volta sola, ogni blocco chiuso da una riga di
-% contributo. NON cinque blocchi come nelle slide: non c'e' spazio.]
 
 \textbf{Long-lag VARs.} 
 \\
@@ -491,11 +489,13 @@ Which is what typically keeps practitioners away from using long lags is the sta
 becomes perveasive. In the sense conentional wisdom thiks that, as the lags increases 
 the number of parameters rapidly escalate, therby reducing the degrees of freedom and making confidence 
 interval width prohibitevely large.
+\\
 
 \cite{Long_Lag2025} explore the trivial solution to short lag VARs, that is, dramatic increase in the 
 lag lenght.
 
 \subsection{Long-Lag VARs}
+\label{sec:long-lag_VARs}
 Their central point is that standard intuition is just a portion of the story, \textit{"in face of misspecification due to 
 lag truncation, increasing the lag length can actually reduce unceirtanty"} \cite{Long_Lag2025} p. 2.
 
@@ -520,17 +520,13 @@ and they estimate the bivariate VARs \footnote{For \cite{SM2007}, they reduce th
 to maitanin consistency with the other two exercises. They keep GDP-growth and interest rates.}
 representations of the DSGE choosing different increasing the lag choice.
 When comparing VARs of different lag-lenght, they restrict the sample of effective observations as $T = 170$ 
-ensuting that lag inizialization does not affect sample size.\footnote{\textcolor{red}{Cosa che io non farò, e difenderò
-dicendo che tanto le stime non cambiano di molto, e che anzi rimandono consistenti, o che comunque in generale
-in pratica poi si usano tutti i dati disponibili, non si butta via niente, quindi se poi ai fatti uno deve 
-decidere tra un VAR 4 e un VAR 12 non si mette, nel VAR 4, a buttare via 8 osservazioni per avere lo stesso numero
-di osservazioni del lag 12, meglio usare tutti i dati. in particolare questo discorso vale ancora di più 
-nel momento in cui si aumenta drasticamente il numero di lag (come negli esercizi di \cite{Long_Lag2025}, e non nel mio)} }
+ensuting that lag inizialization does not affect sample size.
 Unceirtanty bands are computed as in \textcolor{red}{(Sims and Zha 1999, Canova 2007, Hulig 2005.)}, in this sense 
 it is used a the Normal-Inverse Wishart prior, which have good aproximation to frequentist bootstapped intervals.
 It does not weigth differently short vs. long lags as would do other prios like the Minnesota one.
 
 \subsection{Long-Lag Benefits}
+\label{sec:long-lag_benefits}
 \cite{Long_Lag2025} analyse how the truncated VARs of the three DSGE with VAR($\infty$) 
 representation behave. 
 The results are much in favor for long-lag VARs.
@@ -588,7 +584,8 @@ At some point the number of parameters to estimate will be greater than the numb
 It is shown by \cite{Long_Lag2025} that the degrees of freedom limit is far from being reached by 
 small scale VAR with one year of lags. In this work replicating \cite{ACEL2005WP} we stand in the Frequentist side ,
 so I won't talk regularization tecquicues or how easy is to implement long-lag VARs in Bayesian as
-they inherently avoid over-parametrisation..
+they inherently avoid over-parametrisation.
+
 Given the dimension of VAR in analysis, I am going to show that even being close to the limit, 
 it is possible to estimate long(er)-lag VARs in the Frequentist approach which have structural implications.
 
@@ -613,7 +610,9 @@ then, misspecification concerns are essential.
 
 In these sense, if structural inference is the objective of the work, 
 it may be ill-advised to trust lag-selection criteria with purely focus 
-on forecasting and parsimony as AIC and BIC. 
+on forecasting and parsimony as AIC and BIC. These lag selection criteria 
+are not designed fro the pourpose of dynamic causal analysis, 
+parsimony introduces truncation bias \cite{Humble_VARs_2026,Baumeister2025}. 
 Connecting to \cite{ACEL2005WP}, their IC suggest to use 2 lags, the half of the choice taken by the authors.
 Both \cite{Baumeister2025,Long_Lag2025} points on the necessarity to leave forecasting IC for lag selection 
 when the structural inference is the aim of the work, and \cite{GonzalezCasasus_Schorfheide2025} are proposing 
@@ -628,35 +627,88 @@ that is clearly indicating that truncation is important to the question at hand"
 
 \textcolor{red}{qua devo unire \cite{Long_Lag2025,Baumeister2025}, e se riesco anche \cite{Ludwig2026},
 ed infine anche solite cit rispetto a truncation bias that affects IRFs at every horizon, including 
-those at h < p.}
+those at h < p. Devo riuscire a chiudere con qualcosa tipo : in IRF matching we are matching h horizons 
+of IRFs, so even if the research question is about short effects, we need to take in mind that we are matching 
+h horizons, so we need h consistent estiamtes of IRFs, therefore p should be consistent with h}
 
 % =============================================================
 % 4. EMPIRICAL RESULTS                              [target: 11 pp]
 % =============================================================
 \section{Empirical Results}
 \label{sec:results}
+In this section I present results from enriched dynamic structure of \cite{ACEL2005WP} VAR
+used to estimate their DSGE parameters.
+Doing this exercise, I extend the work of \cite{Long_Lag2025} in three different aspects.
+
+First, in MonteCarlo laboratory that \cite{Long_Lag2025} have created to evaluate the three DSGE that have choose 
+to use to generate data, all respect an important assumption, \cite{FVRRSS2007} Poor Mans condition.
+All the DSGE admits a VAR($\infty$) representation, and because of this they can evaluate the performance 
+of truncated VARs, which are full informative. Are bivariate, have two variables and two shock.
+The VAR used in \cite{ACEL2005WP,ACEL2011} contronts three shocks with ten observable variables.
+The system is therefore stocastic singular, there is no exact VAR($\infty$) representation of the DSGE that 
+the VAR is being used to estimate for. But this is not a caveat, is a feauture, is one of the reasons why 
+the ACEL used to estimate their model a partial information approach as IRF minimum distance estimator.
+\\
+
+The second departure as previously anticipated in the Section \ref{sec:long-lag_VARs} relates on the dimension of 
+the VAR emploied in this work.
+Becuase the three DGP processes in \cite{Long_Lag2025} are two-variable systems, their VAR remains cheapely 
+parametrised even at long lag lenghts, and increasing $p$ costs relatively little in terms of degrees of freedom.
+The ACEL VAR doess not enjoy that luxury. With $K = 10$ variables, a constant and $p$ lags, each equation carries 
+$10p + 1$ coefficients, and the sample runs from 1959:Q2 to 2001:Q4, that is $171$ quarterly observations 
+before lags are consumed. I will show that concerns related to CI explosions migth not accour even in limiting cases.
+\\
+
+Three, which is strictly connected to the second, I am using as baseline result the exercises where I am not 
+restricting the sample size to the one used in the longest-lag VAR.
+The reason is why the results does not vary much, and when they do they do by a small amount and consistenlty 
+with the baseline when the common available data is used. it is shown in Appendix \ref{app:robustness}.
+The other reason is that, in practice, if a researcher has to decide to use a longer-lag VAR respect the short one, 
+the short VAR wpuld be still estimated with as many data points available. 
+In particular this argument is even more valid when the VAR has a lot of variables or if the available data 
+points is little.
+
+\subsection{VARs IRFs}
+\label{sec:results_VARs_IRFs}
+The baseline lag choice of ACEL's VAR is $p = 4$, I re-estimate their DSGE matching it with VARs of 
+lag $p = 8$ and $12$, raisig the lags to one up to two and three years.
+
+In Figure \ref{fig:var_irfs_lag4} are plotted the VARs' IRFs to a monetary policy shock
+ across the different lag structures with $90\%$ bootstrap confidence intervals.
+ 
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+    \caption{VARs IRFs across different lag struture}
+    \label{fig:var_irfs_lag4}
+\end{figure}
+\FloatBarrier
 
 
 \subsection{DSGE structural parameters}
 \label{sec:results_params}
+In this section I analyse what consequences enriched dynamics in the VAR have brought in the
+DSGE deep parameters.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
 \FloatBarrier
 
-
-
 \subsection{Implied duration and the collapse of the firm-specific mechanism}
-
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-\FloatBarrier
 
 The Chi parameter
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\FloatBarrier
+
+\subsection{Calvo Price Parameters}
+\label{sec:calvo_price_params}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
 \FloatBarrier
 
