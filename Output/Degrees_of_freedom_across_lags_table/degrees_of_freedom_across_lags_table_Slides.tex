@@ -1,0 +1,17 @@
+\centering
+\scriptsize
+\begin{tabular}{lccc}
+    \toprule
+     & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
+    \midrule
+    Usable observations $T_u$ & 167 & 163 & 159 \\
+    Coefficients per equation $k$ & 41 & 81 & 121 \\
+    Degrees of freedom $T_u-k$ & 126 & 82 & 38 \\
+    Observations per parameter $T_u/k$ & 4.07 & 2.01 & 1.31 \\
+    Coefficients, full system & 410 & 810 & 1{,}210 \\
+    \bottomrule
+\end{tabular}
+
+\vspace{0.15cm}
+\raggedright
+\tiny{\textit{Note:} $T$ = raw sample size, $T_u$ = usable sample size ($T_u=T-p$); $k$ = regressors per equation ($k=10p+1$; $K=10$ variables, $p$ lags, one constant). Raw sample: $T=171$ quarterly observations (1959:Q2--2001:Q4), of which $p$ are consumed as initial conditions. OLS requires $k<T_u$, i.e.\ $10p+1 < 171-p$, i.e.\ $p \leq 15$; at $p=15$ only 5 degrees of freedom per equation remain.}

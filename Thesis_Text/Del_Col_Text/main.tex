@@ -662,7 +662,7 @@ before lags are consumed. I will show that concerns related to CI explosions mig
 Three, which is strictly connected to the second, I am using as baseline result the exercises where I am not 
 restricting the sample size to the one used in the longest-lag VAR.
 The reason is why the results does not vary much, and when they do they do by a small amount and consistenlty 
-with the baseline when the common available data is used. it is shown in Appendix \ref{app:robustness}.
+with the baseline when the common available data is used. it is shown in Appendix \ref{app:VAR_aligned}.
 The other reason is that, in practice, if a researcher has to decide to use a longer-lag VAR respect the short one, 
 the short VAR wpuld be still estimated with as many data points available. 
 In particular this argument is even more valid when the VAR has a lot of variables or if the available data 
@@ -671,7 +671,9 @@ points is little.
 \subsection{VARs IRFs}
 \label{sec:results_VARs_IRFs}
 The baseline lag choice of ACEL's VAR is $p = 4$, I re-estimate their DSGE matching it with VARs of 
-lag $p = 8$ and $12$, raisig the lags to one up to two and three years.
+lag $p = 8$ and $12$, raisig the lags to one up to two and three years. In Appendix \ref{app:VAR_aligned} 
+are presented the results when the sample is restricted for all the estimations to the one available 
+to the VAR with twelve lags.
 
 In Figure \ref{fig:var_irfs_lag12} are plotted the VARs' IRFs to a one standard deviation monetary 
 policy shock easing across different lag structures with $90\%$ bootstrap confidence intervals of the VAR($4$).
@@ -688,8 +690,9 @@ Inflation and Fed Funds Rate are expressed in units of percentage points at quar
 \end{figure}
 \FloatBarrier
 
-The green solid line with grey 90\% bootstrap confidence interval are shown the ACEL baseline results from the 
-VAR with four lags. In orange dashed line the IRFs VAR(8), and in blue solid line the VAR(12).
+The green solid line with grey 90\% bootstrap confidence interval are shown the \cite{ACEL2005WP} 
+baseline results from the VAR with four lags. In orange dashed line the IRFs VAR(8), 
+and in blue solid line the VAR(12).
 
 I start desribing Figure \ref{fig:var_irfs_lag12} from some evidence that does not change dramatically.
 First, the response of money growth rate to a monetary policy shock,
@@ -714,12 +717,83 @@ five quarters and then goes to $0$.
 The VAR($12$) inflation response need some more attention as it seems to have a puzzeling response 
 in the first year after the easing shock happens.
 It seems to be very much more intertial respect the baseline, but on the other hand is consistent with all 
-the other response variables that are inertial too. Having in mind ACEL theoretical mechanism we can interpret 
+the other response variables that are inertial too. Having in mind \cite{ACEL2005WP} theoretical mechanism we can interpret 
 the inflation response being really slow in the first year after the shock, or even negative, because firms 
 have such strong frictions that allow the portion of optimisers to re-set prices once every more than one year, 
 making inflation and real variables such as output, consumption and average hours being slow to react.
 
+Given the persistence and slow response of the variables in the VAR($12$), these can be consisntent with 
+ACEL mechanism if the price stickiness is high implying low implied time duration of prices.
 
+\subsection{Unceirtanty around longer lags estimates}
+Conventional wisdom thinks that increasing lag lenght increase parametrisation, therefore reduce the degrees 
+of freedom making uncertainty around the estimates larger. As well explained by \cite{Long_Lag2025}, 
+this is for sure part of the story.
+Misspecification lowers the variance of the residuals, and that can offset the imprecision caused by additional parameters.
+As preaviously mentioned, in a bivariate system there is plenty of room to increase lag lenght without 
+having big concerns relative to overparametrisation. In ACEL VAR the concerns are more than realistic, 
+the parametrisation grows by a factor of three already large relative to the sample.
+If coinfidence intervals were going to explode anywhere, they would do it here.
+\\
+
+They do not.
+Table \ref{tab:degrees_of_freedom} sumarise the coefficients and degrees of freedom of the exercise.
+The baseline exercise at $p = 4$, the VAR has $410$ coefficients, $167$ available data points and $41$ 
+coefficient per regression.
+At $p = 12$ the system carries 1210 coefficients, each equation is estimated on $159$ observations with 
+$121$ regressors, and only 28 degrees of freedom survive.
+The degrees of freedom limit, at which the number of regressors per equation $k$ is greater than the number 
+of usable observations $T_u$, pointed out by \cite{Long_Lag2025} in this exercise is at $p = 16$.
+
+Tripling the lag lenght relative to the ACEL baseline is therefore not a conservative perturbation, 
+but it is nearly the largest perturbation the data permit.
+This maks the exercise a demanding test for the central claim in \cite{Long_Lag2025}.
+
+\IfFileExists{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}
+    {\input{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:degrees_of_freedom}
+\FloatBarrier
+
+Figure \ref{fig:var_irfs_all_ci} plots the VARs' IRFs to a monetary policy shock at each lag order, 
+togeter with their own $95$ percent bootstrap confidence bands.
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
+    \caption{VARs' IRFs to a Montetary Policy shock across different lag struture, 95\% CI}
+    \label{fig:var_irfs_all_ci}
+\end{figure}
+\FloatBarrier
+
+The bands at $p = 12$ are not wider that those at $p = 4$ for several variables; inflation, Fed Funds rate, 
+real wage, velocity and relative price of investment, they are visibly narrower despite the increased parametrisation 
+documented in Table \ref{tab:degrees_of_freedom}.
+\textcolor{red}{On average, the width of the CI decrease by XXX}
+Therefore suggesting that the variance reduction mechanism 
+of \cite{Long_Lag2025} operates even at the parametrisation fronteer, at least in this work.
+
+The first objection would be that this is simply overfitting: a VAR with 121 regressors
+per equation fits the sample closely, the estimated residuals shrink, and confidence bands
+computed from those residuals shrink with them. The objection needs to be taken seriously,
+because in-sample it cannot be dismissed; reduced misspecification and overfitting have
+the same in-sample signature, namely a smaller residual variance.
+
+What can be said here, is to point on two direction, misspecification reduction, and bootstrap.
+Starting from the latter, the bootstrap bands are constructed re-estimating the entire VAR 
+on each artificial sample, so the unceirtanty introduced by the parameters is propagated inot the repoted 
+intervals rather than being conditioned away. If the estimator would have been unstable at $p = 12$, the
+re-estimated responses would have varied wildy across draws, therefore, the bands would have widened accordingly.
+
+In this sense, bootstrap rules out the mechanical part of the concern, since parameter unceirtanty is not being surpressed.
+\textcolor{red}{What it cannot be be omitted, is that the residual variance is itself untestated, because the bootstrap resamples 
+from the fitted residuals of the very model under scrunity: NON CONVITNO DI QUESTO, è DI CLAUDE}
+
+Misspecification reduction is at the hearth of \cite{Long_Lag2025} point.
+
+\section{Structural Implications}
 \subsection{DSGE structural parameters}
 \label{sec:results_params}
 In this section I analyse what consequences enriched dynamics in the VAR have brought in the
@@ -728,6 +802,7 @@ DSGE deep parameters.
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:params_across_lags}
 \FloatBarrier
 
 \subsection{Implied duration and the collapse of the firm-specific mechanism}
@@ -802,8 +877,8 @@ satisfy.
 \section{Monte Carlo Inference on the Calvo Parameters}
 \label{app:montecarlo}
 
-\section{Robustness}
-\label{app:robustness}
+\section{VAR Aligned}
+\label{app:VAR_aligned}
 
 \section{Replication Files and Code}
 \label{app:code}
