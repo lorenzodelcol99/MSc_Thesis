@@ -673,18 +673,51 @@ points is little.
 The baseline lag choice of ACEL's VAR is $p = 4$, I re-estimate their DSGE matching it with VARs of 
 lag $p = 8$ and $12$, raisig the lags to one up to two and three years.
 
-In Figure \ref{fig:var_irfs_lag4} are plotted the VARs' IRFs to a monetary policy shock
- across the different lag structures with $90\%$ bootstrap confidence intervals.
- 
+In Figure \ref{fig:var_irfs_lag12} are plotted the VARs' IRFs to a one standard deviation monetary 
+policy shock easing across different lag structures with $90\%$ bootstrap confidence intervals of the VAR($4$).
+All variables, exept for inflation and the interest rate are expressed in percent terms.
+Inflation and Fed Funds Rate are expressed in units of percentage points at quarterly rate and annual rate, respectively.
+
 \begin{figure}[htbp]
     \centering
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
         {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-    \caption{VARs IRFs across different lag struture}
-    \label{fig:var_irfs_lag4}
+    \caption{VARs' IRFs to a Montetary Policy shock across different lag struture}
+    \label{fig:var_irfs_lag12}
 \end{figure}
 \FloatBarrier
+
+The green solid line with grey 90\% bootstrap confidence interval are shown the ACEL baseline results from the 
+VAR with four lags. In orange dashed line the IRFs VAR(8), and in blue solid line the VAR(12).
+
+I start desribing Figure \ref{fig:var_irfs_lag12} from some evidence that does not change dramatically.
+First, the response of money growth rate to a monetary policy shock,
+consistently with the baseline VAR($4$), the effect is completed within one year.
+Second, there is a liquidity effect, money growth and interest rate move in opposite direction after the shock.
+Third, velocity co-moves with the interest rate which fall in response to the shock, and then rise.
+Fourth, price of investment seems not to have an impact, at intermediate horizons have some divergence respect the baseline.
+In general, all the point estimates across different lags lies inside the confidence intervals of the VAR($4$).
+
+Real wage in the VAR($12$) have the hump shape respect the baseline which is flat.
+
+Some important responses does not change in the magnitude or sign, nor in the shape, but in the timing.
+Output, inflation, capacity utilization, average hours, consumption, velocity and investment 
+as the lag choice increase, the timing of the formation of the hump shape, and its peack is shifted in time.
+On average, the peak effect in the longer-lag VARs occurs one year after respect the baseline results, with 
+the exception of consumption in the VAR($8$), response is indistinguable from the baseline.
+
+Fed Funds rate standard deviation shock change from being a $60$ basis point at horizon $h = 0$ which then 
+decrease its impact almost to $0$ in two quarters, to a more realistic $25$ basis points shock that lasts for 
+five quarters and then goes to $0$.
+
+The VAR($12$) inflation response need some more attention as it seems to have a puzzeling response 
+in the first year after the easing shock happens.
+It seems to be very much more intertial respect the baseline, but on the other hand is consistent with all 
+the other response variables that are inertial too. Having in mind ACEL theoretical mechanism we can interpret 
+the inflation response being really slow in the first year after the shock, or even negative, because firms 
+have such strong frictions that allow the portion of optimisers to re-set prices once every more than one year, 
+making inflation and real variables such as output, consumption and average hours being slow to react.
 
 
 \subsection{DSGE structural parameters}
