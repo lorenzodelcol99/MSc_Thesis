@@ -1,0 +1,16 @@
+\begin{table}[htpb]
+    \centering
+    \scriptsize
+    \begin{tabular}{ccccc}
+    \toprule
+    \textbf{Lag} & \textbf{Fit gain} & \textbf{AIC cost} & \textbf{HQ cost} & \textbf{SC cost} \\
+    \midrule
+    $p = 8$ & 2.6605 & 5.0314 & 8.1667 & 12.7520 \\
+    $p = 12$ & 10.9316 & 10.0629 & 16.3333 & 25.5039 \\
+    \bottomrule
+    \end{tabular}
+
+    \vspace{0.15cm}
+    \raggedright
+    \tiny{\textit{Note:} Relative to VAR(4). Fit gain is the fall in $\log\det\hat{\Sigma}$; the other columns are the AIC/HQ/SC penalty growth. The longer lag wins a criterion when its cost is below the fit gain.}
+\end{table}

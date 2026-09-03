@@ -1,0 +1,18 @@
+\begin{table}[htpb]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Benefit of Extra Lags versus Cost of Extra Parameters (Relative to VAR(4))}
+    \label{tab:benefit_vs_cost}
+    \begin{tabular}{ccccc}
+    \toprule
+    \textbf{Lag order} & \textbf{Fit gain} & \textbf{AIC cost} & \textbf{HQ cost} & \textbf{SC cost} \\
+    \midrule
+    $p = 8$ & 2.6605 & 5.0314 & 8.1667 & 12.7520 \\
+    $p = 12$ & 10.9316 & 10.0629 & 16.3333 & 25.5039 \\
+    \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} All magnitudes relative to the VAR(4) baseline. Fit gain is the fall in $\log\det\hat{\Sigma}$, the benefit of the longer lag order; the remaining columns are the corresponding growth in the AIC, HQ and SC parameter penalty, the cost. A criterion favours the longer lag order over VAR(4) whenever its cost column is smaller than the fit gain.}
+\end{table}

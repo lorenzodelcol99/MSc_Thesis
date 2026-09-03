@@ -1,0 +1,17 @@
+\begin{table}[htpb]
+    \centering
+    \scriptsize
+    \begin{tabular}{ccccc}
+    \toprule
+    \textbf{Lag} & \textbf{$\log\det\hat{\Sigma}$} & \textbf{AIC} & \textbf{HQ} & \textbf{SC} \\
+    \midrule
+    $p = 4$ & -103.1111 & -98.0796 & \textbf{-94.9444} & \textbf{-90.3591} \\
+    $p = 8$ & -105.7716 & -95.7087 & -89.4383 & -80.2677 \\
+    $p = 12$ & -114.0426 & \textbf{-98.9483} & -89.5426 & -75.7867 \\
+    \bottomrule
+    \end{tabular}
+
+    \vspace{0.15cm}
+    \raggedright
+    \tiny{\textit{Note:} Bold marks the lag order each criterion selects (lowest value). Selected lag: AIC $\to p=12$, HQ $\to p=4$, SC $\to p=4$.}
+\end{table}
