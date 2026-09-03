@@ -9,13 +9,13 @@
         \textbf{Model Specification} & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
         \midrule
 
-        \multicolumn{4}{l}{\textit{Homogeneous Capital Model (validity check, $\chi \equiv 1$)}} \\
-        $\chi_{hom}$ & 0.9989 & 1.0010 & 0.9977 \\
-        & (0.0000) & (0.0000) & (0.0000) \\
+        \multicolumn{4}{l}{\textit{Homogeneous Capital Model ($\chi \equiv 1$)}} \\
+        $\chi_{hom}$ & 1.0000 & 1.0000 & 1.0000 \\
+        & (-) & (-) & (-) \\
 
         \midrule
         \multicolumn{4}{l}{\textit{Firm-Specific Capital Model}} \\
-        $\chi_{fs}$ & 0.0307 & 0.2030 & 0.8671 \\
+        $\chi_{fs}$ & 0.0307 & 0.2030 & 0.8671*** \\
         & (0.0596) & (0.1667) & (0.1698) \\
 
         \bottomrule
@@ -23,5 +23,5 @@
 
     \vspace{0.2cm}
     \centering
-    \scriptsize{\textit{Note:} $\chi$ is recovered by inverting $\gamma = \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\chi$ at the estimated $\gamma$ and implied $\xi_p$. $\chi_{hom} \equiv 1$ by construction (Proposition 1(i) in \citealp{ACEL2011}); reported here only as a check that the numerical pipeline is consistent. Standard errors in parentheses are computed from the same 1{,}000{,}000-draw joint Monte Carlo used for the Calvo parameters' standard errors, applying the formula above draw-by-draw. The 90\% Monte Carlo percentile interval for $\chi_{fs}$ is $[0.0067,\,0.0879]$, $[0.0516,\,0.5101]$, $[0.3704,\,0.9270]$ for $p=4,8,12$ respectively; see the discussion of non-normality of the Calvo/chi Monte Carlo distributions in the text.}
+    \scriptsize{\textit{Note:} Standard errors in parentheses. Significance: *** $p<0.01$, ** $p<0.05$, * $p<0.10$. $\chi$ is recovered by inverting $\gamma = \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\chi$ at the estimated $\gamma$ and implied $\xi_p$; $\chi_{hom} \equiv 1$ by construction (Proposition 1(i) in \citealp{ACEL2011}) and carries no standard error. Standard errors for $\chi_{fs}$ are computed from the same 1{,}000{,}000-draw joint Monte Carlo used for the Calvo parameters.}
 \end{table}

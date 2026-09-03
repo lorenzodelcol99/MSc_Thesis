@@ -1,24 +1,27 @@
-    \begin{table}[htpb]
-        \centering
-        \scriptsize
-        \renewcommand{\arraystretch}{1.1}
-        \begin{tabular}{lccc}
-            \toprule
-            \textbf{Model Specification} & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
-            \midrule
+\centering
+\small
 
-            \multicolumn{4}{l}{\textit{Homogeneous Capital Model}} \\
-            Calvo parameter ($\xi_{p, hom}$) & 0.82 & 0.82 & 0.90 \\
-            Implied duration (quarters)      & \textbf{5.6} & \textbf{5.6} & \textbf{9.6} \\
-
-            \midrule
-            \multicolumn{4}{l}{\textit{Firm-Specific Capital Model}} \\
-            Calvo parameter ($\xi_{p, fs}$) & 0.34 & 0.64 & 0.89 \\
-            Implied duration (quarters)     & \textbf{1.5} & \textbf{2.8} & \textbf{9.0} \\
-
-            \bottomrule
-        \end{tabular}
-    \end{table}
-
+\begin{table}[htpb]
     \centering
-    \tiny{\textit{Note:} Implied duration is calculated as $D = 1/(1 - \xi_p)$.}
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Model Specification} & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
+        \midrule
+
+        \multicolumn{4}{l}{\textit{Homogeneous Capital Model}} \\
+        Calvo parameter ($\xi_{p, hom}$) & 0.82 & 0.82 & 0.90 \\
+        Implied duration (quarters)      & \textbf{5.6} & \textbf{5.6} & \textbf{9.6} \\
+
+        \midrule
+        \multicolumn{4}{l}{\textit{Firm-Specific Capital Model}} \\
+        Calvo parameter ($\xi_{p, fs}$) & 0.34 & 0.64 & 0.89 \\
+        Implied duration (quarters)     & \textbf{1.5} & \textbf{2.8} & \textbf{9.0} \\
+
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\vspace{0.2cm}
+\raggedright
+\tiny{\textit{Note:} Implied duration is calculated as $D = 1/(1 - \xi_p)$.}

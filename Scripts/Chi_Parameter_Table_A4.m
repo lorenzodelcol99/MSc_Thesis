@@ -59,10 +59,10 @@ end
 
 n_draws_str = regexprep(sprintf('%d', mc(1).N_draws), '(\d)(?=(\d{3})+$)', '$1{,}');
 
-%% 2. Point estimates and Monte Carlo standard errors of chi
-chi_hom_pe = zeros(1, numel(lags));
+%% 2. Point estimate and Monte Carlo standard error of chi_fs
+% chi_hom is not computed here: it is exactly 1 by construction
+% (Proposition 1(i)), so it is written directly into the table below.
 chi_fs_pe  = zeros(1, numel(lags));
-chi_hom_se = zeros(1, numel(lags));
 chi_fs_se  = zeros(1, numel(lags));
 chi_fs_p05 = zeros(1, numel(lags));
 chi_fs_p95 = zeros(1, numel(lags));
@@ -71,25 +71,21 @@ for i = 1:numel(lags)
     gam  = data(i).xx(18);      % Phillips curve slope, point estimate
     beta = data(i).par(2);      % discount factor, calibrated (not drawn in the MC)
 
-    % --- point estimates, from (*) inverted ---
-    chi_hom_pe(i) = chi_from_gamma(gam, data(i).ksiph, beta);
-    chi_fs_pe(i)  = chi_from_gamma(gam, data(i).ksip,  beta);
+    % --- point estimate, from (*) inverted ---
+    chi_fs_pe(i) = chi_from_gamma(gam, data(i).ksip, beta);
 
-    % --- Monte Carlo distribution of chi, draw-by-draw ---
-    gam_draws   = mc(i).simulated_params_clean(:, 18);
-    ksiph_draws = mc(i).sim_ksiph_clean;
-    ksip_draws  = mc(i).sim_ksip_clean;
+    % --- Monte Carlo distribution of chi_fs, draw-by-draw ---
+    gam_draws  = mc(i).simulated_params_clean(:, 18);
+    ksip_draws = mc(i).sim_ksip_clean;
 
-    chi_hom_draws = chi_from_gamma(gam_draws, ksiph_draws, beta);
-    chi_fs_draws  = chi_from_gamma(gam_draws, ksip_draws,  beta);
+    chi_fs_draws = chi_from_gamma(gam_draws, ksip_draws, beta);
 
-    chi_hom_se(i) = std(chi_hom_draws);
     chi_fs_se(i)  = std(chi_fs_draws);
     chi_fs_p05(i) = prctile(chi_fs_draws, 5);
     chi_fs_p95(i) = prctile(chi_fs_draws, 95);
 
-    fprintf('p=%d: chi_hom = %.4f (SE %.4f, should be ~1) | chi_fs = %.4f (SE %.4f, 90%% CI [%.4f, %.4f])\n', ...
-        lags(i), chi_hom_pe(i), chi_hom_se(i), chi_fs_pe(i), chi_fs_se(i), chi_fs_p05(i), chi_fs_p95(i));
+    fprintf('p=%d: chi_fs = %.4f (SE %.4f, 90%% CI [%.4f, %.4f])\n', ...
+        lags(i), chi_fs_pe(i), chi_fs_se(i), chi_fs_p05(i), chi_fs_p95(i));
 end
 
 %% 3. Creating the LaTeX table
@@ -107,13 +103,14 @@ fprintf(fileID, '        \\toprule\n');
 fprintf(fileID, '        \\textbf{Model Specification} & \\textbf{VAR $p=4$} & \\textbf{VAR $p=8$} & \\textbf{VAR $p=12$} \\\\\n');
 fprintf(fileID, '        \\midrule\n\n');
 
-fprintf(fileID, '        \\multicolumn{4}{l}{\\textit{Homogeneous Capital Model (validity check, $\\chi \\equiv 1$)}} \\\\\n');
-fprintf(fileID, '        $\\chi_{hom}$ & %.4f & %.4f & %.4f \\\\\n', chi_hom_pe(1), chi_hom_pe(2), chi_hom_pe(3));
-fprintf(fileID, '        & (%.4f) & (%.4f) & (%.4f) \\\\\n\n', chi_hom_se(1), chi_hom_se(2), chi_hom_se(3));
+fprintf(fileID, '        \\multicolumn{4}{l}{\\textit{Homogeneous Capital Model ($\\chi \\equiv 1$)}} \\\\\n');
+fprintf(fileID, '        $\\chi_{hom}$ & %.4f & %.4f & %.4f \\\\\n', 1, 1, 1);
+fprintf(fileID, '        & (-) & (-) & (-) \\\\\n\n');
 
 fprintf(fileID, '        \\midrule\n');
 fprintf(fileID, '        \\multicolumn{4}{l}{\\textit{Firm-Specific Capital Model}} \\\\\n');
-fprintf(fileID, '        $\\chi_{fs}$ & %.4f & %.4f & %.4f \\\\\n', chi_fs_pe(1), chi_fs_pe(2), chi_fs_pe(3));
+fprintf(fileID, '        $\\chi_{fs}$ & %s & %s & %s \\\\\n', ...
+    format_pe(chi_fs_pe(1), chi_fs_se(1)), format_pe(chi_fs_pe(2), chi_fs_se(2)), format_pe(chi_fs_pe(3), chi_fs_se(3)));
 fprintf(fileID, '        & (%.4f) & (%.4f) & (%.4f) \\\\\n\n', chi_fs_se(1), chi_fs_se(2), chi_fs_se(3));
 
 fprintf(fileID, '        \\bottomrule\n');
@@ -121,24 +118,35 @@ fprintf(fileID, '    \\end{tabular}\n\n');
 
 fprintf(fileID, '    \\vspace{0.2cm}\n');
 fprintf(fileID, '    \\centering\n');
-fprintf(fileID, '    \\scriptsize{\\textit{Note:} $\\chi$ is recovered by inverting ');
-fprintf(fileID, '$\\gamma = \\frac{(1-\\xi_p)(1-\\beta\\xi_p)}{\\xi_p}\\chi$ at the estimated $\\gamma$ and implied $\\xi_p$. ');
-fprintf(fileID, '$\\chi_{hom} \\equiv 1$ by construction (Proposition 1(i) in \\citealp{ACEL2011}); ');
-fprintf(fileID, 'reported here only as a check that the numerical pipeline is consistent. ');
-fprintf(fileID, 'Standard errors in parentheses are computed from the same %s-draw joint Monte Carlo ', n_draws_str);
-fprintf(fileID, 'used for the Calvo parameters'' standard errors, applying the formula above draw-by-draw. ');
-fprintf(fileID, 'The 90\\%% Monte Carlo percentile interval for $\\chi_{fs}$ is ');
-fprintf(fileID, '$[%.4f,\\,%.4f]$, $[%.4f,\\,%.4f]$, $[%.4f,\\,%.4f]$ for $p=4,8,12$ respectively; ', ...
-    chi_fs_p05(1), chi_fs_p95(1), chi_fs_p05(2), chi_fs_p95(2), chi_fs_p05(3), chi_fs_p95(3));
-fprintf(fileID, 'see the discussion of non-normality of the Calvo/chi Monte Carlo distributions in the text.}\n');
+fprintf(fileID, '    \\scriptsize{\\textit{Note:} Standard errors in parentheses. ');
+fprintf(fileID, 'Significance: *** $p<0.01$, ** $p<0.05$, * $p<0.10$. ');
+fprintf(fileID, '$\\chi$ is recovered by inverting $\\gamma = \\frac{(1-\\xi_p)(1-\\beta\\xi_p)}{\\xi_p}\\chi$ ');
+fprintf(fileID, 'at the estimated $\\gamma$ and implied $\\xi_p$; $\\chi_{hom} \\equiv 1$ by construction ');
+fprintf(fileID, '(Proposition 1(i) in \\citealp{ACEL2011}) and carries no standard error. ');
+fprintf(fileID, 'Standard errors for $\\chi_{fs}$ are computed from the same %s-draw joint Monte Carlo ', n_draws_str);
+fprintf(fileID, 'used for the Calvo parameters.}\n');
 
 fprintf(fileID, '\\end{table}\n');
 fclose(fileID);
 fprintf('Done and saved in : %s\n', filename);
 
-%% Local function
+%% Local functions
 function chi = chi_from_gamma(gam, xip, beta)
     % Inverts gamma = ((1-xip)*(1-beta*xip)/xip) * chi  =>  chi = gamma*xip / ((1-xip)*(1-beta*xip))
     % Vectorised: gam, xip can be scalars or column vectors of Monte Carlo draws; beta is scalar.
     chi = gam .* xip ./ ((1 - xip) .* (1 - beta .* xip));
+end
+
+function s = format_pe(p, e)
+    t = abs(p/e);
+    if t > 2.576
+        star='***';
+    elseif t > 1.960
+        star='**';
+    elseif t > 1.645
+        star='*';
+    else
+        star='';
+    end
+    s = sprintf('%.4f%s', p, star);
 end

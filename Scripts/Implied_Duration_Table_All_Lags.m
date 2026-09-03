@@ -61,12 +61,6 @@ fprintf(fileID, '        \\end{tabular}\n');
 fprintf(fileID, '    \\end{table}\n\n');
 
 fprintf(fileID, '    \\vspace{0.2cm}\n');
-fprintf(fileID, '    \\begin{itemize}\n');
-fprintf(fileID, '        \\item \\textbf{Baseline VAR ($p=4$)}: Homogeneous capital implies price changes every \\textbf{%.1f quarters}.\n', dur_hom_4);
-fprintf(fileID, '        \\item \\textbf{Firm-specific capital}: Drastically reduces this to \\textbf{%.1f quarters}, matching microeconomic evidence.\n', dur_fs_4);
-fprintf(fileID, '    \\end{itemize}\n\n');
-
-fprintf(fileID, '    \\vspace{0.2cm}\n');
 fprintf(fileID, '    \\raggedright\n');
 fprintf(fileID, '    \\tiny{\\textit{Note:} Implied duration is calculated as $D = 1/(1 - \\xi_p)$.}\n');
 fprintf(fileID, '\\end{frame}\n');

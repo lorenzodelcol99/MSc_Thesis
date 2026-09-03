@@ -79,14 +79,12 @@ for i = 1:size(param_map, 1)
         % Field naming: ksiph -> SE_ksiph, ksip -> SE_ksip
         se_field = ['SE_' v];
 
-        fprintf(fileID, '    %s & %.4f & %.4f & %.4f \\\\\n    & (%.4f) & (%.4f) & (%.4f) \\\\\n', ...
-            n, data4.(v), data8.(v), data12.(v), ...
+        fprintf(fileID, '    %s & %s & %s & %s \\\\\n    & (%.4f) & (%.4f) & (%.4f) \\\\\n', ...
+            n, ...
+            format_pe(data4.(v), MonteCalvo_4.(se_field)), ...
+            format_pe(data8.(v), MonteCalvo_8.(se_field)), ...
+            format_pe(data12.(v), MonteCalvo_12.(se_field)), ...
             MonteCalvo_4.(se_field), MonteCalvo_8.(se_field), MonteCalvo_12.(se_field));
-        % AL MOMENTO NON SONO STATI MESSE LE STELLE DI SIGNIDFICATIVITA'
-        % SUI CALVO PARAMETERS. RAGIOANRE SE PDF CALVO PRICE SI
-        % DISTRIBUISCE COME UNA NORMALE E QUINDI SI POSSONO USARE LE
-        % STELLINE --> non tutte le PDF sono belle, non tutte si
-        % distribuiscono come normali
     end
 end
 
@@ -97,11 +95,8 @@ fprintf(fileID, '    \\vspace{0.2cm}\n');
 fprintf(fileID, '    \\raggedright\n');
 fprintf(fileID, '    \\scriptsize{\\textit{Note:} Standard errors in parentheses. ');
 fprintf(fileID, 'Significance: *** $p<0.01$, ** $p<0.05$, * $p<0.10$. ');
-fprintf(fileID, 'The Calvo price parameters $\\xi_{p,hom}$ and $\\xi_{p,fs}$ are not estimated directly: ');
-fprintf(fileID, 'they are recovered numerically from the estimated structural parameters. ');
-fprintf(fileID, 'Their standard errors are therefore obtained by Monte Carlo simulation with %s draws ', n_draws_str);
-fprintf(fileID, 'from the joint distribution of the estimated structural parameters, ');
-fprintf(fileID, 'solving for the implied Calvo parameter at each draw.}\n');
+fprintf(fileID, 'The Calvo price parameters standard errors are obtained by Monte Carlo simulation with %s draws ', n_draws_str);
+fprintf(fileID, 'from the joint distribution of the estimated structural parameters.}\n');
 
 fprintf(fileID, '\\end{table}\n');
 fclose(fileID);
