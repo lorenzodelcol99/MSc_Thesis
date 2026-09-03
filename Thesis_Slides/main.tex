@@ -40,7 +40,7 @@
 
 % --- Informazioni Presentazione ---
 \author[Del Col]{Lorenzo Del Col}
-\title[Master's Thesis]{DSGE Model Estimation via VAR IRF Matching: The Short and Long of It }
+\title[Master's Thesis]{DSGE Model Estimation via VAR IRF Matching: The Short and Long of It}
 \newcommand{\email}{lorenzo.delcol@studenti.unipd.it}
 
 \institute[]{
@@ -49,7 +49,7 @@
     \footnotesize \textit{University of Padova} \\ 
     \footnotesize \textit{MSc Applied Economics}
 }
-\date{August 2026}
+\date{September 2026}
 
 \begin{document}
 
@@ -68,13 +68,11 @@
 \begin{frame}{Motivation}
     \begin{itemize}
         \item VARs are often used to estimate DSGE frameworks by IRFs minimization matching
+        \item IRFME $\hat{\zeta} = \underset{\zeta}{\arg\min} \, (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))$
     \end{itemize}
     
     \pause
     \begin{itemize}
-        \item \textit{"The quality of our strategy (IRFs matching) depends on the \textbf{ability of identified VARs to generate reliable estimates} of the dynamic response of economic variables to shocks."}
-        \vspace{0.1cm}
-        \hfill {\small \textbf{Altig et al. (2011) p. 3, fn. 10} }
         \item \textit{If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
         \\
@@ -220,14 +218,17 @@
 % =======================================
 
 \begin{frame}{ACEL's DSGE Mechanism (Cont'd)}
+ Here $\chi$ is a non-linear function representing the strategic complementarity in price settings 
 \begin{itemize}
-    \item In the \textbf{Homogeneous} model, $\chi = 1$: $\gamma$ depends only on $\beta$ and $\xi_p$
+    \item In the \textbf{Homogeneous} model, $\chi = 1$: $\gamma$ depends only on $\beta$
     \item In the \textbf{Firm-specific} model, $\chi < 1$ and captures two forces that make a firm move its price \textit{less} when it can reset:
     \begin{itemize}
-        \item the costlier it is to vary capital utilization, the steeper the firm's own marginal cost curve
-        \item the more elastic the firm's demand, the larger the fall in output (and hence in marginal cost) after a price increase
+        \item It depends on Variable Capital Utilization $\sigma_a$
+        \item The costlier it is to vary capital utilization, the steeper the firm's own marginal cost curve
+        \item The more elastic the firm's demand, the larger the fall in output (and hence in marginal cost) after a price increase
     \end{itemize}
     \vspace{0.3cm}
+    
     \item So $\chi$ governs \textbf{how much} a firm moves its price
     \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
 \end{itemize}
@@ -263,9 +264,9 @@
 \begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
 \begin{itemize}
     \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
+    \item When forecasting information criteria are not used
     \item Standard lag choice by SVAR researchers is 4 for quarterly data and 12 for monthly
     \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
-    
     \item VARs are typically small systems with few lags often interpret as models of the entire economy, IRFs are highly sensitive to variable and lag choice
 \end{itemize}
 
@@ -360,21 +361,6 @@
 \end{frame}
 
 % =======================================
-% RMSE Image
-% =======================================
-\begin{frame}{RMSE}
-    \begin{figure}
-        \centering
-        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_RMSE_Across_Lags_All_Variables.pdf}}
-            {\fbox{Missing file: InSample\_RMSE\_Across\_Lags\_All\_Variables.pdf}}
-        \caption{In Sample RMSE Comparison Across lags }
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
-
-
-% =======================================
 % Portmanteau P-Values Across lags 
 % =======================================
 \begin{frame}{Portmanteau P-Values Across lags }
@@ -416,7 +402,6 @@
 \end{frame}
 
 
-
 % =======================================
 % VAR IRFs MP
 % =======================================
@@ -449,6 +434,7 @@
         \begin{scope}[x={(img.south east)},y={(img.north west)}]
             \draw[red, thick, rounded corners] (-0.01,0.73) rectangle (0.315,0.96); % Output
             \draw[red, thick, rounded corners] (-0.01,0.48) rectangle (0.315,0.72); % Fed Funds
+            \draw[red, thick, rounded corners] (0.335,0.48) rectangle (0.665,0.72); % Capacity Utilisation
             \draw[red, thick, rounded corners] (0.685,0.73) rectangle (1.01,0.96); % Inflation
         \end{scope}
         \end{tikzpicture}
@@ -457,50 +443,12 @@
     \end{figure}
 \end{frame}
 
-% =======================================
-%  VAR IRFs All CI: MP
-% =======================================
-\begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
-    \label{fig:placeholder4}
-\end{figure}
-\end{frame}
 
 % =======================================
-%  Comment on CI
+%  What about the DSGE's structural parameters?
 % =======================================
-\begin{frame}{Bootstrap Confidence Intervals Shrinks!}
-    \begin{itemize}
-        \item With respect to De Graeve and Westermark (2025) examples, this exercise have a medium scale VAR; 10 variables + constant
-        \item Estimating the VAR 12 we reach the feasible limit of the degrees of freedom T-k = 30 and total numebr of coefficients $n + n^2 p = 1210$
-        \item Bootstrap Confidence Intervals actually shrinks! 
-        \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
-        "Misspecification reduction not only leads to Bias-Variance trade off, but it reduces variance" 
-    \end{itemize}
-\end{frame}
-
-
-% =======================================
-%  Comments on VAR IRFs MP Shock
-% =======================================
-\begin{frame}{Comment: VAR IRFs; Monetary Policy Shock across lags}
-After a negative (easing) monetary policy shock:
-    \begin{itemize}
-    \item Sign and magnitudes did not change
-    \item Formation and the top of the humps accour with much delay 
-    \item Does inflaiton have the price puzzle? No if we have the ACEL theoretical model in mind
-\end{itemize}
-Overall:
-\\
-Point estimates across lags are included in the baseline CI
-\vspace{0.2cm}
-
-\textbf{\textcolor{PadovaRed}{What about the DSGE's structural parameters?}}
+\begin{frame}
+\textbf{\Large\textcolor{PadovaRed}{What about DSGE's structural parameters?}}
 \end{frame}
 
 % =======================================
@@ -545,10 +493,14 @@ Point estimates across lags are included in the baseline CI
         \item Capacity Utilization Cost, crucial variable to justify the firm specific model, dramatically shrinks to 0
         \item Firm specificity of capital seems not the key concept to explain inflation inertia
         \item ACEL's evidence on firm specific capital is not robust to long-lag VARs
-        \vspace{0.5cm}
-        \item Long-Lag VARs migth have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
     \end{itemize} 
-    
+    \vspace{0.5cm}
+    \pause
+
+    \hfill {\color{PadovaRed}\small \textbf{De Graeve \& Westermark (2025) and Baumeister (2025)} }
+    \begin{itemize}
+        \item Long-Lag VARs migth have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
+    \end{itemize}
     
 \end{frame}
 
@@ -570,6 +522,33 @@ Point estimates across lags are included in the baseline CI
 % APPENDICE
 % =========================================================
 \appendix
+
+% =======================================
+%  VAR IRFs All CI: MP
+% =======================================
+\begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
+\begin{figure}
+    \centering
+    \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
+    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
+    \label{fig:placeholder4}
+\end{figure}
+\end{frame}
+
+% =======================================
+%  Comment on CI
+% =======================================
+\begin{frame}{Bootstrap Confidence Intervals Shrinks!}
+    \begin{itemize}
+        \item With respect to De Graeve and Westermark (2025) examples, this exercise have a medium scale VAR; 10 variables + constant
+        \item Estimating the VAR 12 we reach the feasible limit of the degrees of freedom T-k = 30 and total numebr of coefficients $n + n^2 p = 1210$
+        \item Bootstrap Confidence Intervals actually shrinks! 
+        \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
+        "Misspecification reduction not only leads to Bias-Variance trade off, but it reduces variance" 
+    \end{itemize}
+\end{frame}
 
 % =======================================
 %  DSGE IRFs: MP
@@ -604,14 +583,14 @@ Point estimates across lags are included in the baseline CI
 % =======================================
 % COMMENT: VAR IRFs: NT
 % =======================================
-\begin{frame}{Comment: VAR IRFs: NT}
-With VAR(12)
-\begin{itemize}
-    \item No effect in the short and long run in Output, Average Hours and Consumption
-    \item No effect in the long run in Investments
-    \item Some IRFs are not included in the baseline CI
-\end{itemize}
-\end{frame}
+%\begin{frame}{Comment: VAR IRFs: NT}
+%With VAR(12)
+%\begin{itemize}
+%    \item No effect in the short and long run in Output, Average Hours and Consumption
+%    \item No effect in the long run in Investments
+%    \item Some IRFs are not included in the baseline CI
+%\end{itemize}
+%\end{frame}
 
 % =======================================
 %  VAR IRFs: ET
@@ -630,14 +609,14 @@ With VAR(12)
 % =======================================
 % COMMENT: VAR IRFs: ET
 % =======================================
-\begin{frame}{Comment: VAR IRFs: ET}
-With VAR(12)
-\begin{itemize}
-    \item Strange effect in long run in Output, Average Hours, Consumption and Investment
-    \item Almost no effect in Inflation
-    \item Some IRFs are not included in the baseline CI
-\end{itemize}
-\end{frame}
+%\begin{frame}{Comment: VAR IRFs: ET}
+%With VAR(12)
+%\begin{itemize}
+%    \item Strange effect in long run in Output, Average Hours, Consumption and Investment
+%    \item Almost no effect in Inflation
+%    \item Some IRFs are not included in the baseline CI
+%\end{itemize}
+%\end{frame}
 % =======================================
 % RESIDUAL ANALYSIS
 
@@ -686,8 +665,6 @@ With VAR(12)
 \end{itemize}
  
 \end{frame}
-
-
 
 
 % =======================================
