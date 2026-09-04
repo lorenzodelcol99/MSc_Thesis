@@ -2,9 +2,8 @@
     \centering
     \small
     \renewcommand{\arraystretch}{1.2}
-    \caption{In-sample RMSE of the reduced form VAR residuals}
+    \caption{In-sample RMSE of the reduced form VAR residuals, by lag order}
     \label{tab:insample_rmse}
-    \resizebox{\linewidth}{!}{%
     \begin{tabular}{lccc}
     \toprule
     \textbf{Variable} & \textbf{VAR $p=4$} & \textbf{VAR $p=8$} & \textbf{VAR $p=12$} \\
@@ -20,6 +19,9 @@
     Federal funds rate & 0.7179 & 0.5340 & 0.3201 \\
     Velocity: ln P + ln GDP - ln MZM & 1.4146 & 1.0896 & 0.7643 \\
     \bottomrule
-    \end{tabular}%
-    }
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} Root mean squared error of the reduced form residuals $u_t = A_0^{-1}\varepsilon_t$, in percentage points, each lag order evaluated on its own estimation sample (167, 163 and 159 observations for $p=4,8,12$). Restricting every lag order to the common last 159 observations changes no entry by more than 0.0927 pp.}
 \end{table}

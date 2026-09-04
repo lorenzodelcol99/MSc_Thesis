@@ -3,15 +3,17 @@
     \renewcommand{\arraystretch}{1.2}
     \caption{Generalized variance across VAR lag orders}
     \label{tab:generalized_variance}
-    \resizebox{\linewidth}{!}{%
     \begin{tabular}{ccccc}
     \toprule
     \textbf{Lag order} & \textbf{$\log\det\hat{\Sigma}$} & \textbf{$\Delta$ vs.\ $p=4$} & \textbf{$\Delta$ Variance (\%)} & \textbf{$\Delta$ St.\,Dev.\ (\%)} \\
     \midrule
-    $p = 4$ & -106.2903 & 0.0000 & +0.0\% & +0.0\% \\
-    $p = 8$ & -110.9467 & -4.6564 & -37.2\% & -20.8\% \\
-    $p = 12$ & -120.1037 & -13.8134 & -74.9\% & -49.9\% \\
+    $p = 4$ & -106.1432 & 0.0000 & +0.0\% & +0.0\% \\
+    $p = 8$ & -111.0610 & -4.9178 & -38.8\% & -21.8\% \\
+    $p = 12$ & -120.1037 & -13.9605 & -75.2\% & -50.2\% \\
     \bottomrule
-    \end{tabular}%
-    }
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} $\hat{\Sigma}$ is the covariance matrix of the REDUCED FORM VAR residuals, $u_t = A_0^{-1}\varepsilon_t$, each lag order evaluated on its own estimation sample (167, 163 and 159 observations for $p=4,8,12$). The percentage columns convert the change in $\log\det\hat{\Sigma}$ into the implied change in the typical residual variance, $\exp(\Delta/K)-1$, and standard deviation, $\exp(\Delta/2K)-1$, with $K=10$ variables.}
 \end{table}

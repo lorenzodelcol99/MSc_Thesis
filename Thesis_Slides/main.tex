@@ -7,7 +7,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{tikz} % serve per i riquadri rossi sovrapposti alle IRF (tikzpicture)
-\usetikzlibrary{calc} % serve per la sintassi $(coord)+(dx,dy)$ usata nei riquadri sulle tabelle
+\usetikzlibrary{calc, positioning} % calc: sintassi $(coord)+(dx,dy)$ per i riquadri sulle tabelle;
+                                    % positioning: posizionamento relativo dei nodi nel diagramma ACEL
 % Coordinate "invisibile" agganciata al flusso del testo/tabella, richiamabile
 % in seguito da un tikzpicture[remember picture,overlay] separato: usata per
 % evidenziare righe specifiche di una tabella LaTeX nativa (non un'immagine).
@@ -29,6 +30,12 @@
 % rosso Padova): il tema colore "structure" sopra tingerebbe di rosso anche
 % le citazioni di default, quindi lo forziamo esplicitamente a nero qui.
 \hypersetup{citecolor=black}
+
+% --- Frecce blu su/giù per i meccanismi "a testo semplice" tipo AS-AD
+% (freccette + $\Rightarrow$, niente riquadri): \Up e \Down si usano al posto
+% di \uparrow/\downarrow ovunque serva lo stile "solo lettere e frecce". ---
+\newcommand{\Up}{{\color{PadovaRed}\uparrow}}
+\newcommand{\Down}{{\color{PadovaRed}\downarrow}}
 
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{} 
@@ -62,24 +69,68 @@
 \end{frame}
 
 % =======================================
+% Inflation Persistence
+% =======================================
+
+\begin{frame}{Stylised Fact: Inflation Persistence}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/Inflation_Persistence/Inflation_Persistence.pdf}
+            {\includegraphics[width=0.75\linewidth]{../Output/Inflation_Persistence/Inflation_Persistence.pdf}}
+            {\fbox{Missing file: Inflation\_Persistence.pdf}}
+        \label{fig:inflation_persistence}
+    \end{figure}
+    
+    \pause
+    \begin{itemize}
+        \item DSGE models are often used to explain inflation persistence
+        \pause
+        \item But standard NK models reproduce it with \textbf{unrealistically high levels of price stickiness}, inconsistent
+        with micro data evidence
+    \end{itemize}
+
+\end{frame}
+
+% =======================================
+% CEE and ACEL Motivation
+% =======================================
+
+\begin{frame}{CEE and ACEL's DSGE Motivation}
+    \begin{itemize}
+        \item CEE JPE (2005) and ACEL RoED (2011) seminal works introduced the concept of \textbf{Firm Specific Capital} to model inflation persistence,
+            mechanism supported by IRF matching with VAR(4)
+    \end{itemize}
+    \vspace{0.3cm}
+    \pause
+
+    \begin{itemize}
+        \item \textbf{Impulse Response Function Matching Estimation (IRFME)} is a common way to estimate DSGE models through VARs
+    \end{itemize}
+    \vspace{0.3cm}
+    \begin{equation}
+        \hat{\zeta} = \underset{\zeta}{\arg\min} \, (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))
+    \end{equation}
+
+\end{frame}
+
+% =======================================
 % MOTIVATION
 % =======================================
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item VARs are often used to estimate DSGE frameworks by IRFs minimization matching
-        \item IRFME $\hat{\zeta} = \underset{\zeta}{\arg\min} \, (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))$
-    \end{itemize}
-    
-    \pause
-    \begin{itemize}
         \item \textit{If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
         \\
         \hfill {\small \textbf{Ramey (2016) p. 83} }
+        \vspace{0.3cm}
         \pause
         
-        \item Misspecification can deliver distorted results mis informing the central banker
+        \item \textcolor{PadovaRed}{\textbf{Truncation Bias is a type of misspecification}} that arises when the VAR lag order is shorter respect its DGP. 
+        \vspace{0.3cm}
+        \pause
+
+        \item Misspecification can deliver distorted results misinforming the central banker
     \end{itemize}
 
 \end{frame}
@@ -97,20 +148,16 @@
     \vspace{0.4cm}
     \textbf{What it's done:}
     \begin{itemize}
-        \item Revisit ACEL RoED (2011) contribution by estimating Homogeneous vs Firm Specific versions of their DSGE with VARs with different dynamic structures
+        \item Revisit ACEL contribution, estimating Homogeneous vs Firm Specific Capital versions of their DSGE with VARs with different dynamic structures
     \end{itemize}
     \pause
     
     \vspace{0.4cm}    
     \textbf{Findings:}
     \begin{itemize}
-        \item Increasing the VAR lag structure cast doubds on the importance of Variable Capital Utilization to explain inflation inertia
-        \item Lag choice can have implicationtions for optimal policy desing
+        \item Increasing the VAR lag structure casts doubts on the importance of Specificity of Capital to explain inflation inertia
+        \item Lag choice can have implications for optimal policy design, modelling and structural inference
     \end{itemize}
-    \begin{center}
-        \hyperlink{slide:var_irfs}{\beamerbutton{VAR IRFs}} \quad
-        \hyperlink{slide:dsge_params}{\beamerbutton{DSGE Parameters}}
-    \end{center}
 \end{frame}
 
 % =======================================
@@ -120,7 +167,7 @@
     \begin{itemize}
         \item Related Literature
         \item ACEL model
-        \item DSGE as VAR($\infty$)
+ %      \item DSGE as VAR($\infty$)
         \item Truncation Bias
         \item Results
     \end{itemize}
@@ -130,16 +177,6 @@
 % RELATED LITERATURE
 % =======================================
 \begin{frame}{Related Literature}
-    %OTHER POSSIBLE VERSION SET-UP
-    %\textbf{Long-Lag VARs:}
-    %\begin{itemize}
-    %    \item \textbf{Long-Lag VARs:}
-    %    \\
-    %    {\small \citep{Long_Lag2025, Baumeister2025, Antolin-Diaz_Surico2025, AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}}
-    %    \begin{itemize}
-    %        \item \textcolor{PadovaRed}{Contribution: Long-Lag ACEL's VAR }
-    %    \end{itemize}
-    %\end{itemize}
     \textbf{Long-Lag VARs:}
     \begin{itemize}
         \item {\small De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026)}
@@ -148,10 +185,10 @@
     \begin{itemize}
         \item {\small Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026)}
     \end{itemize}
-    \textbf{DSGE State Space representation into VAR($\infty$)}
-    \begin{itemize}
-        \item {\small Fernández-Villaverde et al., (2005); Ravenna, (2007); Giacomini, (2013); Theodoridis, (2011); Forni et al., (2016)}
-    \end{itemize}
+ %   \textbf{DSGE State Space representation into VAR($\infty$)}
+ %   \begin{itemize}
+ %       \item {\small Fernández-Villaverde et al., (2005); Ravenna, (2007); Giacomini, (2013); Theodoridis, (2011); Forni et al., (2016)}
+ %   \end{itemize}
     \textbf{DSGE IRFs matching with VARs}
     \begin{itemize}
         \item {\small Rotemberg and Woodford (1997); Christiano et al., (2005); Boivin and Giannoni (2006); Altig et al., (2011); Rossi et al., (2012)}
@@ -160,33 +197,21 @@
 
 
 % =======================================
-% CEE and ACEL Motivation
-% =======================================
-
-\begin{frame}{CEE and ACEL's DSGE Motivation}
-    \begin{itemize}
-        \item Standard NK models replicate inflation persistence with levels of price stikiness, inconsistent with micro data evidence 
-        \item CEE JPE (2005) and ACEL RoED (2011) seminal works introduced the concept of \textbf{firm specific capital} to model inflation persistence,
-    mechanism supported by IRF matching with VAR(4)
-    \end{itemize}
-\end{frame}
-
-% =======================================
 % ACEL'S MECHANISM 1
 % =======================================
 \begin{frame}{ACEL's DSGE Mechanism}
-        \begin{itemize}
-        \item In Altig et al., (2005) inflation is inertial despite firms re-optimising prices on average every 1.5 quarters
-        \item Inertia is explained by the fact that, when firms re-optimise, they do it by a small amount because each firm's short run marginal cost is increasing in its own output
-        \item The key assumption is that, in any given period, a firm's capital stock is pre-determined and firm-specific
-    \end{itemize}
-
-    \vspace{0.5cm}
-    They build two models on Christiano et al. JPE, (2005):
+    ACEL build two models on Christiano et al. JPE, (2005):
     \begin{itemize}
         \item Homogeneous capital
         \item Firm-specific capital
     \end{itemize}
+    \vspace{0.5cm}
+    
+    \begin{itemize}
+        \item \textbf{Inflation is inertial} despite firms re-optimising prices on average every 1.5 quarters
+        \item  When firms re-optimise, \textbf{prices are adjusted by a small amount} because each firm's short run marginal cost is increasing in its own output
+        \item The key assumption is that, in any given period, a \textbf{firm's capital stock is pre-determined and firm-specific}
+    \end{itemize}    
 \end{frame}
 
 % =======================================
@@ -207,9 +232,9 @@
 \end{align}
 
 \begin{itemize}
-    \item $\hat{s}_t$ is the economy-wide marginal cost, $\gamma$ the Phillips Curve slope, $\xi_p$ the Calvo price stickiness parameter
-    \item $\chi$ reduces the sensitivity of inflation to marginal costs in the firm-specific capital model
-    \item The two models are observationally equivalent in terms of prices and quantities: macro data identify $\gamma$, so the difference between the two models lies in the implied $\xi_p$
+    \item \textbf{Models are observationally equivalent in terms of prices and quantities:} \textcolor{PadovaRed}{macro data identify $\gamma$, the difference between the two models lies in the implied $\xi_p$}
+    \item {\small $\hat{s}_t$ is the economy-wide marginal cost, $\gamma$ the Phillips Curve slope, $\xi_p$ the Calvo price stickiness parameter}
+    \item {\small $\chi$ reduces the sensitivity of inflation to marginal costs in the firm-specific capital model}
 \end{itemize}
 \end{frame}
 
@@ -232,8 +257,55 @@
     \item So $\chi$ governs \textbf{how much} a firm moves its price
     \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
 \end{itemize}
- Since $\gamma$ is estimated by aggregate data, a smaller $\chi$ imply a smaller $\xi_p$
+ Given a fixed value of $\gamma$, a smaller $\chi$ imply a smaller $\xi_p$
 \end{frame}
+
+
+% =======================================
+% ACEL'S Shock Propagation Mechanism
+% =======================================
+
+\begin{frame}{ACEL'S Monetary Policy Shock Propagation Mechanism}
+\large
+
+% --- Shared part: identical text on both overlays, held fixed at the top.
+% Plain letters-and-arrows style (\Up/\Down defined in the preamble, now
+% PadovaRed), no boxes -- fill in/extend freely below. ---
+$\varepsilon_t^M\Down \Rightarrow i_t\Down$ $\Rightarrow$ $y^d_t\Up$
+$\Rightarrow$ $y^s_t\Up$ $\Rightarrow h_t^d\Up$
+\\
+$\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
+
+\vspace{0.5cm}
+
+% --- Swapped part: same spot, content replaced across the two overlays ---
+\only<1>{%
+\textbf{Homogeneous}
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item $K_t=u_t\bar K_t$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K_t}$ and $u_t\Up$ $r_t\Up$ given $\hat{\sigma_a}$
+    \item $\Rightarrow$ $MC_{i,t} = MC_t$ $\Rightarrow$ MC independent from $y_{i,t}$ $\chi=1$
+    \item $MC_t\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
+    \item $\gamma = f(\overset{-}{\xi_p})$ given $\bar{\gamma}$ low, $\xi_p$ need to be high enough
+\end{itemize}
+}%
+
+\only<2->{%
+\textbf{Firm Specific}
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item $K_{i,t}=u_{i,t}\bar K_{i,t}\Up$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K}$
+    \item Given $\chi < 1$ $\Rightarrow MC_{i,t}\Up$ in $y_{i,t}$
+    \item $MC_{i,t}\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
+    \item $\gamma = f(\overset{-}{\xi_p};\overset{-}{\sigma_a})$ given $\bar{\gamma}$
+\end{itemize}
+\vspace{0.5cm}
+\begin{itemize}
+    \item If $\sigma_a \rightarrow 0$ $\Rightarrow$ $\chi \rightarrow 1$ $\Rightarrow$ $\gamma = f(\overset{-}{\xi_p};0)$ $\Rightarrow$ $\xi_{p,\text{FS}} \rightarrow \xi_{p,\text{H}}$
+\end{itemize}
+}
+\end{frame}
+
 
 % =======================================
 % ACEL'S RESULTS
@@ -245,8 +317,6 @@
         \item \textbf{Homogeneous} capital: $\xi_p = 0.82$, firms change prices every 5.6 quarters
         \item \textbf{Firm-specific} capital: firms change prices every 1.5 quarters
     \end{itemize}
-    The gap arises because firms' demand curves are highly elastic and their marginal cost curves are very steep: the same $\gamma$ is delivered by frequent but small price adjustments.
-\\
 \vspace{0.1cm}
 \textbf{Only the firm-specific capital model reconciles the micro-macro pricing conflict}
 \vspace{0.5cm}
@@ -261,23 +331,23 @@
 % =======================================
 % DSGE, State Space and VAR($\infty$) Representation
 % =======================================
-\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
-\begin{itemize}
-    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
-    \item When forecasting information criteria are not used
-    \item Standard lag choice by SVAR researchers is 4 for quarterly data and 12 for monthly
-    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
-    \item VARs are typically small systems with few lags often interpret as models of the entire economy, IRFs are highly sensitive to variable and lag choice
-\end{itemize}
+%\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
+%\begin{itemize}
+%    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
+%    \item When forecasting information criteria are not used
+%    \item Standard lag choice by SVAR researchers is 4 for quarterly data and 12 for monthly
+%    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
+%    \item VARs are typically small systems with few lags often interpret as models of the entire economy, IRFs are highly sensitive to variable and lag choice
+%\end{itemize}
 
-\vspace{0.4cm} 
+%\vspace{0.4cm} 
 
-\pause
-\begin{itemize}
-    \item \textcolor{PadovaRed}{\textbf{Should the VAR lag order be increased to overcome Truncation Bias implications?}}
-\end{itemize}
+%\pause
+%\begin{itemize}
+%    \item \textcolor{PadovaRed}{\textbf{Should the VAR lag order be increased to overcome Truncation Bias implications?}}
+%\end{itemize}
 
-\end{frame}
+%\end{frame}
 
 % =======================================
 % ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
@@ -308,7 +378,7 @@
 % =======================================
 
 \begin{frame}{Long-Lag VARs}
-    De Graeve and Westermark, (2025) demontrates that increasing the lag structure improves VAR's IRFs estimates obtaining:
+    De Graeve and Westermark, (2025) demonstrate that increasing the lag structure improves VAR's IRFs estimates obtaining:
     \pause
     \vspace{0.4cm}
     
@@ -349,7 +419,7 @@
 % Residuals' Variance Reduction
 % =======================================
 
-\begin{frame}{Residuals' Variance Reduction }
+\begin{frame}{Residuals' Variance Reduction}
     \begin{figure}
         \centering
         \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
@@ -361,17 +431,18 @@
 \end{frame}
 
 % =======================================
-% Portmanteau P-Values Across lags 
+% Generalised Variance and Information Criteria
 % =======================================
-\begin{frame}{Portmanteau P-Values Across lags }
+\begin{frame}{Generalised Variance and Information Criteria}
 \begin{figure}
         \centering
-        \IfFileExists{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Portmanteau_PValues_Across_Lags.pdf}}
-            {\fbox{Missing file: Portmanteau\_PValues\_Across\_Lags.pdf}}
-        \caption{Portmanteau P-Values Across lags}
-        \label{fig:placeholder1}
+        \IfFileExists{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}
+            {\includegraphics[width=0.85\linewidth]{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}}
+            {\fbox{Missing file: Generalized\_Variance\_Vs\_Penalised\_Across\_Lags.pdf}}
     \end{figure}
+    \IfFileExists{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}
+        {\input{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}}
+        {\noindent\fbox{Table Path Broken or File Missing}}
 \end{frame}
 
 % =======================================
@@ -423,38 +494,36 @@
                     {\fbox{Missing file: Step\_2\_UpToLag\_8.pdf}}
             };
         }%
-        \only<3>{%
+        \only<3->{%
             \node[anchor=south west,inner sep=0] (img) at (0,0) {%
                 \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
                     {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
                     {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
             };
         }%
-        % --- riquadri rossi su Output (y), Fed Funds (i), Inflation (pi) ---
+        % --- red boxes revealed one at a time: Fed Funds, Real Wage, Capacity Utilisation, Output, Inflation ---
         \begin{scope}[x={(img.south east)},y={(img.north west)}]
-            \draw[red, thick, rounded corners] (-0.01,0.73) rectangle (0.315,0.96); % Output
-            \draw[red, thick, rounded corners] (-0.01,0.48) rectangle (0.315,0.72); % Fed Funds
-            \draw[red, thick, rounded corners] (0.335,0.48) rectangle (0.665,0.72); % Capacity Utilisation
-            \draw[red, thick, rounded corners] (0.685,0.73) rectangle (1.01,0.96); % Inflation
+            \only<4->{\draw[red, thick, rounded corners] (-0.01,0.48) rectangle (0.315,0.72);} % Fed Funds
+            \only<5->{\draw[red, thick, rounded corners] (-0.01,0.23) rectangle (0.315,0.47);} % Real Wage
+            \only<6->{\draw[red, thick, rounded corners] (0.335,0.48) rectangle (0.665,0.72);} % Capacity Utilisation
+            \only<7->{\draw[red, thick, rounded corners] (-0.01,0.73) rectangle (0.315,0.96);} % Output
+            \only<8->{\draw[red, thick, rounded corners] (0.685,0.73) rectangle (1.01,0.96);} % Inflation
         \end{scope}
         \end{tikzpicture}
-        \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{4 lags}\only<2>{8 lags}\only<3>{12 lags}}
+        \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{4 lags}\only<2>{8 lags}\only<3->{12 lags}}
         \label{fig:placeholder2}
     \end{figure}
-\end{frame}
-
-
-% =======================================
-%  What about the DSGE's structural parameters?
-% =======================================
-\begin{frame}
-\textbf{\Large\textcolor{PadovaRed}{What about DSGE's structural parameters?}}
 \end{frame}
 
 % =======================================
 %  DSGE Structural Parameters Table
 % =======================================
-\begin{frame}{DSGE Structural Parameters}\label{slide:dsge_params}
+\begin{frame}{DSGE Structural Parameters}
+    % Label only registered on overlay 3 (both red boxes visible), so every
+    % \hyperlink{slide:dsge_params}{...} jumps straight to that fully-revealed
+    % version rather than the blank first page of this frame. Beamer's own
+    % \label takes an overlay specification directly (unlike plain LaTeX's).
+    \label<3>{slide:dsge_params}%
     \IfFileExists{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}
     {\input{../Output/DSGE_Parameters_Comparison/dsge_params_table_Slides_4_8_12_Calvo_SE.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
@@ -463,23 +532,30 @@
             ($(philTL)+(-0.15,0.25)$) rectangle ($(philBR)+(0.15,-0.08)$);}
         \only<3->{\draw[red, thick, rounded corners]
             ($(calvoTL)+(-0.15,0.25)$) rectangle ($(calvoBR)+(0.15,-0.08)$);}
+        % No room left below the table for a button (note fills the slide),
+        % so it sits at title height, top-right corner, instead.
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:montecalvo}{\beamerbutton{MonteCalvo}}};
     \end{tikzpicture}
 \end{frame}
 
 % =======================================
 %  Implied Duration
 % =======================================
-\begin{frame}{Implied Duration}
+\begin{frame}{Implied Duration}\label{slide:implied_duration}
     \IfFileExists{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}
     {\input{../Output/DSGE_Parameters_Comparison/implied_duration_beamer_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
     \normalsize
-\begin{itemize}
-    \item Firm Specific model's Calvo Price parameter converges to the Homogeneous one
-    \item Back to the micro-macro implied price duration missmatch
-\end{itemize}
 
+    \begin{itemize}
+        \item Firm Specific model's Calvo Price parameter converges to the Homogeneous one
+        \item Back to the micro-macro implied price duration mismatch
+    \end{itemize}
 
+    \begin{center}
+        \hyperlink{slide:chi_table}{\beamerbutton{$\chi$ Across Lags}}
+    \end{center}
 \end{frame}
 
 % =======================================
@@ -499,7 +575,7 @@
 
     \hfill {\color{PadovaRed}\small \textbf{De Graeve \& Westermark (2025) and Baumeister (2025)} }
     \begin{itemize}
-        \item Long-Lag VARs migth have structural implication, it's up to the researcher to demonstrate that its findings are robust to an encriched lag structure
+        \item Long-Lag VARs might have structural implications, it's up to the researcher to demonstrate that their findings are robust to an enriched lag structure
     \end{itemize}
     
 \end{frame}
@@ -524,6 +600,19 @@
 \appendix
 
 % =======================================
+%  Chi Parameter Across Lags (linked from Truncation Bias slide)
+% =======================================
+\begin{frame}{Implied Real Rigidity ($\chi$) Across Lags}\label{slide:chi_table}
+    \IfFileExists{../Output/DSGE_Parameters_Comparison/chi_parameter_table_Slides_4_8_12.tex}
+    {\input{../Output/DSGE_Parameters_Comparison/chi_parameter_table_Slides_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+
+    \begin{center}
+        \hyperlink{slide:implied_duration}{\beamerbutton{Back to Implied Duration}}
+    \end{center}
+\end{frame}
+
+% =======================================
 %  VAR IRFs All CI: MP
 % =======================================
 \begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
@@ -542,9 +631,9 @@
 % =======================================
 \begin{frame}{Bootstrap Confidence Intervals Shrinks!}
     \begin{itemize}
-        \item With respect to De Graeve and Westermark (2025) examples, this exercise have a medium scale VAR; 10 variables + constant
-        \item Estimating the VAR 12 we reach the feasible limit of the degrees of freedom T-k = 30 and total numebr of coefficients $n + n^2 p = 1210$
-        \item Bootstrap Confidence Intervals actually shrinks! 
+        \item With respect to De Graeve and Westermark (2025) examples, this exercise has a medium scale VAR; 10 variables + constant
+        \item Estimating the VAR at $p=12$ we approach the feasible limit: only $T_u-k = 38$ degrees of freedom per equation, and a total number of coefficients $n + n^2 p = 1210$
+        \item Bootstrap Confidence Intervals actually shrink!
         \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
         "Misspecification reduction not only leads to Bias-Variance trade off, but it reduces variance" 
     \end{itemize}
@@ -565,7 +654,6 @@
 \end{frame}
 
 
-
 % =======================================
 %  VAR IRFs: NT
 % =======================================
@@ -580,17 +668,6 @@
 \end{figure}
 \end{frame}
 
-% =======================================
-% COMMENT: VAR IRFs: NT
-% =======================================
-%\begin{frame}{Comment: VAR IRFs: NT}
-%With VAR(12)
-%\begin{itemize}
-%    \item No effect in the short and long run in Output, Average Hours and Consumption
-%    \item No effect in the long run in Investments
-%    \item Some IRFs are not included in the baseline CI
-%\end{itemize}
-%\end{frame}
 
 % =======================================
 %  VAR IRFs: ET
@@ -606,93 +683,23 @@
 \end{figure}
 \end{frame}
 
-% =======================================
-% COMMENT: VAR IRFs: ET
-% =======================================
-%\begin{frame}{Comment: VAR IRFs: ET}
-%With VAR(12)
-%\begin{itemize}
-%    \item Strange effect in long run in Output, Average Hours, Consumption and Investment
-%    \item Almost no effect in Inflation
-%    \item Some IRFs are not included in the baseline CI
-%\end{itemize}
-%\end{frame}
-% =======================================
-% RESIDUAL ANALYSIS
-
-
-% =======================================
-% RMSE Table
-% =======================================
-\begin{frame}{RMSE Table}
-\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}
-    {\input{../Output/VAR_Residuals_RMSE_Estimates/insample_rmse_table.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-\begin{itemize}
-    \small
-    \item RMSE of the RF residuals $u_t = A_0^{-1}\varepsilon_t$, in percentage points 
-    \item Lag orders evaluated on its own sample (T = 167, 163, 159)
-    \item Restricting every lag order to the common last 159 observations changes no entry by more than 0.0927 pp.
-\end{itemize}
-
-\end{frame}
-
-% =======================================
-% Generalized Variance Image
-% =======================================
-\begin{frame}{Generalized Variance}
-\begin{figure}
-        \centering
-        \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/Generalized_Variance_Across_Lags.pdf}}
-            {\fbox{Missing file: Generalized\_Variance\_Across\_Lags.pdf}}
-        \caption{Generalized Variance Across lags }
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
-
-
-% =======================================
-% Generalized Variance Table
-% =======================================
-\begin{frame}{Generalized Variance}
-\IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}
-    {\input{../Output/VAR_Residuals_RMSE_Estimates/generalized_variance_table.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-\begin{itemize}
-    \item $\hat{\Sigma}$ is the covariance matrix of the RF-VAR residuals
-    \item Evaluated on the common sample of 159 observations
-\end{itemize}
- 
-\end{frame}
-
-
-% =======================================
-% Standard Deviation Ratios ReducedForm
-% =======================================
-\begin{frame}{Standard Deviation Ratios ReducedForm}
-\begin{figure}
-        \centering
-        \IfFileExists{../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/Residual_Analysis_Output/Standard_Deviation_Ratios_ReducedForm.pdf}}
-            {\fbox{Missing file: Standard\_Deviation\_Ratios\_ReducedForm.pdf}}
-        \caption{Standard Deviation Ratios ReducedForm}
-        \label{fig:placeholder1}
-    \end{figure}
-\end{frame}
 
 % =======================================
 %  MonteCalvo VAR 4
 % =======================================
-\begin{frame}{MonteCalvo}
+\begin{frame}{MonteCalvo}\label{slide:montecalvo}
 \begin{figure}
     \centering
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_4.pdf}}
-    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(4)}
+    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(4)}
     \label{fig:placeholder4}
 \end{figure}
+
+\begin{center}
+    \hyperlink{slide:dsge_params}{\beamerbutton{Back to DSGE Parameters}}
+\end{center}
 \end{frame}
 
 % =======================================
@@ -702,11 +709,15 @@
 \begin{figure}
     \centering
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}
-        {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}}
+        {\includegraphics[width=1\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_8.pdf}}
-    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(8)}
+    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(8)}
     \label{fig:placeholder4}
 \end{figure}
+
+\begin{center}
+    \hyperlink{slide:dsge_params}{\beamerbutton{Back to DSGE Parameters}}
+\end{center}
 \end{frame}
 
 % =======================================
@@ -718,9 +729,12 @@
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_12.pdf}}
-    \caption{Calvo Price Parameter PDF from Montecarlo Simulation; VAR(12)}
+    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(12)}
     \label{fig:placeholder4}
 \end{figure}
+\begin{center}
+    \hyperlink{slide:dsge_params}{\beamerbutton{Back to DSGE Parameters}}
+\end{center}
 \end{frame}
 
 

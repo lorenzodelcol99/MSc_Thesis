@@ -32,19 +32,32 @@ disp(['Loaded ', num2str(numel(inflation)), ' quarterly observations, ', ...
       datestr(time_vector(1), 'yyyy'), ' to ', datestr(time_vector(end), 'yyyy'), '.']);
 
 %% 3. Plotting
-figure('Name', 'US Inflation', 'Color', 'w', 'Units', 'normalized', 'Position', [0.15 0.15 0.6 0.55]);
+% PadovaRed: same institutional colour used in Thesis_Slides/main.tex,
+% \definecolor{PadovaRed}{HTML}{B20E10}, converted to normalized RGB.
+padova_red = [178 14 16] / 255;
 
-plot(time_vector, inflation, 'LineWidth', 2.2, 'Color', 'r');
+figure('Name', 'USA Inflation', 'Color', 'w', 'Units', 'normalized', 'Position', [0.15 0.15 0.6 0.55]);
+
+plot(time_vector, inflation, 'LineWidth', 2.2, 'Color', padova_red);
 hold on;
 yline(2, '--', 'Color', [0.5 0.5 0.5], 'LineWidth', 1.2);   % 2% inflation objective
 hold off;
 
-title('US Inflation', 'FontWeight', 'bold', 'Color', 'r');
+title('Inflation in USA', 'FontWeight', 'bold', 'Color', 'k');
 xlabel('Year');
-ylabel('Inflation, y/y (\%)');
+ylabel('Inflation, % change y/y');
 box on;
 
 set(gca, 'FontSize', 12);
+
+% Hide the interactive axes toolbar (camera/brush/pan/zoom/home icons that
+% MATLAB overlays in the top-right corner of the axes from R2018b on). It
+% is a screen-only widget, but it gets captured by some export/screenshot
+% paths, so it is switched off explicitly rather than relying on
+% exportgraphics to always omit it.
+ax = gca;
+ax.Toolbar.Visible = 'off';
+disableDefaultInteractivity(ax);
 
 %% 4. Saving
 % Export as a vector PDF for perfect scaling in LaTeX
