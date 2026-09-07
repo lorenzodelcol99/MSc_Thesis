@@ -96,19 +96,42 @@ price stickiness that firm-specific capital was introduced to resolve.
 \subsection{Motivation}
 % [target: ~2 pp]
 
-An important goal of monetary business cycle research is to explain the empirical evidence
-on the impact of economic shocks on macroeconomic variables. Because the systematic component
-of policy is endogenous, identifying the causal effect of monetary policy requires isolating
-the non-systematic component, the monetary policy shock, even though it is small and
-infrequent \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.
+Inflation is persistent; when it appears is typically going to stay for some time, and it is difficult to bring down. 
+This is a stylised fact of the data, as can be seen in the post second world war US inflation history in Figure \ref{fig:inflation}.
 
-A large class of estimated DSGE models is taken to the data through this channel. Impulse
-Response Function Matching Estimation (IRFME) is a limited-information strategy that chooses
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/Inflation_Persistence/Inflation_Persistence.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/Inflation_Persistence/Inflation_Persistence.pdf}}
+        {\fbox{Missing file: Inflation\_Persistence.pdf}}
+    \caption{Inflation in the US, 1959Q2--2026Q2: quarterly growth rate of the Consumer Price Index, in percent.}
+    \label{fig:inflation}
+\end{figure}
+\FloatBarrier
+
+Many Dynamic Stochastic General Equilibrium (DSGE) models  
+are built to explain this phenomena. But standard New Keynesian (NK) models are able to model 
+this inflation behaviour only impling inplausibly high levels of price stickiness, which are 
+in stark contrast with micro-data evidence. \citet{ACEL2011} propose a resolution to this micro-macro conflict. 
+They create two differend models built on two versions of the \citet{CEE2005} model: 
+one with \textit{homogeneous} capital and the other were the capital is \textit{firm-specific}.
+\\
+
+One of the important goals of monetary business cycle research is to explain the empirical evidence 
+on the impact of economic shocks on macroeconomic variables.
+Because the systematic component of policy is endogenous, identifying the causal effect 
+of monetary policy shocks requires isolating the non-systematic component, the monetary policy 
+shock, even though it is small and infrequent \cite{Ravenna2007,Aruoba_Drechsel2024_MP_LLM}. 
+
+
+A large class of estimated DSGE models is taken to the data through this channel.
+Impulse Response Function Matching Estimation (IRFME) is a limited-information strategy that chooses
 structural parameters to minimise the distance between the impulse responses implied by the
 model and those estimated from an identified VAR \citep{CEE2005, ACEL2011,
 Hall_Inoue_Nason_Rossi2012}. The strategy is attractive precisely because it is partial:
 the researcher takes a stand on the identification of a subset of shocks, and remains
 agnostic about the remaining dimensions of the data.
+\\
 
 That attractiveness rests entirely on one maintained assumption: that the VAR delivers
 \emph{consistent} estimates of the moments being matched. If the reduced-form VAR adequately
@@ -117,10 +140,11 @@ VAR is misspecified, the specification error propagates to the structural statis
 compounds at each horizon \citep{Ramey2016, Canova_Fosso2025}
 \cite{Ravenna2007} "The bias introduced by truncation can lead to bias in the identification 
 of the structural shock."
-\citet{ACEL2011} say as much
+\citet[][footnote 10, p.~3]{ACEL2011} say as much
 themselves: ``the quality of our estimation strategy depends on the ability of identified
 VARs to generate reliable estimates of the dynamic response of economic variables to
-shocks''.\footnote{\citet[][footnote 10, p.~3]{ACEL2011}.}
+shocks''.
+\\
 
 Since a VAR($\infty$) cannot be estimated on a finite sample, researchers truncate. The
 resulting VAR($p$) is misspecified, and increasingly so the smaller is $p$
@@ -204,7 +228,7 @@ Section
 \subsection{Inflation inertia and the micro--macro conflict}
 
 \citet{ACEL2011} start from a tension in the New Keynesian literature. To account for inertia
-in inflation, standard models require firms to re-optimise prices infrequently --- every six
+in inflation, standard models require firms to re-optimise prices infrequently; every six
 quarters, and in versions without indexation to past inflation even every two years. This sits
 uneasily with the microeconometric evidence, which finds price changes considerably more
 frequent. \textcolor{red}{Citare Bils and Klenow (2004), Golosov and Lucas (2007), Klenow and Kryvtsov
@@ -332,11 +356,17 @@ to identify possible modelling weaknesses and to infer usefull economic conclusi
 
 The authors use a four lag medium scale VAR with 10 quarterly series and 3 shocks: Monetary Policy Shock identified with 
 short run Cholesky restriction, and Embodied and Neutral Technology shocks with long run identification à la 
-\cite{Shapiro_Watson88}. As well summarised by \cite{Hall_Inoue_Nason_Rossi2012}, the theoretical proposed by
+METTERE FISHER E NON \cite{Shapiro_Watson88}. As well summarised by \cite{Hall_Inoue_Nason_Rossi2012}, the theoretical proposed by
 \cite{ACEL2005WP}  impose that the tech shocks are the only one allowed to affect productivity in the long run. 
 In particular, only Capital Embodied shock can affects the price of investment goods.
 Finally, Monetary Policy shock affects quantities and prices only within a quarter. 
 The VAR is identified such its IRFs respects the DSGE restrictions and estimate the structural parameters.
+
+\textcolor{red}{NEET TO EXPLAIN THAT EVEN IF THRE ARE THREE SHOCKS, AT THE END ACEL IS A MP SHOCK PAPER, THEIR 
+MAIN FINDING LOADS ON THE MP SHOCK, THE OTHER TWO ARE NECESSARY EXPECIALLY IN THE DSGE ESTIMATION.
+NEED TO ADD THE INDENTIFICATION BIAS OVER TRUNCATION BIAS. THIS IS NECESSARY TO EXPLAIN WHY 
+THE TECH SHOCKS CHANGE A LOT, AND EXPECIALLY AT H=0 HORIZONT, RESPECT THE MP SHOCK THAT ID DOES NOT 
+THANKS TO ITS RECURSIVE IDENTIFICAITON. Doing so its allows me to put the tech shocks in the appendix}
 
 \subsection{SVAR and IRF minimum distance}
 The SVAR can be recovered by imposing structure on the reduced form,
@@ -694,7 +724,7 @@ The green solid line with grey 90\% bootstrap confidence interval are shown the 
 baseline results from the VAR with four lags. In orange dashed line the IRFs VAR(8), 
 and in blue solid line the VAR(12).
 
-I start desribing Figure \ref{fig:var_irfs_lag12} from some evidence that does not change dramatically.
+I start desribing Figure \ref{fig:var_irfs_lag12} from what does not change dramatically.
 First, the response of money growth rate to a monetary policy shock,
 consistently with the baseline VAR($4$), the effect is completed within one year.
 Second, there is a liquidity effect, money growth and interest rate move in opposite direction after the shock.
@@ -782,7 +812,9 @@ because in-sample it cannot be dismissed; reduced misspecification and overfitti
 the same in-sample signature, namely a smaller residual variance.
 
 What can be said here, is to point on two direction, misspecification reduction, and bootstrap.
-Starting from the latter, the bootstrap bands are constructed re-estimating the entire VAR 
+Misspecification reduction is at the hearth of \cite{Long_Lag2025} point, 
+and it is the reason why the confidence bands do not explode with the lag lenght.
+The latter point is that the bootstrap bands are constructed re-estimating the entire VAR 
 on each artificial sample, so the unceirtanty introduced by the parameters is propagated inot the repoted 
 intervals rather than being conditioned away. If the estimator would have been unstable at $p = 12$, the
 re-estimated responses would have varied wildy across draws, therefore, the bands would have widened accordingly.
@@ -791,7 +823,14 @@ In this sense, bootstrap rules out the mechanical part of the concern, since par
 \textcolor{red}{What it cannot be be omitted, is that the residual variance is itself untestated, because the bootstrap resamples 
 from the fitted residuals of the very model under scrunity: NON CONVITNO DI QUESTO, è DI CLAUDE}
 
-Misspecification reduction is at the hearth of \cite{Long_Lag2025} point.
+ACEL choose the lag lenght of $p = 4$ even if the AIC and BIC criteria suggested to use $p = 2$.
+The choice was motivated by the fact that the VAR with four lags had a better fit to the data, 
+and that the IRFs were more consistent with the DSGE's theoretical mechanism.
+
+I've checked the IC at longer lags, I find that the AIC criteria points in favour of the VAR($12$).
+The results of this work suggest that the choice of $p = 4$ was not enough to capture the dynamics of the data, 
+and that a longer lag length is needed to obtain more accurate estimates of the DSGE's structural parameters.
+
 
 \section{Structural Implications}
 \subsection{DSGE structural parameters}

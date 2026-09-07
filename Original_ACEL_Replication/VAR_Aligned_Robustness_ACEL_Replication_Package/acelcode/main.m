@@ -37,7 +37,7 @@ hours       = 0;     % if 0, use benchmark dataset (ie., use non-farm business h
 estvar      = 1;     % Set to 1 if you want to estimate the ACEL VAR.
 nsteps      = 20;    % If estvar = 1, this controls number of steps out to compute impulse responses
 %%%%% LORENZO DEL COL change line 38 to make the LONG LAG VAR exercise
-nlags       = 12     % If estvar = 1, this controls number of lags in VAR
+nlags       = 5     % If estvar = 1, this controls number of lags in VAR
 hascon      = 1;     % If estvar = 1, if unity, include constant term in VAR
 
 %
@@ -144,7 +144,7 @@ end
 %  Estimate The VAR, if you want to    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-if Chi_Parameter_Table_A4 == 1 || decomp ==1 || vardecomp == 1
+if estvar == 1 || decomp ==1 || vardecomp == 1
     nvars   = size(vardata,2);
     %   identify a price of investment shock, a tech shock and a fed funds shock. (Fed Funds is the 9th variable in the VAR.)
     ffshk = 9;
