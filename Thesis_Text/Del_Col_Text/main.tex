@@ -540,7 +540,127 @@ covariance matrix $\Sigma_u$.
 Since impulse responses are a function of both, they inherit the bias.
 \begin{equation}
     \mathrm{IRF} = f\bigl(B(L), \Sigma_u\bigr),
+    \label{eq:irf-f}
 \end{equation}
+
+Written in this way, however, the statement treats $\Sigma_u$ as though it were itself the object
+that matters for structural analysis. It is not. The reduced form covariance is only ever used
+through a further mapping into structural shocks, and whether that mapping inherits the bias in
+$B(L)$ turns out to depend entirely on how the shock of interest is identified.
+
+\subsection{Identification bias}
+\label{sec:identification_bias}
+
+\citet{Ravenna2007} shows that truncation reaches impulse responses through two distinct channels,
+and that equation \eqref{eq:irf-f} describes only the first of them, being 
+called pure truncation bias.
+
+The second channel is different in kind. Impulse responses are not read off the reduced form alone.
+They also require the map from reduced form innovations to structural shocks of equation
+\eqref{eq:u-w-map}, and that map has to be estimated as well. Whenever the autoregressive
+coefficients enter its computation, a biased $\hat{B}(L)$ delivers a biased $\hat{B}_0$, and the
+object the researcher labels a structural shock is not the shock the identifying assumption
+defines. In Ravenna's words, ``if the VAR coefficients enter in the computation of the matrix
+identifying structural shocks from reduced form innovations, truncation results in erroneous
+identification''.\footnote{\citet[][p.~2049]{Ravenna2007}.} Two features of this result matter for
+what follows. It arises when the identifying assumptions are correct, since the identification bias
+``does not originate in mistaken identification
+assumptions''.\footnote{\citet[][p.~2053]{Ravenna2007}.} And it arises in population, so it is not
+a small sample problem: the results ``do not hinge on small-sample bias of the
+estimator''.\footnote{\citet[][p.~2049]{Ravenna2007}.}
+\\
+
+Whether the second channel is active therefore depends on a single question. Do the estimated
+autoregressive coefficients enter the computation of the identifying map?
+
+Under a recursive short run scheme they do not. The identifying restrictions are zero restrictions
+on contemporaneous relations, so $B_0$ is recovered from $\hat{\Sigma}_u$ alone through equation
+\eqref{eq:sigma-map}, and the lag polynomial plays no part in it. This does not make the recursive
+scheme immune to truncation. The estimate $\hat{\Sigma}_u$ is itself inflated by the omitted
+dynamics, exactly as in equation \eqref{eq:omitted}, and the propagation is distorted as it is for
+anyone else. It makes the scheme immune to the second channel: the restriction is a statement about
+the contemporaneous covariance of whatever innovations the estimated VAR produces, and it retains
+that meaning at any lag order.
+
+Under a long run scheme they do. In the formulation of \citet{BlanchardQuah1989} the identifying
+map is obtained by factorising the long run covariance matrix
+$[I - B(1)]^{-1}\Sigma_u\bigl\{[I - B(1)]^{-1}\bigr\}'$, where $B(1) = \sum_{j=1}^{p}B_j$ is the
+entire lag polynomial evaluated at unity. The truncated coefficients enter the identification
+directly, and the restriction is imposed on a sum that a VAR($p$) does not estimate consistently
+when the true representation is of infinite order.
+
+The identification used by \citet{ACEL2011} follows \citet{Fisher2006}, who borrows the estimation
+strategy from \citet{Shapiro_Watson88}, and it reaches the same place along a different route. The
+restriction there is not imposed by rotating an estimated matrix after the fact. It is imposed
+inside the estimating equation, as a common factor restriction on the lag polynomials of the
+variables whose long run effect is set to zero, and the identified shock is the residual of the
+instrumental variables regression that results.\footnote{\citet[][pp.~422--423]{Fisher2006} shows
+that imposing the restriction is equivalent to imposing a unit root in each of those lag
+polynomials. The procedure is described in Appendix \ref{app:identification}.} The lag order fixes
+the regression, the regression fixes the residual, and the residual is the shock, so the estimated
+dynamics enter the identification by construction rather than through a rotation. What the two
+formulations share is the object being restricted, the sum of a truncated lag polynomial, and that
+sum is not the sum of the true one.
+\\
+
+This has a consequence for where the error appears, and it is not the one intuition suggests. A
+long run restriction says nothing about any finite horizon, impact included. It fixes the cumulated
+effect and leaves every response along the way to be implied by the estimated dynamics. The
+restriction is therefore not a constraint on the response function but the device that defines the
+shock, and when the device is applied to a truncated polynomial, the linear combination of reduced
+form innovations that is extracted is the wrong one. A wrong linear combination is wrong at every
+horizon, starting from the first. The two channels leave different traces: pure truncation bias
+distorts propagation, so its trace accumulates with the horizon, while identification bias distorts
+the shock, so its trace is visible already on impact.
+
+\citet{ChariKehoeMcGrattan2008} put magnitudes on this. Decomposing the error of a long run
+identified SVAR into a small sample component and a lag truncation component, they find that the
+second dominates, ``the SVAR error is primarily due to the lag-truncation
+bias''.\footnote{\citet[][p.~1345]{ChariKehoeMcGrattan2008}.} The number of lags required to make
+that component small is far beyond what a quarterly postwar sample allows, more than two hundred in
+their benchmark specification. Two further results of theirs bear directly on how the lag length
+should be chosen, a question taken up below. Lag truncation is not picked up by the usual
+diagnostics, since ``standard lag-length tests $\ldots$ do not detect the need for more
+lags''.\footnote{\citet[][p.~1338]{ChariKehoeMcGrattan2008}.} And convergence of the estimated
+responses to their theoretical counterparts as $p$ grows is not monotone, so a comparison between
+two lag lengths cannot by itself be read as a movement towards the truth.
+
+The reply of \citet{CEV2007} is usually filed as a defence of structural VARs against that critique,
+and on the substantive question it is. On the mechanism, however, the two papers agree, and the
+agreement is what matters here. CEV find that ``structural VARs perform remarkably well when
+identification is based on short-run restrictions'', and that ``the main distinction between our
+short and long-run results is that the sampling uncertainty associated with estimated impulse
+response functions is substantially larger in the long-run
+case''.\footnote{\citet[][pp.~2--3]{CEV2007}.} Their diagnosis of why is explicit: ``when
+substantial bias exists, it stems from the fact that with long-run restrictions one requires an
+estimate of the sum of the VAR coefficients. The specification error involved in using a finite-lag
+VAR is the reason that in some of our examples, the sum of VAR coefficients is difficult to estimate
+accurately''.\footnote{\citet[][p.~3]{CEV2007}.} Their remedy is to estimate that object without the
+VAR coefficients at all, through a nonparametric estimator of the spectral density at frequency
+zero, which removes most of the bias. Both sides of the debate therefore locate the fragility in the
+same place, the sum of the lag polynomial, which is precisely what truncation distorts.
+
+Long run restrictions are known to be delicate for reasons that have nothing to do with truncation,
+and \citet{Faust_Leeper1997} and \citet{Erceg_Guerrieri_Gust2005} document several of them. These
+are complements rather than alternatives to the argument above. What distinguishes the truncation
+channel is that it is the one that moves when the lag length moves, and the lag length is the only
+thing the exercise of this paper varies.
+\tbd{Espandere questo paragrafo dopo la lettura di Faust e Leeper (1997) ed Erceg, Guerrieri e
+Gust (2005).}
+\\
+
+The VAR of \citet{ACEL2005WP} is an unusually clean setting in which to look for the second channel,
+because it carries both kinds of restriction at once. The monetary policy shock is identified
+recursively following \citet{CEE2005}, so its identification does not involve the lag polynomial.
+The neutral and capital embodied technology shocks are identified from restrictions on long run
+multipliers following \citet{Fisher2006}, so theirs does. The two blocks are estimated on the same
+sample, from the same ten variables, within the same system and with the same estimator. They differ
+in one respect only, namely where the identifying restriction lives, at horizon zero in the first
+case and at infinity in the second. The argument of this section therefore delivers a prediction
+that can be read directly off the estimates. As the lag length grows, the monetary responses should
+retain their shape on impact and move mainly in the timing of their propagation, while the
+technology responses should move from impact onwards. Section \ref{sec:results} reports what happens
+to each.
 
 The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
 links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
@@ -575,7 +695,7 @@ This trade off it applies to all truncated VARs, no matter what the identificati
 
 To reveal Long-Lag VARs properties \cite{Long_Lag2025} generate data, with a MonteCarlo, of realistic samples size 
 from three DSGE, to estimate VARs of different lag length.
-The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore (CKM), \cite{CEV2007} (CEV) and \cite{SM2007} (SW).
+The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore (CKM), \cite{CEV2007} (CEV) and \cite{SW2007} (SW).
 Are alle chosen as well known, \textcolor{red}{CONTROLLARE E RIPENSARE A COME SCRIVERE CKM is the most known critique in the literature 
 on truncation bias effects on IFRs identified with long-run restrictions.
 Whereas CEV defend the use short run restriction, and SW becasue uses many macro frictions frequently disscussed in macro.}
@@ -584,7 +704,7 @@ And the DSGE are fundamental in the sense of \cite{FVRRSS2007}, so invertivility
 Under these ipotesis these models have an exact VAR($\infty$) representation.
 
 With the MonteCarlo they generate $1000$ datasets of realistic macro sample size for quarterly data, $T = 200$,
-and they estimate the bivariate VARs \footnote{For \cite{SM2007}, they reduce the number of variables from 7 to 2 
+and they estimate the bivariate VARs \footnote{For \cite{SW2007}, they reduce the number of variables from 7 to 2 
 to maitanin consistency with the other two exercises. They keep GDP-growth and interest rates.}
 representations of the DSGE choosing different increasing the lag choice.
 When comparing VARs of different lag-lenght, they restrict the sample of effective observations as $T = 170$ 
