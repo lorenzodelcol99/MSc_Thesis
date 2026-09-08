@@ -551,7 +551,7 @@ $B(L)$ turns out to depend entirely on how the shock of interest is identified.
 \subsection{Identification bias}
 \label{sec:identification_bias}
 
-\citet{Ravenna2007} finds two channels through which truncation operates. The first being \textit{pure
+\citet{Ravenna2007} finds two channels through which lag truncation operates. The first being \textit{pure
 truncation} bias, the one described in the section above.
 The second he calls it \textit{identification bias}, and works trought the fact that
 impulse responses are not read off the reduced form alone, they also require the
@@ -562,7 +562,7 @@ Ravenna's identification bias arises when the identifying restrictions are corre
 so it does not originate in mistaken identification assumptions, 
 and it arises in population, so it is not an artefact of small samples.
 
-For this reason \textit{truncation on identification} could be the more accurate label.
+For this reason \textit{truncation on identification bias} could be the more accurate label.
 Whenever the estimated autoregressive coefficients enter its
 computation, a biased $\hat{B}(L)$ delivers a biased $\hat{B}_0$, and the object the researcher
 labels a structural shock is not the shock the identifying assumption defines. 
@@ -575,7 +575,7 @@ coefficients enter the computation of the identifying map?
 Under a recursive short run scheme they do not. The identifying restrictions are zero restrictions
 on contemporaneous relations, so $B_0$ is recovered from $\hat{\Sigma}_u$ alone, and the lag polynomial plays no part in it. This does not make the recursive
 scheme immune to pure truncation, since $\hat{\Sigma}_u$ is itself inflated by the omitted dynamics and
-the propagation is distorted as it is for everyone else. It makes the scheme immune to the second
+the propagation is distorted as it is for everyone else. The short run Cholesky scheme is not affected to the second
 channel, truncation on identification, because the restriction is a statement about the contemporaneous covariance of whatever
 innovations the estimated VAR produces, and it retains that meaning at any lag order.
 \\
@@ -594,18 +594,33 @@ so that the entire lag polynomial evaluated at unity enters the identification d
 does not estimate that sum consistently when the true representation is of infinite order, and the
 restriction is therefore imposed on the wrong object.
 
-The identification used by \citet{ACEL2011} follows \citet{Fisher2006}, who takes the estimation
-strategy from \citet{Shapiro_Watson88}, and it reaches the same place by a different route. The
-restriction is not imposed by rotating an estimated matrix after the fact. It is imposed inside the
-estimating equation, as a common factor restriction on the lag polynomials of the variables whose
-long run effect is set to zero, and the identified shock is the residual of the instrumental
-variables regression that results. The lag order fixes the regression, the regression fixes the
-residual, and the residual is the shock, so the estimated dynamics enter the identification by
-construction rather than through a rotation. The procedure is described in Appendix
-\ref{app:identification}. What the two formulations share is the object being restricted, the sum of
-a truncated lag polynomial, and that sum is not the sum of the true one.
+In \citet{ACEL2011} the restriction reaches the same place by a different route. It is not imposed
+by rotating an estimated matrix once the reduced form has been fitted, it is imposed inside the
+estimating equation. \textcolor{red}{CAPIRE COME SPIEGARE LA PARTE, PRIMA DOVREI CAPIRE BENE BENE FISHER, CHE NON RIESCO A CAPIRE Setting the long run effect of a variable to zero is equivalent to requiring
+the coefficients on its lags to sum to zero, hence to requiring its lag polynomial to contain the
+factor $(1-L)$, and this is implemented by entering that variable in differences. The identified
+shock is then the residual of the instrumental variables regression that results, and the procedure
+is described in Appendix \ref{app:identification}. DISCORSO DI DIFFICOLTA' VALE ANCHE PER QUANTO SEGUE SOTTO}
 
-This has a consequence for where the error appears, and it is not the one intuition suggests. A long
+Truncation enters through the equivalence itself, because it holds for the polynomial that is
+actually estimated. With $p$ lags the restriction forces the coefficients on the included lags to
+sum to zero, whereas the assumption it is meant to encode concerns the sum over the true $p^{*}>p$
+lags. The two agree only if the finite order polynomial reproduces the true dynamics, which is
+exactly what \citet{Fisher2006} assumes when he requires the inverse of the moving average
+representation to be well approximated by a finite order lag polynomial.
+
+When that assumption fails the consequence is sharper than a distortion of the coefficients, because
+here the shock is defined residually. It is whatever remains of the dependent variable once the
+restricted and truncated dynamics have been projected out. The omitted lags are correlated with the
+included regressors, so they are absorbed partly by the estimated coefficients and partly by the
+residual, and what the procedure returns is not the innovation the restriction was designed to
+isolate but a mixture of that innovation and the dynamics left out of the specification. The
+identifying assumption remains economically correct. What stops corresponding to it is the empirical
+object built to implement it. \citet{BlanchardQuah1989} restrict a sum of estimated coefficients
+after estimation, \citet{ACEL2011} restrict the same sum during it, and in both cases the sum
+belongs to a truncated polynomial.
+
+This has a consequence for where the bias appears, and it is not the one intuition suggests. A long
 run restriction says nothing about any finite horizon, impact included. It fixes the cumulated
 effect and leaves every response along the way to be implied by the estimated dynamics. The
 restriction is therefore not a constraint on the response function but the device that defines the
