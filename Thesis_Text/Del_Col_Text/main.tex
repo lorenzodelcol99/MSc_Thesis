@@ -594,31 +594,13 @@ so that the entire lag polynomial evaluated at unity enters the identification d
 does not estimate that sum consistently when the true representation is of infinite order, and the
 restriction is therefore imposed on the wrong object.
 
-In \citet{ACEL2011} the restriction reaches the same place by a different route. It is not imposed
-by rotating an estimated matrix once the reduced form has been fitted, it is imposed inside the
-estimating equation. \textcolor{red}{CAPIRE COME SPIEGARE LA PARTE, PRIMA DOVREI CAPIRE BENE BENE FISHER, CHE NON RIESCO A CAPIRE Setting the long run effect of a variable to zero is equivalent to requiring
-the coefficients on its lags to sum to zero, hence to requiring its lag polynomial to contain the
-factor $(1-L)$, and this is implemented by entering that variable in differences. The identified
-shock is then the residual of the instrumental variables regression that results, and the procedure
-is described in Appendix \ref{app:identification}. DISCORSO DI DIFFICOLTA' VALE ANCHE PER QUANTO SEGUE SOTTO}
-
-Truncation enters through the equivalence itself, because it holds for the polynomial that is
-actually estimated. With $p$ lags the restriction forces the coefficients on the included lags to
-sum to zero, whereas the assumption it is meant to encode concerns the sum over the true $p^{*}>p$
-lags. The two agree only if the finite order polynomial reproduces the true dynamics, which is
-exactly what \citet{Fisher2006} assumes when he requires the inverse of the moving average
-representation to be well approximated by a finite order lag polynomial.
-
-When that assumption fails the consequence is sharper than a distortion of the coefficients, because
-here the shock is defined residually. It is whatever remains of the dependent variable once the
-restricted and truncated dynamics have been projected out. The omitted lags are correlated with the
-included regressors, so they are absorbed partly by the estimated coefficients and partly by the
-residual, and what the procedure returns is not the innovation the restriction was designed to
-isolate but a mixture of that innovation and the dynamics left out of the specification. The
-identifying assumption remains economically correct. What stops corresponding to it is the empirical
-object built to implement it. \citet{BlanchardQuah1989} restrict a sum of estimated coefficients
-after estimation, \citet{ACEL2011} restrict the same sum during it, and in both cases the sum
-belongs to a truncated polynomial.
+\citet{ACEL2011} impose the same kind of restriction by a different route, following
+\citet{Fisher2006}: instead of rotating an estimated matrix after the fact, they build the
+restriction into the estimating equation and read the identified shock off as a regression residual
+(mechanics in Appendix \ref{app:identification}). Either way, the restriction binds on the sum of
+the lag polynomial the VAR actually estimates, which runs only to $p$, not on the sum over the true
+$p^{*}>p$ lags it is meant to capture. The restriction is anchored to the wrong object, and the shock
+it delivers is the wrong linear combination of reduced form innovations.
 
 This has a consequence for where the bias appears, and it is not the one intuition suggests. A long
 run restriction says nothing about any finite horizon, impact included. It fixes the cumulated
