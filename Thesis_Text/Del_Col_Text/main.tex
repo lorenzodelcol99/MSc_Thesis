@@ -611,22 +611,16 @@ effect and leaves every response along the way to be implied by the estimated dy
 restriction is therefore not a constraint on the response function but the device that defines the
 shock, and when the device is applied to a truncated polynomial, the linear combination of reduced
 form innovations that is extracted is the wrong one. A wrong linear combination is wrong at every
-horizon, starting from the first. The two channels leave different traces: pure truncation bias
-distorts propagation, so its trace accumulates with the horizon, while identification bias distorts
+horizon, starting from the first. 
+\\
+
+The two channels leave different traces: \textit{pure truncation} bias
+distorts propagation, so its trace accumulates with the horizon, while \textit{truncation on identification} bias distorts
 the shock, so its trace is visible already on impact.
 
-The VAR of \citet{ACEL2005WP} carries both kinds of restriction at once, which makes it an unusually
-clean setting in which to look for the second channel. The monetary policy shock is identified
-recursively following \citet{CEE2005}, so its identification does not involve the lag polynomial and
-only the first channel can reach it. The neutral and capital embodied technology shocks are
-identified from restrictions on long run multipliers following \citet{Fisher2006}, so both channels
-can reach them. The two blocks are estimated on the same sample, from the same ten variables, within
-the same system and with the same estimator, and they differ in one respect only, namely where the
-identifying restriction lives, at horizon zero in the first case and at infinity in the second. This
-delivers a prediction that can be read directly off the estimates. As the lag length grows, the
-monetary responses should retain their shape on impact and move mainly in the timing of their
-propagation, while the technology responses should move from impact onwards. Section
-\ref{sec:results} reports what happens to each.
+The VAR of \citet{ACEL2011} carries both kinds of restriction at once, which makes it an unusually
+clean setting in which to look for both the cannels.
+\\
 
 The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
 links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
