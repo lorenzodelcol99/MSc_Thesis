@@ -552,7 +552,7 @@ $B(L)$ turns out to depend entirely on how the shock of interest is identified.
 \label{sec:identification_bias}
 
 \citet{Ravenna2007} finds two channels through which lag truncation operates. The first being \textit{pure
-truncation} bias, the one described in the section above.
+truncation} bias the one described in the section above.
 The second he calls it \textit{identification bias}, and works trought the fact that
 impulse responses are not read off the reduced form alone, they also require the
 map from reduced form innovations to structural shocks, and that map
@@ -562,7 +562,7 @@ Ravenna's identification bias arises when the identifying restrictions are corre
 so it does not originate in mistaken identification assumptions, 
 and it arises in population, so it is not an artefact of small samples.
 
-For this reason \textit{truncation on identification bias} could be the more accurate label.
+For this reason \textit{truncation on identification bias} could be a more accurate label.
 Whenever the estimated autoregressive coefficients enter its
 computation, a biased $\hat{B}(L)$ delivers a biased $\hat{B}_0$, and the object the researcher
 labels a structural shock is not the shock the identifying assumption defines. 
@@ -601,19 +601,23 @@ restriction into the estimating equation and read the identified shock off as a 
 the lag polynomial the VAR actually estimates, which runs only to $p$, not on the sum over the true
 $p^{*}>p$ lags it is meant to capture. The restriction is anchored to the wrong object, and the shock
 it delivers is the wrong linear combination of reduced form innovations.
+\\
 
-This has a consequence for where the bias appears, and it is not the one intuition suggests. A long
+This has a consequence for where the bias may appear. A long
 run restriction says nothing about any finite horizon, impact included. It fixes the cumulated
-effect and leaves every response along the way to be implied by the estimated dynamics. The
-restriction is therefore not a constraint on the response function but the device that defines the
-shock, and when the device is applied to a truncated polynomial, the linear combination of reduced
-form innovations that is extracted is the wrong one. A wrong linear combination is wrong at every
-horizon, starting from the first. 
+effect and leaves every response along the way to be implied by the estimated dynamics.
+The long run restriction is therefore not a constraint on the response at a given horizon: 
+it is the rule by which the shock is isolated from the reduced form innovations, 
+and it is on that rule that truncation acts. Applied to a truncated polynomial, the identifying restriction 
+can isolate a different combination from the intended one. If the shock itself 
+turns out to be a different one, the bias is no longer bound to accumulate with 
+the horizon: it could already be present at the first period, unlike pure truncation bias 
+which builds up over time.
 \\
 
 The two channels leave different traces: \textit{pure truncation} bias
-distorts propagation, so its trace accumulates with the horizon, while \textit{truncation on identification} bias distorts
-the shock, so its trace is visible already on impact.
+distorts propagation, so its mark accumulates with the horizon, while \textit{truncation on identification} bias distorts
+the shock, so its trace could be visible already on impact.
 
 The VAR of \citet{ACEL2011} carries both kinds of restriction at once, which makes it an unusually
 clean setting in which to look for both the cannels.
