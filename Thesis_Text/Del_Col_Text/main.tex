@@ -175,7 +175,7 @@ the reduced form to the structural parameters. Second, and more specifically, I 
 setting their design deliberately excludes. \citet{Long_Lag2025} state that ``all our
 experiments are based on two-shock models and two-variable VARs'', and that where a candidate
 model does not fit that framework --- Smets and Wouters --- ``we consider the model with only
-monetary policy and preference shocks''.\footnote{\citet[][p.~10]{Long_Lag2025}. They also note
+monetary policy and preference shocks''.\footnote{\citep[p.~10]{Long_Lag2025}. They also note
 that ``invertibility is never a problem; all the models we consider are fundamental''.} Their
 data generating processes are square and fundamental by construction, so that truncation bias
 is isolated from singularity and invertibility. ACEL's model is not: it confronts three
@@ -204,7 +204,7 @@ on the frequency of price adjustment. Under a richer lag structure that reconcil
 disappears. The channel is transparent and internal to their own argument: ACEL note that
 ``to the extent that capital utilization rates can easily be varied, the assumption of
 firm-specific capital loses its ability to rationalize low values of
-$\xi_p$''.\footnote{\citet[][p.~227]{ACEL2011}.} Long-lag VARs push the estimate of $\sigma_a$
+$\xi_p$''.\footnote{\citep[p.~227]{ACEL2011}.} Long-lag VARs push the estimate of $\sigma_a$
 precisely into that region.
 
 \subsection{Related Literature}
@@ -291,41 +291,68 @@ need to be very high, implying irrealistic implied time duration of prices, that
 which are in stark conflict with micro evidence.
 \\
 
-The flexibility of capital utilisation is governed by $\sigma_a$, and $1/\sigma_a$ is
-the elasticity of utilisation with respect to the rental rate of capital. \textcolor{red}{Its role is
-easiest to see by following a firm that has just cut its price and must now meet
-higher demand. DA PORRE COME SE CI FOSSE UN POSITIVE DEMAND SHOCK INASPETTATO, OVVERO COME SE CI FOSSE UN EASING MP SHOCK.} Extra labour can be hired at the going wage, but extra capital services
-can only come from running the capital the firm already holds more intensively, and
-$\sigma_a$ is what that costs. If $\sigma_a$ is high that margin is expensive, so most
-of the additional output has to be produced by adding labour to a quantity of capital
-services that barely moves. The firm's own marginal cost then rises sharply with its own output, and
-a firm that anticipates this cuts its price by less in the first place. That restraint
-is what $\chi$ records, and it is why the firm-specific model needs a high $\sigma_a$:
-only then is $\chi$ far enough below one for a low $\gamma$ to be consistent with a
-low $\xi_p$.
+The role of $\sigma_a$ is easiest to see by following what happens after an unexpected,
+positive demand shock. Aggregate demand rises within the quarter and firms have to produce
+more. Hours expand first, and wages are themselves set on a Calvo
+scheme, so only the $1-\xi_w$ of households that can reoptimise raise their wage while the
+remaining $\xi_w$ keep supplying at the wage set earlier. The aggregate nominal wage
+therefore rises, and the real wage with it, but by little. Capital is another matter, and
+it is here that the two models differentiate from each other.
 
-It is worth being precise here, because $\sigma_a$ is a single parameter, estimated
-once, and does not take different values across the two models. What differs is
-whether it reaches $\chi$ at all. Under homogeneous capital the firm buys capital
-services on a market at the going rental rate, so its own marginal cost does not
-depend on its own output and $\chi = 1$ whatever $\sigma_a$ happens to be. Under
-firm-specific capital the firm is tied to the capital it already owns, and $\sigma_a$
-determines how much that constraint is actually binding.
+Under homogeneous capital there is a competitive, economy-wide market for capital services.
+The aggregate capital stock is predetermined within the quarter, so the additional services
+have to come from higher utilisation, and the rental rate rises by an amount governed by
+$\sigma_a$. The individual firm, however, takes that rental rate as given and can hire as
+many capital services as it wants at it. This is the standard assumption in equilibrium
+business cycle models, and \citet{ACEL2005WP} state it plainly: ``a firm's capital stock is
+not pre-determined and all factors of production, including capital, can be instantaneously
+transferred across firms, without any cost, in perfectly competitive
+markets''.\footnote{\citep[p.~2]{ACEL2005WP}.} Both of its factors are therefore available
+at prices it does not influence, so its marginal cost is the same as every other firm's and
+does not depend on how much this particular firm happens to produce. Marginal cost is
+common and independent of own output, which is what $\chi = 1$ records.
 
-The limiting case makes the point. If $\sigma_a$ is close to zero, utilisation is
-almost free to vary, so a firm tied to its own capital can still draw from it whatever
-volume of capital services it needs, at negligible cost. Owning the capital rather
-than renting it then makes no practical difference: the firm's own marginal cost is as
-flat as it would be with a market for capital services, $\chi$ returns to one, and the
-firm-specific model collapses onto the homogeneous one. Firm specificity is an
-assumption about ownership, but its economic content comes entirely from the cost of
-varying utilisation, and without that cost the constraint exists in name only.
+Under firm-specific capital that market does not exist. The firm is left with the capital
+it already owns, which cannot be reallocated within the period, so the only way to obtain
+more capital services is to run its own stock harder. It would be willing to pay for
+additional services, but there is no market on which to buy them, and $\sigma_a$ is what
+raising utilisation costs it instead. When $\sigma_a$ is high that margin is expensive, and
+most of the additional output has to come from adding hours to a quantity of capital
+services that barely moves. The marginal product of labour falls as the fixed factor binds,
+and the firm's own marginal cost rises with its own output.
+
+This changes the decision of the $1-\xi_p$ firms that can reset their price. Economy-wide
+marginal cost has risen, so optimiser firms desire to raise prices. But a firm that raises its price by more
+than the others sees its relative price rise, its demand fall, and its own output fall with
+it, and under firm-specific capital a lower own output means a lower own marginal cost,
+which argues for a smaller increase in the first place. Having internalised that producing
+more is what raises its costs, the firm moves its price by less than it would in the
+absence of this real rigidity, the more so the steeper its own marginal cost curve and the
+more elastic the demand it faces, since a given price increase then costs it more output.
+Inflation responds less to a given movement in economy-wide marginal cost, and this is
+precisely what a $\chi$ below one means.
+
+It is worth being precise about what is doing the work here, because $\sigma_a$ is a single
+parameter, estimated once, which does not take different values across the two models. What
+differs is whether it reaches $\chi$ at all. Under homogeneous capital the market for
+capital services severs the link between a firm's own output and its own marginal cost, and
+$\chi = 1$ whatever $\sigma_a$ happens to be. Under firm-specific capital the firm is tied
+to the capital it already owns, and $\sigma_a$ decides how binding that tie is.
+
+The limiting case makes the point. If $\sigma_a$ is close to zero, utilisation is almost
+free to vary, so a firm tied to its own capital can still draw from it whatever volume of
+capital services it needs, at negligible cost. Owning the capital rather than renting it
+then makes no practical difference: the firm's own marginal cost is as flat as it would be
+with a market for capital services, $\chi$ converges to one, and the firm-specific model
+collapses onto the homogeneous one. Firm specificity is an assumption about ownership, but
+its economic content comes entirely from the cost of varying utilisation, and without that
+cost the constraint exists in name only.
 \\
 
-This is where the mechanism is fragile, and \cite{ACEL2011} say themselves so: "to the extent
+This is where the mechanism is fragile, and \cite{ACEL2011} say themselves so: \textit{"to the extent
 that capital utilization rates can easily be varied, the assumption of firm-specific
 capital loses its ability to rationalize low values of
-$\xi_p$".\footnote{\citet[][p.~227]{ACEL2011}.} The reconciliation of micro and macro
+$\xi_p$"}.\citet[][p.~227]{ACEL2011}. The reconciliation of micro and macro
 evidence rests, in the end, lies on a single estimated parameter.
 
 \subsection{DSGE estimation via IRF matching}
@@ -424,7 +451,7 @@ by construction. This is a normalisation, not an assumption about the economy: w
 is estimated is not the scale of each shock, but how a given shock propagates through
 the system, which is entirely encoded in $B_0^{-1}$.
 
-$Y_t$ is the ten-dimensional vector of series used by \citet{ACEL2005WP,ACEL2011},
+$Y_t$ is the ten-dimensional vector of series used by \citet{ACEL2011},
 \begin{equation}
     Y_t =
     \begin{pmatrix}
@@ -455,9 +482,7 @@ the long-run level of labour productivity, and the capital-embodied shock alone 
 allowed to affect the long-run relative price of investment. The full derivation
 is in Appendix \ref{app:identification}.
 
-These restrictions identify three shocks out of ten. \citet{ACEL2005WP} note that the
-remaining \textcolor{red}{seven are left unlabelled RICORDARSI DI SISTEMARE QUESTO PARAGRAFO}. This SVAR identifies selected aspects that are consistent
-with the DSGE's shocks. IRFME matches the IRFs of the three identified shocks, 
+These restrictions identify three shocks out of ten. IRFME matches the IRFs of the three identified shocks, 
 not on those not identified.
 
 \subsection{Estimating the Parameters of the Equilibrium Model}
@@ -479,11 +504,11 @@ Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed u
 more detail in the Appendix \ref{app:delta_method}
 
 The minimum distance estimator relies on the ability of the VAR to estimate the IRFs.
-\textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"} 
-point the attention on misspecification concerns in general VAR practice \cite{Ramey2016} p. 83.
-This is clear to the author which claim \textit{"The quality of our strategy (IRF matching) 
+\textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"}
+point the attention on misspecification concerns in general VAR practice \citep[p.~83]{Ramey2016}.
+This is clear to the author which claim \textit{"The quality of our strategy (IRF matching)
 depends on the ability of identified VARs to generate reliable estimates of the
-dynamic response of economic variables to shocks"} \cite{ACEL2011} p. 3, fn. 10.
+dynamic response of economic variables to shocks"} \citep[p.~3, fn.~10]{ACEL2011}.
 
 % =============================================================
 % 3. TRUNCATION BIAS and LONG-LAG VARs                         
@@ -623,21 +648,15 @@ The VAR of \citet{ACEL2011} carries both kinds of restriction at once, which mak
 clean setting in which to look for both the cannels.
 \\
 
-The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
-links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
-theoretical ones, in order to estimate the model's strucural parameters. Sample IRFs are the objective that the
-estimator wants to mimic, but if they are misspecified, the estimator is targeting the strucutal parameters to 
-an object that is biased, consequently obtaining potentially distorted estimates of the strucutal parameters.
-
-In light of recent research branch \cite{Li_PlagborgMoller_Wolf2024, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}, 
-they dissmiss the use of VARs in of Local Projections (LP), where almost every argument against VARs 
-lies on being VARs lag truncated. 
-While Long-Lag VARs have excellent theoretical properties \cite{Plagborg-Moller_Wolf2021}, are considered
-unworkable in practice due high variance concerns.
-Which is what typically keeps practitioners away from using long lags is that; standard intuition thinks that unceirtany 
-becomes perveasive. In the sense coventional wisdom thiks that, as the lags increases 
-the number of parameters rapidly escalate, therby reducing the degrees of freedom and making confidence 
-interval width prohibitevely large.
+In essence, both the channels in which truncation bias potentially operates can be 
+closed or mitigated by simply increasing the lag lenght of the VAR.
+Applied practice has largely resisted that response. Even where long-lag
+VARs are known to have good asymptotic properties \cite{Plagborg-Moller_Wolf2021},
+they are widely treated as unworkable in finite samples due to high variance concerns: 
+more lags mean more parameters, fewer degrees of freedom, and confidence intervals 
+presumed to widen accordingly. That presumption is part of why a recent literature 
+prefers Local Projections (LP) to VARs outright \cite{Li_PlagborgMoller_Wolf2024, 
+Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}.
 \\
 
 \cite{Long_Lag2025} explore the trivial solution to short lag VARs, that is, dramatic increase in the 
@@ -645,8 +664,8 @@ lag lenght.
 
 \subsection{Long-Lag VARs}
 \label{sec:long-lag_VARs}
-Their central point is that standard intuition is just a portion of the story, \textit{"in face of misspecification due to 
-lag truncation, increasing the lag length can actually reduce unceirtanty"} \cite{Long_Lag2025} p. 2.
+Their central point is that standard intuition is just a portion of the story, \textit{"in face of misspecification due to
+lag truncation, increasing the lag length can actually reduce unceirtanty"} \citep[p.~2]{Long_Lag2025}.
 
 As the dynamic structure increases, lag truncation decrease, consequently misspecification reduces.
 Misspecification reduction has a double effect, the first being the well-known bias reduction, while 
@@ -656,10 +675,8 @@ This trade off it applies to all truncated VARs, no matter what the identificati
 
 To reveal Long-Lag VARs properties \cite{Long_Lag2025} generate data, with a MonteCarlo, of realistic samples size 
 from three DSGE, to estimate VARs of different lag length.
-The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore (CKM), \cite{CEV2007} (CEV) and \cite{SW2007} (SW).
-Are alle chosen as well known, \textcolor{red}{CONTROLLARE E RIPENSARE A COME SCRIVERE CKM is the most known critique in the literature 
-on truncation bias effects on IFRs identified with long-run restrictions.
-Whereas CEV defend the use short run restriction, and SW becasue uses many macro frictions frequently disscussed in macro.}
+The three DSGE are \cite{ChariKehoeMcGrattan2008} hencefore, \cite{CEV2007} and \cite{SW2007}.
+
 This MonteCarlo simulation is conducted under the assumptions that the identification restriction is correct.
 And the DSGE are fundamental in the sense of \cite{FVRRSS2007}, so invertivility is never a problem.
 Under these ipotesis these models have an exact VAR($\infty$) representation.
@@ -694,7 +711,7 @@ are roughly in the same ballpark as those of short-lag VARs.
 
 
 Long-Lag VARs have comparable coverage rates and comparable MSE than short-lag VARs. combined with 
-the tendency to produce smaller biases, long-lag VARs have favorable properties compared to standard short-lag VARS.
+the tendency to produce smaller biases, long-lag VARs have favorable properties compared to standard short-lag VARs.
 
 \cite{Long_Lag2025} leverage to the above mentioned MonteCarlo simulation proposing an exercise that decompose the unceirtanty effects creating hypotetical IRFs
 that are composed by long-lag estimates of the point estimates, while using short-lag estimates of variance covariance matrix 
@@ -720,7 +737,12 @@ of IRFs related to p and h: here there is some to be done: recall that, given th
 does not relates to long run stuff, IRFME matches VAR IRFs' up to h periods, so in ligth of above, even if we are estimating a DSGE 
 that aims to study short run stuff, if it is done with IRFME we need to take care about h!. Then some examles of 
 pure structural questions with VARs affected by long lag estimation and in particualr the ones with econ questions which 
-are linked to the long run.}
+are linked to the long run. usare is seguente The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
+links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
+theoretical ones, in order to estimate the model's strucural parameters. Sample IRFs are the objective that the
+estimator wants to mimic, but if they are misspecified, the estimator is targeting the strucutal parameters to 
+an object that is biased, consequently obtaining potentially distorted estimates of the strucutal parameters.
+}
 \cite{Long_Lag2025} also revisits \cite{Gali1999} and \cite{Chang_Hong2006} (with uninformative priors) and \cite{MirandaAgrippinoRicco2021}.
 While \cite{Baumeister2025} re estimate \cite{Jorda2024long_run_mp} BVAR with 60 monthly lags and complitely break 
 down their result on long run effects of monetary policy.
@@ -752,10 +774,10 @@ for making structural inference with VARs, the lag lenght $p$ shoul be chosen co
 horizon of interest of the research question. \textcolor{red}{ GIA' DETTO, PENSARE COME RIFORMULARE O EVOLVERE QUA: For a VAR($p$) inference is largely uninformative at horizons $h > p$ 
 since the VAR($p$) cannot propagate much beyond the horizon $p$.} Because it implies that lag truncation 
 leads to unceirtanty being meccanicaly underestimated at those longer horizons.
-\textit{Coupled with potentially significant truncation bias, the short-lag VAR researcher runs 
-the risk of becoming relatively certain about the wrong point estimate. Hence, if the research 
-question centers on long horizon effects the VAR better include lags that extend that far.” } 
-\cite{Long_Lag2025} p. 2.
+\textit{Coupled with potentially significant truncation bias, the short-lag VAR researcher runs
+the risk of becoming relatively certain about the wrong point estimate. Hence, if the research
+question centers on long horizon effects the VAR better include lags that extend that far.” }
+\citep[p.~2]{Long_Lag2025}.
 
 What emerges from \cite{Long_Lag2025} leverage that the results that came from implementing enriched lag 
 struture are solely to take into consideration for structural inference works.
@@ -776,11 +798,11 @@ when structural inference is the aim of the anaylisis, and \cite{GonzalezCasasus
 a criteria that acknowledge the model will be used for structual inference.
 
 But it is not necessary to wait for state of the art IC to implement long lag VARs.
-\textit{"A simplier heuristic approach would be to plot the structural moments central to the research question 
+\textit{"A simplier heuristic approach would be to plot the structural moments central to the research question
 against lag length. If the structural conclusion dramatically change as the lag lenght increases,
-that is clearly indicating that truncation is important to the question at hand"} \cite{Long_Lag2025} p. 12.
+that is clearly indicating that truncation is important to the question at hand"} \citep[p.~12]{Long_Lag2025}.
 
-\textit{"The presumption that adding more lags necessarly leads to prohibitively large unceirtanty is hereby disproven"} \cite{Long_Lag2025} p. 12.
+\textit{"The presumption that adding more lags necessarly leads to prohibitively large unceirtanty is hereby disproven"} \citep[p.~12]{Long_Lag2025}.
 
 \textcolor{red}{qua devo unire \cite{Long_Lag2025,Baumeister2025}, e se riesco anche \cite{Ludwig2026},
 ed infine anche solite cit rispetto a truncation bias that affects IRFs at every horizon, including 
@@ -1029,9 +1051,6 @@ economically motivated, and it is exactly this requirement that the DSGE is used
 satisfy.
 
 
-\section{Delta Method}
-\label{app:delta_method}
-
 
 \section{The ACEL Model: Full Derivation}
 \label{app:model}
@@ -1039,6 +1058,8 @@ satisfy.
 \section{Additional Residual Analysis}
 \label{app:residuals}
 
+\section{Delta Method}
+\label{app:delta_method}
 
 \section{Monte Carlo Inference on the Calvo Parameters}
 \label{app:montecarlo}
@@ -1046,8 +1067,6 @@ satisfy.
 \section{VAR Aligned}
 \label{app:VAR_aligned}
 
-\section{Replication Files and Code}
-\label{app:code}
 
 
 \end{document}
