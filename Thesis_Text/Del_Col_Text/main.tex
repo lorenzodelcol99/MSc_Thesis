@@ -573,7 +573,7 @@ that matters for structural analysis. It is not. The reduced form covariance is 
 through a further mapping into structural shocks, and whether that mapping inherits the bias in
 $B(L)$ turns out to depend entirely on how the shock of interest is identified.
 
-\subsection{Identification bias}
+\subsection{Identification Bias}
 \label{sec:identification_bias}
 
 \citet{Ravenna2007} finds two channels through which lag truncation operates. The first being \textit{pure
@@ -587,10 +587,9 @@ Ravenna's identification bias arises when the identifying restrictions are corre
 so it does not originate in mistaken identification assumptions, 
 and it arises in population, so it is not an artefact of small samples.
 
-For this reason \textit{truncation on identification bias} could be a more accurate label.
-Whenever the estimated autoregressive coefficients enter its
+Whenever the estimated autoregressive coefficients enter the identifying map's
 computation, a biased $\hat{B}(L)$ delivers a biased $\hat{B}_0$, and the object the researcher
-labels a structural shock is not the shock the identifying assumption defines. 
+labels a structural shock is not the shock the identifying assumption defines.
 \\
 
 Whether the second channel, is present therefore reduces to a single question: do the estimated autoregressive
@@ -601,12 +600,12 @@ Under a recursive short run scheme they do not. The identifying restrictions are
 on contemporaneous relations, so $B_0$ is recovered from $\hat{\Sigma}_u$ alone, and the lag polynomial plays no part in it. This does not make the recursive
 scheme immune to pure truncation, since $\hat{\Sigma}_u$ is itself inflated by the omitted dynamics and
 the propagation is distorted as it is for everyone else. The short run Cholesky scheme is not affected to the second
-channel, truncation on identification, because the restriction is a statement about the contemporaneous covariance of whatever
+channel, identification bias, because the restriction is a statement about the contemporaneous covariance of whatever
 innovations the estimated VAR produces, and it retains that meaning at any lag order.
 \\
 
 Under a long run scheme they do. Long run identification is known to be delicate for several
-reasons, of which truncation is only one \citep{Faust_Leeper1997, Erceg_Guerrieri_Gust2005,
+reasons, of which truncation is only one \cite{Faust_Leeper1997, Erceg_Guerrieri_Gust2005,
 ChariKehoeMcGrattan2008, CEV2007}. The mechanism at work here is clearest in the formulation of
 \citet{BlanchardQuah1989}, where the identifying map is obtained by factorising the long run
 covariance matrix
@@ -641,7 +640,7 @@ which builds up over time.
 \\
 
 The two channels leave different traces: \textit{pure truncation} bias
-distorts propagation, so its mark accumulates with the horizon, while \textit{truncation on identification} bias distorts
+distorts propagation, so its mark accumulates with the horizon, while \textit{identification} bias distorts
 the shock, so its trace could be visible already on impact.
 
 The VAR of \citet{ACEL2011} carries both kinds of restriction at once, which makes it an unusually
@@ -725,30 +724,78 @@ us at odds both with standard intuition (less degrees of freedom) and with the w
 Standard intuition on increased parametrisation is partially correct and obviously part of the story, but 
 \cite{Long_Lag2025} finds that misspecification reduction tends to have substantial variance effects.
 
-Given that macroeconomist almost never have the luxury of knowing the true DGP as in 
-the just reviewed the MonteCarlo exercise. \cite{Baumeister2025} (in the discussion of \cite{Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}) 
-and also \cite{Long_Lag2025} ask if long-lag VARs are a viable methodology in sample data revisiting some well 
-known empirical studies.
+\subsection{Chosing the Lag Lenght}
 
-\textcolor{red}{Qua creare ponte di collegamento tra discussione in long-lag VARs quando non si conosce il DGP: 
-meglio andare lunghi! sopratutto se la domanda economica richiede è di lungo periodo, o ad ogni modo, bisogna dimostrare 
-di essere robusti a long lag VARs given the what it has been studied respet the trustfullness of point estimates 
-of IRFs related to p and h: here there is some to be done: recall that, given that even if the economic quesiton 
-does not relates to long run stuff, IRFME matches VAR IRFs' up to h periods, so in ligth of above, even if we are estimating a DSGE 
-that aims to study short run stuff, if it is done with IRFME we need to take care about h!. Then some examles of 
-pure structural questions with VARs affected by long lag estimation and in particualr the ones with econ questions which 
-are linked to the long run. usare is seguente The misspecification concerns of short lag VARs which potentially suffer from truncation bias naturally 
-links with the IRF matching estimator. Its role is to minimise the distance of the sample IRFs with the 
-theoretical ones, in order to estimate the model's strucural parameters. Sample IRFs are the objective that the
-estimator wants to mimic, but if they are misspecified, the estimator is targeting the strucutal parameters to 
-an object that is biased, consequently obtaining potentially distorted estimates of the strucutal parameters.
-}
-\cite{Long_Lag2025} also revisits \cite{Gali1999} and \cite{Chang_Hong2006} (with uninformative priors) and \cite{MirandaAgrippinoRicco2021}.
-While \cite{Baumeister2025} re estimate \cite{Jorda2024long_run_mp} BVAR with 60 monthly lags and complitely break 
-down their result on long run effects of monetary policy.
+Macroeconomists almost never have the luxury of knowing the true DGP, unlike in the Monte
+Carlo exercise just reviewed, so point estimates cannot be checked against a known truth the
+way \citet{Long_Lag2025} do in simulation. 
 
-\cite{Antolin-Diaz_Surico2025} use a very long-lag VAR to asses long-run effects question, 
-they activly are using VAR for making strucutral inference on h periods while using $p=h$ lags.
+What can be checked instead is robustness: whether
+the structural conclusions hold up as the lag length increases substantially, or shift as $p$
+grows. Stability across lag orders is the closest a researcher can come to the reassurance the
+Monte Carlo evidence provides, which is why \citet{Baumeister2025}, and \citet{Long_Lag2025} themselves both
+ask whether long-lag VARs remain a viable methodology in sample data, revisiting well known
+empirical studies rather than relying on simulation alone: \citet{Long_Lag2025} return to
+\citet{Gali1999}, where the evidence against RBC models in favour of New Keynesian ones
+weakens with longer lags; to \citet{Chang_Hong2006}, whose central result is similarly less
+strong; and to \citet{MirandaAgrippinoRicco2021}, where longer lags change the estimated
+duration of the monetary policy shock's impact.
+\\
+
+This robustness check is something a researcher cannot choose to skip, for two reasons. The first
+applies whenever the economic question is itself about the long run: a VAR($p$) cannot
+propagate a response, or say anything informative, beyond horizon $p$, so a long-run question
+mechanically requires a long-lag VAR. \citet{Baumeister2025} illustrate the point directly:
+re-estimating the BVAR of \citet{Jorda2024long_run_mp} with 60 monthly lags eliminate its
+conclusions on the long-run effects of monetary policy. \citet{Antolin-Diaz_Surico2025} build
+the same requirement into their design from the outset, using $p=h$ lags to draw structural
+inference at horizon $h$.
+\\
+
+The second feature applies even when the question is not about the long run at all, and it is
+the point I want to stress here. When the DSGE is estimated by IRF matching, the estimator
+does not target a single horizon: it minimises the distance between VAR and DSGE impulse
+responses jointly over $h$ periods, up to $h=20$ in \citet{ACEL2011}. If the VAR misspecifies
+the dynamics it is asked to estimate, that misspecification is present at every one of those
+horizons, and the estimator is matched to an object that is biased throughout the window, not
+only near its end. \citet{Antolin-Diaz_Surico2025} set $p=h$ because their question is
+explicitly about the long run; what this thesis adds is that under IRF matching the same
+requirement follows even when it is not, because the estimator's own objective function
+reaches out to horizon $h$ regardless of what the underlying economic question asks about. A
+researcher whose question is genuinely about short-run dynamics is therefore not exempt from
+the choice of $p$: as long as the estimation strategy is IRF matching, $p$ has to be chosen
+with $h$ in mind, not only with the horizon of the substantive question.
+\\
+
+The mismatch can equally be resolved from the other side, by lowering $h$ rather than raising
+$p$: twenty quarters, five years, is a long horizon for a question that is meant to be about
+the short run, and a shorter matching window asks less of the VAR's dynamics. Nor need the two
+adjustments be alternatives; raising $p$ and lowering $h$ together, so that neither lever does
+all the work on its own, converges naturally on $p=h$, which is exactly the choice
+\citet{Antolin-Diaz_Surico2025} make.
+\\
+
+None of this is an argument for going long everywhere. \citet{Long_Lag2025} are explicit that
+their results speak to structural inference, not to forecasting: when the objective is
+predicting unseen data, parsimony still earns its keep, because overfitting rather than
+misspecification is the main risk there. It is only when the objective is structural, be it
+impulse responses, causal inference, or IRF matching against a DSGE, that the misspecification
+concerns described above become the ones that matter.
+\\
+
+This is also why the conventional criteria used to choose $p$, Akaike, Hannan-Quinn and
+Schwarz, are the wrong tool for that objective. They are built to minimise out-of-sample
+forecast error, which rewards parsimony, not to protect against the truncation bias \cite{Humble_VARs_2026,Baumeister2025}. Both \citet{Baumeister2025}
+and \citet{Long_Lag2025} argue that a researcher whose aim is structural inference should not
+defer to these forecasting criteria, and \citet{GonzalezCasasus_Schorfheide2025} propose an
+alternative designed with that aim in mind.
+\\
+
+A researcher does not have to wait for that criterion to become available. The Long-Lag VARs authors 
+suggest a simpler heuristic: \textit{"plot the structural moments central to the research
+question against lag length. If the structural conclusion dramatically change as the lag
+lenght increases, that is clearly indicating that truncation is important to the question at
+hand"} \citep[p.~12]{Long_Lag2025}.
 
 \subsection{Model size}
 The bias-variance trade-off documented by \cite{Long_Lag2025} applies to all untruncated reduced form VARs.
@@ -767,48 +814,6 @@ they inherently avoid over-parametrisation.
 
 Given the dimension of VAR in analysis, I am going to show that even being close to the limit, 
 it is possible to estimate long(er)-lag VARs in the Frequentist approach.
-
-\subsection{Chosing the Lag Lenght}
-The one lessons that comes from \cite{Long_Lag2025,Baumeister2025} on lag choice selections is that, 
-for making structural inference with VARs, the lag lenght $p$ shoul be chosen consistenly with the 
-horizon of interest of the research question. \textcolor{red}{ GIA' DETTO, PENSARE COME RIFORMULARE O EVOLVERE QUA: For a VAR($p$) inference is largely uninformative at horizons $h > p$ 
-since the VAR($p$) cannot propagate much beyond the horizon $p$.} Because it implies that lag truncation 
-leads to unceirtanty being meccanicaly underestimated at those longer horizons.
-\textit{Coupled with potentially significant truncation bias, the short-lag VAR researcher runs
-the risk of becoming relatively certain about the wrong point estimate. Hence, if the research
-question centers on long horizon effects the VAR better include lags that extend that far.” }
-\citep[p.~2]{Long_Lag2025}.
-
-What emerges from \cite{Long_Lag2025} leverage that the results that came from implementing enriched lag 
-struture are solely to take into consideration for structural inference works.
-None fo the results imply that long-lag VARs are advised to use for forecasting matters.
-In these type of exercises parsimony hedges against overfitting, that is a matter of 
-poor performance in forecasting unseen data.
-But if one wants to draw structural concusions, IRFs analysis or use VARs to estimate DSGEs with a IRFME,
-then, misspecification concerns are essential.
-
-In these sense, if structural inference is the objective of the work, 
-it may be ill-advised to trust lag-selection criteria with purely focus 
-on forecasting and parsimony as AIC or HQ and SC. These lag selection criteria 
-are not designed for the pourpose of dynamic causal analysis, 
-parsimony introduces truncation bias \cite{Humble_VARs_2026,Baumeister2025}. 
-\textcolor{red}{Connecting to \cite{ACEL2005WP}, their IC suggest to use 1 ore 2 lags, the half of the choice taken by the authors. NOT THE PLACE FOR THIS SENTENCE, QUESTO VA MESSO IN EMPIRICAL RESULTS}
-Both \cite{Baumeister2025,Long_Lag2025} points on the necessarity to leave forecasting IC for lag selection 
-when structural inference is the aim of the anaylisis, and \cite{GonzalezCasasus_Schorfheide2025} are proposing 
-a criteria that acknowledge the model will be used for structual inference.
-
-But it is not necessary to wait for state of the art IC to implement long lag VARs.
-\textit{"A simplier heuristic approach would be to plot the structural moments central to the research question
-against lag length. If the structural conclusion dramatically change as the lag lenght increases,
-that is clearly indicating that truncation is important to the question at hand"} \citep[p.~12]{Long_Lag2025}.
-
-\textit{"The presumption that adding more lags necessarly leads to prohibitively large unceirtanty is hereby disproven"} \citep[p.~12]{Long_Lag2025}.
-
-\textcolor{red}{qua devo unire \cite{Long_Lag2025,Baumeister2025}, e se riesco anche \cite{Ludwig2026},
-ed infine anche solite cit rispetto a truncation bias that affects IRFs at every horizon, including 
-those at h < p. Devo riuscire a chiudere con qualcosa tipo : in IRF matching we are matching h horizons 
-of IRFs, so even if the research question is about short effects, we need to take in mind that we are matching 
-h horizons, so we need h consistent estiamtes of IRFs, therefore p should be consistent with h}
 
 % =============================================================
 % 4. EMPIRICAL RESULTS                              [target: 11 pp]
@@ -853,6 +858,8 @@ The baseline lag choice of ACEL's VAR is $p = 4$, I re-estimate their DSGE match
 lag $p = 8$ and $12$, raisig the lags to one up to two and three years. In Appendix \ref{app:VAR_aligned} 
 are presented the results when the sample is restricted for all the estimations to the one available 
 to the VAR with twelve lags.
+
+\textcolor{red}{In Figure XXX and XXX can be seen the IRFs from the embodied techonology and neutral technology shock respectively.}
 
 In Figure \ref{fig:var_irfs_lag12} are plotted the VARs' IRFs to a one standard deviation monetary 
 policy shock easing across different lag structures with $90\%$ bootstrap confidence intervals of the VAR($4$).
