@@ -245,12 +245,12 @@ and firm-specific, so that factor of production cannot be instantly and costless
 
 \subsection{Homogeneous and firm-specific capital}
 
-\cite{ACEL2011} conduct the analysis evolving \citet{CEE2005} model 
-adding also tech shocks, and building two versions: one in which
-capital is homogeneous, as in standard formulations, and the other in which it is firm-specific.
+\citet{ACEL2011} build on the \citet{CEE2005} model, adding the two technology shocks, and
+construct two versions of it: one in which capital is homogeneous, as in standard
+formulations, and one in which it is firm-specific.
 
 Once log-linearised, the only difference between the two sets of equilibrium conditions lies
-in the equation relating inflation $\pi_t$ to marginal cost, the New Keynesian Phillips Curve,
+in the equation relating inflation $\pi_t$ to marginal cost, the New Keynesian Phillips curve,
 \begin{equation}
     \Delta\hat{\pi}_t = \mathbb{E}\bigl[\beta\Delta\hat{\pi}_{t+1} + \gamma\hat{s}_t \mid \Omega_t\bigr],
     \label{eq:phillips}
@@ -262,99 +262,114 @@ the slope $\gamma$ maps into the structural parameters as
     \label{eq:gamma}
 \end{equation}
 The information set $\Omega_t$ contains the current realisation of the technology shocks but
-not that of the monetary policy innovation.
-The two models are parametrised in terms of $\gamma$ rather than $\xi_p$, where $\xi_p$ denotes 
-the Calvo Price stickiness parameter. 
+not that of the monetary policy innovation. Here $\xi_p$ is the Calvo price stickiness
+parameter, so that a fraction $1-\xi_p$ of firms reset their price each quarter and the
+implied duration of a price contract is $D = 1/(1-\xi_p)$.
 
-Given the remaining parameters they are then observationally equivalent with respect to aggregate prices and
+Both models are parametrised in terms of $\gamma$ rather than $\xi_p$. Given the remaining
+parameters they are then observationally equivalent with respect to aggregate prices and
 quantities, so that no stand need be taken on which version is being estimated. What
-distinguishes them is the value of $\xi_p$ given $\gamma$ implies.
+distinguishes them is the value of $\xi_p$ that a given $\gamma$ implies, and that in turn
+depends on $\chi$.
 \\
 
-The real rigidity parameter $\chi$ measures the strategic complementarity in price
-setting of \citet{BallRomer1990}. It works as an attenuation parameter, and can takes values in $(0,1]$, and the closer it lies
-to zero the stronger the attenuation. That is, a firm that is able to reset its price moves it
-by less, for a given movement in economy-wide marginal cost. In the \textit{homogeneous}
-capital model $\chi$ is set to $1$, the attenuation is absent. In the \textit{firm-specific} model
-$\chi$ is a non-linear function of the structural parameters.
-
-In particular $\chi$ depends on some calibrated parameters, $[a,\beta, \delta, \lambda_f]$ which are respectively,
-capital component in the Cobb-Douglas production function, time preference parameter, capital depreciation rate, and the average price markup.
-And two estimated parameters, $[\sigma_a; S'']$, which are the Capacity utilisation cost and Investment adjustment cost respectively.
-
-The \cite{ACEL2011} logic suggest that, for a fixed value of price stickiness $\xi_p$, the larger $\sigma_a$, the lower is $\gamma$, in line
-with the vast set of literature that suggests that the Phillips curve slope is low.
-But other things equal, a lower $\xi_p$ implies a higher $\gamma$. This determine that for a given value of $\gamma$
-, $\xi_p$ is a decreasing function of $\sigma_a$.
-\\
-In this sense, a flat Phillips curve is a problem in the homogenoues capital model.
-A low value of $\gamma$ implies that given, that there $\chi = 1$, the Clavo price stickiness parameter $\xi_p$ 
-need to be very high, implying irrealistic implied time duration of prices, that is $D = \frac{1}{(1-\xi_p)}$ 
-which are in stark conflict with micro evidence.
+The real rigidity parameter $\chi$ measures the strategic complementarity in price setting of
+\citet{BallRomer1990}. It works as an attenuation factor, takes values in $(0,1]$, and the
+closer it lies to zero the stronger the attenuation: a firm that is able to reset its price
+moves it by less, for a given movement in economy-wide marginal cost. In the
+\textit{homogeneous} capital model $\chi$ is set to be one and the attenuation is absent. In the
+\textit{firm-specific} model $\chi$ is a non-linear function of the structural parameters,
+namely of the calibrated $[\alpha, \beta, \delta, \lambda_f]$, respectively the capital share
+in the Cobb-Douglas production function, the discount factor, the depreciation rate and the
+average price markup, and of two estimated parameters, $[\sigma_a, S'']$, 
+capital utilisation cost and the investment adjustment cost respectively.
 \\
 
-The role of capacity utilisation cost $\sigma_a$ is easiest to see by following what happens after an unexpected,
-positive demand shock. There is an ecces of demand and non optimiser firms need to serve it. Hours expand first, and wages are themselves set on a Calvo
-scheme, so only the $1-\xi_w$ of households that can reoptimise raise their wage while the
-remaining $\xi_w$ keep supplying at the wage set earlier. The aggregate nominal wage
-therefore rises, and the real wage with it, but by little. Capital is another matter, and
-it is here that the two models differentiate from each other.
+The role of capital utilisation cost $\sigma_a$ is is best understood by following what happens after an unexpected,
+positive demand shock. Aggregate demand rises within the quarter and firms have to produce
+more. Hours expand first, and wages are themselves set on a Calvo scheme, so only the
+$1-\xi_w$ of households that can reoptimise choose a new wage, while the rest adjust only
+mechanically through indexation. The aggregate nominal wage therefore rises, and the real
+wage with it, but by little. Capital is another matter, and it is here that the two models
+part company.
+\\
 
-Under homogeneous capital there is a competitive, economy-wide market for capital services.
-The aggregate capital stock is predetermined within the quarter, so the additional services
-have to come from higher utilisation, and the rental rate rises by an amount governed by
-$\sigma_a$. The individual firm, however, takes that rental rate as given and can hire as
-many capital services as it wants at it. This is the standard assumption in equilibrium
-business cycle models, and \citet{ACEL2005WP} state it plainly: ``a firm's capital stock is
-not pre-determined and all factors of production, including capital, can be instantaneously
-transferred across firms, without any cost, in perfectly competitive
-markets''.\footnote{\citep[p.~2]{ACEL2005WP}.} Both of its factors are therefore available
-at prices it does not influence, so its marginal cost is the same as every other firm's and
-does not depend on how much this particular firm happens to produce. Marginal cost is
-common and independent of own output, which is what $\chi = 1$ records.
+Under homogeneous capital there is a competitive economy-wide market for capital services.
+In the aggregate the capital stock is predetermined within the quarter, so the additional
+services can only come from higher utilisation, and how far the rental rate must rise to call
+them forth is governed by $\sigma_a$. That much is true in both models, and it is not what
+separates them. But in the homogeneous capital model each takes the rental rate as given and hires as many capital services as it
+wants at it, since capital can be moved across firms within the period. Any single firm's
+capital stock is therefore not predetermined, even though the economy's is.
+\citet[p.~2]{ACEL2005WP} put the assumption plainly: ``a firm's capital stock is not
+pre-determined and all factors of production, including capital, can be instantaneously
+transferred across firms, without any cost, in perfectly competitive markets''. Both factors
+are then available at prices the firm does not influence, so its marginal cost is the same as
+every other firm's and does not depend on how much it produces itself. That is what
+$\chi = 1$ records.
+\\
 
-Under firm-specific capital that market does not exist. The firm is left with the capital
-it already owns, which cannot be reallocated within the period, so the only way to obtain
-more capital services is to run its own stock harder. It would be willing to pay for
-additional services, but there is no market on which to buy them, and $\sigma_a$ is what
-raising utilisation costs it instead. When $\sigma_a$ is high that margin is expensive, and
-most of the additional output has to come from adding hours to a quantity of capital
-services that doesn't move as it is fixed. The marginal product of labour falls as the fixed factor binds,
-and the firm's own marginal cost rises with its own output.
+Under the firm-specific capital model there is no market for capital services. The firm is left with
+the capital it already owns, which cannot be reallocated within the period, so the only way
+to obtain more capital services is to run its own stock harder. It would be willing to pay for additional services, but there is no market on which to buy
+them, and $\sigma_a$ governs how much raising utilisation costs it instead. When $\sigma_a$ is high that margin is expensive, so
+most of the additional output has to come from adding hours to a quantity of capital services
+that barely moves. The marginal product of labour falls as the fixed factor binds, and the
+firm's own marginal cost rises with its own output.
+\\
 
-This changes the decision of the $1-\xi_p$ firms that can reset their price. Economy-wide
-marginal cost has risen, so optimiser firms desire to raise prices. But a firm that raises its price by more
-than the others sees its relative price rise, its demand fall, and its own output fall with
-it, and under firm-specific capital a lower own output means a lower own marginal cost,
-which argues for a smaller increase in the first place. Having internalised that producing
-more is what raises its costs, the firm moves its price by less than it would in the
-absence of this real rigidity, the more so the steeper its own marginal cost curve and the
-more elastic the demand it faces, since a given price increase then costs it more output.
+This changes the decision of the optimiser firms that can reset their price. Economy-wide
+marginal cost has risen, so those firms wish to raise prices. But a firm that raises its
+price by more than the others sees its relative price rise, its demand fall, and its own
+output fall with it, and under firm-specific capital a lower own output means a lower own
+marginal cost, which argues for a smaller increase in the first place. Having internalised
+that producing more is what raises its costs, the firm moves its price by less than it would
+in the absence of this real rigidity, the more so the steeper its own marginal cost curve and
+the more elastic the demand it faces, since a given price increase then costs it more output.
 Inflation responds less to a given movement in economy-wide marginal cost, and this is
 precisely what a $\chi$ below one means.
+\\
 
 It is worth being precise about what is doing the work here, because $\sigma_a$ is a single
 parameter, estimated once, which does not take different values across the two models. What
-differs is whether it reaches $\chi$ at all. Under homogeneous capital the market for
-capital services severs the link between a firm's own output and its own marginal cost, and
-$\chi = 1$ whatever $\sigma_a$ happens to be. Under firm-specific capital the firm is tied
-to the capital it already owns, and $\sigma_a$ decides how binding that tie is.
-
-The limiting case makes the point. If $\sigma_a$ is close to zero, utilisation is almost
-free to vary, so a firm tied to its own capital can still draw from it whatever volume of
-capital services it needs, at negligible cost. Owning the capital rather than renting it
-then makes no practical difference: the firm's own marginal cost is as flat as it would be
-with a market for capital services, $\chi$ converges to one, and the firm-specific model
-collapses onto the homogeneous one. Firm specificity is an assumption about ownership, but
-its economic content comes entirely from the cost of varying utilisation, and without that
-cost the constraint exists in name only.
+differs is whether it reaches $\chi$ at all. Under homogeneous capital the market for capital
+services severs the link between a firm's own output and its own marginal cost, and
+$\chi = 1$ whatever $\sigma_a$ happens to be. Under firm-specific capital the firm is tied to
+the capital it already owns, and $\sigma_a$ decides how binding that tie is.
 \\
 
-This is where the mechanism is fragile, and \cite{ACEL2011} say themselves so: \textit{"to the extent
-that capital utilization rates can easily be varied, the assumption of firm-specific
-capital loses its ability to rationalize low values of
-$\xi_p$"}.\citet[][p.~227]{ACEL2011}. The reconciliation of micro and macro
-evidence rests, in the end, lies on a single estimated parameter.
+The limiting case makes the point. If $\sigma_a$ is close to zero, utilisation is almost free
+to vary, so a firm tied to its own capital can still draw from it whatever volume of capital
+services it needs, at negligible cost. Owning the capital rather than renting it then makes
+no practical difference: the firm's own marginal cost is as flat as it would be with a market
+for capital services, $\chi$ converges to one, and the firm-specific model collapses onto the
+homogeneous one. Firm specificity is an assumption about ownership, but its economic content
+comes entirely from the cost of varying utilisation, and without that cost the constraint
+exists in name only.
+\\
+
+Since $\chi$ is decreasing in $\sigma_a$ and $\gamma$ is proportional to $\chi$, a larger $\sigma_a$
+lowers $\gamma$ for any given $\xi_p$. Reading the Phillips curve slope $\gamma$, equation \eqref{eq:gamma}, 
+in the other direction is what matters for estimation, as $\gamma$ is estimated from the data.
+The term $(1-\xi_p)(1-\beta\xi_p)/\xi_p$ is decreasing in $\xi_p$, so holding $\gamma$ fixed, a smaller
+$\chi$ must be offset by a larger value of that term, which requires a smaller $\xi_p$. For a
+given slope of the Phillips curve, then, $\xi_p$ is a decreasing function of $\sigma_a$.
+\\
+
+This is what resolves the micro macro price conflict. The
+empirical literature finds the Phillips curve to be flat, that is $\gamma$ small. In the
+homogeneous capital model $\chi = 1$, so a small $\gamma$ can only be delivered by pushing
+$\xi_p$ close to one, and the implied duration $D = 1/(1-\xi_p)$ becomes long enough to sit
+in open conflict with the micro literature evidence. In the firm-specific model the same
+small $\gamma$ is delivered instead by a $\chi$ well below one, which leaves room for a much
+lower $\xi_p$. Inflation is inertial not because firms reset their prices rarely, but because
+when they do they move them by little. This is how \citet{ACEL2005WP} obtain an average
+duration of $1.5$ quarters and still match the aggregate evidence on inflation.
+
+The resolution, however, rests on a single estimated parameter, capital utilisation cost $\sigma_a$, and \citet{ACEL2011}
+acknowledge the fragility themselves: ``to the extent that capital utilization rates can
+easily be varied, the assumption of firm-specific capital loses its ability to rationalize
+low values of $\xi_p$'' \citep[p.~227]{ACEL2011}.
 
 \subsection{DSGE estimation via IRF matching}
 Theoretical models are usefull to economists and policymakers only if they are able to reproduce important
@@ -562,11 +577,10 @@ Since impulse responses are a function of both, they inherit the bias.
     \label{eq:irf-f}
 \end{equation}
 
-Written in this way, however, the statement treats $\Sigma_u$ as though it were itself the object
-that matters for structural analysis. It is not. The reduced form covariance is only ever used
-through a further mapping into structural shocks, and whether that mapping inherits the bias in
-reduced-form lag polynomial $A(L)$ turns out to depend entirely on how 
-the shock of interest is identified.
+Writing the impulse responses this way suggests that $\Sigma_u$ enters structural analysis on
+its own. It does not: $\Sigma_u$ is only ever used through a further mapping into the
+structural shocks, via the impact matrix $B_0$, and whether that mapping inherits the
+truncation bias just described depends entirely on how the shock of interest is identified.
 
 \subsection{Identification Bias}
 \label{sec:identification_bias}
@@ -784,14 +798,14 @@ Schwarz, are the wrong tool for that objective. They are built to minimise out-o
 forecast error, which rewards parsimony, not to protect against the truncation bias \cite{Humble_VARs_2026,Baumeister2025}. Both \citet{Baumeister2025}
 and \citet{Long_Lag2025} argue that a researcher whose aim is structural inference should not
 defer to these forecasting criteria, and \citet{GonzalezCasasus_Schorfheide2025} propose an
-alternative designed with that aim in mind.
+alternative designed for structural inference.
 \\
 
-A researcher does not have to wait for that criterion to become available. The Long-Lag VARs authors 
-suggest a simpler heuristic: \textit{"plot the structural moments central to the research
-question against lag length. If the structural conclusion dramatically change as the lag
-lenght increases, that is clearly indicating that truncation is important to the question at
-hand"} \citep[p.~12]{Long_Lag2025}.
+There is no need, however, to wait for that or other criterias to become standard practice.
+\citet{Long_Lag2025} already offer a simpler heuristic that any researcher can apply today:
+\textit{"plot the structural moments central to the research question against lag length. If
+the structural conclusion dramatically change as the lag lenght increases, that is clearly
+indicating that truncation is important to the question at hand"} \citep[p.~12]{Long_Lag2025}.
 
 \subsection{Model size}
 The bias-variance trade-off documented by \cite{Long_Lag2025} applies to all untruncated reduced form VARs.
