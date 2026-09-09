@@ -870,9 +870,6 @@ are presented the results when the sample is restricted for all the estimations 
 to the VAR with twelve lags.
 \\
 
-\textcolor{red}{In Figure XXX and XXX can be seen the IRFs from the embodied techonology and neutral technology shock respectively.}
-Hello
-\\
 
 In Figure \ref{fig:var_irfs_lag12} are plotted the VARs' IRFs to a one standard deviation monetary 
 policy shock easing across different lag structures with $95\%$ bootstrap confidence intervals of the VAR($4$).
@@ -904,7 +901,7 @@ In general, all the point estimates across different lags lies inside the confid
 Real wage in the VAR($12$) have the hump shape respect the baseline which is flat.
 
 Some important responses does not change in the magnitude or sign, nor in the shape, but in the timing.
-Output, inflation, capacity utilization, average hours, consumption, velocity and investment 
+Output, inflation, capacity utilisation, average hours, consumption, velocity and investment 
 as the lag choice increase, the timing of the formation of the hump shape, and its peack is shifted in time.
 On average, the peak effect in the longer-lag VARs occurs one year after respect the baseline results, with 
 the exception of consumption in the VAR($8$), response is indistinguable from the baseline.
@@ -913,7 +910,7 @@ Fed Funds rate standard deviation shock change from being a $60$ basis point at 
 decrease its impact almost to $0$ in two quarters, to a more realistic $25$ basis points shock that lasts for 
 five quarters and then goes to $0$.
 
-The VAR($12$) inflation response need some more attention as it seems to have a puzzeling response 
+The VAR($12$) inflation response need some more attention as it seems to have a the price puzzle response 
 in the first year after the easing shock happens.
 It seems to be very much more intertial respect the baseline, but on the other hand is consistent with all 
 the other response variables that are inertial too. Having in mind \cite{ACEL2005WP} theoretical mechanism we can interpret 
@@ -923,6 +920,80 @@ making inflation and real variables such as output, consumption and average hour
 
 Given the persistence and slow response of the variables in the VAR($12$), these can be consisntent with 
 ACEL mechanism if the price stickiness is high implying low implied time duration of prices.
+
+\subsection{Technology shocks and the long run restriction}
+\label{sec:results_tech}
+
+The two technology shocks are identified with long run restrictions following \citet{Fisher2006},
+so this is where the second channel found by \cite{Ravenna2007}, the identification bias described in Section \ref{sec:identification_bias}, could bind.
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Neutral_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Neutral_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: VAR\_IRFs\_Point\_Estimates\_Against\_CI\_VAR4\_Comparison\_Lags\_4\_8\_12.pdf}}
+    \caption{VARs' IRFs to a Neutral Technology shock across different lag struture}
+    \label{fig:var_nt_irfs_lag12}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Embodied_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Embodied_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: VAR\_IRFs\_Point\_Estimates\_Against\_CI\_VAR4\_Comparison\_Lags\_4\_8\_12.pdf}}
+    \caption{VARs' IRFs to a Embodied Technology shock across different lag struture}
+    \label{fig:var_et_irfs_lag12}
+\end{figure}
+\FloatBarrier
+
+
+Figure \ref{fig:var_nt_irfs_lag12} reports the responses to a neutral technology shock, and the
+disagreement across lag orders is of a different nature from the one found for monetary policy. It
+is not a matter of timing, the responses do not place the same hump later, they change level and,
+for several variables, sign. Output rises by around half a percent and stays there in the baseline
+VAR($4$), while in the VAR($12$) it starts close to zero and drifts below it after the third year.
+Consumption behaves in the same way, positive and persistent at $p = 4$, flat and indistinguishable
+from zero at $p = 12$. Average hours are the clearest case, the baseline delivers a positive hump of
+about half a percent, the VAR($12$) a flat response that turns negative at intermediate horizons.
+The sign of the hours response to a neutral technology shock is the object of a long debate
+\citep{Gali1999, CEV2007}, and here the lag order alone settles it in either direction.
+
+Figure \ref{fig:var_et_irfs_lag12} shows the same instability in a different form. The baseline
+responses to an embodied technology shock are front loaded: output, average hours, capacity
+utilisation and investment all peak within the first four quarters and then decay. The VAR($12$)
+responses are close to zero, or slightly negative, over exactly that range, and they rise only after
+the tenth quarter, reaching their maximum at the end of the horizon. The profile is not delayed, it
+is reversed: where the baseline sees the effect of the shock exhausting itself, the long lag VAR
+sees it beginning.
+
+What matters for the argument is what happens on impact. Under the recursive scheme most impact
+responses to a monetary policy shock are zero by construction, and those that are not differ across
+lag orders roughly in proportion to the estimated size of the shock. Nothing of the sort holds here.
+The impact response of the relative price of investment to an embodied technology shock, the
+variable on which the restriction is anchored, falls from about $-0.45$ in the baseline to about
+$-0.1$ at $p = 12$. Inflation responds positively on impact at $p = 4$ and negatively at $p = 8$.
+Investment responds positively on impact to a neutral technology shock at $p = 4$ and negatively at
+both longer lag orders. These are disagreements at horizon zero, before any propagation has taken
+place.
+
+This is the trace that Section \ref{sec:identification_bias} attributes to identification bias
+rather than to pure truncation. Pure truncation distorts the propagation of a correctly isolated
+shock, so its mark has to accumulate with the horizon and cannot by itself generate a disagreement
+at $h = 0$. A restriction imposed on $B(1)$ computed over $p$ lags, when the true polynomial runs to
+$p^{*} > p$, isolates a different linear combination of the reduced form innovations, and a
+different shock has a different impact effect. The monetary policy responses, identified without the
+lag polynomial, keep their sign and their shape and move only in timing. The technology responses,
+identified through it, do neither. This is the asymmetry \citet{Ravenna2007} predicts, and it
+appears here within the same VAR, on the same sample, with only the identification scheme differing.
+
+Two qualifications are in order. The two channels are not mutually exclusive and the technology
+responses are subject to both, so what the figures establish is that the long run identified
+responses are the fragile ones, not that pure truncation is absent from them. And longer lags do not
+by themselves certify the responses at $p = 12$ as the correct ones. The claim is the weaker one:
+what a technology shock does in this VAR is not robust to the lag order, and it is fragile in
+exactly the place where the theory says it should be, which is also the place
+\citet{ChariKehoeMcGrattan2008} target in their critique of long run identified SVARs.
 
 \subsection{Unceirtanty around longer lags estimates}
 Conventional wisdom thinks that increasing lag lenght increase parametrisation, therefore reduce the degrees 
