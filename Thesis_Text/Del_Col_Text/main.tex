@@ -1007,7 +1007,7 @@ If confidence intervals were going to explode anywhere, they would do it here.
 \\
 
 They do not.
-Table \ref{tab:degrees_of_freedom} summarise the coefficients and degrees of freedom of the exercise.
+Table \ref{tab:df_budget} summarise the coefficients and degrees of freedom of the exercise.
 The baseline exercise at $p = 4$, the VAR has $410$ coefficients, $167$ available data points and $41$ 
 coefficient per regression.
 At $p = 12$ the system carries 1210 coefficients, each equation is estimated on $159$ observations with 
@@ -1022,7 +1022,6 @@ This maks the exercise a demanding test for the central claim in \cite{Long_Lag2
 \IfFileExists{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}
     {\input{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    \label{tab:degrees_of_freedom}
 \FloatBarrier
 
 Figure \ref{fig:var_irfs_all_ci} plots the VARs' IRFs to a monetary policy shock at each lag order, 
@@ -1040,7 +1039,7 @@ together with their own $95$ percent bootstrap confidence bands.
 
 The bands at $p = 12$ are not wider than those at $p = 4$ for several variables; inflation, Fed Funds rate, 
 real wage, velocity and relative price of investment, they are visibly narrower despite the increased parametrisation 
-documented in Table \ref{tab:degrees_of_freedom}.
+documented in Table \ref{tab:df_budget}.
 \textcolor{red}{On average, the width of the CI decrease by XXX}
 Therefore suggesting that the variance reduction mechanism 
 of \cite{Long_Lag2025} operates even at the parametrisation frontier, at least in this work.
@@ -1071,115 +1070,190 @@ I've checked the IC at longer lags, I find that the AIC criteria points in favou
 The results of this work suggest that the choice of $p = 4$ was not enough to capture the dynamics of the data, 
 and that a longer lag length is needed to obtain more accurate estimates of the DSGE's structural parameters.
 
-\clearpage
 \section{Structural Implications}
+\label{sec:structural}
+
+The central result of this work is that the resolution of the micro--macro price conflict
+proposed by \cite{ACEL2011} is not robust to the lag structure of the VAR used to estimate it.
+At the baseline $p = 4$ I replicate their finding: the firm-specific capital model implies that
+prices are re-optimised on average every $1.5$ quarters, against $5.6$ quarters in the
+homogeneous capital model, so that only the firm-specific version is compatible with the
+microeconometric evidence on the frequency of price adjustment. At $p = 12$ the same two models
+imply $9.0$ and $9.6$ quarters. The firm-specific model no longer reconciles anything, and the
+homogeneous model, which was already in conflict with the micro evidence at the baseline, moves
+further away from it.
+\\
+
+The channel that produces this result is internal to the ACEL argument itself, and I establish
+it in three steps. Section \ref{sec:results_params} shows that the capacity utilisation cost
+$\sigma_a$, the only estimated parameter that governs the real rigidity in a quantitatively
+relevant way, collapses towards zero as the lag length increases. Section \ref{sec:results_chi}
+shows that the real rigidity parameter $\chi$ rises accordingly, and with it disappears the
+attenuation that allows the firm-specific model to rationalise frequent price re-optimisation.
+Sections \ref{sec:results_calvo} and \ref{sec:results_duration} carry these movements into the
+Calvo price stickiness parameters and into the implied duration of price contracts.
+
 \subsection{DSGE structural parameters}
 \label{sec:results_params}
-In this section I analyse what consequences enriched dynamics in the VAR have brought in the
-DSGE deep parameters.
-In Table \ref{tab:dsge_params_comparison_4_8_12} I am replicating results from the 
-\cite{ACEL2005WP} Table 2\footnote{I report \cite{ACEL2005WP} Table 2 in Appendix \ref{app:acelwp05_table_2}}
-across different lag dynamics.
+In Table \ref{tab:dsge_params_comparison_4_8_12} I replicate the results of
+\cite{ACEL2005WP} Table 2\footnote{I report \cite{ACEL2005WP} Table 2 in Appendix
+\ref{app:acelwp05_table_2}.} across different lag dynamics. The baseline column reproduces
+their estimates. The price markup $\lambda_f$ is calibrated, so it carries no standard error.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_no_stickiness_table_A4_4_8_12_lags.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_no_stickiness_table_A4_4_8_12_lags.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    \label{tab:params_across_lags}
 \FloatBarrier
 
-The baseline results have no differences compared to the \cite{ACEL2005WP} ones. 
-Price markup $\lambda_f$ is calibrated so it does not have standard errors. 
-When the VAR lag lenght is increased, labour market frictions become less stringent, 
-wage stickiness parameter $\xi_w$ looses a quarter of its strength when the 
-DSGE is estimate to match the higher lag choice VAR, if we recall from Section \ref{fig:var_irfs_lag12} 
-real wages have the hump shape, which is not present in the shorter VARs version.
-When lag choice is equal to $4$ and $8$ habit formation $b$ remains constant a $0.7$, but 
-became $0.85$ at $p = 12$.
-Money demand elasticity $\epsilon$ flucuate a bit across the different lag choice, but remains 
-tigth around the baseline result at $0.8$.
-Investment adjustment cost $S''$ is the other estimated parameters that, along with capacity utilisation cost 
-$\sigma_a$ enters in the $\chi$ non linear equation in the firm-specific DSGE, and as explained in Section 
-\ref{sec:2.2homog_bs_firm-spec_capital} I recall that is not the key driver of $\chi$.
-The $S''$ parameter at $p = 12$ double in size becoming $6.8$, this transtalets 
-to higher cost of investments to adjust capital stock in the future.
+Two parameters carry the result, and I take them first. The Phillips curve slope $\gamma$ is
+unchanged at $0.0402$ between $p = 4$ and $p = 8$, and falls to $0.0129$ at $p = 12$. What
+happens to its precision matters as much as the fall itself. The standard error goes from
+$0.0246$ at the baseline, where the slope cannot be distinguished from zero, to $0.0042$ at
+$p = 12$, where it is significant at the one percent level. The long-lag VAR therefore delivers
+an estimate of the Phillips curve slope roughly six times more precise than the baseline one,
+which is the variance reduction mechanism of \cite{Long_Lag2025} appearing inside the structural
+estimates rather than in the reduced form.
 \\
 
-Focusing on the key elements of Table \ref{tab:dsge_params_comparison_4_8_12}; Phillips curve slope $\gamma$ 
-remains constant at $0.0402$ at the first two lag choice, becoming flatter $0.0129$ and statically significant 
-at the $99\%$ level at the $p = 12$.
-Capacity utilisation cost $\sigma_a$ starts at roughly $2$, immidiately convergin to $0$ as the lag length 
-increases, becoming equal to $0,1175$ at $p = 8$, and then almost inexistent, $0,0042$ at $P = 12$.
+The capacity utilisation cost $\sigma_a$ moves from $1.9938$ at $p = 4$ to $0.1175$ at $p = 8$
+and to $0.0042$ at $p = 12$. This is the movement that drives everything that follows. As
+discussed in Section \ref{sec:2.2homog_bs_firm-spec_capital}, a $\sigma_a$ close to zero means
+that utilisation is almost free to vary, so a firm tied to its own capital can still draw
+whatever quantity of capital services it needs at negligible cost, and firm specificity stops
+being an economically binding constraint.
 \\
 
-In general as the VAR lag lenght increase, even the unceirtanty of the structural parameters shirnks.
+There is an important qualification to make about $\sigma_a$, and it strengthens rather than
+weakens the argument. At no lag order is $\sigma_a$ statistically distinguishable from zero.
+Strictly, therefore, one cannot reject that $\sigma_a$ was zero in ACEL's own specification. The
+resolution of the micro--macro conflict rests entirely on the point estimate of a parameter that
+the data do not pin down, and what the long-lag VAR does is to move that point estimate into
+precisely the region where \cite{ACEL2011} themselves concede that the mechanism fails. The
+difference between the baseline and $p = 12$ is not that the parameter becomes insignificant,
+since it never was significant, but that at $p = 12$ it is tightly bounded around zero, with a
+standard error of $0.0230$, whereas at the baseline the same parameter was consistent with
+almost any value in a wide interval.
 \\
 
-The Chi parameter is the last piece missing to derive the Calvo Price parameter, and given that 
-both $\chi$ and the Calvo price parameters $\xi_p$ are implied by the model, 
-they naturally don't have uncertanty around the extracted number. 
-Both the parameters are extracted by inverting the Phillips curve equation, they are implied parameters
-so, when they are extrapolated, they don't have standard errors around the extracted number.
-To provide a measure of unceirtanty around these numbers, I have done a one million draws 
-Monte Carlo simulation, in which I simulate all the structural parameters in a joint normal distribution,
-This assumption is driven by how the sampling variance of the estimated parameters is recovered in 
-\cite{ACEL2005WP}, is done by applying the Deltha method to estimate the standard errors around the structural 
-parameters in the IRF matching estimation. The Deltha method asssume the structural parameters being jointly Normal.
-In Appendix \ref{app:delta_method} I explain the Deltha and \ref{app:montecalvo}
-I show the probability density function (PDF) of the price stickines parameters simulated from the Monte Carlo.
-\\
+The remaining parameters move less, but one of them connects the structural estimates to the
+impulse responses of Section \ref{sec:results_VARs_IRFs}. Wage stickiness $\xi_w$ falls from
+$0.7221$ at the baseline to $0.4838$ at $p = 12$, losing roughly a third of its baseline value,
+so labour market frictions become less stringent exactly where the VAR($12$) delivers the hump
+shaped real wage response that is absent in the shorter lag versions, Figure
+\ref{fig:var_irfs_lag12}. Habit formation $b$ is stable at around $0.70$ for $p = 4$ and
+$p = 8$ and rises to $0.86$ at $p = 12$. The money demand elasticity $\epsilon$ fluctuates
+mildly and stays close to its baseline value of $0.81$. The investment adjustment cost $S''$
+roughly doubles, from $3.2807$ to $6.8431$, and becomes precisely estimated only at $p = 12$,
+which translates into a higher cost of adjusting the capital stock over time. It enters the
+non-linear expression for $\chi$ alongside $\sigma_a$, but as discussed in Section
+\ref{sec:2.2homog_bs_firm-spec_capital} it is not the key driver of the real rigidity.
+
+\subsection{The real rigidity parameter}
+\label{sec:results_chi}
+
+Both $\chi$ and the Calvo price stickiness parameters $\xi_p$ are implied parameters. They are
+not estimated directly, but recovered by inverting the Phillips curve slope $\gamma$ equation
+\eqref{eq:gamma} at the estimated parameters, so the IRF matching estimation does not attach
+standard errors to them. To attach a measure of uncertainty I run a Monte Carlo simulation with
+one million draws from the joint distribution of the estimated structural parameters. Joint
+normality is the assumption already used in the estimation itself, since \cite{ACEL2005WP}
+recover the sampling variance of the structural parameters through the delta method, which
+assumes exactly that. Appendix \ref{app:delta_method} describes the delta method and Appendix
+\ref{app:montecalvo} reports the simulated densities. The intervals reported here
+and in the next section are percentiles of the simulated distribution of the valid draws.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    \label{tab:chi_param}
 \FloatBarrier
 
-Table \ref{tab:chi_param} shows how the real rigidity parameter $\chi$ behave across different 
-dynamics in th firm-specific capital model, in contrast with the homogeneous capital where it is 
-set to be equal to $1$.
-The baseline result shows that the strategic complementarity in price settings, with a value of $\chi_{fs} = 0.0307$ 
-has a strong attenuation effect, the real rigidity there is binding forcing the optimiser firms increse prices
-by small amounts. But as the lag lenght increases, $\chi_{fs}$ increases too, in particular at $p = 12$ 
-having a value equal to $0.86$, being the only one statistically significant, converges towards $1$.
+Table \ref{tab:chi_comparison_4_8_12} reports how the real rigidity parameter $\chi$ behaves
+across lag orders in the firm-specific capital model, against the homogeneous model where it is
+set to one by construction. At the baseline $\chi_{fs} = 0.0307$, with a $95$ percent simulated
+interval of $[0.004, 0.146]$. The attenuation is close to total: a firm that is able to reset
+its price moves it by about three percent of what it would move it in the absence of the real
+rigidity. At $p = 8$ the parameter rises to $0.2030$, and at $p = 12$ to $0.8671$, with a $95$
+percent interval of $[0.342, 0.959]$. The baseline and the long-lag intervals do not overlap, so
+the movement is not an artefact of the imprecision of either estimate.
+\\
+
+An attenuation factor of $0.03$ means that firm specificity does almost all of the work
+in dampening price adjustment, while a factor of $0.87$ means that it does almost none of it and
+the firm-specific model behaves nearly as the homogeneous one does. The question that matters
+for \cite{ACEL2011} is whether $\chi$ it is small enough to rationalise a low $\xi_p$, and at $p = 12$ it is not.
 
 \subsection{Calvo price stickiness parameters and the collapse of the firm-specific mechanism}
+\label{sec:results_calvo}
 
-Having in mind the equation \ref{eq:gamma}, Phillips curve slope, that is the core mechanism
-of the \cite{ACEL2011} model, we can intuitively rationalise the resutls on the Clavo price stickiness
-parameter in the firm-specific $\xi_{p,fs}$ that are shown in Table \ref{tab:calvo_price_stikiness_params}.
+Having in mind equation \eqref{eq:gamma}, the results on the Calvo price stickiness parameters
+reported in Table \ref{tab:calvo_price_stickiness_4_8_12} follow directly from the two movements
+just described.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/calvo_price_stickiness_table_A4_4_8_12_lags.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/calvo_price_stickiness_table_A4_4_8_12_lags.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    \label{tab:calvo_price_stikiness_params}
 \FloatBarrier
 
-Conditional on low values of the Phillips curve slope, the price stickiness parameter in the homogeneous capital
-remains high and at $p = 12$, where $\gamma$ is flatter compared to the other two models, the friction is even 
-stronger.
-On the other side of the model, when the capital is firm-specific, with the $\chi_{fs}$ parameter that 
-grows as lag choice increases, the price stickiness pass from being relatively low, $\xi_{p,fs} = 0.3372$ 
-in the baseline $p = 4$, already almost doublying at $P = 8$ with $\xi_{p,fs} = 0.6448$ 
-completing its evolution at $p = 12$ where it converges to the homogeneous version where 
-$\xi_{p,fs} = 0.8884$ and the homogeneous is $\xi_{p,h} = 0.8958$
+In the homogeneous capital model $\chi = 1$, so the whole burden of delivering a small $\gamma$
+falls on price stickiness alone. The parameter is $0.8213$ at $p = 4$ and at $p = 8$, with a
+$95$ percent simulated interval of $[0.747, 0.936]$ at the baseline, and it rises to $0.8958$ at
+$p = 12$, with an interval of $[0.869, 0.923]$. The flatter Phillips curve of the long-lag VAR
+therefore makes the homogeneous model worse on its own terms. The friction it requires in order
+to match the aggregate evidence becomes stronger, not weaker, and it was already implausibly
+strong at the baseline.
+\\
 
-\subsection{Implied duration of Prices}
+In the firm-specific model the parameter moves a great deal more. It is $0.3372$ at the
+baseline, with a $95$ percent interval of $[0.057, 0.709]$, rises to $0.6448$ at $p = 8$, with
+an interval of $[0.413, 0.853]$, and reaches $0.8884$ at $p = 12$, with an interval of
+$[0.815, 0.898]$. The baseline point estimate lies outside the $95$ percent interval of the
+$p = 8$ distribution, where only $1.1$ percent of the draws fall at or below it. At $p = 12$ the
+separation is complete, since no draw at all falls at or below the baseline value. Whatever the
+firm-specific model says about price stickiness at $p = 4$, it is not what the same model says
+once the VAR is given a richer lag structure.
 
-The implied dutation of prices governed by the Calvo style of price settings is $D = \frac{1}{1-\xi_p}$
+\subsection{Implied duration of prices}
+\label{sec:results_duration}
+
+Under Calvo price setting the implied duration, average time between re-optimisations, is
+$D = \frac{1}{1-\xi_p}$, and it is here that the size of the gap between the two models becomes
+meaningful.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
-    \label{tab:implied_time}
 \FloatBarrier
 
+Table \ref{tab:implied_duration_4_8_12} shows how increasing the lag length of the VAR used to
+estimate the \cite{ACEL2011} DSGE brings back the micro--macro price duration conflict that
+firm-specific capital was introduced to resolve. At the baseline the firm-specific model implies
+that prices are re-optimised on average every $1.5$ quarters, against $5.6$ quarters in the
+homogeneous model, and it is this difference that allows ACEL to claim that only the
+firm-specific version is compatible with the micro evidence. At $p = 8$ the firm-specific
+duration almost doubles, to $2.8$ quarters, which is still half the homogeneous figure but
+already a long way from the micro evidence. At $p = 12$ the two models imply $9.0$ and $9.6$
+quarters.
+\\
 
-Following Table \ref{tab:implied_time} it is easy to see how increasing lag lengh of the VAR used 
-to estimate \cite{ACEL2011} DSGE brings back the micro-macro price duration conflict.
-When the lag choice is equal to $8$, the calvo price in the firm specific model almost double respect the 
-baseline, passing from $1.5$ to $2.8$ quarters of on average price duration, where still is half respect 
-the one implied from the homogeneous model, but still seems that prices stay there for almost tre quarters.
-Where at the longest lag choice, both the models equally impliy an unrealistic $9$ quarters of average price duration.
+The homogeneous capital model, with its implied duration rises from $5.6$ to $9.6$ quarters, 
+was already already in open conflict with the micro evidence at the baseline, it now
+ends up requiring prices to remain fixed for well over two years. The long-lag results therefore
+do not points at the homogeneous capital model at the expense of the firm-specific one. They
+push both models into the same implausible region, and the conclusion is not that one version
+wins the argument, but that the reconciliation \cite{ACEL2011} offer is not available at all
+once the VAR is allowed a richer lag structure.
+\\
+
+This outcome is the one their own argument anticipates. The reconciliation works only if varying
+capital utilisation is costly enough to make firm specificity bind, and the models' authors state
+that ``to the extent that capital utilization rates can easily be varied, the assumption of
+firm-specific capital loses its ability to rationalize low values of $\xi_p$''
+\citep[p.~227]{ACEL2011}. The long-lag VAR drives $\sigma_a$ to essentially zero, which is
+exactly the case they describe. I do not claim that $p = 12$ delivers the true structural
+parameters, and nothing here establishes that the firm-specific mechanism is wrong in itself.
+What the exercise establishes is that the conclusion drawn from it is not robust to a choice,
+the lag order of the VAR, that was not treated as a substantive modelling decision.
+
 
 % =============================================================
 % 6. CONCLUSION                                    [target: 1.5 pp]
