@@ -111,10 +111,10 @@ This is a stylised fact of the data, as can be seen in the post second world war
 
 Many Dynamic Stochastic General Equilibrium (DSGE) models  
 are built to explain this phenomena. But standard New Keynesian (NK) models are able to model 
-this inflation behaviour only impling inplausibly high levels of price stickiness, which are 
+this inflation behaviour only implying implausibly high levels of price stickiness, which are 
 in stark contrast with micro-data evidence. \citet{ACEL2011} propose a resolution to this micro-macro conflict. 
-They create two differend models built on two versions of the \citet{CEE2005} model: 
-one with \textit{homogeneous} capital and the other were the capital is \textit{firm-specific}.
+They create two different models built on two versions of the \citet{CEE2005} model: 
+one with \textit{homogeneous} capital and the other where the capital is \textit{firm-specific}.
 \\
 
 One of the important goals of monetary business cycle research is to explain the empirical evidence 
@@ -149,8 +149,8 @@ shocks''.
 Since a VAR($\infty$) cannot be estimated on a finite sample, researchers truncate. The
 resulting VAR($p$) is misspecified, and increasingly so the smaller is $p$
 \citep{Long_Lag2025, Humble_VARs_2026, Ravenna2007}. 
-\cite{Ravenna2007} "the problem facing economistis is whether the number of lags $p$ to be 
-included is reasonable given the lenght of economics time series over which VARs are
+\cite{Ravenna2007} "the problem facing economists is whether the number of lags $p$ to be 
+included is reasonable given the length of economics time series over which VARs are
 estimated. When estimating a VAR consistent with DSGE business cycle models it is
 standard to assume that including few lags is sufficient to provide a reasonable
 approximation to the exact infinite order VAR representation!
@@ -235,7 +235,7 @@ frequent \cite{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008}.
 % TBD: valutare se aggiungere evidenza micro piu' recente oltre a questi tre riferimenti di ACEL.
 \\
 
-\citet{ACEL2005WP}\footnote{The replicaiton code made available from the authors is NBER working paper from 2005. Hence, I replicate and refere to those results.} 
+\citet{ACEL2005WP}\footnote{The replication code made available from the authors is NBER working paper from 2005. Hence, I replicate and refer to those results.} 
 propose a resolution. In their model inflation is inertial even though
 firms re-optimise on average every $1.5$ quarters. Inertia arises not because firms change
 prices rarely, but because when they do it, they change them by a small amount: each firm's
@@ -244,6 +244,7 @@ adjustment. The underlying assumption that drives this result is that capital is
 and firm-specific, so that factor of production cannot be instantly and costlessly reallocated across firms.
 
 \subsection{Homogeneous and firm-specific capital}
+\label{sec:2.2homog_bs_firm-spec_capital}
 
 \citet{ACEL2011} build on the \citet{CEE2005} model, adding the two technology shocks, and
 construct two versions of it: one in which capital is homogeneous, as in standard
@@ -285,7 +286,7 @@ average price markup, and of two estimated parameters, $[\sigma_a, S'']$,
 capital utilisation cost and the investment adjustment cost respectively.
 \\
 
-The role of capital utilisation cost $\sigma_a$ is is best understood by following what happens after an unexpected,
+The role of capital utilisation cost $\sigma_a$ is best understood by following what happens after an unexpected,
 positive demand shock. Aggregate demand rises within the quarter and firms have to produce
 more. Hours expand first, and wages are themselves set on a Calvo scheme, so only the
 $1-\xi_w$ of households that can reoptimise choose a new wage, while the rest adjust only
@@ -372,12 +373,12 @@ easily be varied, the assumption of firm-specific capital loses its ability to r
 low values of $\xi_p$'' \citep[p.~227]{ACEL2011}.
 
 \subsection{DSGE estimation via IRF matching}
-Theoretical models are usefull to economists and policymakers only if they are able to reproduce important
-feauters of the observed data. Which is a property that critically depends on the values that model's 
+Theoretical models are useful to economists and policymakers only if they are able to reproduce important
+features of the observed data. Which is a property that critically depends on the values that model's 
 parameters have attached, and also on how the researcher decide to estimate them \cite{Theodoridis2011}.
 
-\cite{ACEL2005WP} folowing \cite{RotembergWoodford1997, CEE2005, Iacoviello2005, BoivinGiannoni2006},
-use a limited information approach an IRF matching estimator, 
+\cite{ACEL2005WP} following \cite{RotembergWoodford1997, CEE2005, Iacoviello2005, BoivinGiannoni2006},
+use a limited information approach, an IRF matching estimator, 
 this procedure select and estimate the model's structural parameters that produce the DSGE IRFs, which
 minimises the distance with IRFs created from the SVAR. 
 
@@ -387,13 +388,13 @@ The VAR and theoretical IRFs are identified by restrictions implied by the DSGE.
 admits a structural VAR representation, in this way, sample moments of the VAR are informative for the 
 theoretical model's structural parameters \cite{Hall_Inoue_Nason_Rossi2012}.
 
-\citet{Theodoridis2011}, following \citet{Canova1994, Canova2007}, notes that many DSGE economistis prefer to use 
+\citet{Theodoridis2011}, following \citet{Canova1994, Canova2007}, notes that many DSGE economists prefer to use 
 partial information estimators rather than full information ones, like maximum likelihood, because they 
-prefere estimates that minimise the economic distance rather than statistical fit criteria.
-Because structual IRF matching estimates deliver selected DSGE moments-statistic as close as possible to 
+prefer estimates that minimise the economic distance rather than statistical fit criteria.
+Because structural IRF matching estimates deliver selected DSGE moments-statistic as close as possible to 
 those observed in the data.
 The economist can assess how well the estimated model replicates these targets allowing the researcher 
-to identify possible modelling weaknesses and to infer usefull economic conclusions.
+to identify possible modelling weaknesses and to infer useful economic conclusions.
 \\
 
 The authors use a medium-scale VAR with four lags, ten quarterly series and three structural shocks.
@@ -494,7 +495,7 @@ These restrictions identify three shocks out of ten. IRFME matches the IRFs of t
 not on those not identified.
 
 \subsection{Estimating the Parameters of the Equilibrium Model}
-Using \cite{ACEL2011} notation, let $\zeta$ denote the strucutal model parameters that are aimed to be estimated, and $\Psi(\zeta)$ being the mapping 
+Using \cite{ACEL2011} notation, let $\zeta$ denote the structural model parameters that are aimed to be estimated, and $\Psi(\zeta)$ being the mapping 
 from the structural parameters $\zeta$ to the model IRFs. The SVAR IRFs estimates are denoted as $\hat{\Psi}$.
 
 The IRFME then can be written as:
@@ -505,16 +506,16 @@ The IRF matching is done horizon by horizon: the estimator compares the VAR
 point estimate of each impulse response at each of the first $h$ horizons; being $h=20$ in \cite{ACEL2011} work, excluding
 those set to zero by identification, against the model-implied counterpart. 
 Here, V is a diagonal matrix composed by the sample variances along the diagonal $\hat{\Psi}$.
-Those variances, compose the condifence intervals around the point estimates of the SVAR IRFs.
+Those variances, compose the confidence intervals around the point estimates of the SVAR IRFs.
 With this choice of V, the estimated model's structural parameters $\hat{\zeta}$ are the value 
 of ${\zeta}$ that ensures that the $\hat{\Psi}$ DSGE's IRFs lies as much as possible inside the VAR IRFs' confidence intervals.
-Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed using the Deltha method, 
+Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed using the Delta method, 
 more detail in the Appendix \ref{app:delta_method}
 
 The minimum distance estimator relies on the ability of the VAR to estimate the IRFs.
 \textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"}
 point the attention on misspecification concerns in general VAR practice \citep[p.~83]{Ramey2016}.
-This is clear to the author which claim \textit{"The quality of our strategy (IRF matching)
+This is clear from the authors themselves, who claim \textit{"The quality of our strategy (IRF matching)
 depends on the ability of identified VARs to generate reliable estimates of the
 dynamic response of economic variables to shocks"} \citep[p.~3, fn.~10]{ACEL2011}.
 
@@ -530,10 +531,10 @@ use forecasting information criteria (IC) such as Akaike (AIC) or Hannan-Quinn (
 use conventions; that is, 4 lags for quarterly data and 12 for monthly data.
 \\
 
-If a DSGE is estimated using an IRF matching tecnique, using a short lag VAR it might be problematic
+If a DSGE is estimated using an IRF matching technique, using a short lag VAR it might be problematic
 as the DSGE is estimated by a biased by lag truncation VAR.
-Truncation Bias is a type of misspecification that arises when the VAR lag order is shorter respect its DGP.
-This type of misspecification might be a potential problem for structual inference.
+Truncation Bias is a type of misspecification that arises when the VAR lag order is shorter than that of its DGP.
+This type of misspecification might be a potential problem for structural inference.
 
 VARs are typically small systems with few lags often interpreted as models of the entire economy, 
 IRFs are highly sensitive to variable and lag choice \cite{Humble_VARs_2026,Long_Lag2025}.
@@ -552,7 +553,7 @@ Estimating the relationship while omitting $x_{2t}$,
     y_t = x_{1t} b_1 + e_t ,
     \label{eq:omitted}
 \end{equation}
-Equeation \ref{eq:omitted} delivers a biased point estimate unless the regressors are orthogonal, that is 
+Equation \ref{eq:omitted} delivers a biased point estimate unless the regressors are orthogonal, that is 
 $\mathbb{E}(b_1)\neq\beta_1$, and an upward-biased residual variance, $s^2 > \sigma^2$. Both
 distortions matter here, and the second is the one usually forgotten.
 
@@ -587,7 +588,7 @@ truncation bias just described depends entirely on how the shock of interest is 
 
 \citet{Ravenna2007} finds two channels through which lag truncation operates. The first being \textit{pure
 truncation} bias the one described in the section above.
-The second he calls it \textit{identification bias}, and works trought the fact that
+The second he calls it \textit{identification bias}, and works through the fact that
 impulse responses are not read off the reduced form alone, they also require the
 map from reduced form innovations to structural shocks, and that map
 has to be estimated as well.
@@ -653,11 +654,11 @@ distorts propagation, so its mark accumulates with the horizon, while \textit{id
 the shock, so its trace could be visible already on impact.
 
 The VAR of \citet{ACEL2011} carries both kinds of restriction at once, which makes it an unusually
-clean setting in which to look for both the cannels.
+clean setting in which to look for both the channels.
 \\
 
 In essence, both the channels in which truncation bias potentially operates can be 
-closed or mitigated by simply increasing the lag lenght of the VAR.
+closed or mitigated by simply increasing the lag length of the VAR.
 Applied practice has largely resisted that response. Even where long-lag
 VARs are known to have good asymptotic properties \cite{Plagborg-Moller_Wolf2021},
 they are widely treated as unworkable in finite samples due to high variance concerns: 
@@ -668,14 +669,14 @@ Montiel-Olea_Plagborg-Moller_Qian_Wolf2025}.
 \\
 
 \cite{Long_Lag2025} explore the trivial solution to short lag VARs, that is, dramatic increase in the 
-lag lenght.
+lag length.
 
 \subsection{Long-Lag VARs}
 \label{sec:long-lag_VARs}
-Their central point is that standard intuition that, increasing lag lenght increase unceirtanty around 
+Their central point is that standard intuition that, increasing lag length increase uncertainty around 
 estimates given the increased parametrisation is just a portion of the story, 
 \textit{"in face of misspecification due to lag truncation, increasing the lag 
-length can actually reduce unceirtanty"} \citep[p.~2]{Long_Lag2025}.
+length can actually reduce uncertainty"} \citep[p.~2]{Long_Lag2025}.
 
 As the dynamic structure increases, lag truncation decrease, consequently misspecification reduces.
 Misspecification reduction has a double effect, the first being the well-known bias reduction, while 
@@ -683,23 +684,23 @@ the second is the variance reduction that works against the imprecision coming f
 This trade off it applies to all truncated VARs, no matter what the identification strategy is.
 \\
 
-To reveal Long-Lag VARs properties \cite{Long_Lag2025} generate data, with a MonteCarlo, of realistic samples size 
+To reveal Long-Lag VARs properties \cite{Long_Lag2025} generate data, with a Monte Carlo, of realistic samples size 
 from three DSGE.
 The three DSGE are \cite{ChariKehoeMcGrattan2008}, \cite{CEV2007} and \cite{SW2007}.
 
-This MonteCarlo simulation is conducted under the assumptions that the identification restriction is correct.
-And the DSGE are fundamental in the sense of \cite{FVRRSS2007}, so invertivility is never a problem.
-Under these hypotesis these models have an exact VAR($\infty$) representation.
+This Monte Carlo simulation is conducted under the assumptions that the identification restriction is correct.
+And the DSGE are fundamental in the sense of \cite{FVRRSS2007}, so invertibility is never a problem.
+Under these hypothesis these models have an exact VAR($\infty$) representation.
 
-With the MonteCarlo they generate $1000$ datasets of realistic macro sample size for quarterly data, $T = 200$,
+With the Monte Carlo they generate $1000$ datasets of realistic macro sample size for quarterly data, $T = 200$,
 and they estimate the bivariate VARs \footnote{For \cite{SW2007}, they reduce the number of variables from 7 to 2 
-to maitanin consistency with the other two exercises. They keep GDP-growth and interest rates.}
+to maintain consistency with the other two exercises. They keep GDP-growth and interest rates.}
 representations of the DSGE choosing different increasing the lag choice.
-When comparing VARs of different lag-lenght, they restrict the sample of effective observations as $T = 170$ 
-ensuting that lag inizialization does not affect sample size.
-Unceirtanty bands are computed as in \citep{Sims_Zha1999, Canova2007, Uhlig2005}, in this sense 
-it is used a the Normal-Inverse Wishart prior, which have good aproximation to frequentist bootstapped intervals.
-It does not weigth differently short vs. long lags as would do other prios like the Minnesota one.
+When comparing VARs of different lag-length, they restrict the sample of effective observations as $T = 170$ 
+ensuring that lag initialisation does not affect sample size.
+Uncertainty bands are computed as in \citep{Sims_Zha1999, Canova2007, Uhlig2005}, in this sense 
+it is used a the Normal-Inverse Wishart prior, which have good approximation to frequentist bootstrapped intervals.
+It does not weight differently short vs. long lags as would do other priors like the Minnesota one.
 
 \subsection{Long-Lag Benefits}
 \label{sec:long-lag_benefits}
@@ -710,32 +711,31 @@ The variance-reducing effect of lower misspecification often dominates the penal
 In a nutshell, Long-Lag VARs, reduce truncation bias, have more 
 precise inference, reduced Mean Squared Error (MSE) and better coverage.
 
-Short-lag VARs have maximum unceirtanty for horizons where unceirtanty is not mecchanically low.
+Short-lag VARs have maximum uncertainty for horizons where uncertainty is not mechanically low.
 For longer horizons, short-lag VARs have minimum CI width, this because a VAR($p$) cannot propagate much 
 beyond horizon $p$, VARs with lag length extrapolate impulse responses for 
 horizons $h > p$ from the first $p$ autocovariances \cite{Baumeister2025}. 
-Therefore unceirtanty cannot propagate much beyond that horizon either.
+Therefore uncertainty cannot propagate much beyond that horizon either.
 
-Unceirtany does not explode with the lag lenght increase; instead for VARs with very long lags, confidence bands 
+Uncertainty does not explode with the lag length increase; instead for VARs with very long lags, confidence bands 
 are roughly in the same ballpark as those of short-lag VARs.
 
 
-Long-Lag VARs have comparable coverage rates and comparable MSE than short-lag VARs. combined with 
+Long-Lag VARs have comparable coverage rates and comparable MSE than short-lag VARs, combined with 
 the tendency to produce smaller biases, long-lag VARs have favorable properties compared to standard short-lag VARs.
 
-\cite{Long_Lag2025} leverage to the above mentioned MonteCarlo simulation proposing an exercise that decompose the unceirtanty effects creating hypotetical IRFs
+\cite{Long_Lag2025} leverage to the above mentioned Monte Carlo simulation proposing an exercise that decompose the uncertainty effects creating hypothetical IRFs
 that are composed by long-lag estimates of the point estimates, while using short-lag estimates of variance covariance matrix 
 obtaining an $IRF = f(B_{30}(L), \Sigma_4)$. Such IRFs can be interpreted as isolating the effect of increased parametrisation.
 
-The standard intuition whould suggest that long-lag length makes the entire distribution shift outward,
-through the additional unceirtanty created by the strong increase of parameters.
-In their exercise find that the increased parametrisation does not invariably increase unceirtanty 
-us at odds both with standard intuition (less degrees of freedom) and with the well known omittet variable result.
+The standard intuition would suggest that long-lag length makes the entire distribution shift outward,
+through the additional uncertainty created by the strong increase of parameters.
+In their exercise, they find that the increased parametrisation does not invariably increase uncertainty, which is at odds both with standard intuition (fewer degrees of freedom) and with the well known omitted variable result.
 
 Standard intuition on increased parametrisation is partially correct and obviously part of the story, but 
 \cite{Long_Lag2025} finds that misspecification reduction tends to have substantial variance effects.
 
-\subsection{Chosing the Lag Lenght}
+\subsection{Choosing the Lag Length}
 
 Macroeconomists almost never have the luxury of knowing the true DGP, unlike in the Monte
 Carlo exercise just reviewed, so point estimates cannot be checked against a known truth the
@@ -804,22 +804,22 @@ alternative designed for structural inference.
 There is no need, however, to wait for that or other criterias to become standard practice.
 \citet{Long_Lag2025} already offer a simpler heuristic that any researcher can apply today:
 \textit{"plot the structural moments central to the research question against lag length. If
-the structural conclusion dramatically change as the lag lenght increases, that is clearly
+the structural conclusion dramatically change as the lag length increases, that is clearly
 indicating that truncation is important to the question at hand"} \citep[p.~12]{Long_Lag2025}.
 
 \subsection{Model size}
 The bias-variance trade-off documented by \cite{Long_Lag2025} applies to all untruncated reduced form VARs.
-It does not depend on the number variables in the VAR, nor in the identifying assuption or wheater the researcher 
+It does not depend on the number variables in the VAR, nor in the identifying assumption or whether the researcher 
 is using a Bayesian or Frequentist method.
 
-The Frequentist researcher migth bump into a degrees of freedom problem.
+The Frequentist researcher might bump into a degrees of freedom problem.
 An $n$-variable VAR($p$) has $n + n^2p$ coefficients, and $\frac{n(n+1)}{2}$ elements in the variance 
-covariance matrix. As the lag lenght grows, the number of parameters to estiamte will rapidely increase, and the higher is 
+covariance matrix. As the lag length grows, the number of parameters to estimate will rapidly increase, and the higher is 
 the number of variables in the VAR, the faster will happen.
 At some point the number of parameters to estimate will be greater than the number of available data points.
 It is shown by \cite{Long_Lag2025} that the degrees of freedom limit is far from being reached by 
 small scale VAR with one year of lags. In this work replicating \cite{ACEL2005WP} we stand in the Frequentist side,
-so I won't talk regularization tecquicues or how easy is to implement long-lag VARs in Bayesian as
+so I won't talk regularization techniques or how easy it is to implement long-lag VARs in Bayesian as
 they inherently avoid over-parametrisation.
 
 Given the dimension of VAR in analysis, I am going to show that even being close to the limit, 
@@ -834,30 +834,30 @@ In this section I present results from enriched dynamic structure of \cite{ACEL2
 used to estimate their DSGE parameters.
 Doing this exercise, I extend the work of \cite{Long_Lag2025} in three different aspects.
 
-First, in MonteCarlo laboratory that \cite{Long_Lag2025} have created to evaluate the three DSGE that have choose 
-to use to generate data, all respect an important assumption, \cite{FVRRSS2007} Poor Mans condition.
+First, in Monte Carlo laboratory that \cite{Long_Lag2025} have created to evaluate the three DSGE that have chosen 
+to use to generate data, all respect an important assumption, \cite{FVRRSS2007} Poor Man's condition.
 All the DSGE admits a VAR($\infty$) representation, and because of this they can evaluate the performance 
-of truncated VARs, which are full informative. Are bivariate, have two variables and two shock.
+of truncated VARs, which are fully informative. They are bivariate, with two variables and two shocks.
 The VAR used in \cite{ACEL2011} confronts three shocks with ten observable variables.
-The system is therefore stocastic singular, there is no exact VAR($\infty$) representation of the DSGE that 
-the VAR is being used to estimate for. But this is not a caveat, is a feauture, is one of the reasons why 
+The system is therefore stochastically singular, there is no exact VAR($\infty$) representation of the DSGE that 
+the VAR is being used to estimate for. But this is not a caveat, is a feature, and is one of the reasons why 
 the ACEL used to estimate their model a partial information approach as IRF minimum distance estimator.
 \\
 
 The second departure as previously anticipated in the Section \ref{sec:long-lag_VARs} relates on the dimension of 
-the VAR emploied in this work.
-Becuase the three DGP processes in \cite{Long_Lag2025} are two-variable systems, their VAR remains cheapely 
-parametrised even at long lag lenghts, and increasing $p$ costs relatively little in terms of degrees of freedom.
-The ACEL VAR doess not enjoy that luxury. With $K = 10$ variables, a constant and $p$ lags, each equation carries 
+the VAR employed in this work.
+Because the three DGP processes in \cite{Long_Lag2025} are two-variable systems, their VAR remains cheaply 
+parametrised even at long lag lengths, and increasing $p$ costs relatively little in terms of degrees of freedom.
+The ACEL VAR does not enjoy that luxury. With $K = 10$ variables, a constant and $p$ lags, each equation carries 
 $10p + 1$ coefficients, and the sample runs from 1959:Q2 to 2001:Q4, that is $171$ quarterly observations 
-before lags are consumed. I will show that concerns related to CI explosions migth not accour even in limiting cases.
+before lags are consumed. I will show that concerns related to CI explosions might not occur even in limiting cases.
 \\
 
-Three, which is strictly connected to the second, I am using as baseline result the exercises where I am not 
+Third, which is strictly connected to the second, I am using as baseline result the exercises where I am not 
 restricting the sample size to the one used in the longest-lag VAR.
-The reason is why the results does not vary much, and when they do they do by a small amount and consistenlty 
-with the baseline when the common available data is used. it is shown in Appendix \ref{app:VAR_aligned}.
-The other reason is that, in practice, if a researcher has to decide to use a longer-lag VAR respect the short one, 
+The reason is why the results does not vary much, and when they do they do by a small amount and consistently 
+with the baseline when the common available data is used. It is shown in Appendix \ref{app:VAR_aligned}.
+The other reason is that, in practice, if a researcher has to decide to use a longer-lag VAR rather than a short one, 
 the short VAR would be still estimated with as many data points available. 
 In particular this argument is even more valid when the VAR has a lot of variables or if the available data 
 points is little.
@@ -865,7 +865,7 @@ points is little.
 \subsection{VARs IRFs}
 \label{sec:results_VARs_IRFs}
 The baseline lag choice of ACEL's VAR is $p = 4$, I re-estimate their DSGE matching it with VARs of 
-lag $p = 8$ and $12$, raisig the lags to one up to two and three years. In Appendix \ref{app:VAR_aligned} 
+lag $p = 8$ and $12$, raising the lags to one up to two and three years. In Appendix \ref{app:VAR_aligned} 
 are presented the results when the sample is restricted for all the estimations to the one available 
 to the VAR with twelve lags.
 \\
@@ -873,7 +873,7 @@ to the VAR with twelve lags.
 
 In Figure \ref{fig:var_irfs_lag12} are plotted the VARs' IRFs to a one standard deviation monetary 
 policy shock easing across different lag structures with $95\%$ bootstrap confidence intervals of the VAR($4$).
-All variables, exept for inflation and the interest rate are expressed in percent terms.
+All variables, except for inflation and the interest rate are expressed in percent terms.
 Inflation and Fed Funds Rate are expressed in units of percentage points at quarterly rate and annual rate, respectively.
 
 \begin{figure}[htbp]
@@ -881,7 +881,7 @@ Inflation and Fed Funds Rate are expressed in units of percentage points at quar
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
         {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-    \caption{VARs' IRFs to a Montetary Policy shock across different lag struture}
+    \caption{VARs' IRFs to a Monetary Policy shock across different lag structure}
     \label{fig:var_irfs_lag12}
 \end{figure}
 \FloatBarrier
@@ -890,21 +890,21 @@ The green solid line with grey $95\%$ bootstrap confidence interval are shown th
 baseline results from the VAR with four lags. In orange dashed line the IRFs VAR(8), 
 and in blue solid line the VAR(12).
 
-I start desribing Figure \ref{fig:var_irfs_lag12} from what does not change dramatically.
+I start describing Figure \ref{fig:var_irfs_lag12} from what does not change dramatically.
 First, the response of money growth rate to a monetary policy shock,
 consistently with the baseline VAR($4$), the effect is completed within one year.
-Second, there is a liquidity effect, money growth and interest rate move in opposite direction after the shock.
-Third, velocity co-moves with the interest rate which fall in response to the shock, and then rise.
-Fourth, price of investment seems not to have an impact, at intermediate horizons have some divergence respect the baseline.
+Second, there is a liquidity effect, money growth and interest rate move in opposite directions after the shock.
+Third, velocity co-moves with the interest rate, which falls in response to the shock and then rises.
+Fourth, the price of investment seems not to be affected on impact, though it shows some divergence from the baseline at intermediate horizons.
 In general, all the point estimates across different lags lies inside the confidence intervals of the VAR($4$).
 
-Real wage in the VAR($12$) have the hump shape respect the baseline which is flat.
+The real wage in the VAR($12$) has a hump shape, compared with the flat baseline.
 
 Some important responses does not change in the magnitude or sign, nor in the shape, but in the timing.
 Output, inflation, capacity utilisation, average hours, consumption, velocity and investment 
-as the lag choice increase, the timing of the formation of the hump shape, and its peack is shifted in time.
-On average, the peak effect in the longer-lag VARs occurs one year after respect the baseline results, with 
-the exception of consumption in the VAR($8$), response is indistinguable from the baseline.
+as the lag choice increase, the timing of the formation of the hump shape, and its peak is shifted in time.
+On average, the peak effect in the longer-lag VARs occurs one year later than in the baseline results, with 
+the exception of consumption in the VAR($8$), response is indistinguishable from the baseline.
 
 Fed Funds rate standard deviation shock change from being a $60$ basis point at horizon $h = 0$ which then 
 decrease its impact almost to $0$ in two quarters, to a more realistic $25$ basis points shock that lasts for 
@@ -912,13 +912,13 @@ five quarters and then goes to $0$.
 
 The VAR($12$) inflation response need some more attention as it seems to have a the price puzzle response 
 in the first year after the easing shock happens.
-It seems to be very much more intertial respect the baseline, but on the other hand is consistent with all 
+It seems to be much more inertial than the baseline, but on the other hand is consistent with all 
 the other response variables that are inertial too. Having in mind \cite{ACEL2005WP} theoretical mechanism we can interpret 
 the inflation response being really slow in the first year after the shock, or even negative, because firms 
 have such strong frictions that allow the portion of optimisers to re-set prices once every more than one year, 
 making inflation and real variables such as output, consumption and average hours being slow to react.
 
-Given the persistence and slow response of the variables in the VAR($12$), these can be consisntent with 
+Given the persistence and slow response of the variables in the VAR($12$), these can be consistent with 
 ACEL mechanism if the price stickiness is high implying low implied time duration of prices.
 
 \subsection{Technology shocks and the long run restriction}
@@ -932,7 +932,7 @@ so this is where the second channel found by \cite{Ravenna2007}, the identificat
     \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Neutral_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Neutral_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: VAR\_IRFs\_Point\_Estimates\_Against\_CI\_VAR4\_Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{VARs' IRFs to a Neutral Technology shock across different lag struture}
+    \caption{VARs' IRFs to a Neutral Technology shock across different lag structure}
     \label{fig:var_nt_irfs_lag12}
 \end{figure}
 \FloatBarrier
@@ -942,7 +942,7 @@ so this is where the second channel found by \cite{Ravenna2007}, the identificat
     \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Embodied_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Embodied_Technology_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: VAR\_IRFs\_Point\_Estimates\_Against\_CI\_VAR4\_Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{VARs' IRFs to a Embodied Technology shock across different lag struture}
+    \caption{VARs' IRFs to a Embodied Technology shock across different lag structure}
     \label{fig:var_et_irfs_lag12}
 \end{figure}
 \FloatBarrier
@@ -995,19 +995,19 @@ what a technology shock does in this VAR is not robust to the lag order, and it 
 exactly the place where the theory says it should be, which is also the place
 \citet{ChariKehoeMcGrattan2008} target in their critique of long run identified SVARs.
 
-\subsection{Unceirtanty around longer lags estimates}
-Conventional wisdom thinks that increasing lag lenght increase parametrisation, therefore reduce the degrees 
+\subsection{Uncertainty around longer lags estimates}
+Conventional wisdom thinks that increasing lag length increase parametrisation, therefore reduce the degrees 
 of freedom making uncertainty around the estimates larger. As well explained by \cite{Long_Lag2025}, 
 this is for sure part of the story.
 Misspecification lowers the variance of the residuals, and that can offset the imprecision caused by additional parameters.
-As preaviously mentioned, in a bivariate system there is plenty of room to increase lag lenght without 
+As previously mentioned, in a bivariate system there is plenty of room to increase lag length without 
 having big concerns relative to overparametrisation. In ACEL VAR the concerns are more than realistic, 
 the parametrisation grows by a factor of three already large relative to the sample.
-If coinfidence intervals were going to explode anywhere, they would do it here.
+If confidence intervals were going to explode anywhere, they would do it here.
 \\
 
 They do not.
-Table \ref{tab:degrees_of_freedom} sumarise the coefficients and degrees of freedom of the exercise.
+Table \ref{tab:degrees_of_freedom} summarise the coefficients and degrees of freedom of the exercise.
 The baseline exercise at $p = 4$, the VAR has $410$ coefficients, $167$ available data points and $41$ 
 coefficient per regression.
 At $p = 12$ the system carries 1210 coefficients, each equation is estimated on $159$ observations with 
@@ -1015,7 +1015,7 @@ $121$ regressors, and only 38 degrees of freedom survive.
 The degrees of freedom limit, at which the number of regressors per equation $k$ is greater than the number 
 of usable observations $T_u$, pointed out by \cite{Long_Lag2025} in this exercise is at $p = 16$.
 
-Tripling the lag lenght relative to the ACEL baseline is therefore not a conservative perturbation, 
+Tripling the lag length relative to the ACEL baseline is therefore not a conservative perturbation, 
 but it is nearly the largest perturbation the data permit.
 This maks the exercise a demanding test for the central claim in \cite{Long_Lag2025}.
 
@@ -1026,24 +1026,24 @@ This maks the exercise a demanding test for the central claim in \cite{Long_Lag2
 \FloatBarrier
 
 Figure \ref{fig:var_irfs_all_ci} plots the VARs' IRFs to a monetary policy shock at each lag order, 
-togeter with their own $95$ percent bootstrap confidence bands.
+together with their own $95$ percent bootstrap confidence bands.
 
 \begin{figure}[htbp]
     \centering
     \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
-    \caption{VARs' IRFs to a Montetary Policy shock across different lag struture, 95\% CI}
+    \caption{VARs' IRFs to a Monetary Policy shock across different lag structure, 95\% CI}
     \label{fig:var_irfs_all_ci}
 \end{figure}
 \FloatBarrier
 
-The bands at $p = 12$ are not wider that those at $p = 4$ for several variables; inflation, Fed Funds rate, 
+The bands at $p = 12$ are not wider than those at $p = 4$ for several variables; inflation, Fed Funds rate, 
 real wage, velocity and relative price of investment, they are visibly narrower despite the increased parametrisation 
 documented in Table \ref{tab:degrees_of_freedom}.
 \textcolor{red}{On average, the width of the CI decrease by XXX}
 Therefore suggesting that the variance reduction mechanism 
-of \cite{Long_Lag2025} operates even at the parametrisation fronteer, at least in this work.
+of \cite{Long_Lag2025} operates even at the parametrisation frontier, at least in this work.
 
 The first objection would be that this is simply overfitting: a VAR with 121 regressors
 per equation fits the sample closely, the estimated residuals shrink, and confidence bands
@@ -1052,18 +1052,18 @@ because in-sample it cannot be dismissed; reduced misspecification and overfitti
 the same in-sample signature, namely a smaller residual variance.
 
 What can be said here, is to point on two direction, misspecification reduction, and bootstrap.
-Misspecification reduction is at the hearth of \cite{Long_Lag2025} point, 
-and it is the reason why the confidence bands do not explode with the lag lenght.
+Misspecification reduction is at the heart of \cite{Long_Lag2025} point, 
+and it is the reason why the confidence bands do not explode with the lag length.
 The latter point is that the bootstrap bands are constructed re-estimating the entire VAR 
-on each artificial sample, so the unceirtanty introduced by the parameters is propagated inot the repoted 
+on each artificial sample, so the uncertainty introduced by the parameters is propagated into the reported 
 intervals rather than being conditioned away. If the estimator would have been unstable at $p = 12$, the
-re-estimated responses would have varied wildy across draws, therefore, the bands would have widened accordingly.
+re-estimated responses would have varied wildly across draws, therefore, the bands would have widened accordingly.
 
-In this sense, bootstrap rules out the mechanical part of the concern, since parameter unceirtanty is not being surpressed.
-\textcolor{red}{What it cannot be be omitted, is that the residual variance is itself untestated, because the bootstrap resamples 
-from the fitted residuals of the very model under scrunity: NON CONVITNO DI QUESTO, è DI CLAUDE}
+In this sense, bootstrap rules out the mechanical part of the concern, since parameter uncertainty is not being suppressed.
+\textcolor{red}{What it cannot be omitted, is that the residual variance is itself understated, because the bootstrap resamples 
+from the fitted residuals of the very model under scrutiny: NON CONVITNO DI QUESTO, è DI CLAUDE}
 
-ACEL choose the lag lenght of $p = 4$ even if the AIC pointed on usign one lag, and HQ and SC suggested to use $p = 2$.
+ACEL choose the lag length of $p = 4$ even if the AIC pointed on using one lag, and HQ and SC suggested to use $p = 2$.
 The choice was motivated by the fact that the VAR with four lags had a better fit to the data, 
 and that the IRFs were more consistent with the DSGE's theoretical mechanism.
 
@@ -1071,18 +1071,66 @@ I've checked the IC at longer lags, I find that the AIC criteria points in favou
 The results of this work suggest that the choice of $p = 4$ was not enough to capture the dynamics of the data, 
 and that a longer lag length is needed to obtain more accurate estimates of the DSGE's structural parameters.
 
-
+\clearpage
 \section{Structural Implications}
 \subsection{DSGE structural parameters}
 \label{sec:results_params}
 In this section I analyse what consequences enriched dynamics in the VAR have brought in the
 DSGE deep parameters.
+In Table \ref{tab:dsge_params_comparison_4_8_12} I am replicating results from the 
+\cite{ACEL2005WP} Table 2\footnote{I report \cite{ACEL2005WP} Table 2 in Appendix \ref{app:acelwp05_table_2}}
+across different lag dynamics.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
     \label{tab:params_across_lags}
 \FloatBarrier
+
+The baseline results have no differences compared to the \cite{ACEL2005WP} ones. 
+Price markup $\lambda_f$ is calibrated so it does not have standard errors. 
+When the VAR lag lenght is increased, labour market frictions become less stringent, 
+wage stickiness parameter $\xi_w$ looses a quarter of its strength when the 
+DSGE is estimate to match the higher lag choice VAR, if we recall from Section \ref{fig:var_irfs_lag12} 
+real wages have the hump shape, which is not present in the shorter VARs version.
+When lag choice is equal to $4$ and $8$ habit formation $b$ remains constant a $0.7$, but 
+became $0.85$ at $p = 12$.
+Money demand elasticity $\epsilon$ flucuate a bit across the different lag choice, but remains 
+tigth around the baseline result at $0.8$.
+Investment adjustment cost $S''$ is the other estimated parameters that, along with capacity utilisation cost 
+$\sigma_a$ enters in the $\chi$ non linear equation in the firm-specific DSGE, and as explained in Section 
+\ref{sec:2.2homog_bs_firm-spec_capital} I recall that is not the key driver of $\chi$.
+The $S''$ parameter at $p = 12$ double in size becoming $6.8$, this transtalets 
+to higher cost of investments to adjust capital stock in the future.
+\\
+
+Focusing on the key elements of Table \ref{tab:dsge_params_comparison_4_8_12}; Phillips curve slope $\gamma$ 
+remains constant at $0.0402$ at the first two lag choice, becoming flatter $0.0129$ and statically significant 
+at the $99\%$ level at the $p = 12$.
+Capacity utilisation cost $\sigma_a$ starts at roughly $2$, immidiately convergin to $0$ as the lag length 
+increases, becoming equal to $0,1175$ at $p = 8$, and then almost inexistent, $0,0042$ at $P = 12$.
+\\
+
+Given that the Calvo price parameters are implied by the model, they naturally don't have uncertanty 
+around the extracted number. 
+The Calvo price parameters are extracted by inverting the Phillips curve equation, they are implied parameters
+so, when they are extrapolated, they don't have standard errors around the extracted number.
+To provide a measure of unceirtanty around these numbers, I have done a one million draws 
+Monte Carlo simulation, in which I simulate all the structural parameters in a joint normal distribution,
+This assumption is driven by how the sampling variance of the estimated parameters is recovered in 
+\cite{ACEL2005WP}, is done by applying the Deltha method to estimate the standard errors around the structural 
+parameters in the IRF matching estimation. The Deltha method asssume the structural parameters being jointly Normal.
+In Appendix \ref{app:delta_method} I explain the Deltha and \ref{app:montecalvo} 
+I show the probability density function (PDF) of the price stickines parameters simulated from the Monte Carlo.
+\\
+
+Having in mind the equation \ref{eq:gamma}, Phillips curve slope, that is the core mechanism 
+of the \cite{ACEL2011} model, we can intuitively rationalise the resutls on the Clavo price stickiness 
+parameter in the firm-specific $\xi_{p,fs}$ that are shown in the lower section of Table \ref{tab:dsge_params_comparison_4_8_12}.
+\\
+Conditional on low values of the Phillips curve slope, the cla
+
+
 
 \subsection{Implied duration and the collapse of the firm-specific mechanism}
 
@@ -1146,6 +1194,9 @@ satisfy.
 \section{The ACEL Model: Full Derivation}
 \label{app:model}
 
+\section{ACEL 2005 WP Table 2}
+\label{app:acelwp05_table_2}
+
 \section{Additional Residual Analysis}
 \label{app:residuals}
 
@@ -1153,7 +1204,37 @@ satisfy.
 \label{app:delta_method}
 
 \section{Monte Carlo Inference on the Calvo Parameters}
-\label{app:montecarlo}
+\label{app:montecalvo}
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo PDF $p = 4$}
+    \label{fig:montecalvo4}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo PDF $p = 8$}
+    \label{fig:montecalvo8}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo PDF $p = 12$}
+    \label{fig:montecalvo12}
+\end{figure}
+\FloatBarrier
 
 \section{VAR Aligned}
 \label{app:VAR_aligned}
