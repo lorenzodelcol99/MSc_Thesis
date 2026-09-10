@@ -139,7 +139,7 @@ subplot(1,2,1);
 plot(lags, logdet, '-o', 'LineWidth', 1.8, 'Color', col_fit, 'MarkerFaceColor', 'w');
 xlabel('Lag order p'); ylabel('log det \Sigma');
 title('Raw fit (Generalized Variance)');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 subplot(1,2,2);
 plot(lags, AIC, '-o', 'LineWidth', 1.8, 'Color', col_AIC); hold on;
@@ -148,7 +148,7 @@ plot(lags, SC,  '-d', 'LineWidth', 1.8, 'Color', col_SC);
 xlabel('Lag order p'); ylabel('Criterion value');
 title('Fit penalised for parameters');
 legend({'AIC','HQ','SC'}, 'Location', 'best');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 %% 7. Plot: benefit against cost, relative to VAR(4)
 % Everything is measured against the VAR(4) baseline and shown as a positive
@@ -174,7 +174,7 @@ ylabel('Magnitude relative to VAR(4)');
 title('Benefit of extra lags versus cost of extra parameters');
 legend({'Fit gain (benefit)','AIC penalty','HQ penalty','SC penalty'}, ...
        'Location', 'northwest');
-xticks(lags(2:3)); grid on;
+xticks(lags(2:3)); grid off;
 
 %% 8. Plot: Generalized Variance across lag choice (standalone)
 % Same information as the left panel of point 6, but on its own so it can be
@@ -186,7 +186,7 @@ plot(lags, logdet, '-o', 'LineWidth', 2, 'Color', col_fit, ...
 xlabel('Lag order p');
 ylabel('log det \Sigma   (Generalized Variance)');
 title('Generalized Variance across VAR lag orders');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 %% 9. LaTeX-ready table of the Generalized Variance (point 3)
 % Builds the LaTeX source as text in memory. Nothing is written to disk here

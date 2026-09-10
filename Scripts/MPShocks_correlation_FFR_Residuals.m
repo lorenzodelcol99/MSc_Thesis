@@ -215,7 +215,7 @@ for k = 1:num_proxies
         plot(common_dates, z_ffr, 'Color', col_shock_ffr, 'LineWidth', 1.2); hold on;
         plot(common_dates, z_proxy, 'Color', col_proxy, 'LineWidth', 1.2);
         yline(0, 'k:');
-        grid on; box on;
+        grid off; box on;
         title(sprintf('VAR(%d) vs %s:  r = %.3f', p, proxies(k).name, r_val), 'Interpreter', 'none');
         if i == 1
             ylabel(proxies(k).name, 'Interpreter', 'none', 'FontWeight', 'bold');

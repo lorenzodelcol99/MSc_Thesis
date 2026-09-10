@@ -127,7 +127,7 @@ for i = 1:num_lags
     lam = all_eigenvalues{i};
     plot(real(lam), imag(lam), 'o', 'MarkerSize', 5, ...
          'MarkerFaceColor', [0.85 0.33 0.10], 'MarkerEdgeColor', 'none');
-    axis equal; grid on;
+    axis equal; grid off;
     xlim([-1.2 1.2]); ylim([-1.2 1.2]);
     title(sprintf('VAR(%d)   max |\\lambda| = %.4f', ...
                   lags_to_test(i), max(abs(lam))));
@@ -169,7 +169,7 @@ for i = 1:length(lags_to_test)
         
         % Format the subplot
         title(actual_var_names{v}, 'Interpreter', 'none');
-        grid on;
+        grid off;
         
         % Remove the default 'Lag' and 'Sample Autocorrelation' labels to reduce clutter
         xlabel('');
@@ -203,7 +203,7 @@ for i = 1:length(lags_to_test)
         
         % Format the subplot
         title(actual_var_names{v}, 'Interpreter', 'none');
-        grid on;
+        grid off;
         
         % Remove the default 'Lag' and 'Sample Autocorrelation' labels to reduce clutter
         xlabel('');
@@ -371,7 +371,7 @@ for v = 1:num_vars
     ylim([0 1.05]);               % p-values strictly range from 0 to 1
     xlim([1 num_acf_lags]);       % X-axis goes from 1 to 20
     xticks(2:2:num_acf_lags);     % Show X-axis ticks every 2 lags to reduce clutter
-    grid on;
+    grid off;
     
     % Add axis labels
 
@@ -688,7 +688,7 @@ for i = 1:num_lags
     view(45, 30);
     
     % Enable the grid
-    grid on;
+    grid off;
     hold off;
 end
 

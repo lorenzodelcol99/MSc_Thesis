@@ -143,7 +143,7 @@ subplot(1,2,1);
 plot(lags, logdet, '-o', 'LineWidth', 1.8, 'Color', col_fit, 'MarkerFaceColor', 'w');
 xlabel('Lag order p'); ylabel('log det \Sigma');
 title('Raw fit (Generalized Variance)');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 subplot(1,2,2);
 plot(lags, AIC, '-o', 'LineWidth', 1.8, 'Color', col_AIC); hold on;
@@ -152,7 +152,7 @@ plot(lags, SC,  '-d', 'LineWidth', 1.8, 'Color', col_SC);
 xlabel('Lag order p'); ylabel('Criterion value');
 title('Fit penalised for parameters');
 legend({'AIC','HQ','SC'}, 'Location', 'best');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 exportgraphics(fig_gv_pen, [save_path 'Generalized_Variance_Vs_Penalised_Across_Lags.pdf'], 'ContentType', 'vector');
 fprintf('Saved: %s\n', [save_path 'Generalized_Variance_Vs_Penalised_Across_Lags.pdf']);
@@ -181,7 +181,7 @@ ylabel('Magnitude relative to VAR(4)');
 title('Benefit of extra lags versus cost of extra parameters');
 legend({'Fit gain (benefit)','AIC penalty','HQ penalty','SC penalty'}, ...
        'Location', 'northwest');
-xticks(lags(2:3)); grid on;
+xticks(lags(2:3)); grid off;
 
 exportgraphics(fig_bc, [save_path 'benefit_vs_cost_across_lags.pdf'], 'ContentType', 'vector');
 fprintf('Saved: %s\n', [save_path 'benefit_vs_cost_across_lags.pdf']);
@@ -196,7 +196,7 @@ plot(lags, logdet, '-o', 'LineWidth', 2, 'Color', col_fit, ...
 xlabel('Lag order p');
 ylabel('log det \Sigma   (Generalized Variance)');
 title('Generalized Variance across VAR lag orders');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 exportgraphics(fig_gv, [save_path 'generalized_variance_across_lags.pdf'], 'ContentType', 'vector');
 fprintf('Saved: %s\n', [save_path 'generalized_variance_across_lags.pdf']);
@@ -215,7 +215,7 @@ xlabel('Lag order p');
 ylabel('Criterion value');
 title('Generalized Variance Penalised for Extra Parameters');
 legend({'AIC','HQ','SC'}, 'Location', 'best');
-xticks(lags); grid on;
+xticks(lags); grid off;
 
 exportgraphics(fig_ic, [save_path 'information_criteria_across_lags.pdf'], 'ContentType', 'vector');
 fprintf('Saved: %s\n', [save_path 'information_criteria_across_lags.pdf']);

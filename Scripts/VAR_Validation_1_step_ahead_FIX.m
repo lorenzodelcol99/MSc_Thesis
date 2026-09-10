@@ -159,7 +159,7 @@ title(['In-sample residuals: ', display_var_names{var_to_plot}]);
 xlabel('Year');
 ylabel('Residual');
 legend('Location', 'best');
-grid on;
+grid off;
 hold off;
 
 safe_name = regexprep(actual_var_names{var_to_plot}, '[^\w]', '_');
@@ -194,7 +194,7 @@ for v = 1:num_vars
     xlabel('Year');
     ylabel('Residual');
     legend('Location', 'best');
-    grid on;
+    grid off;
     hold off;
 
     safe_name = regexprep(actual_var_names{v}, '[^\w]', '_');
@@ -230,7 +230,7 @@ for v = 1:num_vars
     yline(0, 'k-', 'LineWidth', 0.8, 'HandleVisibility', 'off');
 
     title(display_var_names{v});
-    grid on;
+    grid off;
 
     % Legend on the first tile only, otherwise it is repeated ten times
     if v == 1
@@ -266,7 +266,7 @@ for v = 1:num_vars
          'LineWidth', 1.5, 'MarkerFaceColor', 'k');
 
     title(display_var_names{v});
-    grid on;
+    grid off;
     xticks(lags_to_test);
     xlim([min(lags_to_test) - 1, max(lags_to_test) + 1]);
     xlabel('Lag order (p)');

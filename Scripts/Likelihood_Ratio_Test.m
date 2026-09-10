@@ -212,7 +212,7 @@ set(gca, 'XTick', x, 'XTickLabel', ...
 ylabel('Statistic value');
 title('Sequential LR test: statistic vs. 5% \chi^2 critical value');
 legend({'LR statistic','\chi^2_{0.95} critical value'}, 'Location', 'best');
-grid on;
+grid off;
 
 exportgraphics(fig_lr, [save_path 'likelihood_ratio_test_across_lags.pdf'], 'ContentType', 'vector');
 fprintf('Saved: %s\n', [save_path 'likelihood_ratio_test_across_lags.pdf']);

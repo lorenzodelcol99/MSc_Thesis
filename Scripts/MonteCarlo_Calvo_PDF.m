@@ -47,7 +47,7 @@ xline(ci_hom(2), ':k', 'LineWidth', 1.2);
 title('Homogeneous Capital (\xi_{p,hom})', 'FontSize', 14, 'FontWeight', 'bold');
 xlabel('Calvo Parameter', 'FontSize', 12);
 ylabel('Density', 'FontSize', 12);
-grid on;
+grid off;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); % Clean axes
 
 % --- Plot Firm-Specific ---
@@ -66,7 +66,7 @@ xline(ci_fs(2), ':k', 'LineWidth', 1.2);
 title('Firm-Specific Capital (\xi_{p,fs})', 'FontSize', 14, 'FontWeight', 'bold');
 xlabel('Calvo Parameter', 'FontSize', 12);
 ylabel('Density', 'FontSize', 12);
-grid on;
+grid off;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); % Clean axes
 
 % 3. Final Formatting: Super Title

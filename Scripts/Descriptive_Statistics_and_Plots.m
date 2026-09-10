@@ -50,7 +50,7 @@ for v = 1:length(actual_var_names)
     title(actual_var_names{v}, 'Interpreter', 'none');
     
     % Turn on the grid lines for easier visual reading
-    grid on;
+    grid off;
 
 end
 
@@ -86,7 +86,7 @@ plot(time_vector, Y(:, 9), ...      % plot(X, Y): is plotting command. The first
 xlabel('Time');
 ylabel(actual_var_names{9});
 title(['Isolated Plot of ', actual_var_names{9}], 'Interpreter', 'none');
-grid on;
+grid off;
 
 %% Plotting all the series in isolation
 for v = 1:length(actual_var_names)
@@ -99,7 +99,7 @@ for v = 1:length(actual_var_names)
     xlabel('Time');
     ylabel(actual_var_names{v}, 'Interpreter', 'none');
     title(['Isolated Plot of ', actual_var_names{v}], 'Interpreter', 'none');
-    grid on;
+    grid off;
     
     % --- Automated Image Saving (PDF format) ---
     % Ensure the target directory exists

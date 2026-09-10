@@ -218,7 +218,7 @@ for i = 1:num_lags
              'MarkerFaceColor', col_out, 'MarkerEdgeColor', 'k', 'LineWidth', 0.8);
     end
 
-    axis equal; grid on; box on;
+    axis equal; grid off; box on;
     xlim([-1.25 1.25]); ylim([-1.25 1.25]);
     xlabel('Re(\lambda)'); ylabel('Im(\lambda)');
     title(sprintf('VAR(%d):  max |\\lambda| = %.4f   (%d outside)', ...
@@ -261,7 +261,7 @@ for i = 1:num_lags
         autocorr(R(:, v), 'NumLags', acf_lags);
 
         title(display_var_names{v});
-        grid on;
+        grid off;
 
         % Drop the default 'Lag' / 'Sample Autocorrelation' labels: across ten
         % panels they are clutter, and the axes are self-evident.
@@ -429,7 +429,7 @@ xlabel('Portmanteau truncation lag s');
 ylabel('Bootstrap p-value');
 ylim([0 1.05]);
 xticks(s_all);
-grid on; box on;
+grid off; box on;
 title('Multivariate portmanteau test, bootstrap p-values', ...
       'FontWeight', 'bold');
 
@@ -713,7 +713,7 @@ for v = 1:num_vars
     ylim([0 1.05]);
     xlim([1 num_acf_lags]);
     xticks(2:2:num_acf_lags);
-    grid on;
+    grid off;
     xlabel('ACF lag');
     ylabel('p-value');
 

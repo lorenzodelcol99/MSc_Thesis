@@ -135,7 +135,6 @@ for s = 1:3
 
             ax = gca;
             ax.YAxis.Exponent = 0;
-            yline(0, 'k:', 'LineWidth', 0.6, 'HandleVisibility', 'off');
             hold off;
         end
 

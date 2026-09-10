@@ -501,6 +501,7 @@ from the structural parameters $\zeta$ to the model IRFs. The SVAR IRFs estimate
 The IRFME then can be written as:
 \begin{equation}
     \hat{\zeta} = \underset{\zeta}{\arg\min} \, (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))
+    \label{eq:irfme}
 \end{equation}
 The IRF matching is done horizon by horizon: the estimator compares the VAR
 point estimate of each impulse response at each of the first $h$ horizons; being $h=20$ in \cite{ACEL2011} work, excluding
@@ -1073,25 +1074,12 @@ and that a longer lag length is needed to obtain more accurate estimates of the 
 \section{Structural Implications}
 \label{sec:structural}
 
-The central result of this work is that the resolution of the micro--macro price conflict
-proposed by \cite{ACEL2011} is not robust to the lag structure of the VAR used to estimate it.
-At the baseline $p = 4$ I replicate their finding: the firm-specific capital model implies that
-prices are re-optimised on average every $1.5$ quarters, against $5.6$ quarters in the
-homogeneous capital model, so that only the firm-specific version is compatible with the
-microeconometric evidence on the frequency of price adjustment. At $p = 12$ the same two models
-imply $9.0$ and $9.6$ quarters. The firm-specific model no longer reconciles anything, and the
-homogeneous model, which was already in conflict with the micro evidence at the baseline, moves
-further away from it.
-\\
-
-The channel that produces this result is internal to the ACEL argument itself, and I establish
-it in three steps. Section \ref{sec:results_params} shows that the capacity utilisation cost
-$\sigma_a$, the only estimated parameter that governs the real rigidity in a quantitatively
-relevant way, collapses towards zero as the lag length increases. Section \ref{sec:results_chi}
-shows that the real rigidity parameter $\chi$ rises accordingly, and with it disappears the
-attenuation that allows the firm-specific model to rationalise frequent price re-optimisation.
-Sections \ref{sec:results_calvo} and \ref{sec:results_duration} carry these movements into the
-Calvo price stickiness parameters and into the implied duration of price contracts.
+The structural estimates in this section show that the resolution of the micro--macro price
+conflict proposed by \cite{ACEL2011} is not robust to the lag structure of the VAR it is
+estimated from. The mechanism fails through the very parameter it rests on: as the lag length
+increases the cost of varying capital utilisation collapses towards zero, firm specificity stops
+being an economically binding constraint, and the two versions of the model end up saying the
+same thing about price stickiness.
 
 \subsection{DSGE structural parameters}
 \label{sec:results_params}
@@ -1160,7 +1148,7 @@ normality is the assumption already used in the estimation itself, since \cite{A
 recover the sampling variance of the structural parameters through the delta method, which
 assumes exactly that. Appendix \ref{app:delta_method} describes the delta method and Appendix
 \ref{app:montecalvo} reports the simulated densities. The intervals reported here
-and in the next section are percentiles of the simulated distribution of the valid draws.
+and in the next section are percentiles of the simulated distribution.
 
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}}
@@ -1180,7 +1168,7 @@ the movement is not an artefact of the imprecision of either estimate.
 An attenuation factor of $0.03$ means that firm specificity does almost all of the work
 in dampening price adjustment, while a factor of $0.87$ means that it does almost none of it and
 the firm-specific model behaves nearly as the homogeneous one does. The question that matters
-for \cite{ACEL2011} is whether $\chi$ it is small enough to rationalise a low $\xi_p$, and at $p = 12$ it is not.
+for \cite{ACEL2011} is whether $\chi$ is small enough to rationalise a low $\xi_p$, and at $p = 12$ it is not.
 
 \subsection{Calvo price stickiness parameters and the collapse of the firm-specific mechanism}
 \label{sec:results_calvo}
@@ -1235,10 +1223,10 @@ already a long way from the micro evidence. At $p = 12$ the two models imply $9.
 quarters.
 \\
 
-The homogeneous capital model, with its implied duration rises from $5.6$ to $9.6$ quarters, 
-was already already in open conflict with the micro evidence at the baseline, it now
+The homogeneous capital model, whose implied duration rises from $5.6$ to $9.6$ quarters, 
+was already in open conflict with the micro evidence at the baseline, and now
 ends up requiring prices to remain fixed for well over two years. The long-lag results therefore
-do not points at the homogeneous capital model at the expense of the firm-specific one. They
+do not point at the homogeneous capital model at the expense of the firm-specific one. They
 push both models into the same implausible region, and the conclusion is not that one version
 wins the argument, but that the reconciliation \cite{ACEL2011} offer is not available at all
 once the VAR is allowed a richer lag structure.
@@ -1261,6 +1249,30 @@ the lag order of the VAR, that was not treated as a substantive modelling decisi
 \section{Conclusion}
 \label{sec:conclusion}
 
+% -------------------------------------------------------------------
+% Material moved here from the opening of Section \ref{sec:structural}.
+% To be worked into the conclusion.
+% -------------------------------------------------------------------
+
+%The central result of this work is that the resolution of the micro--macro price conflict
+%proposed by \cite{ACEL2011} is not robust to the lag structure of the VAR used to estimate it.
+%At the baseline $p = 4$ I replicate their finding: the firm-specific capital model implies that
+%prices are re-optimised on average every $1.5$ quarters, against $5.6$ quarters in the
+%homogeneous capital model, so that only the firm-specific version is compatible with the
+%microeconometric evidence on the frequency of price adjustment. At $p = 12$ the same two models
+%imply $9.0$ and $9.6$ quarters. The firm-specific model no longer reconciles anything, and the
+%homogeneous model, which was already in conflict with the micro evidence at the baseline, moves
+%further away from it.
+%\\
+
+%The channel that produces this result is internal to the ACEL argument itself. The capacity
+%utilisation cost $\sigma_a$, the only estimated parameter that governs the real rigidity in a
+%quantitatively relevant way, collapses towards zero as the lag length increases. The real
+%rigidity parameter $\chi$ rises accordingly, and with it disappears the attenuation that allows
+%the firm-specific model to rationalise frequent price re-optimisation. These movements carry
+%into the Calvo price stickiness parameters and into the implied duration of price contracts.
+
+
 \clearpage
 
 % --- BIBLIOGRAPHY ---
@@ -1276,7 +1288,64 @@ the lag order of the VAR, that was not treated as a substantive modelling decisi
 
 \section{Data}
 \label{app:data}
+I report exactly what is written in \cite{ACEL2005WP,ACEL2011}, not one single difference is been made.
+\\
 
+The ten series in $Y_t$, equation \eqref{eq:Yt}, are the exact same data as \citet{ACEL2005WP}. 
+With the exception of the price of investment and of the transactions
+balances measure, all series are taken from the DRI Basic Economics Database. Table
+\ref{tab:data_sources} lists the underlying series and the transformation applied to each to
+obtain the corresponding element of $Y_t$.
+
+\begin{table}[htpb]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Data sources and transformations}
+    \label{tab:data_sources}
+    \begin{tabularx}{\linewidth}{p{3.3cm}Xp{3.1cm}}
+    \toprule
+    \textbf{Element of $Y_t$} & \textbf{Source series} & \textbf{Transformation} \\
+    \midrule
+    Relative price of investment & Total investment price series of \citet{Fisher2006} & Log difference \\
+    GDP per hour (labour productivity) & GDPQ (real, chain-weighted output); LBMNU (non-farm business hours, per capita) & Log difference \\
+    GDP deflator & GDP / GDPQ (ratio of nominal to real output) & Log difference \\
+    Capacity utilisation & IPXMCA (manufacturing capacity index) & Level \\
+    Hours & LBMNU, converted to per capita terms using P16 & Log level \\
+    GDP per hour less the real wage & GDPQ, LBMNU; LBCPU (nominal hourly compensation) deflated by GDP/GDPQ & Log difference \\
+    Consumption share of GDP & GCN (nondurables) + GCS (services) + GGE (government expenditure), over GDP & Log ratio \\
+    Investment share of GDP & GCD (consumer durables) + GPI (gross private domestic investment), over GDP & Log ratio \\
+    Federal funds rate & FYFF & Level, annualised percentage points \\
+    Log velocity of MZM & GDP, GDP/GDPQ, MZM (see below) & Log level \\
+    \bottomrule
+    \end{tabularx}
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} All mnemonics refer to the DRI Basic Economics Database, with the
+    exception of the price of investment and of MZM. Output, investment, consumption and money
+    are converted to per capita terms using P16, the DRI series for the US population aged
+    sixteen and over, before entering the ratios and log differences above.}
+\end{table}
+
+Two series depart from the Database. The price of investment is the total investment price
+series constructed by \citet{Fisher2006}, built directly from the relative price of new
+equipment and structures rather than recovered as an implicit deflator from nominal and real
+output. The transactions balances measure, MZM, is obtained by splicing two Federal Reserve
+Bank of St. Louis series, the M2 minus small time deposits series before 1974 and the MZM
+series from 1974 onward, with no rescaling at the splice point since the two series are
+essentially identical in that year. \citet{ACEL2005WP} adopt MZM over narrower aggregates such
+as M1 or the monetary base for two reasons. First, MZM is constructed as a measure of
+transactions balances, which is the natural empirical counterpart to the model's money variable
+$Q_t$. Second, the estimation strategy requires the velocity of money to be stationary, an
+assumption that is reasonable for MZM but considerably more doubtful for narrower aggregates.
+\\
+
+The sample is quarterly, 1959:Q2 to 2001:Q4, giving $171$ observations before any lags are
+consumed. At the baseline lag order $p=4$ the first four quarters are used as initial
+conditions, leaving $167$ usable observations; at the longer lag orders considered in this
+thesis correspondingly more quarters are consumed in the same way, as reported in Table
+\ref{tab:df_budget}.
 
 \begin{figure}[htpb]
     \centering
@@ -1305,14 +1374,80 @@ satisfy.
 \section{ACEL 2005 WP Table 2}
 \label{app:acelwp05_table_2}
 
-\section{Additional Residual Analysis}
+\section{IRFs with all confidence intervals}
+\label{app:irfs_confidence_intervals}
+
+\section{Residual Analysis}
 \label{app:residuals}
 
 \section{Delta Method}
 \label{app:delta_method}
+Following the standard error estimation strategy for the DSGE structural parameters chosen by \cite{ACEL2005WP}
+and well explained in their footnote number 14.
+\\
+
+Given the IRF minimum distance estimator Equation \ref{eq:irfme}, 
+let the criterion be denoted as $L(\zeta,\hat{\Psi}) \equiv (\hat{\Psi} - \Psi(\zeta))' V^{-1} (\hat{\Psi} - \Psi(\zeta))$ 
+so that $L_1(\hat{\zeta},\hat{\Psi}) = 0$.
+\\
+
+Note that the mapping in \ref{eq:irfme} is given by $\hat{\zeta} = f(\hat{\Psi})$. In order to obtain 
+the sampling variance of the estimator, $\hat{\zeta}$, as a function of the sampling variance of $\hat{\Psi}$, 
+the delta function method approximates $f(\hat{\Psi})$ by its linear expansion about the true value of $\Psi$, $\Psi^0$.
+The Taylor's expansion is given by, $f(\hat{\Psi}) \approx f(\Psi^0) + f'(\Psi^0)(\hat{\Psi} - \Psi^0)$.
+Here $f(\Psi^0) = \zeta^0$, where $\zeta^0$ is the true unknown value of $\zeta$, by the consistency of the estimator.
+\\
+
+Then $\sqrt{T}(\hat{\zeta_T}-\zeta^0)$ is asymptotically Normally distributed with zero mean and variance equal to 
+$f'(\Psi^0)Wf'(\Psi^0)^{T}$, where the superscript T indicates the transposition operator, 
+and $W$ is the asymptotic variance-covariance matrix of $\sqrt{T}(\hat{\Psi}-\Psi)$.
+\\
+
+Then, implicit function theorem is used to approximate $f'(\Psi^0)$ by $-L_{11}(\zeta^0,\Psi^0)^{-1}L_{12}(\zeta^0,\Psi^0)$.
+Then, $V$ is not selected as random, in practice a diagonal matrix is built using the VAR IRFs variances $W$.
+In addition, $W$ is replaced by its sample estimate, as are $\zeta^0$ and $\Psi^0$ in the expression for $f'$.
 
 \section{Monte Carlo Inference on the Calvo Parameters}
 \label{app:montecalvo}
+
+Neither $\chi$ nor the Calvo price stickiness parameters $\xi_p$ are estimated directly. They
+are recovered by inverting the non-linear mapping in equation \eqref{eq:gamma} at the estimated
+structural parameters, so the IRF matching estimator attaches no standard error to either of
+them. The delta method of Appendix \ref{app:delta_method} gives the joint sampling variance-covariance
+$V_{DSGE}$ of the estimated structural parameters, but propagating that uncertainty through a
+non-linear mapping analytically is not tractable here, so I do it by simulation.
+\\
+
+I draw the full vector of structural parameters jointly from a multivariate normal distribution
+centred at the point estimates $\hat{\zeta}$, with variance-covariance $V_{DSGE}$, for $N = 1{,}000{,}000$
+draws. Drawing the parameters jointly, rather than varying $\gamma$ alone, matters because
+$\chi$ and $\xi_p$ depend on several parameters at once, and those parameters are themselves
+correlated: the simulation has to preserve the correlation structure encoded in $V_{DSGE}$, not
+just the marginal uncertainty of each parameter taken on its own.
+\\
+
+Five of the estimated parameters enter the mapping directly: the Phillips curve slope $\gamma$,
+the capacity utilisation cost $\sigma_a$, the investment adjustment cost $S''$, habit formation
+$b$, and the money demand elasticity $\epsilon$. The remaining calibrated parameters are held
+fixed at their original values. For every draw of these five parameters I recover the implied
+Calvo parameters using the ''findksip'' routine from the \citet{ACEL2005WP} replication
+code. In the homogeneous capital model $\chi \equiv 1$ by construction, so equation
+\eqref{eq:gamma} collapses to a quadratic in $\xi_{p,hom}$ and the routine solves it in closed
+form. In the firm-specific model $\chi$ is itself a non-linear function of the draw, so the
+routine searches a grid of candidate values of $\xi_{p,fs}$, brackets the point at which the
+implied $\gamma$ crosses the target value, and refines the root numerically.
+\\
+
+Not every draw returns an economically meaningful solution. Some draws imply a $\gamma$ for
+which no admissible root exists, or a complex valued one, and these are discarded rather than
+recorded as zero or as a boundary value. The share of draws that return a valid solution is
+$78.6\%$ at $p=4$, $31.8\%$ at $p=8$, and $49.2\%$ at $p=12$. The empirical distributions of
+$\xi_{p,fs}$ and $\xi_{p,hom}$ across the valid draws, plotted below, are what the percentile
+intervals reported in Sections \ref{sec:results_chi} and \ref{sec:results_calvo} are computed
+from.
+
+Here I plot the probability density functions (PDF) and the cumulative density functions (CDF) derived 
+from the Monte Carlo simulation.
 
 \begin{figure}[htpb]
     \centering
@@ -1344,9 +1479,107 @@ satisfy.
 \end{figure}
 \FloatBarrier
 
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_4.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_4.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo CDF $p = 4$}
+    \label{fig:montecalvo_cdf4}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_8.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_8.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo CDF $p = 8$}
+    \label{fig:montecalvo_cdf8}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_12.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output/MonteCarlo_Calvo_CDF_Plots/MonteCalvo_CDF_Plot_lag_12.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{Monte Carlo CDF $p = 12$}
+    \label{fig:montecalvo_cdf12}
+\end{figure}
+\FloatBarrier
+
 \section{VAR Aligned}
 \label{app:VAR_aligned}
 
+In this section I compare the VARs' IRFs with same lag lenght between the one that uses the full sample 
+available as in main work, and the one that restrict the sample to the one available for the VAR with $12$ lags.
+
+In general, the IRFs change by small in negligible terms, the same is true for the strutural parameters results.
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR4_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR4_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned monetary policy shock IRFs comparison $p = 4$}
+    \label{fig:var_4_aligned_mp_irfs_comparison}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR8_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR8_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 8$}
+    \label{fig:var_4_aligned_mp_irfs_comparison}
+\end{figure}
+\FloatBarrier
+
+The having less observations than in the baseline, regarding the monetary policy shock IRFs create no differences 
+for the VAR with four lags. Whereas in the VAR(8), there are some difference on the point estimated at $h > p$,
+but still negligibles.
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 4$}
+    \label{fig:var_4_aligned_et_irfs_comparison}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 8$}
+    \label{fig:var_8_aligned_et_irfs_comparison}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned neutral technology policy shock IRFs comparison $p = 4$}
+    \label{fig:var_4_aligned_nt_irfs_comparison}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htpb]
+    \centering
+    \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}
+    {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}}
+    {\fbox{Image Path Broken or File Missing}}
+    \caption{VAR aligned neutral technology policy shock IRFs comparison $p = 8$}
+    \label{fig:var_8_aligned_nt_irfs_comparison}
+\end{figure}
+\FloatBarrier
 
 
 \end{document}

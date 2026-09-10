@@ -67,7 +67,7 @@ for i = 1:length(lags)
     title('Homogeneous Capital (\xi_{p,hom})', 'FontSize', 14, 'FontWeight', 'bold');
     xlabel('Calvo Parameter', 'FontSize', 12);
     ylabel('Density', 'FontSize', 12);
-    grid on;
+    grid off;
     set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); 
     
     % --- Plot Firm-Specific ---
@@ -82,7 +82,7 @@ for i = 1:length(lags)
     title('Firm-Specific Capital (\xi_{p,fs})', 'FontSize', 14, 'FontWeight', 'bold');
     xlabel('Calvo Parameter', 'FontSize', 12);
     ylabel('Density', 'FontSize', 12);
-    grid on;
+    grid off;
     set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off');
     
     % 3. Final Formatting: Super Title

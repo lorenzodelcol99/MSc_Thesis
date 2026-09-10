@@ -55,7 +55,7 @@ for i = 1:length(var_indices)
         
     title(['Historical Decomposition: ', var_names_plot{i}], 'FontSize', 14);
     xlim([time_vec(1) time_vec(end)]);
-    grid on;
+    grid off;
     hold off;
 end
 

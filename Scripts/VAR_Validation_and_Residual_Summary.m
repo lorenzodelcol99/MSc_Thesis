@@ -323,7 +323,7 @@ for v = 1:num_vars
          'LineWidth', 1.5, 'MarkerFaceColor', 'k');
 
     title(display_var_names{v});
-    grid on;
+    grid off;
     xticks(lags_to_test);
     xlim([min(lags_to_test) - 1, max(lags_to_test) + 1]);
     xlabel('Lag order (p)');
@@ -395,7 +395,7 @@ xlabel('Lag order (p)');
 ylabel('log det \Sigma   (generalized variance)');
 title('Generalized variance across VAR lag orders');
 xticks(lags_to_test);
-grid on;
+grid off;
 
 exportgraphics(fig_gv, ...
     fullfile(save_base_path, 'Generalized_Variance_Across_Lags.pdf'), ...

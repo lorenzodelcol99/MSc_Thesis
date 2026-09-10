@@ -52,7 +52,7 @@ title('Homogeneous Capital (\xi_{p,hom})', 'FontSize', 14, 'FontWeight', 'bold')
 xlabel('Calvo Parameter', 'FontSize', 12);
 ylabel('Cumulative Probability', 'FontSize', 12);
 ylim([0 1.05]); % Bound the Y-axis properly for a CDF
-grid on;
+grid off;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); 
 
 % --- Plot Firm-Specific CDF ---
@@ -70,7 +70,7 @@ title('Firm-Specific Capital (\xi_{p,fs})', 'FontSize', 14, 'FontWeight', 'bold'
 xlabel('Calvo Parameter', 'FontSize', 12);
 ylabel('Cumulative Probability', 'FontSize', 12);
 ylim([0 1.05]);
-grid on;
+grid off;
 set(gca, 'GridAlpha', 0.15, 'FontSize', 11, 'Box', 'off'); 
 
 % 3. Final Formatting: Super Title
