@@ -1081,8 +1081,8 @@ In Table \ref{tab:dsge_params_comparison_4_8_12} I am replicating results from t
 \cite{ACEL2005WP} Table 2\footnote{I report \cite{ACEL2005WP} Table 2 in Appendix \ref{app:acelwp05_table_2}}
 across different lag dynamics.
 
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_table_A4_4_8_12_lags_Calvo_SE.tex}}
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/dsge_params_no_stickiness_table_A4_4_8_12_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/dsge_params_no_stickiness_table_A4_4_8_12_lags.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
     \label{tab:params_across_lags}
 \FloatBarrier
@@ -1111,45 +1111,75 @@ Capacity utilisation cost $\sigma_a$ starts at roughly $2$, immidiately convergi
 increases, becoming equal to $0,1175$ at $p = 8$, and then almost inexistent, $0,0042$ at $P = 12$.
 \\
 
-\subsection{Chi Parameter}
-The Chi parameter
-\IfFileExists{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}
-    {\input{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}}
-    {\noindent\fbox{Image Path Broken or File Missing}}
-\FloatBarrier
+In general as the VAR lag lenght increase, even the unceirtanty of the structural parameters shirnks.
+\\
 
-\subsection{Calvo price stickiness parameters}
-
-Given that the Calvo price parameters are implied by the model, they naturally don't have uncertanty 
-around the extracted number. 
-The Calvo price parameters are extracted by inverting the Phillips curve equation, they are implied parameters
+The Chi parameter is the last piece missing to derive the Calvo Price parameter, and given that 
+both $\chi$ and the Calvo price parameters $\xi_p$ are implied by the model, 
+they naturally don't have uncertanty around the extracted number. 
+Both the parameters are extracted by inverting the Phillips curve equation, they are implied parameters
 so, when they are extrapolated, they don't have standard errors around the extracted number.
 To provide a measure of unceirtanty around these numbers, I have done a one million draws 
 Monte Carlo simulation, in which I simulate all the structural parameters in a joint normal distribution,
 This assumption is driven by how the sampling variance of the estimated parameters is recovered in 
 \cite{ACEL2005WP}, is done by applying the Deltha method to estimate the standard errors around the structural 
 parameters in the IRF matching estimation. The Deltha method asssume the structural parameters being jointly Normal.
-In Appendix \ref{app:delta_method} I explain the Deltha and \ref{app:montecalvo} 
+In Appendix \ref{app:delta_method} I explain the Deltha and \ref{app:montecalvo}
 I show the probability density function (PDF) of the price stickines parameters simulated from the Monte Carlo.
 \\
 
-\subsection{Price stickiness parameters the collapse of the firm-specific mechanism}
-Having in mind the equation \ref{eq:gamma}, Phillips curve slope, that is the core mechanism 
-of the \cite{ACEL2011} model, we can intuitively rationalise the resutls on the Clavo price stickiness 
-parameter in the firm-specific $\xi_{p,fs}$ that are shown in the lower section of Table \ref{tab:dsge_params_comparison_4_8_12}.
-\\
-Conditional on low values of the Phillips curve slope, the cla
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/chi_parameter_table_A4_4_8_12.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:chi_param}
+\FloatBarrier
 
+Table \ref{tab:chi_param} shows how the real rigidity parameter $\chi$ behave across different 
+dynamics in th firm-specific capital model, in contrast with the homogeneous capital where it is 
+set to be equal to $1$.
+The baseline result shows that the strategic complementarity in price settings, with a value of $\chi_{fs} = 0.0307$ 
+has a strong attenuation effect, the real rigidity there is binding forcing the optimiser firms increse prices
+by small amounts. But as the lag lenght increases, $\chi_{fs}$ increases too, in particular at $p = 12$ 
+having a value equal to $0.86$, being the only one statistically significant, converges towards $1$.
 
+\subsection{Calvo price stickiness parameters and the collapse of the firm-specific mechanism}
 
+Having in mind the equation \ref{eq:gamma}, Phillips curve slope, that is the core mechanism
+of the \cite{ACEL2011} model, we can intuitively rationalise the resutls on the Clavo price stickiness
+parameter in the firm-specific $\xi_{p,fs}$ that are shown in Table \ref{tab:calvo_price_stikiness_params}.
 
+\IfFileExists{../../Output/DSGE_Parameters_Comparison/calvo_price_stickiness_table_A4_4_8_12_lags.tex}
+    {\input{../../Output/DSGE_Parameters_Comparison/calvo_price_stickiness_table_A4_4_8_12_lags.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:calvo_price_stikiness_params}
+\FloatBarrier
 
-\subsection{Implied duration and the collapse of the firm-specific mechanism}
-\label{sec:calvo_price_params}
+Conditional on low values of the Phillips curve slope, the price stickiness parameter in the homogeneous capital
+remains high and at $p = 12$, where $\gamma$ is flatter compared to the other two models, the friction is even 
+stronger.
+On the other side of the model, when the capital is firm-specific, with the $\chi_{fs}$ parameter that 
+grows as lag choice increases, the price stickiness pass from being relatively low, $\xi_{p,fs} = 0.3372$ 
+in the baseline $p = 4$, already almost doublying at $P = 8$ with $\xi_{p,fs} = 0.6448$ 
+completing its evolution at $p = 12$ where it converges to the homogeneous version where 
+$\xi_{p,fs} = 0.8884$ and the homogeneous is $\xi_{p,h} = 0.8958$
+
+\subsection{Implied duration of Prices}
+
+The implied dutation of prices governed by the Calvo style of price settings is $D = \frac{1}{1-\xi_p}$
+
 \IfFileExists{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}
     {\input{../../Output/DSGE_Parameters_Comparison/implied_duration_A4_4_8_12.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:implied_time}
 \FloatBarrier
+
+
+Following Table \ref{tab:implied_time} it is easy to see how increasing lag lengh of the VAR used 
+to estimate \cite{ACEL2011} DSGE brings back the micro-macro price duration conflict.
+When the lag choice is equal to $8$, the calvo price in the firm specific model almost double respect the 
+baseline, passing from $1.5$ to $2.8$ quarters of on average price duration, where still is half respect 
+the one implied from the homogeneous model, but still seems that prices stay there for almost tre quarters.
+Where at the longest lag choice, both the models equally impliy an unrealistic $9$ quarters of average price duration.
 
 % =============================================================
 % 6. CONCLUSION                                    [target: 1.5 pp]
