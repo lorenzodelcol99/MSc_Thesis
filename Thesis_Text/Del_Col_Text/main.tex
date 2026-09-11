@@ -286,6 +286,12 @@ average price markup, and of two estimated parameters, $[\sigma_a, S'']$,
 capital utilisation cost and the investment adjustment cost respectively.
 \\
 
+The investment adjustment cost $S''$ enters $\chi$ too, but through a different channel: 
+it governs the cost of changing the flow of new investment, which shapes how quickly the 
+firm's own capital stock accumulates in future periods, not how much capital it can access this quarter. 
+Since $\chi$ is pinned down mainly by the within-period margin that $\sigma_a$ governs, $S''$ 
+has correspondingly little quantitative bearing on it.
+
 The role of capital utilisation cost $\sigma_a$ is best understood by following what happens after an unexpected,
 positive demand shock. Aggregate demand rises within the quarter and firms have to produce
 more. Hours expand first, and wages are themselves set on a Calvo scheme, so only the
@@ -367,8 +373,8 @@ lower $\xi_p$. Inflation is inertial not because firms reset their prices rarely
 when they do they move them by little. This is how \citet{ACEL2005WP} obtain an average
 duration of $1.5$ quarters and still match the aggregate evidence on inflation.
 
-The resolution, however, rests on a single estimated parameter, capital utilisation cost $\sigma_a$, and \citet{ACEL2011}
-acknowledge the fragility themselves: ``to the extent that capital utilization rates can
+The resolution, however, rests on a single estimated parameter, capital utilisation cost $\sigma_a$, and 
+the authors acknowledge the fragility themselves: ``to the extent that capital utilization rates can
 easily be varied, the assumption of firm-specific capital loses its ability to rationalize
 low values of $\xi_p$'' \citep[p.~227]{ACEL2011}.
 
@@ -879,8 +885,8 @@ Inflation and Fed Funds Rate are expressed in units of percentage points at quar
 
 \begin{figure}[htbp]
     \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+    \IfFileExists{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Monetary_Policy_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12/Monetary_Policy_Shock/VAR_IRFs_Point_Estimates_Against_CI_VAR4_Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
     \caption{VARs' IRFs to a Monetary Policy shock across different lag structure}
     \label{fig:var_irfs_lag12}
@@ -997,12 +1003,14 @@ exactly the place where the theory says it should be, which is also the place
 \citet{ChariKehoeMcGrattan2008} target in their critique of long run identified SVARs.
 
 \subsection{Uncertainty around longer lags estimates}
-Conventional wisdom thinks that increasing lag length increase parametrisation, therefore reduce the degrees 
+\label{sec:results_uncertainty}
+Conventional view thinks that increasing lag length increase parametrisation, therefore reduce the degrees 
 of freedom making uncertainty around the estimates larger. As well explained by \cite{Long_Lag2025}, 
 this is for sure part of the story.
-Misspecification lowers the variance of the residuals, and that can offset the imprecision caused by additional parameters.
+But the long-lag VARs authors demonstrate how misspecification lowers the variance of the residuals, and that 
+can offset the imprecision caused by additional parameters.
 As previously mentioned, in a bivariate system there is plenty of room to increase lag length without 
-having big concerns relative to overparametrisation. In ACEL VAR the concerns are more than realistic, 
+having big concerns relative to overparametrisation. In \cite{ACEL2011} VAR the concerns are more than realistic, 
 the parametrisation grows by a factor of three already large relative to the sample.
 If confidence intervals were going to explode anywhere, they would do it here.
 \\
@@ -1017,8 +1025,8 @@ The degrees of freedom limit, at which the number of regressors per equation $k$
 of usable observations $T_u$, pointed out by \cite{Long_Lag2025} in this exercise is at $p = 16$.
 
 Tripling the lag length relative to the ACEL baseline is therefore not a conservative perturbation, 
-but it is nearly the largest perturbation the data permit.
-This maks the exercise a demanding test for the central claim in \cite{Long_Lag2025}.
+but it is the largest perturbation the data permit.
+This makes the exercise a demanding test for the central claim in \cite{Long_Lag2025}.
 
 \IfFileExists{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}
     {\input{../../Output/Degrees_of_freedom_across_lags_table/degrees_of_freedom_across_lags_table_A4.tex}}
@@ -1041,35 +1049,77 @@ together with their own $95$ percent bootstrap confidence bands.
 The bands at $p = 12$ are not wider than those at $p = 4$ for several variables; inflation, Fed Funds rate, 
 real wage, velocity and relative price of investment, they are visibly narrower despite the increased parametrisation 
 documented in Table \ref{tab:df_budget}.
-\textcolor{red}{On average, the width of the CI decrease by XXX}
+The pattern is not confined to those five variables. The bands at $p = 12$ are narrower than at $p = 4$ at every 
+horizon and for every variable in the system, with the single exception of MZM growth, which is the only variable 
+whose bands widen at some horizons.
 Therefore suggesting that the variance reduction mechanism 
 of \cite{Long_Lag2025} operates even at the parametrisation frontier, at least in this work.
+
+\subsubsection*{Is this just overfitting?}
 
 The first objection would be that this is simply overfitting: a VAR with 121 regressors
 per equation fits the sample closely, the estimated residuals shrink, and confidence bands
 computed from those residuals shrink with them. The objection needs to be taken seriously,
-because in-sample it cannot be dismissed; reduced misspecification and overfitting have
-the same in-sample signature, namely a smaller residual variance.
+because in sample it cannot be dismissed; reduced misspecification and overfitting have
+the same in sample signature, namely a smaller residual variance.
+\\
 
-What can be said here, is to point on two direction, misspecification reduction, and bootstrap.
-Misspecification reduction is at the heart of \cite{Long_Lag2025} point, 
-and it is the reason why the confidence bands do not explode with the lag length.
-The latter point is that the bootstrap bands are constructed re-estimating the entire VAR 
-on each artificial sample, so the uncertainty introduced by the parameters is propagated into the reported 
-intervals rather than being conditioned away. If the estimator would have been unstable at $p = 12$, the
-re-estimated responses would have varied wildly across draws, therefore, the bands would have widened accordingly.
+What the objection does not deliver, however, is the conclusion it appears to deliver.
+Overfitting pushes the width of the bands in two opposite directions at the same time.
+It lowers the variance of the residuals, which narrows the bands, but it also makes the 
+coefficient estimates noisier, and noisier coefficients widen them.
+Which of the two channels reaches the reported intervals depends on how those intervals are built.
+Here the bands are bootstrapped by re-estimating the entire VAR on each artificial sample, so all 
+1210 coefficients are estimated again, draw after draw, and the uncertainty they carry is propagated 
+into the interval rather than being conditioned away.
+If the estimator were unstable at $p = 12$, the re-estimated responses would vary wildly across draws 
+and the bands would widen accordingly.
+The overfitting story is therefore not complete as it stands. To explain what Figure \ref{fig:var_irfs_all_ci} 
+shows, it has to argue that the variance channel beats the parameter uncertainty channel, which is formally 
+the same claim \cite{Long_Lag2025} make, only read with the opposite sign.
+The burden is symmetric, and it cannot be discharged by pointing at the number of parameters alone.
+\\
 
-In this sense, bootstrap rules out the mechanical part of the concern, since parameter uncertainty is not being suppressed.
-\textcolor{red}{What it cannot be omitted, is that the residual variance is itself understated, because the bootstrap resamples 
-from the fitted residuals of the very model under scrutiny: NON CONVITNO DI QUESTO, è DI CLAUDE}
+There is a second, more direct way of looking at the same question.
+If the extra lags were merely fitting noise, the first thing to disappear into the fitted part of the model 
+would be the large and distinctive movements in the data, because those are exactly the movements a flexible 
+model can chase.
+Figure \ref{fig:ffr_residuals} plots the in sample residuals of the Federal funds rate equation at $p = 4$ 
+and at $p = 12$.
 
-ACEL choose the lag length of $p = 4$ even if the AIC pointed on using one lag, and HQ and SC suggested to use $p = 2$.
-The choice was motivated by the fact that the VAR with four lags had a better fit to the data, 
-and that the IRFs were more consistent with the DSGE's theoretical mechanism.
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
+        {\fbox{Image Path Broken or File Missing}}
+    \caption{In-sample residuals of the Federal funds rate equation, VAR(4) against VAR(12)}
+    \label{fig:ffr_residuals}
+\end{figure}
+\FloatBarrier
 
-I've checked the IC at longer lags, I find that the AIC criteria points in favour of the VAR($12$).
-The results of this work suggest that the choice of $p = 4$ was not enough to capture the dynamics of the data, 
-and that a longer lag length is needed to obtain more accurate estimates of the DSGE's structural parameters.
+The residuals of the longer VAR are visibly smaller across the whole sample, which is the variance reduction 
+discussed above seen from the time series side rather than from the confidence bands.
+What survives the reduction is more interesting than its size.
+The single largest residual of the sample is the last quarter of 1980, in both specifications, and the years 
+of the Volcker disinflation remain the most turbulent stretch of the series at $p = 12$ just as they are at $p = 4$.
+The amplitude is much reduced, but the episode is still there and it is still the most prominent feature of the series.
+This is not what a model that had absorbed the data into its own parametrisation would look like.
+A VAR with 121 regressors per equation that were chasing noise would have had no difficulty in explaining away 
+the most conspicuous monetary policy episode of the post war sample, and it would have done so first.
+The interpretation that fits the picture better is the one \cite{Long_Lag2025} propose, that the additional lags 
+are absorbing serial correlation that the short specification leaves in the residuals, while the genuine 
+disturbances remain where the historical record puts them.
+
+\subsubsection*{What the information criteria say}
+
+\citet{ACEL2005WP} report that the AIC, HQ and SW criteria supported $q = 2$, $1$ and $1$ 
+lags respectively, yet the authors set $q = 4$. Repeating the same three criteria at $p = 4, 8, 12$ in this 
+exercise gives $p = 12$ for AIC and $p = 4$ for both HQ and SW. As already argued in 
+Section \ref{sec:truncation}, these criteria are built to minimise out-of-sample forecast error, not to 
+guard against truncation bias, so neither \cite{ACEL2005WP} own departure from their criteria nor the disagreement 
+found here settles which lag order is appropriate for structural inference; it only confirms that 
+forecasting criteria are the not rigth tool for this structural question.
+
 
 \section{Structural Implications}
 \label{sec:structural}
