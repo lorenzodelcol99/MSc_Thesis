@@ -263,9 +263,9 @@ the slope $\gamma$ maps into the structural parameters as
     \label{eq:gamma}
 \end{equation}
 The information set $\Omega_t$ contains the current realisation of the technology shocks but
-not that of the monetary policy innovation. Here $\xi_p$ is the Calvo price stickiness
-parameter, so that a fraction $1-\xi_p$ of firms reset their price each quarter and the
-implied duration of a price contract is $D = 1/(1-\xi_p)$.
+not that of the monetary policy innovation. Here $\xi_p$ is the price stickiness parameter of
+the \citet{Calvo1983} pricing scheme, so that a fraction $1-\xi_p$ of firms reset their price
+each quarter and the implied duration of a price contract is $D = 1/(1-\xi_p)$.
 
 Both models are parametrised in terms of $\gamma$ rather than $\xi_p$. Given the remaining
 parameters they are then observationally equivalent with respect to aggregate prices and
@@ -1336,7 +1336,7 @@ VARs behave in a comparable setting once the parametrisation is disciplined diff
 shrinkage techniques such as ridge or lasso, or through priors in a Bayesian setting.
 \\
 
-Despite that limitation, the exercise draws attention to the choice of lag length, which in
+Despite the limitation of this work, this study draws attention to the choice of lag length, which in
 applied macroeconomics is usually settled by forecasting information criteria or by convention.
 That choice is not innocuous. Here it decides whether the micro--macro reconciliation of
 \citet{ACEL2011} stands, much as in \citet{Baumeister2025} it decides whether the long-run
@@ -1439,6 +1439,127 @@ satisfy.
 
 \section{The ACEL Model: Full Derivation}
 \label{app:model}
+
+This appendix reports the two model economies of \citet{ACEL2011}, the homogeneous and the
+firm-specific capital versions. Section \ref{sec:2.2homog_bs_firm-spec_capital} already gives
+the economic content of the comparison between the two, and of the parameters that matter for
+it, $\sigma_a$, $S''$ and $\chi$; what follows here is a description of the equilibrium
+conditions from which that comparison is derived, kept to the equations needed to see where
+$\sigma_a$, $S''$ and $\chi$ enter and where the two models coincide or part company. The
+exposition follows \citet{ACEL2011} section 2, and I keep their notation throughout.
+
+\subsection{The homogeneous capital model}
+
+The economy is populated by goods-producing firms, households and the government.
+
+\subsubsection*{Final and intermediate good firms}
+
+A perfectly competitive final good firm combines a continuum of intermediate goods
+$i \in [0,1]$ using the CES technology
+\begin{equation}
+    Y_t = \left[\int_0^1 y_t(i)^{\frac{1}{\lambda_f}} \, di \right]^{\lambda_f}, \qquad 1 \le \lambda_f < \infty,
+    \label{eq:app_Yt}
+\end{equation}
+which gives the usual downward-sloping demand curve $y_t(i)/Y_t = (P_t(i)/P_t)^{-\lambda_f/(\lambda_f-1)}$
+faced by each intermediate good producer, and a price index for $P_t$ of the same CES form.
+Intermediate good $i$ is produced by a monopolist,
+\begin{equation}
+    y_t(i) = K_t(i)^{\alpha}(z_t h_t(i))^{1-\alpha} - \phi z_t^{*}, \qquad z_t^{*} = \Upsilon_t^{\frac{\alpha}{1-\alpha}} z_t,
+    \label{eq:app_prod}
+\end{equation}
+where $h_t(i)$ and $K_t(i)$ are labour and capital services, $z_t$ is a neutral technology
+shock and $\Upsilon_t$ a capital-embodied technology shock, both following exogenous stationary
+processes; $\alpha$ is the capital share and $\phi$ a fixed cost calibrated so that profits are
+zero along the balanced growth path. Firms rent capital and labour in competitive factor
+markets and borrow the wage bill in advance. Prices are set on a Calvo scheme: each
+period a firm can re-optimise its price only with probability $1-\xi_p$, and a firm that cannot
+re-optimise indexes to lagged inflation, $P_t(i) = \pi_{t-1}P_{t-1}(i)$. A firm that can
+re-optimise chooses $P_t(i)$ to maximise the expected discounted value of net cash flow, revenue
+less the wage bill, inclusive of the interest cost of borrowing it, less the cost of capital
+services, subject to the demand curve and to the Calvo friction on future repricing dates.
+
+\subsubsection*{Households}
+
+Households have habit-persistent preferences over consumption and disutility of hours,
+\begin{equation}
+    \mathbb{E}_t^j \sum_{l=0}^{\infty} \beta^l \left[ \log(C_{t+l} - b C_{t+l-1}) - \psi_L \frac{h_{j,t+l}^2}{2} \right],
+    \label{eq:app_utility}
+\end{equation}
+and choose consumption, investment, money and bond holdings subject to a budget constraint that
+combines labour income, capital rental income, firm profits and a cash-in-advance style
+transactions cost on consumption purchases, $[1+\eta(V_t)]P_tC_t$, where velocity is
+$V_t = P_tC_t/Q_t$. Two cost functions inside that budget constraint carry the two structural
+parameters this thesis focuses on. First, capital services are $K_t = u_t\bar{K}_t$, where
+$\bar{K}_t$ is the physical stock and $u_t$ the utilisation rate, and raising utilisation is
+costly in units of the final good, $a(u_t)\bar{K}_t$, with $a$ increasing and convex; the
+curvature of $a$ in steady state,
+\begin{equation}
+    \sigma_a = \frac{a''(1)}{a'(1)} \ge 0,
+    \label{eq:app_sigmaa}
+\end{equation}
+is estimated, normalising $u_t=1$ and $a(1)=0$ in steady state. Second, physical capital
+accumulates subject to an adjustment cost on the flow of investment,
+\begin{equation}
+    \bar{K}_{t+1} = (1-\delta)\bar{K}_t + \left[1 - S\!\left(\frac{I_t}{I_{t-1}}\right)\right] I_t,
+    \label{eq:app_capaccum}
+\end{equation}
+with $S$ increasing, convex and $S=S'=0$ in steady state; its curvature,
+\begin{equation}
+    S'' > 0,
+    \label{eq:app_Spp}
+\end{equation}
+is also estimated. Neither $\sigma_a$ nor $S''$ affects the non-stochastic steady state, only
+the dynamics, which is why both can only be pinned down from impulse responses rather than from
+steady-state ratios.
+
+Each household is also a monopoly supplier of a differentiated labour service, aggregated into
+economy-wide labour $H_t$ through the same CES structure as the goods market, and wages are set
+under an analogous Calvo friction, with re-optimisation probability $1-\xi_w$ and indexation to
+$\pi_{t-1}\mu_{z^{*}}$ for households that cannot reset. Monetary policy is specified as a
+decomposition of money growth into a systematic response to the two technology shocks and an
+exogenous, autoregressive monetary policy shock $\varepsilon_{M,t}$, and \citet{CEE2005} show
+that impulse responses under this rule closely match those from an explicit Taylor rule. The
+government runs a balanced intertemporal budget through lump-sum taxes. Equilibrium closes with
+loan market clearing, $W_tH_t = x_tM_t - Q_t$, and the aggregate resource constraint,
+$[1+\eta(V_t)]C_t + \Upsilon_t^{-1}I_t + a(u_t)\bar{K}_t \le Y_t$, and is solved by log-linear
+approximation around the non-stochastic steady state.
+
+\subsection{The firm-specific capital model}
+
+Every equation above is unchanged except that firms now own their capital and cannot adjust
+their stock within the period: firm $i$'s capital accumulates according to its own version of
+\eqref{eq:app_capaccum}, and it can only vary the capital services it uses by changing its own
+utilisation rate $u_t(i)$, at the cost $a(u_t(i))\bar{K}_t(i)$. There is no market on which the
+firm can rent additional capital services from anyone else, so $\sigma_a$ now governs not an
+economy-wide margin but each firm's own, private cost of meeting extra demand. The firm chooses
+prices, employment, investment and utilisation to maximise the discounted value of net cash flow,
+subject to the same timing and Calvo pricing friction as in the homogeneous model.
+
+\subsection{Implications for inflation}
+
+The equilibrium conditions of the two models coincide except for the equation governing
+aggregate inflation, which takes the form
+\begin{equation}
+    \Delta \hat{\pi}_t = \mathbb{E}\bigl[\beta \Delta \hat{\pi}_{t+1} + \gamma \hat{s}_t \mid \Omega_t\bigr],
+    \qquad
+    \gamma = \frac{(1-\xi_p)(1-\beta\xi_p)}{\xi_p}\,\chi,
+    \label{eq:app_phillips}
+\end{equation}
+reproducing equations \eqref{eq:phillips} and \eqref{eq:gamma} of Section
+\ref{sec:2.2homog_bs_firm-spec_capital}, where $\Delta$ is the first-difference operator,
+$\hat{s}_t$ economy-wide real marginal cost, and $\Omega_t$ the information set containing the
+technology but not the monetary policy shock. \citet{ACEL2011} establish that $\chi = 1$ under
+homogeneous capital, and that $\chi$ is a non-linear function of the model's parameters,
+principally $\sigma_a$ and $S''$, under firm-specific capital. Both models are parametrised in
+terms of $\gamma$ rather than $\xi_p$, so they carry an identical list of parameters and, for
+given parameter values, are observationally equivalent in aggregate prices and quantities. This
+is what lets the estimation in this thesis, as in \citet{ACEL2011}, stay agnostic about which
+version of the model generated the data: the two are told apart only afterwards, from the value
+of $\xi_p$ that a given estimated $\gamma$ implies once $\chi$ is fixed at one or computed from
+the non-linear mapping, which is the exercise carried out in Sections
+\ref{sec:2.2homog_bs_firm-spec_capital}, \ref{sec:results_params} and \ref{sec:results_duration}.
+
+
 
 \section{ACEL 2005 WP Table 2}
 \label{app:acelwp05_table_2}
