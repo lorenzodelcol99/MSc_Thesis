@@ -1,0 +1,45 @@
+% Requires \usepackage{graphicx} (for \resizebox, so the table always fits the
+% text width regardless of margins) - almost certainly already loaded in main.tex.
+\begin{table}[htbp]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.35}
+    \setlength{\tabcolsep}{5pt}
+    \caption{Estimated parameter values, $\zeta_1$}
+    \label{tab:acel2005wp_table2}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+        \hline\hline
+        Model & $\lambda_f$ & $\xi_w$ & $\gamma$ & $\sigma_a$ & $b$ & $S''$ & $\epsilon$ \\
+        \hline
+        Benchmark
+            & \shortstack{1.01\\\mbox{}} & \shortstack{0.72\\(0.13)} & \shortstack{0.040\\(0.020)} & \shortstack{2.02\\(2.32)} & \shortstack{0.70\\(0.04)} & \shortstack{3.28\\(1.69)} & \shortstack{0.80\\(0.21)} \\
+        \hline
+        Monetary Shocks Only
+            & \shortstack{1.08\\(0.10)} & \shortstack{0.62\\(0.07)} & \shortstack{0.106\\(0.061)} & \shortstack{0.01\\(0.01)} & \shortstack{0.73\\(0.05)} & \shortstack{3.63\\(1.73)} & \shortstack{0.82\\(0.19)} \\
+        \hline
+        Neutral Technology Shocks Only
+            & \shortstack{2.05\\\textit{(n.a.)}} & \shortstack{0.93\\\textit{(n.a.)}} & \shortstack{9.5e+006\\\textit{(n.a.)}} & \shortstack{2.3e+046\\\textit{(n.a.)}} & \shortstack{0.054\\\textit{(n.a.)}} & \shortstack{1.00\\\textit{(n.a.)}} & \shortstack{0.97\\\textit{(n.a.)}} \\
+        \hline
+        Embodied Technology Shocks Only
+            & \shortstack{1.01\\\mbox{}} & \shortstack{0.70\\(0.36)} & \shortstack{0.033\\(0.020)} & \shortstack{5.84\\(8.03)} & \shortstack{0.23\\(0.29)} & \shortstack{0.90\\(0.73)} & \shortstack{1.24\\(0.71)} \\
+        \hline
+        \shortstack[l]{Low Cost of Varying\\Capital Utilization}
+            & \shortstack{1.46\\(1.93)} & \shortstack{0.69\\(0.12)} & \shortstack{0.050\\(0.031)} & \shortstack{.01\\\mbox{}} & \shortstack{0.69\\(0.05)} & \shortstack{2.79\\(1.47)} & \shortstack{0.79\\(0.21)} \\
+        \hline
+        Intermediate Markup
+            & \shortstack{1.04\\\mbox{}} & \shortstack{0.72\\(0.13)} & \shortstack{0.042\\(0.022)} & \shortstack{1.91\\(2.23)} & \shortstack{0.70\\(0.04)} & \shortstack{3.18\\(1.65)} & \shortstack{0.80\\(0.21)} \\
+        \hline
+        High Markup
+            & \shortstack{1.20\\\mbox{}} & \shortstack{0.69\\(0.12)} & \shortstack{0.050\\(0.031)} & \shortstack{1.46\\(1.93)} & \shortstack{0.69\\(0.05)} & \shortstack{2.79\\(1.47)} & \shortstack{0.79\\(0.21)} \\
+        \hline
+        Benchmark (6 lag VAR)
+            & \shortstack{1.01\\\mbox{}} & \shortstack{0.93\\(0.07)} & \shortstack{0.152\\(0.229)} & \shortstack{10.54\\(28.11)} & \shortstack{0.72\\(0.06)} & \shortstack{2413.49\\(7368.62)} & \shortstack{0.81\\(0.20)} \\
+        \hline\hline
+    \end{tabular}%
+    }
+
+    \vspace{0.2cm}
+    \raggedright
+    \scriptsize{\textit{Note:} Standard errors in parentheses. \textit{(n.a.)} marks a case for which the minimum-distance step did not converge to a well-behaved covariance matrix, so no standard error is reported. This table reproduces \citet[Table~2]{ACEL2005WP} exactly as printed there; it has not been re-estimated or altered in any way.}
+\end{table}

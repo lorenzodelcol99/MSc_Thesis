@@ -12,7 +12,7 @@
 % -------------------------------------------------------------------------
 % ON THE MONTE CARLO STANDARD ERRORS OF THE CALVO PARAMETERS
 % -------------------------------------------------------------------------
-% Only ONE Monte Carlo exists: the 1,000,000-draw run on the BASELINE
+% Only ONE Monte Carlo exists: the 1,000,000-draw run on the baseline
 % structural estimates. No Monte Carlo has been run on the VAR-aligned
 % results, and none is planned - the claim this table supports is about point
 % estimates ("the alignment choice does not move the estimates"), not about
@@ -132,14 +132,19 @@ for i = 1:size(param_map, 1)
 
     elseif strcmp(t, 'implied')
         % Calvo parameters are solved for numerically, so their uncertainty can
-        % only come from the Monte Carlo. Only the BASELINE Monte Carlo exists,
-        % so the SAME SE is printed on both sides - see the header note and the
-        % table note. Field naming: ksiph -> SE_ksiph, ksip -> SE_ksip.
+        % only come from the Monte Carlo. Only the baseline Monte Carlo exists,
+        % so the SAME SE is used for the significance stars, on both sides -
+        % see the header note and the table note. Field naming:
+        % ksiph -> SE_ksiph, ksip -> SE_ksip.
         se_field = ['SE_' v];
 
-        fprintf(fileID, '    %s & %.4f & %.4f & %.4f & %.4f & %.4f & %.4f \\\\\n', n, ...
-            A{1}.(v), A{2}.(v), A{3}.(v), ...
-            B{1}.(v), B{2}.(v), B{3}.(v));
+        fprintf(fileID, '    %s & %s & %s & %s & %s & %s & %s \\\\\n', n, ...
+            format_pe(A{1}.(v), MC{1}.(se_field)), ...
+            format_pe(A{2}.(v), MC{2}.(se_field)), ...
+            format_pe(A{3}.(v), MC{3}.(se_field)), ...
+            format_pe(B{1}.(v), MC{1}.(se_field)), ...
+            format_pe(B{2}.(v), MC{2}.(se_field)), ...
+            format_pe(B{3}.(v), MC{3}.(se_field)));
         fprintf(fileID, '     & [%.4f] & [%.4f] & [%.4f] & (%.4f) & (%.4f) & (%.4f) \\\\\n', ...
             MC{1}.(se_field), MC{2}.(se_field), MC{3}.(se_field), ...
             MC{1}.(se_field), MC{2}.(se_field), MC{3}.(se_field));
@@ -162,7 +167,7 @@ fprintf(fileID, 'The Calvo price parameters $\\xi_{p,hom}$ and $\\xi_{p,fs}$ are
 fprintf(fileID, 'they are recovered numerically from the estimated structural parameters, so their ');
 fprintf(fileID, 'standard errors come from a %s-draw Monte Carlo of the joint distribution of the ', n_draws_str);
 fprintf(fileID, 'estimated structural parameters rather than from the minimum-distance step. ');
-fprintf(fileID, 'That Monte Carlo was run on the BASELINE estimates only. The figures in square ');
+fprintf(fileID, 'That Monte Carlo was run on the baseline estimates only. The figures in square ');
 fprintf(fileID, 'brackets under the VAR-alignment block therefore repeat the baseline Monte Carlo ');
 fprintf(fileID, 'standard errors and are reported purely as a yardstick for the size of the ');
 fprintf(fileID, 'left-right gap; they are not standard errors of the aligned estimates.}\n');

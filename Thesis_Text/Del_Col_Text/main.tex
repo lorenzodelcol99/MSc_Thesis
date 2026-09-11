@@ -1338,7 +1338,7 @@ the lag order of the VAR, that was not treated as a substantive modelling decisi
 
 \section{Data}
 \label{app:data}
-I report exactly what is written in \cite{ACEL2005WP,ACEL2011}, not one single difference is been made.
+Nothing in this appendix has been changed from the original source. The description of the data below reproduces, in my own words, what \citet[fn.~15]{ACEL2005WP} report in their footnote 15.
 \\
 
 The ten series in $Y_t$, equation \eqref{eq:Yt}, are the exact same data as \citet{ACEL2005WP}. 
@@ -1424,11 +1424,57 @@ satisfy.
 \section{ACEL 2005 WP Table 2}
 \label{app:acelwp05_table_2}
 
+I report Table \ref{tab:acelwp05_table_2}, which is the exact reproduction of the 
+Table 2 reported in \cite{ACEL2005WP} at page 41.
+
+\IfFileExists{../../Output/Table_2_ACEL_NBER_2005_WP/Table_2_ACEL_NBER_2005_WP.tex}
+    {\input{../../Output/Table_2_ACEL_NBER_2005_WP/Table_2_ACEL_NBER_2005_WP.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+    \label{tab:acelwp05_table_2}
+\FloatBarrier
+
+
 \section{IRFs with all confidence intervals}
 \label{app:irfs_confidence_intervals}
 
-\section{Residual Analysis}
+In Figure \ref{fig:var_et_irfs_all_ci} and \ref{fig:var_nt_irfs_all_ci} are reported the IRFs images that include the 
+$95\%$ confidence interval of every lag choice, not only for the baseline VAR($4$).
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
+    \caption{VARs' IRFs to a Embodied Technology shock across different lag structure, 95\% CI}
+    \label{fig:var_et_irfs_all_ci}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
+    \caption{VARs' IRFs to a Neutral Technology shock across different lag structure, 95\% CI}
+    \label{fig:var_nt_irfs_all_ci}
+\end{figure}
+\FloatBarrier
+
+
+
+\section{Residuals}
 \label{app:residuals}
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}}
+        {\fbox{Image Path Broken or File Missing}}
+    \caption{In-sample residuals of all the variables, VAR(4) against VAR(12)}
+    \label{fig:all_residuals}
+\end{figure}
+\FloatBarrier
+
 
 \section{Delta Method}
 \label{app:delta_method}
@@ -1562,10 +1608,17 @@ from the Monte Carlo simulation.
 \section{VAR Aligned}
 \label{app:VAR_aligned}
 
-In this section I compare the VARs' IRFs with same lag lenght between the one that uses the full sample 
-available as in main work, and the one that restrict the sample to the one available for the VAR with $12$ lags.
+The baseline results in the main text use, for every lag order, all the observations available to that
+specification, so the VAR($4$) is estimated on more data than the VAR($12$). This appendix checks whether that
+choice matters, by re-estimating every VAR on the sample common to all three lag orders, the one available to
+the VAR($12$), and comparing the resulting impulse responses and structural parameters against the full-sample
+baseline reported in the main text.
 
-In general, the IRFs change by small in negligible terms, the same is true for the strutural parameters results.
+\subsection*{Impulse responses}
+
+Figures \ref{fig:var_4_aligned_mp_irfs_comparison} and \ref{fig:var_8_aligned_mp_irfs_comparison} compare the
+aligned and full-sample responses to a monetary policy shock, with their own $95$ percent bootstrap confidence
+bands, at $p = 4$ and $p = 8$.
 
 \begin{figure}[htpb]
     \centering
@@ -1582,22 +1635,26 @@ In general, the IRFs change by small in negligible terms, the same is true for t
     \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR8_ComparisonVsBenchmark.pdf}
     {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Monetary_Policy_Shock/VAR8_ComparisonVsBenchmark.pdf}}
     {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 8$}
-    \label{fig:var_4_aligned_mp_irfs_comparison}
+    \caption{VAR aligned monetary policy shock IRFs comparison $p = 8$}
+    \label{fig:var_8_aligned_mp_irfs_comparison}
 \end{figure}
 \FloatBarrier
 
-The having less observations than in the baseline, regarding the monetary policy shock IRFs create no differences 
-for the VAR with four lags. Whereas in the VAR(8), there are some difference on the point estimated at $h > p$,
-but still negligibles.
+Having fewer observations than the baseline makes no visible difference to the monetary policy shock IRFs at
+$p = 4$. At $p = 8$ there is some difference in the point estimates beyond horizon $h > p$, but it remains
+small relative to the size of the responses themselves.
+
+Figures \ref{fig:var_et_4_aligned_et_irfs_comparison} and \ref{fig:var_et_8_aligned_et_irfs_comparison} repeat
+the comparison for the embodied technology shock, and Figures \ref{fig:var_nt_4_aligned_nt_irfs_comparison} and
+\ref{fig:var_nt_8_aligned_nt_irfs_comparison} for the neutral technology shock.
 
 \begin{figure}[htpb]
     \centering
     \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}
     {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}}
     {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 4$}
-    \label{fig:var_4_aligned_et_irfs_comparison}
+    \caption{VAR aligned embodied technology shock IRFs comparison $p = 4$}
+    \label{fig:var_et_4_aligned_et_irfs_comparison}
 \end{figure}
 \FloatBarrier
 
@@ -1606,8 +1663,8 @@ but still negligibles.
     \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}
     {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Embodied_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}}
     {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR aligned embodied technology policy shock IRFs comparison $p = 8$}
-    \label{fig:var_8_aligned_et_irfs_comparison}
+    \caption{VAR aligned embodied technology shock IRFs comparison $p = 8$}
+    \label{fig:var_et_8_aligned_et_irfs_comparison}
 \end{figure}
 \FloatBarrier
 
@@ -1616,8 +1673,8 @@ but still negligibles.
     \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}
     {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR4_ComparisonVsBenchmark.pdf}}
     {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR aligned neutral technology policy shock IRFs comparison $p = 4$}
-    \label{fig:var_4_aligned_nt_irfs_comparison}
+    \caption{VAR aligned neutral technology shock IRFs comparison $p = 4$}
+    \label{fig:var_nt_4_aligned_nt_irfs_comparison}
 \end{figure}
 \FloatBarrier
 
@@ -1626,10 +1683,52 @@ but still negligibles.
     \IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}
     {\includegraphics[width=1\linewidth]{../../Output_VAR_Alignment/VAR_Alignment_VAR_IRFs_ComparisonVsBenchmark/Neutral_Technology_Shock/VAR8_ComparisonVsBenchmark.pdf}}
     {\fbox{Image Path Broken or File Missing}}
-    \caption{VAR aligned neutral technology policy shock IRFs comparison $p = 8$}
-    \label{fig:var_8_aligned_nt_irfs_comparison}
+    \caption{VAR aligned neutral technology shock IRFs comparison $p = 8$}
+    \label{fig:var_nt_8_aligned_nt_irfs_comparison}
 \end{figure}
 \FloatBarrier
 
+Both technology shocks are identified with long run restrictions, which do not pin down the shape of the
+response on impact, and for this reason some of these responses differ more between the baseline and the
+aligned version than the monetary policy responses do.
+
+\subsection*{Structural parameters and implied duration}
+
+Table \ref{tab:dsge_params_alignment_vs_benchmark} compares the DSGE parameters estimated once every VAR is
+aligned on a common sample with those estimated in the baseline exercise, already reported in Section
+\ref{sec:results_params}. I have not re-run the Monte Carlo exercise on the aligned results: the structural
+parameters, and especially the implied Calvo price parameters, are very close to the baseline and lie inside
+its confidence interval, so a separate simulation would add little.
+
+\IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_dsge_params_ComparisonVsBenchmark.tex}
+    {\input{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_dsge_params_ComparisonVsBenchmark.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\FloatBarrier
+
+The two most notable movements are in $\gamma$ and $\sigma_a$, the Phillips curve slope and the capacity
+utilisation cost. In the aligned exercise both estimates are smaller in magnitude than in the baseline:
+$\gamma_{4,\text{aligned}} = 0.0320$ becomes statistically significant at the $10$ percent level, where
+$\gamma_{8,\text{aligned}} = 0.0580$ remains indistinguishable from zero. The capacity utilisation cost becomes
+$\sigma_{a;4,\text{aligned}} = 1.7405$ and $\sigma_{a;8,\text{aligned}} = 0.1912$, both remaining
+indistinguishable from zero, as in the baseline at every lag order.
+
+Table \ref{tab:implied_duration_alignment_vs_benchmark} translates the implied Calvo parameters into implied
+durations, aligned against baseline.
+
+\IfFileExists{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_implied_duration_ComparisonVsBenchmark.tex}
+    {\input{../../Output_VAR_Alignment/VAR_Alignment_DSGE_Parameters_Comparison/VAR_Alignment_implied_duration_ComparisonVsBenchmark.tex}}
+    {\noindent\fbox{Image Path Broken or File Missing}}
+\FloatBarrier
+
+In the homogeneous capital model the aligned exercise implies a duration almost one quarter longer than the
+baseline at $p = 4$ ($D_{4,\text{aligned}} = 6.2$ against $D_{4,\text{baseline}} = 5.6$), but almost one
+quarter shorter at $p = 8$ ($D_{8,\text{aligned}} = 4.7$ against $D_{8,\text{baseline}} = 5.6$). In the
+firm-specific capital model the implied duration moves by no more than $0.7$ quarters, again at $p = 8$, making
+it the marginally more robust of the two specifications under this particular check.
+
+None of these movements are large enough to change the conclusions drawn from the full-sample baseline in the
+main text. The collapse of $\sigma_a$ and the convergence of the implied durations documented there as the lag
+order rises from $p=4$ to $p=12$ is therefore a feature of the lag order itself, not an artefact of the smaller
+sample that a longer lag order happens to require.
 
 \end{document}
