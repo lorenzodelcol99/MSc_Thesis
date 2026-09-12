@@ -96,8 +96,10 @@ price stickiness that firm-specific capital was introduced to resolve.
 \subsection{Motivation}
 
 Inflation is persistent. Once it rises it tends to stay high for some time, and bringing it back
-down is slow. This is a stylised fact of the data, and it is visible in the post second World War
-history of US inflation reported in Figure \ref{fig:inflation}.
+down is slow. This is a stylised fact of the data, visible in the post second World War history
+of US inflation in Figure \ref{fig:inflation}. That inertia is what monetary policy has to work
+against, so how far and how quickly policy can bring inflation back down depends on how inflation
+itself responds to a move in the policy instrument.
 
 \begin{figure}[htbp]
     \centering
@@ -109,15 +111,17 @@ history of US inflation reported in Figure \ref{fig:inflation}.
 \end{figure}
 \FloatBarrier
 
-Explaining it is one of the central tasks of monetary business cycle research, and it requires
-knowing how the economy responds to shocks. \textcolor{red}{AGGIUSTARE STA FRASE Since the systematic component of policy is endogenous,
-this means isolating the non systematic part, the monetary policy shock, small and infrequent as it
-is \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.}
+Measuring that response is one of the important goals of monetary business cycle research, whose
+task is to explain the empirical evidence on the impact of economic shocks on macroeconomic
+variables. Because the systematic
+component of policy is endogenous, identifying the causal effect of monetary policy requires
+isolating the non-systematic component, the monetary policy shock, even though it is small and
+infrequent \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.
 \\
 
-Dynamic Stochastic General Equilibrium (DSGE) models account for inflation inertia only by
-requiring firms to re-optimise their prices rarely, every six quarters and, in versions without
-indexation to past inflation, even every two years. The microeconometric evidence finds price
+Dynamic Stochastic General Equilibrium (DSGE) models are built to reproduce those responses, and
+they deliver the observed inertia of inflation only by requiring firms to re-optimise their prices
+rarely, every six quarters and, without indexation to past inflation, even every two years. The microeconometric evidence finds price
 changes considerably more frequent \citep{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008}, so
 aggregate and micro evidence point in opposite directions. \citet{ACEL2011} propose a resolution.
 They build two versions of the \citet{CEE2005} model, one with homogeneous and one with
@@ -126,10 +130,10 @@ average every $1.5$ quarters, because the firms that do reset their price move i
 than rarely.
 \\
 
-Both versions are taken to the data by matching impulse responses. Impulse Response Function
-Matching Estimation (IRFME) is a limited information strategy that chooses the structural
-parameters minimising the distance between the responses the model implies and those estimated from an
-identified VAR \citep{CEE2005, ACEL2011, Hall_Inoue_Nason_Rossi2012}. The strategy is
+Both versions are taken to the data by Impulse Response Function Matching Estimation (IRFME), a
+limited information strategy that chooses the structural parameters minimising the distance between
+the responses the model implies and those estimated from an identified VAR \citep{CEE2005, ACEL2011,
+Hall_Inoue_Nason_Rossi2012}. The strategy is
 attractive precisely because it is partial: the researcher takes a stand on the identification of a
 subset of shocks and stays agnostic about the rest of the data.
 \\
@@ -144,12 +148,13 @@ dynamic response of economic variables to shocks''.
 
 One source of misspecification is the lag order. Truncation bias arises whenever the VAR carries
 fewer lags than its data generating process, and it distorts the autoregressive coefficients and
-the covariance matrix of the residuals alike, hence the responses computed from them. Lag length,
-however, is rarely treated as a substantive modelling decision: it is settled by forecasting criteria
-or by convention, four lags for quarterly data, and a recent literature argues that neither is the
-right instrument for a structural question \citep{Long_Lag2025, Baumeister2025}. This thesis asks
-what that choice does to the structural conclusions drawn from such a VAR in the contest of DSGE 
-estimation.
+the covariance matrix of the residuals alike, hence the responses computed from them. It does not
+stop there: ``the bias introduced by truncation can lead to bias in the identification of the
+structural shocks'' \citep[p.~1]{Ravenna2007}. Lag length, however, is rarely treated as a
+substantive modelling decision: it is settled by forecasting criteria or by convention, four lags
+for quarterly data, and a recent literature argues that neither is the right instrument for a
+structural question \citep{Long_Lag2025, Baumeister2025}. This thesis asks what that choice does to
+the structural conclusions drawn from such a VAR in the context of DSGE estimation.
 
 \subsection{Contribution and Results}
 
@@ -215,35 +220,40 @@ say the same thing about price stickiness, and the reconciliation with the micro
 \subsection{Related Literature}
 
 \textbf{Long-lag VARs.}
-This work builds directly on \citet{Long_Lag2025}, and on their earlier
-\citet{DeGraeve_Westermark2013}, who show that increasing the lag length reduces misspecification
-and with it the variance of the residuals, so that uncertainty need not grow with the
-parametrisation. \citet{Baumeister2025} makes the same case for questions about the long run, and
-\citet{Antolin-Diaz_Surico2025} set $p = h$ by design. \citet{Plagborg-Moller_Wolf2021} establish
-the asymptotic properties that make long lag specifications defensible, while
-\citet{GonzalezCasasus_Schorfheide2025} propose a lag selection criterion built for structural
-inference rather than for forecasting. The same trade off separates VARs from local projections
-\citep{Li_PlagborgMoller_Wolf2024, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025, Ludwig2026}, \textcolor{red}{voglio citare un po’ di più Ludwig che è l’evoluzione di P-M\&W2021 trova la mappatura di LP and VARs in samples and breake down the li montiel olea et al 2025 “lp vs VAS ..” which claims that LP are best compared to vars in everything.}
-and it connects to the reappraisal of the bias variance trade off in richly parametrised models
-\citep{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff,
-AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}. \textcolor{red}{posso citare antolin diaz and co su double desent phenomena? anche se c’è solo solo le slides?}
+This work builds directly on \citet{Long_Lag2025} and on their earlier
+\citet{DeGraeve_Westermark2013}, who show that longer lags reduce misspecification and with it the
+variance of the residuals, so that uncertainty need not grow with the parametrisation.
+\citet{Baumeister2025} makes the same case for questions about the long run, as do
+\citet{Antolin-Diaz_Surico2025}, who set $p = h$ by design, while
+\citet{GonzalezCasasus_Schorfheide2025} propose a lag criterion built for structural inference
+rather than forecasting. The lag order is also what connects VARs to local projections.
+\citet{Plagborg-Moller_Wolf2021} show that the two estimate the same impulse responses, an
+equivalence that holds exactly in sample provided the local projection and the VAR carry the same
+lag length, and \citet{Ludwig2026} takes that result further: local projections are combinations of
+equal and higher order VARs, and VARs combinations of equal and lower order local projections. Part
+of what the comparisons between the two estimators measure \citep{Li_PlagborgMoller_Wolf2024,
+Montiel-Olea_Plagborg-Moller_Qian_Wolf2025} is therefore the order of the lag polynomial rather than
+a difference between the estimators themselves, which is the object this thesis varies. Behind all
+of this lies the reappraisal of the bias variance trade off in richly parametrised models, where
+risk can fall again once the parameters outnumber the observations
+\citep{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff}, a phenomenon whose time series counterpart
+is still work in progress \citep{AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}.
 \\
 
 \textbf{Truncation bias and the DSGE--VAR mapping.}
-\citet{FVRRSS2007} give the conditions under which the solution of a DSGE admits a VAR($\infty$)
-representation, and \citet{Ravenna2007} separates the two channels through which truncating it
-operates. Long run identification is the fragile case \citep{Faust_Leeper1997,
-Erceg_Guerrieri_Gust2005, CEV2007, ChariKehoeMcGrattan2008}, and the same fragility motivates the
-debate on fundamentalness and on how much of it is really needed \citep{Lippi_Reichlin1993,
-Forni_Gambetti_Sala2016}.
+\citet{FVRRSS2007} give the conditions under which a DSGE admits a VAR($\infty$) representation,
+and \citet{Ravenna2007} separates the two channels through which truncating it operates. Long run
+identification is the fragile case \citep{Faust_Leeper1997, Erceg_Guerrieri_Gust2005, CEV2007,
+ChariKehoeMcGrattan2008}, and the same fragility motivates the debate on fundamentalness and how
+much of it is needed \citep{Lippi_Reichlin1993, Forni_Gambetti_Sala2016}.
 \\
 
 \textbf{Impulse response matching and DSGE estimation.}
 The estimator goes back to \citet{RotembergWoodford1997} and is used by \citet{CEE2005},
 \citet{Iacoviello2005}, \citet{BoivinGiannoni2006} and \citet{ACEL2011}.
-\citet{Hall_Inoue_Nason_Rossi2012} study its asymptotic properties, \citet{Giacomini2013} and
-\citet{Theodoridis2011} discuss what is gained and lost relative to full information methods, and
-\citet{Canova1994, Canova2007} set out the wider case for judging a model by economic rather than
+\citet{Hall_Inoue_Nason_Rossi2012} study its asymptotics, \citet{Giacomini2013} and
+\citet{Theodoridis2011} what is gained and lost relative to full information methods, and
+\citet{Canova1994, Canova2007} the wider case for judging a model by economic rather than
 statistical distance.
 
 \subsection{Outline}
