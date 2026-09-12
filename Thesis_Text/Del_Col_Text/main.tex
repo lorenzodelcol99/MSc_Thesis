@@ -96,8 +96,8 @@ price stickiness that firm-specific capital was introduced to resolve.
 \subsection{Motivation}
 % [target: ~2 pp]
 
-Inflation is persistent; when it appears is typically going to stay for some time, and it is difficult to bring down. 
-This is a stylised fact of the data, as can be seen in the post second world war US inflation history in Figure \ref{fig:inflation}.
+Inflation is persistent; when it appears is typically going to stay for some time and it is difficult to bring down. 
+This is a stylised fact of the data, as can be seen in the post second World War US inflation history in Figure \ref{fig:inflation}.
 
 \begin{figure}[htbp]
     \centering
@@ -109,20 +109,20 @@ This is a stylised fact of the data, as can be seen in the post second world war
 \end{figure}
 \FloatBarrier
 
+One of the important goals of monetary business cycle research is to explain the empirical evidence 
+on the impact of economic shocks on macroeconomic variables.
+Because the systematic component of policy is endogenous, identifying the causal effect 
+of monetary policy shocks requires isolating the non-systematic component, the monetary policy 
+shock, even though it is small and infrequent \cite{Ravenna2007,Aruoba_Drechsel2024_MP_LLM}.
+\\
+
 Many Dynamic Stochastic General Equilibrium (DSGE) models  
-are built to explain this phenomena. But standard New Keynesian (NK) models are able to model 
+are built to explain inflation inertia. But standard New Keynesian (NK) models are able to model 
 this inflation behaviour only implying implausibly high levels of price stickiness, which are 
 in stark contrast with micro-data evidence. \citet{ACEL2011} propose a resolution to this micro-macro conflict. 
 They create two different models built on two versions of the \citet{CEE2005} model: 
 one with \textit{homogeneous} capital and the other where the capital is \textit{firm-specific}.
 \\
-
-One of the important goals of monetary business cycle research is to explain the empirical evidence 
-on the impact of economic shocks on macroeconomic variables.
-Because the systematic component of policy is endogenous, identifying the causal effect 
-of monetary policy shocks requires isolating the non-systematic component, the monetary policy 
-shock, even though it is small and infrequent \cite{Ravenna2007,Aruoba_Drechsel2024_MP_LLM}. 
-
 
 A large class of estimated DSGE models is taken to the data through this channel.
 Impulse Response Function Matching Estimation (IRFME) is a limited-information strategy that chooses
@@ -146,66 +146,38 @@ VARs to generate reliable estimates of the dynamic response of economic variable
 shocks''.
 \\
 
-Since a VAR($\infty$) cannot be estimated on a finite sample, researchers truncate. The
-resulting VAR($p$) is misspecified, and increasingly so the smaller is $p$
-\citep{Long_Lag2025, Humble_VARs_2026, Ravenna2007}. 
-\cite{Ravenna2007} "the problem facing economists is whether the number of lags $p$ to be 
-included is reasonable given the length of economics time series over which VARs are
-estimated. When estimating a VAR consistent with DSGE business cycle models it is
-standard to assume that including few lags is sufficient to provide a reasonable
-approximation to the exact infinite order VAR representation!
-\citet{Long_Lag2025} show that the
-conventional objection to longer lags, that the additional parametrisation makes
-confidence intervals prohibitively wide, is incomplete, because reducing misspecification
-reduces not only bias but also variance. Their conclusion is addressed explicitly to applied
-researchers: ``it is up to the researcher to show that her structural results are robust to
-significant increases in the lag length, far beyond the lag lengths typically considered in
-current practice''.
-
+Recent literature investigates on the importance of lag choice in VAR structural analysis.
+Truncation bias, that is.. , is a well known phenomena that draw concerns about misspecification.
 
 \subsection{Contribution and Results}
-% [target: ~1 pp]
-
 This paper asks what lag truncation does to \emph{structural} estimates, not merely to
-impulse responses. I replicate \citet{ACEL2011} --- henceforth ACEL --- and re-estimate their
-DSGE by IRF matching against VARs of increasing lag order.
+impulse responses. I replicate \citet{ACEL2011} and re-estimate their
+DSGE by IRF matching against VARs of increasing lag order extenting it in the wide sense.
 
-The contribution is twofold. First, relative to \citet{Long_Lag2025}, I move the question from
-the reduced form to the structural parameters. Second, and more specifically, I do so in a
-setting their design deliberately excludes. \citet{Long_Lag2025} state that ``all our
-experiments are based on two-shock models and two-variable VARs'', and that where a candidate
-model does not fit that framework --- Smets and Wouters --- ``we consider the model with only
-monetary policy and preference shocks''.\footnote{\citep[p.~10]{Long_Lag2025}. They also note
-that ``invertibility is never a problem; all the models we consider are fundamental''.} Their
-data generating processes are square and fundamental by construction, so that truncation bias
-is isolated from singularity and invertibility. ACEL's model is not: it confronts three
-structural shocks with a ten-variable VAR.
-\tbd{Verificare che nessun altro abbia gia' fatto questo esercizio su un modello
-stocasticamente singolare. Se confermato, e' il claim centrale.}
+As far as I know, I am the forst that is working in long lag implications of VAR to estimate DSGE.
+I am extending \cite{Long_Lag2025} by increasing the lag lenght in stochastic singular VAR that is 
+used to estimate a dsge model. is a medium scalde VAR respect thei bivariate vars that use in simulation.
+there the parametrisation is at the limit, and show that the variance reduction effect, in this case is present,
+even if at the parameters limit and in the frequentist world.
 
-My main results are the following. \emph{First}, the impulse responses to a monetary policy
-shock retain their sign and broad shape across lag orders, but the humps peak substantially
-later as $p$ increases, and the point estimates remain inside the VAR(4) confidence bands.
-\emph{Second}, the responses to the two technology shocks --- identified with long-run rather
-than short-run restrictions --- do not: several fall outside the baseline confidence set. This
-asymmetry is what \citet{Ravenna2007} predicts, since long-run restrictions require the sum of
-the entire lag polynomial and truncation error accumulates in exactly that object.
-\emph{Third}, the structural estimates move. The Phillips curve slope falls from $0.0402$ to
-$0.0129$ and becomes precisely estimated only at $p=12$; the cost of varying capital
-utilisation collapses from $1.99$ to $0.004$; the investment adjustment cost roughly doubles.
-\emph{Fourth}, and as a consequence, the implied Calvo price parameters of the firm-specific
-and homogeneous capital models converge, from $0.34$ against $0.82$ to $0.89$ against $0.90$.
-The implied duration of price contracts in the firm-specific model rises from $1.5$ to $9.0$
-quarters.
+On \cite{Long_Lag2025,Baumeister2025} given that I am working with VAR to estimate DSGE trougth IRF matching.
+I suggest that the lag choice should be p = h not only for the reasons quoted by \cite{Baumeister2025} long 
+run questions and propagations concerns, or excellent long run VAR properties as \cite{Plagborg-Moller_Wolf2021}, 
+but my point is that, if a VAR is used to estimate a DSGE trougth IRF matching, the IRFME minimise the distance 
+between VAR's IRFs and the models one horison by horison.
 
-The last result overturns ACEL's central conclusion. Their claim is that only the
-firm-specific capital model reconciles macro evidence on inflation inertia with micro evidence
-on the frequency of price adjustment. Under a richer lag structure that reconciliation
-disappears. The channel is transparent and internal to their own argument: ACEL note that
-``to the extent that capital utilization rates can easily be varied, the assumption of
-firm-specific capital loses its ability to rationalize low values of
-$\xi_p$''.\footnote{\citep[p.~227]{ACEL2011}.} Long-lag VARs push the estimate of $\sigma_a$
-precisely into that region.
+Here I am working with a VAR that have both short and long run restriction. 
+And I shoe the implications of going long in both settings contemporaneously.
+it is well kwnon that long run restrictions are fragile \cite{ChariKehoeMcGrattan2008,Faust_Leeper1997}, 
+and here we are going to se that the \cite{Ravenna2007} identification bias (that is ... ) loads and 
+bias the long run identified shock and it is well visible in the IRFs.
+
+the main Econ result is that; after having replicated and extended the lag choice in \cite{ACEL2005WP},
+I find that firm specific capital model effects disapperas when the lag chiice is increased. capacity 
+utilisation cost, that in a nutshel is the main parameter that drives the differenciation of the two alternative 
+models, disappears, and results that the firm spcificity of capital becames just a nominal friction that 
+in that economy does not have implication, implying that that model have the same implication of the 
+homogeneous capital model.
 
 \subsection{Related Literature}
 
@@ -809,7 +781,7 @@ alternative designed for structural inference.
 \\
 
 There is no need, however, to wait for that or other criterias to become standard practice.
-\citet{Long_Lag2025} already offer a simpler heuristic that any researcher can apply today:
+The Long-Lag VARs authors already offer a simpler heuristic that any researcher can apply today:
 \textit{"plot the structural moments central to the research question against lag length. If
 the structural conclusion dramatically change as the lag length increases, that is clearly
 indicating that truncation is important to the question at hand"} \citep[p.~12]{Long_Lag2025}.
@@ -848,7 +820,10 @@ of truncated VARs, which are fully informative. They are bivariate, with two var
 The VAR used in \cite{ACEL2011} confronts three shocks with ten observable variables.
 The system is therefore stochastically singular, there is no exact VAR($\infty$) representation of the DSGE that 
 the VAR is being used to estimate for. But this is not a caveat, is a feature, and is one of the reasons why 
-the ACEL used to estimate their model a partial information approach as IRF minimum distance estimator.
+the \cite{ACEL2011} used to estimate their model a partial information approach as IRF minimum distance estimator.
+In addition the "fundamentalness" concept in the \cite{Lippi_Reichlin1993,FVRRSS2007} sense, is extrimely 
+and unnecessarly restrictive, and in several cases non needed as stressed by \cite{Forni_Gambetti_Sala2016}, 
+as the researcher is often interest in assessing the transmision mechanism of a single or few shock.
 \\
 
 The second departure as previously anticipated in the Section \ref{sec:long-lag_VARs} relates on the dimension of 
