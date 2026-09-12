@@ -89,110 +89,177 @@ price stickiness that firm-specific capital was introduced to resolve.
 \setcounter{page}{1}
 
 % =============================================================
-% 1. INTRODUCTION                                    [target: 4 pp]
+% 1. INTRODUCTION                                    
 % =============================================================
 \section{Introduction}
 
 \subsection{Motivation}
-% [target: ~2 pp]
 
-Inflation is persistent; when it appears is typically going to stay for some time and it is difficult to bring down. 
-This is a stylised fact of the data, as can be seen in the post second World War US inflation history in Figure \ref{fig:inflation}.
+Inflation is persistent. Once it rises it tends to stay high for some time, and bringing it back
+down is slow. This is a stylised fact of the data, and it is visible in the post second World War
+history of US inflation reported in Figure \ref{fig:inflation}.
 
 \begin{figure}[htbp]
     \centering
     \IfFileExists{../../Output/Inflation_Persistence/Inflation_Persistence.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/Inflation_Persistence/Inflation_Persistence.pdf}}
+        {\includegraphics[width=0.8\linewidth]{../../Output/Inflation_Persistence/Inflation_Persistence.pdf}}
         {\fbox{Missing file: Inflation\_Persistence.pdf}}
-    \caption{Inflation in the US, 1959Q2--2026Q2: quarterly growth rate of the Consumer Price Index, in percent.}
+    \caption{Inflation in the US, 1959Q2--2026Q2: year on year growth rate of the Consumer Price Index, in percent.}
     \label{fig:inflation}
 \end{figure}
 \FloatBarrier
 
-One of the important goals of monetary business cycle research is to explain the empirical evidence 
-on the impact of economic shocks on macroeconomic variables.
-Because the systematic component of policy is endogenous, identifying the causal effect 
-of monetary policy shocks requires isolating the non-systematic component, the monetary policy 
-shock, even though it is small and infrequent \cite{Ravenna2007,Aruoba_Drechsel2024_MP_LLM}.
+Explaining it is one of the central tasks of monetary business cycle research, and it requires
+knowing how the economy responds to shocks. \textcolor{red}{AGGIUSTARE STA FRASE Since the systematic component of policy is endogenous,
+this means isolating the non systematic part, the monetary policy shock, small and infrequent as it
+is \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.}
 \\
 
-Many Dynamic Stochastic General Equilibrium (DSGE) models  
-are built to explain inflation inertia. But standard New Keynesian (NK) models are able to model 
-this inflation behaviour only implying implausibly high levels of price stickiness, which are 
-in stark contrast with micro-data evidence. \citet{ACEL2011} propose a resolution to this micro-macro conflict. 
-They create two different models built on two versions of the \citet{CEE2005} model: 
-one with \textit{homogeneous} capital and the other where the capital is \textit{firm-specific}.
+Dynamic Stochastic General Equilibrium (DSGE) models account for inflation inertia only by
+requiring firms to re-optimise their prices rarely, every six quarters and, in versions without
+indexation to past inflation, even every two years. The microeconometric evidence finds price
+changes considerably more frequent \citep{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008}, so
+aggregate and micro evidence point in opposite directions. \citet{ACEL2011} propose a resolution.
+They build two versions of the \citet{CEE2005} model, one with homogeneous and one with
+firm-specific capital, and in the second inflation is inertial even though firms re-optimise on
+average every $1.5$ quarters, because the firms that do reset their price move it by little rather
+than rarely.
 \\
 
-A large class of estimated DSGE models is taken to the data through this channel.
-Impulse Response Function Matching Estimation (IRFME) is a limited-information strategy that chooses
-structural parameters to minimise the distance between the impulse responses implied by the
-model and those estimated from an identified VAR \citep{CEE2005, ACEL2011,
-Hall_Inoue_Nason_Rossi2012}. The strategy is attractive precisely because it is partial:
-the researcher takes a stand on the identification of a subset of shocks, and remains
-agnostic about the remaining dimensions of the data.
+Both versions are taken to the data by matching impulse responses. Impulse Response Function
+Matching Estimation (IRFME) is a limited information strategy that chooses the structural
+parameters minimising the distance between the responses the model implies and those estimated from an
+identified VAR \citep{CEE2005, ACEL2011, Hall_Inoue_Nason_Rossi2012}. The strategy is
+attractive precisely because it is partial: the researcher takes a stand on the identification of a
+subset of shocks and stays agnostic about the rest of the data.
 \\
 
-That attractiveness rests entirely on one maintained assumption: that the VAR delivers
-\emph{consistent} estimates of the moments being matched. If the reduced-form VAR adequately
-captures the data generating process, impulse responses are optimal at all horizons; if the
-VAR is misspecified, the specification error propagates to the structural statistics and
-compounds at each horizon \citep{Ramey2016, Canova_Fosso2025}
-\cite{Ravenna2007} "The bias introduced by truncation can lead to bias in the identification 
-of the structural shock."
-\citet[][footnote 10, p.~3]{ACEL2011} say as much
-themselves: ``the quality of our estimation strategy depends on the ability of identified
-VARs to generate reliable estimates of the dynamic response of economic variables to
-shocks''.
+That attractiveness rests on one maintained assumption, that the VAR delivers consistent estimates
+of the moments being matched. If it is misspecified, the specification error propagates into the
+structural statistics, at every horizon that enters the objective function \citep{Ramey2016,
+Canova_Fosso2025}. \citet[][fn.~10, p.~3]{ACEL2011} say as much themselves: ``the quality of our
+estimation strategy depends on the ability of identified VARs to generate reliable estimates of the
+dynamic response of economic variables to shocks''.
 \\
 
-Recent literature investigates on the importance of lag choice in VAR structural analysis.
-Truncation bias, that is.. , is a well known phenomena that draw concerns about misspecification.
+One source of misspecification is the lag order. Truncation bias arises whenever the VAR carries
+fewer lags than its data generating process, and it distorts the autoregressive coefficients and
+the covariance matrix of the residuals alike, hence the responses computed from them. Lag length,
+however, is rarely treated as a substantive modelling decision: it is settled by forecasting criteria
+or by convention, four lags for quarterly data, and a recent literature argues that neither is the
+right instrument for a structural question \citep{Long_Lag2025, Baumeister2025}. This thesis asks
+what that choice does to the structural conclusions drawn from such a VAR in the contest of DSGE 
+estimation.
 
 \subsection{Contribution and Results}
-This paper asks what lag truncation does to \emph{structural} estimates, not merely to
-impulse responses. I replicate \citet{ACEL2011} and re-estimate their
-DSGE by IRF matching against VARs of increasing lag order extenting it in the wide sense.
 
-As far as I know, I am the forst that is working in long lag implications of VAR to estimate DSGE.
-I am extending \cite{Long_Lag2025} by increasing the lag lenght in stochastic singular VAR that is 
-used to estimate a dsge model. is a medium scalde VAR respect thei bivariate vars that use in simulation.
-there the parametrisation is at the limit, and show that the variance reduction effect, in this case is present,
-even if at the parameters limit and in the frequentist world.
+I replicate \citet{ACEL2005WP}\footnote{The replication code made available from the authors is NBER working paper from 2005. Hence, I replicate and refer to those results.} 
+and re-estimate their DSGE by IRF matching against VARs of
+increasing lag order, from the baseline $p = 4$ to $p = 8$ and $p = 12$, one year of dynamics
+against two and three. The question is what lag truncation does to DSGE structural parameter estimates, 
+and not only to the impulse responses from which they are obtained. To the best of my knowledge this is
+the first study to ask it.
+\\
 
-On \cite{Long_Lag2025,Baumeister2025} given that I am working with VAR to estimate DSGE trougth IRF matching.
-I suggest that the lag choice should be p = h not only for the reasons quoted by \cite{Baumeister2025} long 
-run questions and propagations concerns, or excellent long run VAR properties as \cite{Plagborg-Moller_Wolf2021}, 
-but my point is that, if a VAR is used to estimate a DSGE trougth IRF matching, the IRFME minimise the distance 
-between VAR's IRFs and the models one horison by horison.
+The exercise extends \citet{Long_Lag2025} along three dimensions. Their evidence comes from
+bivariate systems generated by DSGE models with an exact VAR($\infty$) representation, so the
+truncated VAR is nested in a known truth. The VAR of \citet{ACEL2011} confronts three shocks with
+ten observable variables, so it is stochastically singular and no such representation exists. The
+system is also expensive to parametrise: at $p = 12$ it carries $1210$ coefficients, $121$ per
+equation, and $38$ degrees of freedom survive out of $159$ usable observations, with the limit at
+$p = 16$. Tripling the lag length is therefore the largest perturbation the data permit, and a
+demanding test of their claim. The estimation is also frequentist throughout, so the parametrisation
+is not disciplined by a prior.
+\\
 
-Here I am working with a VAR that have both short and long run restriction. 
-And I shoe the implications of going long in both settings contemporaneously.
-it is well kwnon that long run restrictions are fragile \cite{ChariKehoeMcGrattan2008,Faust_Leeper1997}, 
-and here we are going to se that the \cite{Ravenna2007} identification bias (that is ... ) loads and 
-bias the long run identified shock and it is well visible in the IRFs.
+The second contribution is methodological and concerns the choice of $p$. \citet{Baumeister2025}
+argues for long lags when the question is itself about the long run, and
+\citet{Antolin-Diaz_Surico2025} set $p = h$ by design to draw inference at horizon $h$. My point
+does not depend on the horizon of the question. When a DSGE is estimated by IRF matching the
+objective function reaches horizon $h$ by construction, $h = 20$ quarters in \citet{ACEL2011}, so a
+misspecification of the dynamics enters the minimisation at every one of those horizons. Even when
+the substantive question is about the short run, then, $p$ has to be chosen with $h$ in mind.
+\\
 
-the main Econ result is that; after having replicated and extended the lag choice in \cite{ACEL2005WP},
-I find that firm specific capital model effects disapperas when the lag chiice is increased. capacity 
-utilisation cost, that in a nutshel is the main parameter that drives the differenciation of the two alternative 
-models, disappears, and results that the firm spcificity of capital becames just a nominal friction that 
-in that economy does not have implication, implying that that model have the same implication of the 
-homogeneous capital model.
+The VAR carries a short run recursive restriction for the monetary policy shock and long run
+restrictions for the two technology shocks, which makes it an unusually clean setting in which to
+separate the two channels of \citet{Ravenna2007}; pure truncation bias and identification bias.
+The responses to a monetary policy shock keep
+their sign and their shape at every lag order and move only in timing, with peaks arriving about a
+year later at $p = 12$. The responses to the two technology shocks do not: they change level and,
+for several variables, sign, and they disagree already on impact, where the relative price of
+investment falls from about $-0.45$ to $-0.1$ on an embodied technology shock. Pure
+truncation distorts propagation and cannot by itself produce a disagreement at horizon zero, so this
+is the trace \citet{Ravenna2007} attributes to identification bias, and it appears exactly where the
+theory says it should.
+\\
+
+Confidence intervals do not explode as the lag length grows. At $p = 12$ the bootstrap bands are
+narrower than at the baseline at every horizon and for every variable, with the single exception of
+MZM growth, so the variance reduction documented by \citet{Long_Lag2025} operates at the
+parametrisation frontier. It reaches the structural estimates too: the Phillips curve slope
+$\gamma$, which cannot be distinguished from zero at the baseline, is six times more precise at
+$p = 12$.
+\\
+
+The economic result follows from a single parameter. The cost of varying capital utilisation
+$\sigma_a$ falls from $1.9938$ at the baseline to $0.0042$ at $p = 12$, and $\sigma_a$ is what makes
+firm specificity bind. With utilisation almost free to vary, a firm tied to its own capital can
+still obtain the services it needs, its marginal cost stops rising with its own output, and the real
+rigidity $\chi$ rises from $0.03$ to $0.87$ on non overlapping simulated intervals. The implied
+duration of price contracts, $1.5$ quarters under firm-specific capital against $5.6$ under
+homogeneous capital at the baseline, becomes $9.0$ and $9.6$ quarters at $p = 12$. Firm specificity
+survives as an assumption about ownership with no economic content, the two versions of the model
+say the same thing about price stickiness, and the reconciliation with the micro evidence is gone.
 
 \subsection{Related Literature}
 
-\textbf{Long-lag VARs.} 
+\textbf{Long-lag VARs.}
+This work builds directly on \citet{Long_Lag2025}, and on their earlier
+\citet{DeGraeve_Westermark2013}, who show that increasing the lag length reduces misspecification
+and with it the variance of the residuals, so that uncertainty need not grow with the
+parametrisation. \citet{Baumeister2025} makes the same case for questions about the long run, and
+\citet{Antolin-Diaz_Surico2025} set $p = h$ by design. \citet{Plagborg-Moller_Wolf2021} establish
+the asymptotic properties that make long lag specifications defensible, while
+\citet{GonzalezCasasus_Schorfheide2025} propose a lag selection criterion built for structural
+inference rather than for forecasting. The same trade off separates VARs from local projections
+\citep{Li_PlagborgMoller_Wolf2024, Montiel-Olea_Plagborg-Moller_Qian_Wolf2025, Ludwig2026}, \textcolor{red}{voglio citare un po’ di più Ludwig che è l’evoluzione di P-M\&W2021 trova la mappatura di LP and VARs in samples and breake down the li montiel olea et al 2025 “lp vs VAS ..” which claims that LP are best compared to vars in everything.}
+and it connects to the reappraisal of the bias variance trade off in richly parametrised models
+\citep{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff,
+AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}. \textcolor{red}{posso citare antolin diaz and co su double desent phenomena? anche se c’è solo solo le slides?}
 \\
-\textbf{Truncation bias and the DSGE--VAR mapping.}
-\\
-\textbf{Impulse response matching and DSGE estimation.} 
-\\
-\subsection{Outline}
-Section 
 
-\clearpage
+\textbf{Truncation bias and the DSGE--VAR mapping.}
+\citet{FVRRSS2007} give the conditions under which the solution of a DSGE admits a VAR($\infty$)
+representation, and \citet{Ravenna2007} separates the two channels through which truncating it
+operates. Long run identification is the fragile case \citep{Faust_Leeper1997,
+Erceg_Guerrieri_Gust2005, CEV2007, ChariKehoeMcGrattan2008}, and the same fragility motivates the
+debate on fundamentalness and on how much of it is really needed \citep{Lippi_Reichlin1993,
+Forni_Gambetti_Sala2016}.
+\\
+
+\textbf{Impulse response matching and DSGE estimation.}
+The estimator goes back to \citet{RotembergWoodford1997} and is used by \citet{CEE2005},
+\citet{Iacoviello2005}, \citet{BoivinGiannoni2006} and \citet{ACEL2011}.
+\citet{Hall_Inoue_Nason_Rossi2012} study its asymptotic properties, \citet{Giacomini2013} and
+\citet{Theodoridis2011} discuss what is gained and lost relative to full information methods, and
+\citet{Canova1994, Canova2007} set out the wider case for judging a model by economic rather than
+statistical distance.
+
+\subsection{Outline}
+
+Section \ref{sec:model} presents the model, the micro--macro conflict it is meant to resolve, the
+role of the real rigidity $\chi$ and of the cost of varying capital utilisation $\sigma_a$, and the
+IRF matching estimator. Section \ref{sec:truncation} sets out truncation bias, the two channels
+through which it reaches structural estimates, and the case for long-lag VARs. Section
+\ref{sec:results} reports the VAR impulse responses across lag orders and the behaviour of the
+confidence intervals. Section \ref{sec:structural} reports the structural estimates, the real
+rigidity, the Calvo price stickiness parameters and the implied duration of prices. Section
+\ref{sec:conclusion} concludes. The appendices collect the data, the identification strategy, the
+derivation of the model and the additional results.
+
 % =============================================================
-% 2. THE MODEL                                       [target: 4 pp]
+% 2. THE MODEL                                       
 % =============================================================
 \section{The Theoretical Model}
 \label{sec:model}
@@ -207,8 +274,7 @@ frequent \cite{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008}.
 % TBD: valutare se aggiungere evidenza micro piu' recente oltre a questi tre riferimenti di ACEL.
 \\
 
-\citet{ACEL2005WP}\footnote{The replication code made available from the authors is NBER working paper from 2005. Hence, I replicate and refer to those results.} 
-propose a resolution. In their model inflation is inertial even though
+\citet{ACEL2005WP} propose a resolution. In their model inflation is inertial even though
 firms re-optimise on average every $1.5$ quarters. Inertia arises not because firms change
 prices rarely, but because when they do it, they change them by a small amount: each firm's
 short-run marginal cost is increasing in its own output, which dampens the optimal price
