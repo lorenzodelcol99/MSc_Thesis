@@ -1487,29 +1487,27 @@ thesis correspondingly more quarters are consumed in the same way, as reported i
 \section{Identification strategy}
 \label{app:identification}
 
-\citet{ACEL2011} select it with two different kinds of restriction at once, a recursive scheme
+\citet{ACEL2011} identify the system with two kinds of restriction at once, a recursive scheme
 for the monetary policy shock and a long run scheme for the two technology shocks, the latter
-following \citet{Fisher2006}, who builds on \citet{Shapiro_Watson88}. The two are imposed
-jointly, inside a single estimation, and the rest of this appendix describes how.
+following \citet{Fisher2006}, who builds on \citet{Shapiro_Watson88}. Both are imposed inside a
+single estimation.
 
-Throughout, $B_0$ is normalised to have ones on the main diagonal, so that equation $i$ of the
-structural system can be written with $y_{it}$ alone on the left hand side,
+Normalising $B_0$ to have ones on the main diagonal, equation $i$ of the structural system reads
 \begin{equation}
     y_{it} = \sum_{j \neq i} b_{ij}\, y_{jt}
            + \sum_{k=1}^{p}\sum_{j=1}^{K} \beta_{ij,k}\, y_{j,t-k} + w_{it},
     \label{eq:app_eq_i}
 \end{equation}
-where $y_{it}$ is the $i$th element of $Y_t$ in \eqref{eq:Yt} and $w_{it}$ the $i$th structural
-shock. Identification then amounts to deciding, equation by equation, which contemporaneous
-variables may appear on the right hand side and under which constraints.
+with $y_{it}$ the $i$th element of $Y_t$ in \eqref{eq:Yt} and $w_{it}$ the $i$th structural
+shock. Identification amounts to deciding, equation by equation, which contemporaneous variables
+may appear on the right and under which constraints.
 
-\subsection{Recursive identification of the monetary policy shock}
+\subsection*{Recursive identification of the monetary policy shock}
 
 The recursive scheme of \citet{CEE2005} splits the system at the policy instrument. In the
-ordering of \eqref{eq:Yt} the federal funds rate is the ninth variable and the velocity term is
-the tenth, so it is convenient to partition $Y_t = (X_t',\, i_t,\, v_t)'$, where $X_t$ collects
-the eight variables ordered before the funds rate, $i_t$ is the funds rate and $v_t$ the
-velocity term. The identifying assumption gives $B_0$ the block structure
+ordering of \eqref{eq:Yt} the funds rate is the ninth variable and velocity the tenth, so
+partition $Y_t = (X_t',\, i_t,\, v_t)'$, with $X_t$ the eight variables ordered before the funds
+rate. The identifying assumption gives $B_0$ the block structure
 \begin{equation}
     B_0 =
     \begin{pmatrix}
@@ -1520,20 +1518,19 @@ velocity term. The identifying assumption gives $B_0$ the block structure
     \label{eq:app_block_b0}
 \end{equation}
 where $B_{xx}$ is $8 \times 8$ with ones on its diagonal. The zeros in the first block row say
-that neither the monetary policy shock nor the velocity shock moves any of the eight variables
-in $X_t$ within the quarter.
-\\
+that neither the policy shock nor the velocity shock moves any variable in $X_t$ within the
+quarter; the zero in the second says velocity does not move the funds rate on impact. The funds
+rate equation is then a policy rule responding within the quarter to $X_t$ and to the history of
+the system, and the monetary policy shock $w_{it}$ is the part of the funds rate that rule
+leaves unexplained.
 
-What makes the ordering economically meaningful is the timing assumption behind it. Output,
-consumption, investment, hours, prices, the real wage and capacity utilisation are decided
-before the policy shock is realised, or cannot be adjusted within the quarter once it is, which
-is what the first block row of zeros states. Velocity is a financial quantity and adjusts
-immediately, which is why it is ordered after the funds rate and allowed to respond on impact.
-The shock recovered in this way is orthogonal to the entire slow moving block by construction,
-so it is not identified through the sum of any lag polynomial, a point taken up again at the
-end of this appendix.
+The timing assumption behind the ordering is that output, consumption, investment, hours,
+prices, the real wage and capacity utilisation cannot be adjusted within the quarter once the
+policy shock is realised, while velocity, being financial, adjusts immediately. The shock is
+therefore orthogonal to the whole slow moving block by construction, and is not identified
+through the sum of any lag polynomial, a point taken up at the end of this appendix.
 
-\subsection{Long run identification of the technology shocks}
+\subsection*{Long run identification of the technology shocks}
 
 The technology shocks are identified by what they do in the long run rather than by what they
 do within the quarter. \emph{First}, only the capital embodied technology shock affects the
@@ -1543,68 +1540,48 @@ long run.
 
 \subsubsection*{From a long run restriction to a common factor}
 
-The familiar way to impose such a restriction is the one of \citet{BlanchardQuah1989}, which
-estimates the reduced form first and then rotates the estimated long run covariance matrix until
-the required zeros appear, as in \eqref{eq:lr-map}. \citet{Fisher2006} follows
-\citet{Shapiro_Watson88} instead, and the difference is worth setting out, because it is what
-makes the restriction a property of the estimating equation rather than of an estimate.
+\citet{BlanchardQuah1989} would estimate the reduced form first and then rotate the estimated
+long run covariance matrix until the required zeros appear, as in \eqref{eq:lr-map}.
+\citet{Fisher2006} follows \citet{Shapiro_Watson88} instead, which makes the restriction a
+property of the estimating equation rather than of an estimate.
 
 Take the first equation of \eqref{eq:app_eq_i}, whose dependent variable is
-$y_{1t} = \Delta \ln p_{I,t}$, and collect every coefficient that multiplies variable $j$,
-contemporaneous and lagged, into a single lag polynomial,
-\begin{equation}
-    B_{1j}(L) = b_{1j} + \beta_{1j,1}L + \dots + \beta_{1j,p}L^{p},
-    \qquad j = 2,\dots,K .
-    \label{eq:app_poly_1j}
-\end{equation}
-Since $y_{1t}$ is a growth rate, the level $\ln p_{I,t}$ is its cumulated sum, and the long run
-effect of variable $j$ on that level is the cumulated effect on $y_{1t}$, which is the
-polynomial evaluated at $L = 1$. The first restriction is therefore
+$y_{1t} = \Delta \ln p_{I,t}$, and collect every coefficient multiplying variable $j$,
+contemporaneous and lagged, into a single lag polynomial
+$B_{1j}(L) = b_{1j} + \beta_{1j,1}L + \dots + \beta_{1j,p}L^{p}$. Since $y_{1t}$ is a growth
+rate, the level $\ln p_{I,t}$ is its cumulated sum, so the long run effect of variable $j$ on
+that level is the polynomial evaluated at $L = 1$, and the first restriction is
 \begin{equation}
     B_{1j}(1) = 0, \qquad j = 2,\dots,K ,
     \label{eq:app_lr_restriction}
 \end{equation}
-that is, the coefficients on each of the other variables must sum to zero. A polynomial that
-vanishes at $L = 1$ contains a unit root, so it factorises as
-$B_{1j}(L) = \tilde{B}_{1j}(L)(1-L)$ with $\tilde{B}_{1j}(L)$ of order $p-1$, and since
-$(1-L)y_{jt} = \Delta y_{jt}$,
-\begin{equation}
-    B_{1j}(L)\,y_{jt} = \tilde{B}_{1j}(L)\,\Delta y_{jt} .
-    \label{eq:app_common_factor}
-\end{equation}
-The restriction has become a statement about the form the equation is allowed to take: the other
-variables may enter it only in first differences. Substituting \eqref{eq:app_common_factor} into
-the first equation gives
+the coefficients on each of the other variables must sum to zero. A polynomial that vanishes at
+$L = 1$ contains a unit root, so $B_{1j}(L) = \tilde{B}_{1j}(L)(1-L)$ with $\tilde{B}_{1j}(L)$
+of order $p-1$, and since $(1-L)y_{jt} = \Delta y_{jt}$ the other variables may enter the
+equation only in first differences,
 \begin{equation}
     y_{1t} = \sum_{k=1}^{p}\beta_{11,k}\,y_{1,t-k}
            + \sum_{j=2}^{K}\sum_{k=0}^{p-1} \tilde{b}_{1j,k}\,\Delta y_{j,t-k} + w_{1t} .
     \label{eq:app_eq1_sw}
 \end{equation}
-Its own lags enter in levels, everything else enters in differences, the contemporaneous
-difference included. Nothing has been imposed after the fact: the equation that is taken to the
-data already satisfies the restriction, whatever its coefficients turn out to be.
+Own lags in levels, everything else in differences, the contemporaneous difference included.
+Nothing is imposed after the fact: the equation taken to the data already satisfies the
+restriction, whatever its coefficients turn out to be.
 
 \subsubsection*{Estimation by instrumental variables}
 
 Equation \eqref{eq:app_eq1_sw} cannot be estimated by least squares, because the contemporaneous
-terms $\Delta y_{jt}$ are correlated with $w_{1t}$. \citet{Shapiro_Watson88} estimate it by
-instrumental variables, taking the lagged levels
-\begin{equation}
-    Z_t = \bigl(Y_{t-1}',\, Y_{t-2}',\, \dots,\, Y_{t-p}'\bigr)'
-    \label{eq:app_instruments}
-\end{equation}
-as instruments. They are predetermined, hence orthogonal to $w_{1t}$, and they forecast the
-contemporaneous differences, hence relevant. The residual of that regression is
-$\hat{w}_{1t}$, the estimate of the capital embodied technology shock. This is what it means to
-say that the identified shock is read off as a regression residual.
+$\Delta y_{jt}$ are correlated with $w_{1t}$. \citet{Shapiro_Watson88} estimate it by
+instrumental variables, using the lagged levels $Z_t = (Y_{t-1}',\dots,Y_{t-p}')'$: they are
+predetermined, hence orthogonal to $w_{1t}$, and they forecast the contemporaneous differences,
+hence relevant. The residual is $\hat{w}_{1t}$, the capital embodied technology shock, which is
+what it means to say that the shock is read off as a regression residual.
 
 The second equation repeats the construction with two changes. The second restriction leaves
-both $y_1$ and $y_2$ unrestricted, since both technology shocks are allowed to move labour
-productivity permanently, so the common factor applies only to $j = 3,\dots,K$ and the condition
-is $B_{2j}(1) = 0$ for those $j$ alone. In addition the contemporaneous $y_{1t}$ now appears on
-the right hand side, and $\hat{w}_{1t}$ joins the instrument set: it is a valid instrument
-because the structural shocks are mutually orthogonal, so it is uncorrelated with $w_{2t}$,
-while being correlated with $y_{1t}$ by construction. The equation is
+both $y_1$ and $y_2$ unrestricted, since both technology shocks may move labour productivity
+permanently, so the common factor applies only to $j = 3,\dots,K$. And the contemporaneous
+$y_{1t}$ now appears on the right, instrumented by $\hat{w}_{1t}$, which is valid because the
+structural shocks are mutually orthogonal. The equation is
 \begin{equation}
     y_{2t} = b_{21}y_{1t}
            + \sum_{k=1}^{p}\bigl(\beta_{21,k}\,y_{1,t-k} + \beta_{22,k}\,y_{2,t-k}\bigr)
@@ -1612,6 +1589,13 @@ while being correlated with $y_{1t}$ by construction. The equation is
     \label{eq:app_eq2_sw}
 \end{equation}
 and its residual $\hat{w}_{2t}$ is the neutral technology shock.
+
+Condition \eqref{eq:app_lr_restriction} binds on the sum of a lag polynomial that runs only to
+$p$. If the true process is of infinite order, the restriction is imposed correctly but on a
+mismeasured object, and the residual read off from \eqref{eq:app_eq1_sw} is a different linear
+combination of reduced form innovations from the one the assumption defines. Nothing of the kind
+happens to the funds rate equation, whose zeros are statements about contemporaneous covariances
+and keep their meaning at any lag order.
 
 
 \section{The ACEL Model}
@@ -1625,7 +1609,7 @@ conditions from which that comparison is derived, kept to the equations needed t
 $\sigma_a$, $S''$ and $\chi$ enter and where the two models coincide or part company. The
 exposition follows \citet{ACEL2011} section 2, and I keep their notation throughout.
 
-\subsection{The homogeneous capital model}
+\subsection*{The homogeneous capital model}
 
 The economy is populated by goods-producing firms, households and the government.
 
@@ -1701,7 +1685,7 @@ loan market clearing, $W_tH_t = x_tM_t - Q_t$, and the aggregate resource constr
 $[1+\eta(V_t)]C_t + \Upsilon_t^{-1}I_t + a(u_t)\bar{K}_t \le Y_t$, and is solved by log-linear
 approximation around the non-stochastic steady state.
 
-\subsection{The firm-specific capital model}
+\subsection*{The firm-specific capital model}
 
 Every equation above is unchanged except that firms now own their capital and cannot adjust
 their stock within the period: firm $i$'s capital accumulates according to its own version of
@@ -1712,7 +1696,7 @@ economy-wide margin but each firm's own, private cost of meeting extra demand. T
 prices, employment, investment and utilisation to maximise the discounted value of net cash flow,
 subject to the same timing and Calvo pricing friction as in the homogeneous model.
 
-\subsection{Implications for inflation}
+\subsection*{Implications for inflation}
 
 The equilibrium conditions of the two models coincide except for the equation governing
 aggregate inflation, which takes the form
@@ -1748,48 +1732,6 @@ Table 2 reported in \citet{ACEL2005WP} at page 41.
     {\input{../../Output/Table_2_ACEL_NBER_2005_WP/Table_2_ACEL_NBER_2005_WP.tex}}
     {\noindent\fbox{Image Path Broken or File Missing}}
     \label{tab:acelwp05_table_2}
-\FloatBarrier
-
-
-\section{IRFs with all confidence intervals}
-\label{app:irfs_confidence_intervals}
-
-In Figure \ref{fig:var_et_irfs_all_ci} and \ref{fig:var_nt_irfs_all_ci} are reported the IRFs images that include the 
-$95\%$ confidence interval of every lag choice, not only for the baseline VAR($4$).
-
-\begin{figure}[htbp]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
-    \caption{VARs' IRFs to a Embodied Technology shock across different lag structure, 95\% CI}
-    \label{fig:var_et_irfs_all_ci}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[htbp]
-    \centering
-    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
-        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
-    \caption{VARs' IRFs to a Neutral Technology shock across different lag structure, 95\% CI}
-    \label{fig:var_nt_irfs_all_ci}
-\end{figure}
-\FloatBarrier
-
-
-
-\section{Residuals}
-\label{app:residuals}
-
-\begin{figure}[htbp]
-    \centering
-    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}
-        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}}
-        {\fbox{Image Path Broken or File Missing}}
-    \caption{In-sample residuals of all the variables, VAR(4) against VAR(12)}
-    \label{fig:all_residuals}
-\end{figure}
 \FloatBarrier
 
 
@@ -1922,7 +1864,187 @@ from the Monte Carlo simulation.
 \end{figure}
 \FloatBarrier
 
-\section{VAR Aligned}
+
+\section{Additiona Results}
+
+\subsection{Tech shocks IRFs with all confidence intervals}
+\label{app:irfs_confidence_intervals}
+
+In Figure \ref{fig:var_et_irfs_all_ci} and \ref{fig:var_nt_irfs_all_ci} are reported the IRFs images that include the 
+$95\%$ confidence interval of every lag choice, not only for the baseline VAR($4$).
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Embodied_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
+    \caption{VARs' IRFs to a Embodied Technology shock across different lag structure, 95\% CI}
+    \label{fig:var_et_irfs_all_ci}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Neutral_Technology_Shock/Comparison_Lags_4_8_12.pdf}}
+        {\fbox{Missing file: All\_CI\_UpToLag\_12.pdf}}
+    \caption{VARs' IRFs to a Neutral Technology shock across different lag structure, 95\% CI}
+    \label{fig:var_nt_irfs_all_ci}
+\end{figure}
+\FloatBarrier
+
+\subsection{DSGE IRFs}
+\label{app:dsge_irfs}
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_UpToLag\_12.pdf}}
+    \caption{DSGE Monetary Policy shock IRFs, all lags}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: ET\_IRF\_DSGE\_UpToLag\_12.pdf}}
+    \caption{DSGE Embodied Technology shock IRFs, all lags}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}}
+        {\fbox{Missing file: NT\_IRF\_DSGE\_UpToLag\_12.pdf}}
+    \caption{DSGE Neutral Technology shock IRFs, all lags}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+\subsection{DSGE and VAR IRFs}
+\label{app:dsge_and_var_irfs}
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR4_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR4_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_4.pdf}}
+    \caption{DSGE and VAR Monetary Policy shock IRFs, lag 4}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR8_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR8_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_8.pdf}}
+    \caption{DSGE and VAR Monetary Policy shock IRFs, lag 8}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR12_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Monetary_Policy_Shock/DSGE_vs_VAR12_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_12.pdf}}
+    \caption{DSGE and VAR Monetary Policy shock IRFs, lag 12}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+% ET
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR4_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR4_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_4.pdf}}
+    \caption{DSGE and VAR Embodied Technology shock IRFs, lag 4}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR8_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR8_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_8.pdf}}
+    \caption{DSGE and VAR Embodied Technology shock IRFs, lag 8}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR12_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Embodied_Technology_Shock/DSGE_vs_VAR12_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_12.pdf}}
+    \caption{DSGE and VAR Embodied Technology shock IRFs, lag 12}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+%NT
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR4_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR4_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_4.pdf}}
+    \caption{DSGE and VAR Neutral Technology shock IRFs, lag 4}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR8_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR8_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_8.pdf}}
+    \caption{DSGE and VAR Neutral Technology shock IRFs, lag 8}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR12_CI.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR12_CI.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_12.pdf}}
+    \caption{DSGE and VAR Neutral Technology shock IRFs, lag 12}
+    \label{fig:}
+\end{figure}
+\FloatBarrier
+
+
+
+% RESIDUALS
+\subsection{Residuals}
+\label{app:residuals}
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_VAR4_Vs_VAR12_All_Variables.pdf}}
+        {\fbox{Image Path Broken or File Missing}}
+    \caption{In-sample residuals of all the variables, VAR(4) against VAR(12)}
+    \label{fig:all_residuals}
+\end{figure}
+\FloatBarrier
+
+
+\begin{figure}[htbp]
+    \centering
+    \IfFileExists{../../Output/Residual_Analysis_Output/Ljung_Box_P_Values_ReducedForm.pdf}
+        {\includegraphics[width=0.95\linewidth]{../../Output/Residual_Analysis_Output/Ljung_Box_P_Values_ReducedForm.pdf}}
+        {\fbox{Image Path Broken or File Missing}}
+    \caption{Lujng-Box statistics' P-value acros lags)}
+    \label{fig:lb_p_values}
+\end{figure}
+\FloatBarrier
+
+
+\subsection{VAR Aligned}
 \label{app:VAR_aligned}
 
 The baseline results in the main text use, for every lag order, all the observations available to that
