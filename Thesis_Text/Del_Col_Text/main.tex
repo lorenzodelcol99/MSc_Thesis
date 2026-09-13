@@ -23,6 +23,7 @@
 \usepackage{subfig}
 \usepackage{booktabs}
 \usepackage{placeins}
+\usepackage[titletoc]{appendix}
 % NB: il pacchetto "underscore" e' stato rimosso: e' incompatibile con le chiavi
 % bibliografiche che contengono un underscore (es. Long_Lag2025). Se serve un
 % underscore letterale nel testo, scrivere "\_".
@@ -234,7 +235,7 @@ Ranking the two at a common lag length \citep{Li_PlagborgMoller_Wolf2024,
 Montiel-Olea_Plagborg-Moller_Qian_Wolf2025} is therefore not a fair comparison.
 \citet{Baumeister2025} draws on \citet{Ludwig2026} to press exactly this point, which brings VARs
 back into a comparison that had been settling against them, and turns it into a question about the
-lag order, the object this thesis varies.. Behind all
+lag order, the object this thesis varies. Behind all
 of this lies the reassessment of the bias variance trade off in richly parametrised models, where
 risk can fall again once the parameters outnumber the observations
 \citep{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff}, a phenomenon whose time series counterpart
@@ -861,7 +862,7 @@ defer to these forecasting criteria, and \citet{GonzalezCasasus_Schorfheide2025}
 alternative designed for structural inference.
 \\
 
-There is no need, however, to wait for that or other criterias to become standard practice.
+There is no need, however, to wait for that or other criteria to become standard practice.
 The Long-Lag VARs authors already offer a simpler heuristic that any researcher can apply today:
 \textit{"plot the structural moments central to the research question against lag length. If
 the structural conclusion dramatically change as the lag length increases, that is clearly
@@ -902,9 +903,9 @@ The VAR used in \citet{ACEL2011} confronts three shocks with ten observable vari
 The system is therefore stochastically singular, there is no exact VAR($\infty$) representation of the DSGE that 
 the VAR is being used to estimate for. But this is not a caveat, is a feature, and is one of the reasons why 
 the \citet{ACEL2011} used to estimate their model a partial information approach as IRF minimum distance estimator.
-In addition the "fundamentalness" concept in the \citet{Lippi_Reichlin1993,FVRRSS2007} sense, is extrimely 
-and unnecessarly restrictive, and in several cases non needed as stressed by \citet{Forni_Gambetti_Sala2016}, 
-as the researcher is often interest in assessing the transmision mechanism of a single or few shock.
+In addition the "fundamentalness" concept in the \citet{Lippi_Reichlin1993,FVRRSS2007} sense, is extremely 
+and unnecessarily restrictive, and in several cases not needed as stressed by \citet{Forni_Gambetti_Sala2016}, 
+as the researcher is often interested in assessing the transmission mechanism of a single shock or of a few.
 \\
 
 The second departure as previously anticipated in the Section \ref{sec:long-lag_VARs} relates on the dimension of 
@@ -918,8 +919,8 @@ before lags are consumed. I will show that concerns related to CI explosions mig
 
 Third, which is strictly connected to the second, I am using as baseline result the exercises where I am not 
 restricting the sample size to the one used in the longest-lag VAR.
-The reason is why the results does not vary much, and when they do they do by a small amount and consistently 
-with the baseline when the common available data is used. It is shown in Appendix \ref{app:VAR_aligned}.
+The reason is that the results do not vary much, and when they do they do by a small amount and consistently 
+with the baseline when the common available data is used. It is shown in Appendix \ref{app:additional_results} along with other additional results.
 The other reason is that, in practice, if a researcher has to decide to use a longer-lag VAR rather than a short one, 
 the short VAR would be still estimated with as many data points available. 
 In particular this argument is even more valid when the VAR has a lot of variables or if the available data 
@@ -1047,7 +1048,7 @@ place.
 This is the trace that Section \ref{sec:identification_bias} attributes to identification bias
 rather than to pure truncation. Pure truncation distorts the propagation of a correctly isolated
 shock, so its mark has to accumulate with the horizon and cannot by itself generate a disagreement
-at $h = 0$. The monetary policy responses, identified without short run restriction, it keep their 
+at $h = 0$. The monetary policy responses, identified without a long run restriction, keep their 
 sign and their shape and move only in timing. The technology responses,
 identified through it, do neither. This is the asymmetry \citet{Ravenna2007} predicts, and it
 appears here within the same VAR, on the same sample, with only the identification scheme differing.
@@ -1062,8 +1063,8 @@ exactly the place where the theory says it should be, which is also the place
 
 \subsubsection*{Uncertainty around longer lags estimates}
 \label{sec:results_uncertainty}
-Conventional view thinks that increasing lag length increase parametrisation, therefore reduce the degrees 
-of freedom making uncertainty around the estimates larger. As well explained by \citet{Long_Lag2025}, 
+The conventional view is that increasing the lag length increases parametrisation, therefore reducing the 
+degrees of freedom and making uncertainty around the estimates larger. As well explained by \citet{Long_Lag2025}, 
 this is for sure part of the story.
 But the long-lag VARs authors demonstrate how misspecification lowers the variance of the residuals, and that 
 can offset the imprecision caused by additional parameters.
@@ -1112,7 +1113,7 @@ horizon and for every variable in the system, with the single exception of MZM g
 whose bands widen at some horizons.
 Therefore suggesting that the variance reduction mechanism 
 of \citet{Long_Lag2025} operates even at the parametrisation frontier, at least in this work.
-Tech IRFs with confidence intervals around every alg choice are reported in Appendix \ref{app:irfs_confidence_intervals}.
+Tech IRFs with confidence intervals around every lag choice are reported in Appendix \ref{app:irfs_confidence_intervals}.
 
 \subsubsection*{Is this just overfitting?}
 
@@ -1177,7 +1178,7 @@ exercise gives $p = 12$ for AIC and $p = 4$ for both HQ and SW. As already argue
 Section \ref{sec:truncation}, these criteria are built to minimise out-of-sample forecast error, not to 
 guard against truncation bias, so neither \citet{ACEL2005WP} own departure from their criteria nor the disagreement 
 found here settles which lag order is appropriate for structural inference; it only confirms that 
-forecasting criteria are the not rigth tool for this structural question.
+forecasting criteria are not the right tool for this structural question.
 
 
 \section{Structural Implications}
@@ -1410,7 +1411,7 @@ conclusions of \citet{Jorda2024long_run_mp} stand at all.
 % =============================================================
 % APPENDIX
 % =============================================================
-\appendix
+\begin{appendices}
 \textbf{\LARGE{Appendix}}
 
 \section{Data}
@@ -1865,7 +1866,8 @@ from the Monte Carlo simulation.
 \FloatBarrier
 
 
-\section{Additiona Results}
+\section{Additional Results}
+\label{app:additional_results}
 
 \subsection{Tech shocks IRFs with all confidence intervals}
 \label{app:irfs_confidence_intervals}
@@ -2010,7 +2012,7 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
     \centering
     \IfFileExists{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR12_CI.pdf}
         {\includegraphics[width=0.95\linewidth]{../../Output/DSGE_IRFs_with_VARs_CI_Plots/Neutral_Technology_Shock/DSGE_vs_VAR12_CI.pdf}}
-        {\fbox{Missing file: MP\_IRF\_DSGE\_and_VAR_UpToLag\_12.pdf}}
+        {\fbox{Missing file: MP\_IRF\_DSGE\_and\_VAR\_UpToLag\_12.pdf}}
     \caption{DSGE and VAR Neutral Technology shock IRFs, lag 12}
     \label{fig:}
 \end{figure}
@@ -2169,5 +2171,7 @@ None of these movements are large enough to change the conclusions drawn from th
 main text. The collapse of $\sigma_a$ and the convergence of the implied durations documented there as the lag
 order rises from $p=4$ to $p=12$ is therefore a feature of the lag order itself, not an artefact of the smaller
 sample that a longer lag order happens to require.
+
+\end{appendices}
 
 \end{document}
