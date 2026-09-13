@@ -220,21 +220,22 @@ say the same thing about price stickiness, and the reconciliation with the micro
 \subsection{Related Literature}
 
 \textbf{Long-lag VARs.}
-This work builds directly on \citet{Long_Lag2025} and on their earlier
-\citet{DeGraeve_Westermark2013}, who show that longer lags reduce misspecification and with it the
+This work builds directly on \citet{Long_Lag2025} who show that longer lags reduce misspecification and with it the
 variance of the residuals, so that uncertainty need not grow with the parametrisation.
 \citet{Baumeister2025} makes the same case for questions about the long run, as do
 \citet{Antolin-Diaz_Surico2025}, who set $p = h$ by design, while
 \citet{GonzalezCasasus_Schorfheide2025} propose a lag criterion built for structural inference
-rather than forecasting. The lag order is also what connects VARs to local projections.
-\citet{Plagborg-Moller_Wolf2021} show that the two estimate the same impulse responses, an
-equivalence that holds exactly in sample provided the local projection and the VAR carry the same
-lag length, and \citet{Ludwig2026} takes that result further: local projections are combinations of
-equal and higher order VARs, and VARs combinations of equal and lower order local projections. Part
-of what the comparisons between the two estimators measure \citep{Li_PlagborgMoller_Wolf2024,
-Montiel-Olea_Plagborg-Moller_Qian_Wolf2025} is therefore the order of the lag polynomial rather than
-a difference between the estimators themselves, which is the object this thesis varies. Behind all
-of this lies the reappraisal of the bias variance trade off in richly parametrised models, where
+rather than forecasting. The lag order is also what connects VARs to local projections (LP).
+\citet{Plagborg-Moller_Wolf2021} establish the mapping in population, where the two estimate the
+same impulse responses provided they carry the same lag length. \citet{Ludwig2026} establishes it
+in sample, and there the equivalence breaks: an LP is a combination of equal and higher order VARs,
+so an LP run at lag $p$ already carries more lag structure than the VAR($p$) it is set against.
+Ranking the two at a common lag length \citep{Li_PlagborgMoller_Wolf2024,
+Montiel-Olea_Plagborg-Moller_Qian_Wolf2025} is therefore not a fair comparison.
+\citet{Baumeister2025} draws on \citet{Ludwig2026} to press exactly this point, which brings VARs
+back into a comparison that had been settling against them, and turns it into a question about the
+lag order, the object this thesis varies.. Behind all
+of this lies the reassessment of the bias variance trade off in richly parametrised models, where
 risk can fall again once the parameters outnumber the observations
 \citep{Belkin_Hsu_Ma_Mandal2019_Bias_Variance_tradeoff}, a phenomenon whose time series counterpart
 is still work in progress \citep{AntolinDiaz_FernandezVillaverde_GuerronQuintana2026}.
@@ -252,7 +253,9 @@ much of it is needed \citep{Lippi_Reichlin1993, Forni_Gambetti_Sala2016}.
 The estimator goes back to \citet{RotembergWoodford1997} and is used by \citet{CEE2005},
 \citet{Iacoviello2005}, \citet{BoivinGiannoni2006} and \citet{ACEL2011}.
 \citet{Hall_Inoue_Nason_Rossi2012} study its asymptotics, \citet{Giacomini2013} and
-\citet{Theodoridis2011} discuss what is gained and lost relative to full information methods, and
+\citet{Theodoridis2011} discuss what is gained and lost relative to full information methods,
+\citet{GuerronQuintana2010} shows that the data chosen for the match is not innocuous, moving
+the estimated structural parameters as much as the estimation method itself, and
 \citet{Canova1994, Canova2007} set out the wider case for judging a model by economic rather than
 statistical distance.
 
@@ -296,7 +299,7 @@ and firm-specific, so that factor of production cannot be instantly and costless
 
 \citet{ACEL2011} build on the \citet{CEE2005} model, adding the two technology shocks, and
 construct two versions of it: one in which capital is homogeneous, as in standard
-formulations, and one in which it is firm-specific.
+formulations, and one in which it is firm-specific. More of the theoretical model in Appendix \ref{app:model}.
 
 Once log-linearised, the only difference between the two sets of equilibrium conditions lies
 in the equation relating inflation $\pi_t$ to marginal cost, the New Keynesian Phillips curve,
@@ -686,8 +689,8 @@ restriction is therefore imposed on the wrong object.
 
 \citet{ACEL2011} impose the same kind of restriction by a different route, following
 \citet{Fisher2006}: instead of rotating an estimated matrix after the fact, they build the
-restriction into the estimating equation and read the identified shock off as a regression residual
-(mechanics in Appendix \ref{app:identification}). Either way, the restriction binds on the sum of
+restriction into the estimating equation and read the identified shock off as a regression residual.
+Either way, the restriction binds on the sum of
 the lag polynomial the VAR actually estimates, which runs only to $p$, not on the sum over the true
 $p^{*}>p$ lags it is meant to capture. The restriction is anchored to the wrong object, and the shock
 it delivers is the wrong linear combination of reduced form innovations.
@@ -1044,10 +1047,8 @@ place.
 This is the trace that Section \ref{sec:identification_bias} attributes to identification bias
 rather than to pure truncation. Pure truncation distorts the propagation of a correctly isolated
 shock, so its mark has to accumulate with the horizon and cannot by itself generate a disagreement
-at $h = 0$. A restriction imposed on $B(1)$ computed over $p$ lags, when the true polynomial runs to
-$p^{*} > p$, isolates a different linear combination of the reduced form innovations, and a
-different shock has a different impact effect. The monetary policy responses, identified without the
-lag polynomial, keep their sign and their shape and move only in timing. The technology responses,
+at $h = 0$. The monetary policy responses, identified without short run restriction, it keep their 
+sign and their shape and move only in timing. The technology responses,
 identified through it, do neither. This is the asymmetry \citet{Ravenna2007} predicts, and it
 appears here within the same VAR, on the same sample, with only the identification scheme differing.
 
@@ -1111,6 +1112,7 @@ horizon and for every variable in the system, with the single exception of MZM g
 whose bands widen at some horizons.
 Therefore suggesting that the variance reduction mechanism 
 of \citet{Long_Lag2025} operates even at the parametrisation frontier, at least in this work.
+Tech IRFs with confidence intervals around every alg choice are reported in Appendix \ref{app:irfs_confidence_intervals}.
 
 \subsubsection*{Is this just overfitting?}
 
@@ -1267,9 +1269,11 @@ across lag orders in the firm-specific capital model, against the homogeneous mo
 set to one by construction. At the baseline $\chi_{fs} = 0.0307$, with a $95$ percent simulated
 interval of $[0.004, 0.146]$. The attenuation is close to total: a firm that is able to reset
 its price moves it by about three percent of what it would move it in the absence of the real
-rigidity. At $p = 8$ the parameter rises to $0.2030$, and at $p = 12$ to $0.8671$, with a $95$
-percent interval of $[0.342, 0.959]$. The baseline and the long-lag intervals do not overlap, so
-the movement is not an artefact of the imprecision of either estimate.
+rigidity. At $p = 8$ the parameter rises to $0.2030$, with a $95$ percent interval of
+$[0.047, 0.674]$ that still overlaps the baseline, although only $1.2$ percent of its draws fall at
+or below the baseline point estimate. At $p = 12$ it reaches $0.8671$, with an interval of
+$[0.343, 0.961]$ that does not overlap the baseline at all, so the movement is not an artefact of
+the imprecision of either estimate.
 \\
 
 An attenuation factor of $0.03$ means that firm specificity does almost all of the work
@@ -1280,7 +1284,7 @@ for \citet{ACEL2011} is whether $\chi$ is small enough to rationalise a low $\xi
 \subsection{Calvo price stickiness parameters and the collapse of the firm-specific mechanism}
 \label{sec:results_calvo}
 
-Having in mind equation \eqref{eq:gamma}, the results on the Calvo price stickiness parameters
+Having in mind $\gamma$, equation \eqref{eq:gamma}, the results on the Calvo price stickiness parameters
 reported in Table \ref{tab:calvo_price_stickiness_4_8_12} follow directly from the two movements
 just described.
 
@@ -1407,6 +1411,7 @@ conclusions of \citet{Jorda2024long_run_mp} stand at all.
 % APPENDIX
 % =============================================================
 \appendix
+\textbf{\LARGE{Appendix}}
 
 \section{Data}
 \label{app:data}
@@ -1481,16 +1486,135 @@ thesis correspondingly more quarters are consumed in the same way, as reported i
 
 \section{Identification strategy}
 \label{app:identification}
-Equation \eqref{eq:sigma-map} also shows why identification requires restrictions.
-$\Sigma_u$ has $K(K+1)/2$ distinct elements, but $B_0^{-1}$ has $K^2$ free entries, so
-$K(K-1)/2$ restrictions on $B_0$ are needed before $B_0^{-1}$ can be recovered from
-$\Sigma_u$. Being numerically sufficient is not enough: the restrictions have to be
-economically motivated, and it is exactly this requirement that the DSGE is used to
-satisfy.
+
+\citet{ACEL2011} select it with two different kinds of restriction at once, a recursive scheme
+for the monetary policy shock and a long run scheme for the two technology shocks, the latter
+following \citet{Fisher2006}, who builds on \citet{Shapiro_Watson88}. The two are imposed
+jointly, inside a single estimation, and the rest of this appendix describes how.
+
+Throughout, $B_0$ is normalised to have ones on the main diagonal, so that equation $i$ of the
+structural system can be written with $y_{it}$ alone on the left hand side,
+\begin{equation}
+    y_{it} = \sum_{j \neq i} b_{ij}\, y_{jt}
+           + \sum_{k=1}^{p}\sum_{j=1}^{K} \beta_{ij,k}\, y_{j,t-k} + w_{it},
+    \label{eq:app_eq_i}
+\end{equation}
+where $y_{it}$ is the $i$th element of $Y_t$ in \eqref{eq:Yt} and $w_{it}$ the $i$th structural
+shock. Identification then amounts to deciding, equation by equation, which contemporaneous
+variables may appear on the right hand side and under which constraints.
+
+\subsection{Recursive identification of the monetary policy shock}
+
+The recursive scheme of \citet{CEE2005} splits the system at the policy instrument. In the
+ordering of \eqref{eq:Yt} the federal funds rate is the ninth variable and the velocity term is
+the tenth, so it is convenient to partition $Y_t = (X_t',\, i_t,\, v_t)'$, where $X_t$ collects
+the eight variables ordered before the funds rate, $i_t$ is the funds rate and $v_t$ the
+velocity term. The identifying assumption gives $B_0$ the block structure
+\begin{equation}
+    B_0 =
+    \begin{pmatrix}
+        B_{xx} & 0 & 0 \\[2pt]
+        b_{ix}' & 1 & 0 \\[2pt]
+        b_{vx}' & b_{vi} & 1
+    \end{pmatrix},
+    \label{eq:app_block_b0}
+\end{equation}
+where $B_{xx}$ is $8 \times 8$ with ones on its diagonal. The zeros in the first block row say
+that neither the monetary policy shock nor the velocity shock moves any of the eight variables
+in $X_t$ within the quarter.
+\\
+
+What makes the ordering economically meaningful is the timing assumption behind it. Output,
+consumption, investment, hours, prices, the real wage and capacity utilisation are decided
+before the policy shock is realised, or cannot be adjusted within the quarter once it is, which
+is what the first block row of zeros states. Velocity is a financial quantity and adjusts
+immediately, which is why it is ordered after the funds rate and allowed to respond on impact.
+The shock recovered in this way is orthogonal to the entire slow moving block by construction,
+so it is not identified through the sum of any lag polynomial, a point taken up again at the
+end of this appendix.
+
+\subsection{Long run identification of the technology shocks}
+
+The technology shocks are identified by what they do in the long run rather than by what they
+do within the quarter. \emph{First}, only the capital embodied technology shock affects the
+level of the relative price of investment in the long run. \emph{Second}, only the two
+technology shocks, neutral and capital embodied, affect the level of labour productivity in the
+long run.
+
+\subsubsection*{From a long run restriction to a common factor}
+
+The familiar way to impose such a restriction is the one of \citet{BlanchardQuah1989}, which
+estimates the reduced form first and then rotates the estimated long run covariance matrix until
+the required zeros appear, as in \eqref{eq:lr-map}. \citet{Fisher2006} follows
+\citet{Shapiro_Watson88} instead, and the difference is worth setting out, because it is what
+makes the restriction a property of the estimating equation rather than of an estimate.
+
+Take the first equation of \eqref{eq:app_eq_i}, whose dependent variable is
+$y_{1t} = \Delta \ln p_{I,t}$, and collect every coefficient that multiplies variable $j$,
+contemporaneous and lagged, into a single lag polynomial,
+\begin{equation}
+    B_{1j}(L) = b_{1j} + \beta_{1j,1}L + \dots + \beta_{1j,p}L^{p},
+    \qquad j = 2,\dots,K .
+    \label{eq:app_poly_1j}
+\end{equation}
+Since $y_{1t}$ is a growth rate, the level $\ln p_{I,t}$ is its cumulated sum, and the long run
+effect of variable $j$ on that level is the cumulated effect on $y_{1t}$, which is the
+polynomial evaluated at $L = 1$. The first restriction is therefore
+\begin{equation}
+    B_{1j}(1) = 0, \qquad j = 2,\dots,K ,
+    \label{eq:app_lr_restriction}
+\end{equation}
+that is, the coefficients on each of the other variables must sum to zero. A polynomial that
+vanishes at $L = 1$ contains a unit root, so it factorises as
+$B_{1j}(L) = \tilde{B}_{1j}(L)(1-L)$ with $\tilde{B}_{1j}(L)$ of order $p-1$, and since
+$(1-L)y_{jt} = \Delta y_{jt}$,
+\begin{equation}
+    B_{1j}(L)\,y_{jt} = \tilde{B}_{1j}(L)\,\Delta y_{jt} .
+    \label{eq:app_common_factor}
+\end{equation}
+The restriction has become a statement about the form the equation is allowed to take: the other
+variables may enter it only in first differences. Substituting \eqref{eq:app_common_factor} into
+the first equation gives
+\begin{equation}
+    y_{1t} = \sum_{k=1}^{p}\beta_{11,k}\,y_{1,t-k}
+           + \sum_{j=2}^{K}\sum_{k=0}^{p-1} \tilde{b}_{1j,k}\,\Delta y_{j,t-k} + w_{1t} .
+    \label{eq:app_eq1_sw}
+\end{equation}
+Its own lags enter in levels, everything else enters in differences, the contemporaneous
+difference included. Nothing has been imposed after the fact: the equation that is taken to the
+data already satisfies the restriction, whatever its coefficients turn out to be.
+
+\subsubsection*{Estimation by instrumental variables}
+
+Equation \eqref{eq:app_eq1_sw} cannot be estimated by least squares, because the contemporaneous
+terms $\Delta y_{jt}$ are correlated with $w_{1t}$. \citet{Shapiro_Watson88} estimate it by
+instrumental variables, taking the lagged levels
+\begin{equation}
+    Z_t = \bigl(Y_{t-1}',\, Y_{t-2}',\, \dots,\, Y_{t-p}'\bigr)'
+    \label{eq:app_instruments}
+\end{equation}
+as instruments. They are predetermined, hence orthogonal to $w_{1t}$, and they forecast the
+contemporaneous differences, hence relevant. The residual of that regression is
+$\hat{w}_{1t}$, the estimate of the capital embodied technology shock. This is what it means to
+say that the identified shock is read off as a regression residual.
+
+The second equation repeats the construction with two changes. The second restriction leaves
+both $y_1$ and $y_2$ unrestricted, since both technology shocks are allowed to move labour
+productivity permanently, so the common factor applies only to $j = 3,\dots,K$ and the condition
+is $B_{2j}(1) = 0$ for those $j$ alone. In addition the contemporaneous $y_{1t}$ now appears on
+the right hand side, and $\hat{w}_{1t}$ joins the instrument set: it is a valid instrument
+because the structural shocks are mutually orthogonal, so it is uncorrelated with $w_{2t}$,
+while being correlated with $y_{1t}$ by construction. The equation is
+\begin{equation}
+    y_{2t} = b_{21}y_{1t}
+           + \sum_{k=1}^{p}\bigl(\beta_{21,k}\,y_{1,t-k} + \beta_{22,k}\,y_{2,t-k}\bigr)
+           + \sum_{j=3}^{K}\sum_{k=0}^{p-1}\tilde{b}_{2j,k}\,\Delta y_{j,t-k} + w_{2t},
+    \label{eq:app_eq2_sw}
+\end{equation}
+and its residual $\hat{w}_{2t}$ is the neutral technology shock.
 
 
-
-\section{The ACEL Model: Full Derivation}
+\section{The ACEL Model}
 \label{app:model}
 
 This appendix reports the two model economies of \citet{ACEL2011}, the homogeneous and the
