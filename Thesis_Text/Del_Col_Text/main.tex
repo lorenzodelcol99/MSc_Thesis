@@ -1369,33 +1369,33 @@ responses identify their DSGE, following the line of work opened by \citet{Long_
 \citet{Baumeister2025}.
 \\
 
-Their main argument is that a VAR with few lags suffers from truncation bias, a form of
-misspecification that distorts the impulse responses at every horizon. Even where long-lag VARs
-are known to have good asymptotic properties \citep{Plagborg-Moller_Wolf2021}, they are widely
-treated as unworkable in finite samples, since the extra parametrisation that reduces the
-truncation bias is presumed to bring greater uncertainty around the estimates.
-\citet{Long_Lag2025} show that this is only part of the story: correcting the misspecification
-also lowers the variance of the residuals, and that works against the imprecision coming from the
-additional parameters. Neither paper reduces long-lag VARs to a robustness exercise. What they
-recommend is estimating with long lags in the first place, and the demand for robustness is only
-the fallback left to a researcher who insists on a short specification, who then carries the
-burden of showing that the result survives richer lag dynamics.
+The mechanism through which \citet{ACEL2011} reconcile inertial inflation with the frequent price
+changes found in micro data does not survive once the VAR is allowed a richer lag structure. The
+capacity utilisation cost $\sigma_a$ falls from $1.9938$ at $p = 4$ to $0.0042$ at $p = 12$, and
+since $\sigma_a$ is the only estimated parameter that governs the real rigidity $\chi$ in a
+quantitatively relevant way, its collapse removes the attenuation on which firm specificity
+depends. The implied duration of price contracts, $1.5$ quarters under firm-specific capital
+against $5.6$ under homogeneous capital at the baseline, becomes $9.0$ and $9.6$ quarters at
+$p = 12$. The reconciliation with the micro evidence is gone.
 \\
 
-It does not survive here. The capacity utilisation cost $\sigma_a$ falls from $1.9938$ at
-$p = 4$ to $0.0042$ at $p = 12$, and since $\sigma_a$ is the only estimated parameter that governs
-the real rigidity $\chi$ in a quantitatively relevant way, its collapse removes the attenuation on
-which firm specificity depends. The implied duration of price contracts, $1.5$ quarters under
-firm-specific capital against $5.6$ under homogeneous capital at the baseline, becomes $9.0$ and
-$9.6$ quarters at $p = 12$. The reconciliation with the micro evidence is gone, and the confidence
-bands narrow rather than widen as it disappears.
+The main argument of \citet{Long_Lag2025} and \citet{Baumeister2025} is that a VAR with few lags
+suffers from truncation bias, a form of misspecification that distorts the impulse responses at
+every horizon. Even where long-lag VARs are known to have good asymptotic properties
+\citep{Plagborg-Moller_Wolf2021}, they are widely treated as unworkable in finite samples, since
+the extra parametrisation that reduces the truncation bias is presumed to bring greater uncertainty
+around the estimates. \citet{Long_Lag2025} show that this is only part of the story: correcting the
+misspecification also lowers the variance of the residuals, and that works against the imprecision
+coming from the additional parameters. What they recommend is estimating with long lags in the first place, and the demand for
+robustness is only the fallback left to a researcher who insists on a short specification, who then
+carries the burden of showing that the result survives richer lag dynamics. Here the presumption
+does not bite either: the confidence bands narrow rather than widen as the result disappears.
 \\
 
 This is a preliminary and exploratory exercise, and it is confined to a frequentist medium-scale
 VAR used as a source of moments to estimate a DSGE. A natural next step is to ask how long-lag
 VARs behave in a comparable setting once the parametrisation is disciplined differently, through
 shrinkage techniques such as ridge or lasso, or through priors in a Bayesian setting.
-\\
 
 Despite the limitation of this work, this study draws attention to the choice of lag length, which in
 applied macroeconomics is usually settled by forecasting information criteria or by convention.
