@@ -70,7 +70,7 @@
         \citet{ACEL2011}, working on two versions of the \citet{CEE2005} model, show that this mismatch
         can be resolved by allowing for firm-specific capital in the macroeconomic framework. Crucially,
         this mechanism is shown to be supported by US time series data, as the theoretical model is
-        estimated with a vector autoregression (VAR) impulse response function minimum distance estimator,
+        estimated with a vector autoregression (VAR) impulse response functions (IRF) minimum distance estimator,
         relying on a parsimonious VAR dynamic structure. However, recent literature, \citet{Long_Lag2025}
         and \citet{Baumeister2025}, shows that VAR dynamic misspecification can substantially distort
         impulse responses and, therefore, lead to incorrect estimation of DSGE frameworks. Revisiting the
@@ -102,7 +102,7 @@
 Inflation is persistent. Once it rises it tends to stay high for some time, and bringing it back
 down is slow. This is a stylised fact of the data, visible in the post second World War history
 of US inflation in Figure \ref{fig:inflation}. That inertia is what monetary policy has to work
-against, so how far and how quickly policy can bring inflation back down depends on how inflation
+against, so, how far and how quickly policy can bring inflation back down depends on how inflation
 itself responds to a move in the policy instrument.
 
 \begin{figure}[htbp]
@@ -126,7 +126,7 @@ infrequent \citep{Ravenna2007, Aruoba_Drechsel2024_MP_LLM}.
 Dynamic Stochastic General Equilibrium (DSGE) models are built to reproduce those responses, and
 they deliver the observed inertia of inflation only by requiring firms to re-optimise their prices
 rarely, every six quarters and, without indexation to past inflation, even every two years. The microeconometric evidence finds price
-changes considerably more frequent \citep{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008}, so
+changes considerably more frequent \citep{BilsKlenow2004, GolosovLucas2007, KlenowKryvtsov2008, NakamuraSteinsson2008}, so
 aggregate and micro evidence point in opposite directions. \citet{ACEL2011} propose a resolution.
 They build two versions of the \citet{CEE2005} model, one with homogeneous and one with
 firm-specific capital, and in the second inflation is inertial even though firms re-optimise on
@@ -145,7 +145,9 @@ subset of shocks and stays agnostic about the rest of the data.
 That attractiveness rests on one maintained assumption, that the VAR delivers consistent estimates
 of the moments being matched. If it is misspecified, the specification error propagates into the
 structural statistics, at every horizon that enters the objective function \citep{Ramey2016,
-Canova_Fosso2025}. \citet[p.~3, fn.~10]{ACEL2011} say as much themselves: ``the quality of our
+Canova_Fosso2025, Humble_VARs_2026}. 
+
+\citet[p.~3, fn.~10]{ACEL2011} say as much themselves: ``the quality of our
 estimation strategy depends on the ability of identified VARs to generate reliable estimates of the
 dynamic response of economic variables to shocks''.
 \\
@@ -172,7 +174,7 @@ the first study to ask it.
 
 The main economic result follows from a single parameter. The cost of varying capital utilisation
 $\sigma_a$ falls from $1.9938$ at the baseline to $0.0042$ at $p = 12$, and $\sigma_a$ is what makes
-firm specificity bind. With utilisation almost free to vary, a firm tied to its own capital can
+firm-specificity of capital bind. With utilisation almost free to vary, a firm tied to its own capital can
 still obtain the services it needs, its marginal cost stops rising with its own output, and the real
 rigidity $\chi$ rises from $0.03$ to $0.87$ on non overlapping simulated intervals. The implied
 duration of price contracts, $1.5$ quarters under firm-specific capital against $5.6$ under
@@ -184,7 +186,7 @@ say the same thing about price stickiness, and the reconciliation with the micro
 Confidence intervals do not explode as the lag length grows. This can be seen in Figure \ref{fig:var_mp_irfs_all_ci}, 
 which contains the IRFs of a monetary policy shock: at $p = 12$ the bootstrap bands are
 narrower than at the baseline at every horizon and for every variable, with the single exception of
-MZM growth, so the variance reduction documented by \citet{Long_Lag2025} operates at the
+MZM growth, so the variance reduction of long-lag VARs documented by \citet{Long_Lag2025} operates at the
 parametrisation frontier. It reaches the structural estimates too: the Phillips curve slope
 $\gamma$, which cannot be distinguished from zero at the baseline, is six times more precise at
 $p = 12$.
@@ -210,18 +212,17 @@ misspecification of the dynamics enters the minimisation at every one of those h
 the substantive question is about the short run, then, $p$ has to be chosen with $h$ in mind.
 \\
 
-The VAR carries a short run recursive restriction for the monetary policy shock and long run
-restrictions for the two technology shocks, which makes it an unusually clean setting in which to
-separate the two channels of \citet{Ravenna2007}; pure truncation bias and identification bias.
-The responses to a monetary policy shock keep
-their sign and their shape at every lag order and move only in timing, with peaks arriving about a
-year later at $p = 12$. The responses to the two technology shocks do not: they change level and,
-for several variables, sign, and they disagree already on impact, where the relative price of
-investment falls from about $-0.45$ to $-0.1$ on an embodied technology shock, as can be seen in 
-Figure \ref{fig:var_et_irfs_lag12}. Pure truncation distorts propagation and cannot by itself 
-produce a disagreement at horizon zero, so this is the trace \citet{Ravenna2007} attributes 
+The third contribution is to use the VAR's own identification scheme to separate the two channels
+of \citet{Ravenna2007}: pure truncation bias and identification bias. The recursive short run
+restriction on the monetary policy shock and the long run restrictions on the two technology shocks
+make this an unusually clean setting in which to do so. The responses to a monetary policy shock
+keep their sign and their shape at every lag order and move only in timing, with peaks arriving
+about a year later at $p = 12$. The responses to the two technology shocks do not: they change
+level and, for several variables, sign, and they disagree already on impact, where the relative
+price of investment falls from about $-0.45$ to $-0.1$ on an embodied technology shock, as can be
+seen in Figure \ref{fig:var_et_irfs_lag12}. Pure truncation distorts propagation and cannot by
+itself produce a disagreement at horizon zero, so this is the trace \citet{Ravenna2007} attributes
 to identification bias, and it appears exactly where the theory says it should.
-
 
 \subsection{Related Literature}
 \textbf{Price stickiness.}
@@ -457,11 +458,11 @@ use a limited information approach, an IRF matching estimator,
 this procedure select and estimate the model's structural parameters that produce the DSGE IRFs, which
 minimises the distance with IRFs created from the SVAR. 
 
-Using an IRFME implies that the researcher is focusing to match on some limited aspects of the DSGE \citep{Giacomini2013}; 
-it is choosing an identification strategy for the reduced form VAR in a way that is consistent with the key determinants of the DSGE.
-The VAR and theoretical IRFs are identified by restrictions implied by the DSGE. Which means that the DSGE 
-admits a structural VAR representation, in this way, sample moments of the VAR are informative for the 
-theoretical model's structural parameters \citep{Hall_Inoue_Nason_Rossi2012}.
+Using an IRFME means that the researcher matches only a limited set of the DSGE's implications \citep{Giacomini2013};
+the identification strategy for the reduced form VAR is chosen so as to be consistent with the key determinants
+of the DSGE. Both the SVAR and the theoretical responses are identified by restrictions that the DSGE implies, 
+so that the sample moments of the VAR are informative about the structural parameters of the theoretical 
+model \citep{Hall_Inoue_Nason_Rossi2012}.
 
 \citet{Theodoridis2011}, following \citet{Canova1994, Canova2007}, notes that many DSGE economists prefer to use 
 partial information estimators rather than full information ones, like maximum likelihood, because they 
@@ -567,8 +568,8 @@ are described in Appendix \ref{app:data}.
 Identification combines a short-run and a long-run restriction. The full derivation
 is in Appendix \ref{app:identification}.
 
-These restrictions identify three shocks out of ten. IRFME matches the IRFs of the three identified shocks, 
-not on those not identified.
+These restrictions identify three shocks out of ten, and the IRFME matches only the impulse responses of
+those three.
 
 \subsection{Estimating the Parameters of the Equilibrium Model}
 Using \citet{ACEL2011} notation, let $\zeta$ denote the structural model parameters that are aimed to be estimated, and $\Psi(\zeta)$ being the mapping 
@@ -585,9 +586,9 @@ those set to zero by identification, against the model-implied counterpart.
 Here, V is a diagonal matrix composed by the sample variances along the diagonal $\hat{\Psi}$.
 Those variances, compose the confidence intervals around the point estimates of the SVAR IRFs.
 With this choice of V, the estimated model's structural parameters $\hat{\zeta}$ are the value 
-of ${\zeta}$ that ensures that the $\hat{\Psi}$ DSGE's IRFs lies as much as possible inside the VAR IRFs' confidence intervals.
-Standard errors of the DSGE's structural parameters $\hat{\zeta}$ are computed using the Delta method, 
-more detail in the Appendix \ref{app:delta_method}
+of ${\zeta}$ that ensures that the $\Psi(\zeta)$ DSGE's IRFs lies as much as possible inside the 
+VAR IRFs' confidence intervals. Standard errors of the DSGE's structural parameters $\hat{\zeta}$ 
+are computed using the Delta method, more detail in the Appendix \ref{app:delta_method}
 
 The minimum distance estimator relies on the ability of the VAR to estimate the IRFs.
 \textit{"if the VAR is misspecified, the specification errors will be computed at each horizon"}
@@ -782,29 +783,28 @@ It does not weight differently short vs. long lags as would do other priors like
 \subsubsection*{Long-Lag Benefits}
 \label{sec:long-lag_benefits}
 
-\citet{Long_Lag2025} analyse how the truncated VARs of the three DSGE with VAR($\infty$) 
-representation behave. 
-The results are much in favor for long-lag VARs.
-The variance-reducing effect of lower misspecification often dominates the penalty of increased parametrisation.
+\citet{Long_Lag2025} study how truncated VARs behave when the data are generated by three DSGE models that
+admit a VAR($\infty$) representation. The results favour long-lag VARs: the variance-reducing effect of lower
+misspecification often dominates the penalty of the extra parameters.
 In a nutshell, Long-Lag VARs, reduce truncation bias, have more 
 precise inference, reduced Mean Squared Error (MSE) and better coverage.
+\\
 
-Short-lag VARs have maximum uncertainty for horizons where uncertainty is not mechanically low.
-For longer horizons, short-lag VARs have minimum CI width, this because a VAR($p$) cannot propagate much 
-beyond horizon $p$, VARs with lag length extrapolate impulse responses for 
-horizons $h > p$ from the first $p$ autocovariances \citep{Baumeister2025}. 
-Therefore uncertainty cannot propagate much beyond that horizon either.
+Short-lag VARs display their widest bands at the horizons where uncertainty is not mechanically low. At longer
+horizons their confidence intervals are instead at their narrowest, because a VAR($p$) cannot propagate much
+beyond horizon $p$: for $h > p$ it extrapolates the impulse responses from the first $p$ autocovariances
+\citep{Baumeister2025}, so uncertainty cannot propagate much beyond that horizon either.
 
 Uncertainty does not explode with the lag length increase; instead for VARs with very long lags, confidence bands 
 are roughly in the same ballpark as those of short-lag VARs.
 
-
 Long-Lag VARs have comparable coverage rates and comparable MSE than short-lag VARs, combined with 
 the tendency to produce smaller biases, long-lag VARs have favorable properties compared to standard short-lag VARs.
+\\
 
-\citet{Long_Lag2025} leverage to the above mentioned Monte Carlo simulation proposing an exercise that decompose the uncertainty effects creating hypothetical IRFs
-that are composed by long-lag estimates of the point estimates, while using short-lag estimates of variance covariance matrix 
-obtaining an $IRF = f(B_{30}(L), \Sigma_4)$. Such IRFs can be interpreted as isolating the effect of increased parametrisation.
+\citet{Long_Lag2025} use the same Monte Carlo design to decompose these uncertainty effects. They construct
+hypothetical impulse responses that combine long-lag point estimates with a short-lag variance covariance
+matrix, that is $IRF = f(B_{30}(L), \Sigma_4)$, which isolates the effect of the increased parametrisation.
 
 The standard intuition would suggest that long-lag length makes the entire distribution shift outward,
 through the additional uncertainty created by the strong increase of parameters.
@@ -1910,12 +1910,12 @@ from the Monte Carlo simulation.
 \clearpage
 
 % =============================================================
-% APPENDIX: DSGE IN STATE SPACE ABC AND D REPRESENTATION IN VAR(\infty)
+% APPENDIX: DSGE IN STATE SPACE REPRESENTATION as VAR(\infty)
 % =============================================================
-\section{DSGE in State Space ABC and D Representation into VAR($\infty$)}
+\section{DSGE in State Space representation as VAR($\infty$)}
 \label{app:ABCD}
 
-A log linearised DSGE solution can be written in the state space ABCD representation of equations
+A log-linearised DSGE solution can be written in the state space ABCD representation of equations
 \eqref{eq:state_eq} and \eqref{eq:obserbable_eq}. For a set of observables $y_t$, the VAR innovations
 $a_t$ are a linear combination of the history of the model's economic shocks $w_t$ up to $t$.
 
