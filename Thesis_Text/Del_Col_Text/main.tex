@@ -67,14 +67,14 @@
 \noindent
         Inflation persistence in dynamic stochastic general equilibrium (DSGE) models tends to imply a
         high level of price stickiness, while much lower rigidity in prices is found in micro data.
-        \cite{ACEL2011}, working on two versions of the \cite{CEE2005} model, show that this mismatch
+        \citet{ACEL2011}, working on two versions of the \citet{CEE2005} model, show that this mismatch
         can be resolved by allowing for firm-specific capital in the macroeconomic framework. Crucially,
         this mechanism is shown to be supported by US time series data, as the theoretical model is
         estimated with a vector autoregression (VAR) impulse response function minimum distance estimator,
-        relying on a parsimonious VAR dynamic structure. However, recent literature, \cite{Long_Lag2025}
-        and \cite{Baumeister2025}, shows that VAR dynamic misspecification can substantially distort
+        relying on a parsimonious VAR dynamic structure. However, recent literature, \citet{Long_Lag2025}
+        and \citet{Baumeister2025}, shows that VAR dynamic misspecification can substantially distort
         impulse responses and, therefore, lead to incorrect estimation of DSGE frameworks. Revisiting the
-        results in \cite{ACEL2011}, I show that, when allowing for long-lag VARs, the evidence in favour
+        results in \citet{ACEL2011}, I show that, when allowing for long-lag VARs, the evidence in favour
         of low price stickiness in models with firm-specific capital vanishes, and the micro--macro price
         friction mismatch reemerges.
 
@@ -913,7 +913,8 @@ used to estimate their DSGE parameters.
 Doing this exercise, I extend the work of \citet{Long_Lag2025} in three different aspects.
 
 First, in Monte Carlo laboratory that \citet{Long_Lag2025} have created to evaluate the three DSGE that have chosen 
-to use to generate data, all respect an important assumption, \citet{FVRRSS2007} Poor Man's condition.
+to use to generate data, all respect an important assumption, \citet{FVRRSS2007} Poor Man's condition\footnote{In 
+Appendix \ref{app:ABCD} the ABC and D DSGE representation derivation as in \citet{FVRRSS2007}}.
 All the DSGE admits a VAR($\infty$) representation, and because of this they can evaluate the performance 
 of truncated VARs, which are fully informative. They are bivariate, with two variables and two shocks.
 The VAR used in \citet{ACEL2011} confronts three shocks with ten observable variables.
@@ -1431,6 +1432,9 @@ conclusions of \citet{Jorda2024long_run_mp} stand at all.
 \begin{appendices}
 \textbf{\LARGE{Appendix}}
 
+% =============================================================
+% APPENDIX: DATA
+% =============================================================
 \section{Data}
 \label{app:data}
 Nothing in this appendix has been changed from the original source. The description of the data below reproduces, in my own words, what \citet[fn.~15]{ACEL2005WP} report in their footnote 15.
@@ -1502,6 +1506,11 @@ thesis correspondingly more quarters are consumed in the same way, as reported i
 \end{figure}
 \FloatBarrier
 
+\clearpage
+
+% =============================================================
+% APPENDIX: INDENTIFICATION STRATEGY
+% =============================================================
 \section{Identification strategy}
 \label{app:identification}
 
@@ -1615,7 +1624,11 @@ combination of reduced form innovations from the one the assumption defines. Not
 happens to the funds rate equation, whose zeros are statements about contemporaneous covariances
 and keep their meaning at any lag order.
 
+\clearpage
 
+% =============================================================
+% APPENDIX: THE ACEL MODEL
+% =============================================================
 \section{The ACEL Model}
 \label{app:model}
 
@@ -1738,8 +1751,11 @@ of $\xi_p$ that a given estimated $\gamma$ implies once $\chi$ is fixed at one o
 the non-linear mapping, which is the exercise carried out in Sections
 \ref{sec:2.2homog_bs_firm-spec_capital}, \ref{sec:results_params} and \ref{sec:results_duration}.
 
+\clearpage
 
-
+% =============================================================
+% APPENDIX: ACEL 2005 WP TABLE 2
+% =============================================================
 \section{ACEL 2005 WP Table 2}
 \label{app:acelwp05_table_2}
 
@@ -1752,7 +1768,11 @@ Table 2 reported in \citet{ACEL2005WP} at page 41.
     \label{tab:acelwp05_table_2}
 \FloatBarrier
 
+\clearpage
 
+% =============================================================
+% APPENDIX: DELTA METHOD
+% =============================================================
 \section{Delta Method}
 \label{app:delta_method}
 Following the standard error estimation strategy for the DSGE structural parameters chosen by \citet{ACEL2005WP}
@@ -1780,6 +1800,11 @@ Then, implicit function theorem is used to approximate $f'(\Psi^0)$ by $-L_{11}(
 Then, $V$ is not selected as random, in practice a diagonal matrix is built using the VAR IRFs variances $W$.
 In addition, $W$ is replaced by its sample estimate, as are $\zeta^0$ and $\Psi^0$ in the expression for $f'$.
 
+\clearpage
+
+% =============================================================
+% APPENDIX: MONTE CARLO INFERENCE ON THE CALVO PARAMETERS
+% =============================================================
 \section{Monte Carlo Inference on the Calvo Parameters}
 \label{app:montecalvo}
 
@@ -1882,7 +1907,123 @@ from the Monte Carlo simulation.
 \end{figure}
 \FloatBarrier
 
+\clearpage
 
+% =============================================================
+% APPENDIX: DSGE IN STATE SPACE ABC AND D REPRESENTATION IN VAR(\infty)
+% =============================================================
+\section{DSGE in State Space ABC and D Representation into VAR($\infty$)}
+\label{app:ABCD}
+
+A log linearised DSGE solution can be written in the state space ABCD representation of equations
+\eqref{eq:state_eq} and \eqref{eq:obserbable_eq}. For a set of observables $y_t$, the VAR innovations
+$a_t$ are a linear combination of the history of the model's economic shocks $w_t$ up to $t$.
+
+Here I report the conditions, found by \citet{FVRRSS2007}, on the linear approximation of the economic
+model under which $w_t$ can be recovered from the history of $y_s$ through $t$.
+
+State Space:
+\begin{equation}
+    x_{t+1} = Ax_t + Bw_t
+    \label{eq:state_eq}
+\end{equation}
+
+\begin{equation}
+    y_t = Cx_t + Dw_t
+    \label{eq:obserbable_eq}
+\end{equation}
+
+Where $w_t$ is a Gaussian vector of white noise which satisfies $\mathbb{E}[w_t] = 0$, $\mathbb{E}[w_t w_t'] = \mathbb{I}$ and
+$\mathbb{E}[w_t w_{t-j}'] = 0$ for $j \neq 0$.
+\\
+
+Here $x_t$ is an $n \times 1$ vector of possibly unobserved state variables, $y_t$ is a $k \times 1$ vector of variables
+observed by an econometrician, and $w_t$ is an $m \times 1$ vector of economic shocks and measurement errors impinging
+on the states and observables. The observation vector $y_t$ typically includes some prices, quantities,
+and capital stocks. With $m$ shocks in the theoretical economic model, $n$ states, and $k$ observables, $A$ is an
+$n \times n$, $B$ is $n \times m$, $C$ is $k \times n$, and finally $D$ is a $k \times m$. In general, $k \geq m$, which means
+that typically the number of economic shocks is less than number of observables, as in \citet{ACEL2011}, and
+particularly stressed by \citet{Forni_Gambetti_Sala2016}.
+
+But here the focus is on the square case, where $k = m$.
+\\
+
+Assuming that $D$ is a square matrix, and that $D^{-1}$ exists.
+
+Equation \eqref{eq:obserbable_eq} can be re-written as
+
+\begin{equation}
+    Dw_t = y_t - Cx_t
+\end{equation}
+
+then
+
+\begin{equation}
+    D^{-1}Dw_t = D^{-1}(y_t - Cx_t)
+\end{equation}
+
+therefore
+
+\begin{equation}
+    w_t = D^{-1}(y_t - Cx_t)
+    \label{eq:w_t}
+\end{equation}
+
+substituting $w_t$, equation \eqref{eq:w_t}, into \eqref{eq:state_eq}
+
+\begin{equation}
+\begin{split}
+    x_{t+1} &= Ax_t + BD^{-1}(y_t - Cx_t) \\
+    &= Ax_t + BD^{-1}y_t - BD^{-1}Cx_t
+\end{split}
+\end{equation}
+
+therefore
+\begin{equation}
+    x_{t+1} = (A - BD^{-1}C)x_t +  BD^{-1}y_t
+\end{equation}
+
+which then can be re-written as
+
+\begin{equation}
+    x_{t+1} - (A - BD^{-1}C)x_t =  BD^{-1}y_t
+\end{equation}
+
+and finally
+
+\begin{equation}
+    [\mathbb{I} - (A - BD^{-1}C)L] x_{t+1} =  BD^{-1}y_t
+\end{equation}
+
+Poor man's invertibility condition asks that: all the eigenvalues of $A - BD^{-1}C$ are strictly less than
+one in modulus. Then the inverse of the operator on the left of this equation gives a square summable power
+series in $L$. And then we can solve for $x_{t+1}$.
+
+The same logic applies to any stationary autoregression: if the lag polynomial $\Phi(L)$ has its roots
+outside the unit circle, its inverse exists and can be written as the power series
+$\Phi(L)^{-1} = \sum_{j=0}^{\infty} \Phi_j L^j$.
+
+\begin{equation}
+    x_{t+1} = \sum_{j=0}^{\infty} [A - BD^{-1}C]^j BD^{-1}y_{t-j}
+    \label{eq:x_to_shift_back}
+\end{equation}
+
+Then, shifting equation \eqref{eq:x_to_shift_back} back one period and substituting it into
+\eqref{eq:obserbable_eq}
+
+\begin{equation}
+    y_t = C \sum_{j=0}^{\infty} [A - BD^{-1}C]^j BD^{-1}y_{t-j-1} + Dw_t
+    \label{eq_var_infty_repr_abcd}
+\end{equation}
+
+Equation \eqref{eq_var_infty_repr_abcd} is the VAR($\infty$) representation of the DSGE under the Poor man's
+invertibility condition, where $Dw_t$ is the VAR innovation $a_t$ of the opening paragraph.
+
+\clearpage
+
+% =============================================================
+% APPENDIX: ADDITIONAL RESULTS
+% =============================================================
 \section{Additional Results}
 \label{app:additional_results}
 
@@ -1912,6 +2053,11 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 \end{figure}
 \FloatBarrier
 
+\clearpage
+
+% =============================================================
+% APPENDIX: DSGE IRFS
+% =============================================================
 \subsection{DSGE IRFs}
 \label{app:dsge_irfs}
 
@@ -1945,6 +2091,11 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 \end{figure}
 \FloatBarrier
 
+\clearpage
+
+% =============================================================
+% APPENDIX: DSGE AND VAR IRFS
+% =============================================================
 \subsection{DSGE and VAR IRFs}
 \label{app:dsge_and_var_irfs}
 
@@ -2035,9 +2186,11 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 \end{figure}
 \FloatBarrier
 
+\clearpage
 
-
-% RESIDUALS
+% =============================================================
+% APPENDIX: RESIDUALS
+% =============================================================
 \subsection{Residuals}
 \label{app:residuals}
 
@@ -2062,7 +2215,11 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 \end{figure}
 \FloatBarrier
 
+\clearpage
 
+% =============================================================
+% APPENDIX: VAR ALIGNED
+% =============================================================
 \subsection{VAR Aligned}
 \label{app:VAR_aligned}
 
