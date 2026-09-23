@@ -23,7 +23,7 @@
 \usepackage{subfig}
 \usepackage{booktabs}
 \usepackage{placeins}
-\usepackage[titletoc]{appendix}
+\usepackage{appendix}
 % NB: il pacchetto "underscore" e' stato rimosso: e' incompatibile con le chiavi
 % bibliografiche che contengono un underscore (es. Long_Lag2025). Se serve un
 % underscore letterale nel testo, scrivere "\_".
@@ -53,7 +53,7 @@
 % FRONTESPIZIO
 % =============================================================
 \title{DSGE Model Estimation via VAR IRF Matching: \\ The Short and Long of It
-\thanks{I am indebted to Efrem Castelnuovo for his invaulable guidance.
+\thanks{I am indebted to Efrem Castelnuovo for his invaluable guidance.
         \\
         For helpful comments and suggetions, I thank Nicolò Greggio, Mariano Kulish, Giovanni Pellegrino, all the macro 
         research group and dSEA PhD community of the University of Padova.}}
@@ -82,7 +82,7 @@
         friction mismatch reemerges.
 
     \vspace{0.3cm}
-    \noindent\textbf{Keywords:} Truncation Bias, Long-Lag VARs, DSGE Estimation, IRF Minimum Distance, Nominal Rigidities
+    \noindent\textbf{Keywords:} Truncation Bias, Long-Lag VARs, DSGE Estimation, IRF Minimum Distance, Price Stickiness
     \\
     \noindent\textbf{JEL Codes:} C32, C52, E32
 \end{abstract}
@@ -281,7 +281,7 @@ the estimated structural parameters as much as the estimation method itself, and
 \citet{Canova1994, Canova2007} set out the wider case for judging a model by economic rather than
 statistical distance.
 
-\subsection{Outline}
+\subsection*{Outline}
 
 Section \ref{sec:model} presents the model, the micro--macro conflict it is meant to resolve, the
 role of the real rigidity $\chi$ and of the cost of varying capital utilisation $\sigma_a$, and the
@@ -1433,12 +1433,12 @@ conclusions of \citet{Jorda2024long_run_mp} stand at all.
 % APPENDIX
 % =============================================================
 \begin{appendices}
-\textbf{\LARGE{Appendix}}
+\section{Appendix}
 
 % =============================================================
 % APPENDIX: DATA
 % =============================================================
-\section{Data}
+\subsection{Data}
 \label{app:data}
 Nothing in this appendix has been changed from the original source. The description of the data below reproduces, in my own words, what \citet[fn.~15]{ACEL2005WP} report in their footnote 15.
 \\
@@ -1514,7 +1514,7 @@ thesis correspondingly more quarters are consumed in the same way, as reported i
 % =============================================================
 % APPENDIX: INDENTIFICATION STRATEGY
 % =============================================================
-\section{Identification strategy}
+\subsection{Identification strategy}
 \label{app:identification}
 
 \citet{ACEL2011} identify the system with two kinds of restriction at once, a recursive scheme
@@ -1532,7 +1532,7 @@ with $y_{it}$ the $i$th element of $Y_t$ in \eqref{eq:Yt} and $w_{it}$ the $i$th
 shock. Identification amounts to deciding, equation by equation, which contemporaneous variables
 may appear on the right and under which constraints.
 
-\subsection*{Recursive identification of the monetary policy shock}
+\subsubsection*{Recursive identification of the monetary policy shock}
 
 The recursive scheme of \citet{CEE2005} splits the system at the policy instrument. In the
 ordering of \eqref{eq:Yt} the funds rate is the ninth variable and velocity the tenth, so
@@ -1560,7 +1560,7 @@ policy shock is realised, while velocity, being financial, adjusts immediately. 
 therefore orthogonal to the whole slow moving block by construction, and is not identified
 through the sum of any lag polynomial, a point taken up at the end of this appendix.
 
-\subsection*{Long run identification of the technology shocks}
+\subsubsection*{Long run identification of the technology shocks}
 
 The technology shocks are identified by what they do in the long run rather than by what they
 do within the quarter. \emph{First}, only the capital embodied technology shock affects the
@@ -1632,7 +1632,7 @@ and keep their meaning at any lag order.
 % =============================================================
 % APPENDIX: THE ACEL MODEL
 % =============================================================
-\section{The ACEL Model}
+\subsection{The ACEL Model}
 \label{app:model}
 
 This appendix reports the two model economies of \citet{ACEL2011}, the homogeneous and the
@@ -1643,7 +1643,7 @@ conditions from which that comparison is derived, kept to the equations needed t
 $\sigma_a$, $S''$ and $\chi$ enter and where the two models coincide or part company. The
 exposition follows \citet{ACEL2011} section 2, and I keep their notation throughout.
 
-\subsection*{The homogeneous capital model}
+\subsubsection*{The homogeneous capital model}
 
 The economy is populated by goods-producing firms, households and the government.
 
@@ -1719,7 +1719,7 @@ loan market clearing, $W_tH_t = x_tM_t - Q_t$, and the aggregate resource constr
 $[1+\eta(V_t)]C_t + \Upsilon_t^{-1}I_t + a(u_t)\bar{K}_t \le Y_t$, and is solved by log-linear
 approximation around the non-stochastic steady state.
 
-\subsection*{The firm-specific capital model}
+\subsubsection*{The firm-specific capital model}
 
 Every equation above is unchanged except that firms now own their capital and cannot adjust
 their stock within the period: firm $i$'s capital accumulates according to its own version of
@@ -1730,7 +1730,7 @@ economy-wide margin but each firm's own, private cost of meeting extra demand. T
 prices, employment, investment and utilisation to maximise the discounted value of net cash flow,
 subject to the same timing and Calvo pricing friction as in the homogeneous model.
 
-\subsection*{Implications for inflation}
+\subsubsection*{Implications for inflation}
 
 The equilibrium conditions of the two models coincide except for the equation governing
 aggregate inflation, which takes the form
@@ -1759,7 +1759,7 @@ the non-linear mapping, which is the exercise carried out in Sections
 % =============================================================
 % APPENDIX: ACEL 2005 WP TABLE 2
 % =============================================================
-\section{ACEL 2005 WP Table 2}
+\subsection{ACEL 2005 WP Table 2}
 \label{app:acelwp05_table_2}
 
 I report Table \ref{tab:acelwp05_table_2}, which is the exact reproduction of the 
@@ -1776,7 +1776,7 @@ Table 2 reported in \citet{ACEL2005WP} at page 41.
 % =============================================================
 % APPENDIX: DELTA METHOD
 % =============================================================
-\section{Delta Method}
+\subsection{Delta Method}
 \label{app:delta_method}
 Following the standard error estimation strategy for the DSGE structural parameters chosen by \citet{ACEL2005WP}
 and well explained in their footnote number 14.
@@ -1808,7 +1808,7 @@ In addition, $W$ is replaced by its sample estimate, as are $\zeta^0$ and $\Psi^
 % =============================================================
 % APPENDIX: MONTE CARLO INFERENCE ON THE CALVO PARAMETERS
 % =============================================================
-\section{Monte Carlo Inference on the Calvo Parameters}
+\subsection{Monte Carlo Inference on the Calvo Parameters}
 \label{app:montecalvo}
 
 Neither $\chi$ nor the Calvo price stickiness parameters $\xi_p$ are estimated directly. They
@@ -1915,7 +1915,7 @@ from the Monte Carlo simulation.
 % =============================================================
 % APPENDIX: DSGE IN STATE SPACE REPRESENTATION as VAR(\infty)
 % =============================================================
-\section{DSGE in State Space representation as VAR($\infty$)}
+\subsection{DSGE in State Space representation as VAR($\infty$)}
 \label{app:ABCD}
 
 A log-linearised DSGE solution can be written in the state space ABCD representation of equations
@@ -2027,10 +2027,10 @@ invertibility condition, where $Dw_t$ is the VAR innovation $a_t$ of the opening
 % =============================================================
 % APPENDIX: ADDITIONAL RESULTS
 % =============================================================
-\section{Additional Results}
+\subsection{Additional Results}
 \label{app:additional_results}
 
-\subsection{Tech shocks IRFs with all confidence intervals}
+\subsubsection{Tech shocks IRFs with all confidence intervals}
 \label{app:irfs_confidence_intervals}
 
 In Figure \ref{fig:var_et_irfs_all_ci} and \ref{fig:var_nt_irfs_all_ci} are reported the IRFs images that include the 
@@ -2061,7 +2061,7 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 % =============================================================
 % APPENDIX: DSGE IRFS
 % =============================================================
-\subsection{DSGE IRFs}
+\subsubsection{DSGE IRFs}
 \label{app:dsge_irfs}
 
 \begin{figure}[htbp]
@@ -2099,7 +2099,7 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 % =============================================================
 % APPENDIX: DSGE AND VAR IRFS
 % =============================================================
-\subsection{DSGE and VAR IRFs}
+\subsubsection{DSGE and VAR IRFs}
 \label{app:dsge_and_var_irfs}
 
 \begin{figure}[htbp]
@@ -2194,7 +2194,7 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 % =============================================================
 % APPENDIX: RESIDUALS
 % =============================================================
-\subsection{Residuals}
+\subsubsection*{Residuals}
 \label{app:residuals}
 
 \begin{figure}[htbp]
@@ -2212,7 +2212,7 @@ $95\%$ confidence interval of every lag choice, not only for the baseline VAR($4
 % =============================================================
 % APPENDIX: VAR ALIGNED
 % =============================================================
-\subsection{VAR Aligned}
+\subsubsection{VAR Aligned}
 \label{app:VAR_aligned}
 
 The baseline results in the main text use, for every lag order, all the observations available to that
@@ -2221,7 +2221,7 @@ choice matters, by re-estimating every VAR on the sample common to all three lag
 the VAR($12$), and comparing the resulting impulse responses and structural parameters against the full-sample
 baseline reported in the main text.
 
-\subsection*{Impulse responses}
+\subsubsection*{Impulse responses}
 
 Figures \ref{fig:var_4_aligned_mp_irfs_comparison} and \ref{fig:var_8_aligned_mp_irfs_comparison} compare the
 aligned and full-sample responses to a monetary policy shock, with their own $95$ percent bootstrap confidence
@@ -2299,7 +2299,7 @@ Both technology shocks are identified with long run restrictions, which do not p
 response on impact, and for this reason some of these responses differ more between the baseline and the
 aligned version than the monetary policy responses do.
 
-\subsection*{Structural parameters and implied duration}
+\subsubsection*{Structural parameters and implied duration}
 
 Table \ref{tab:dsge_params_alignment_vs_benchmark} compares the DSGE parameters estimated once every VAR is
 aligned on a common sample with those estimated in the baseline exercise, already reported in Section
