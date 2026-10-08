@@ -56,7 +56,7 @@
     \footnotesize \textit{University of Padova} \\ 
     \footnotesize \textit{MSc Applied Economics}
 }
-\date{September 2026}
+\date{October 14, 2026}
 
 \begin{document}
 
@@ -119,18 +119,18 @@
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item \textit{If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
+        \item \textit{``If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
         \vspace{0.1cm}
         \\
         \hfill {\small \textbf{Ramey (2016) p. 83} }
         \vspace{0.3cm}
         \pause
         
-        \item \textcolor{PadovaRed}{\textbf{Truncation Bias is a type of misspecification}} that arises when the VAR lag order is shorter respect its DGP. 
+        \item \textcolor{PadovaRed}{\textbf{Truncation Bias is a type of misspecification}} that arises when the VAR lag order is shorter than its DGP. 
         \vspace{0.3cm}
         \pause
 
-        \item Misspecification can deliver distorted results misinforming the central banker
+        \item Misspecification can deliver distorted results misinforming the central banker % researcher or central banker
     \end{itemize}
 
 \end{frame}
@@ -146,7 +146,7 @@
     \end{itemize}
     
     \vspace{0.4cm}
-    \textbf{What it's done:}
+    \textbf{What's been done:}
     \begin{itemize}
         \item Revisit ACEL contribution, estimating Homogeneous vs Firm Specific Capital versions of their DSGE with VARs with different dynamic structures
     \end{itemize}
@@ -177,21 +177,21 @@
 % RELATED LITERATURE
 % =======================================
 \begin{frame}{Related Literature}
+    \textbf{Price Stickiness:}
+    \begin{itemize}
+        \item {\footnotesize Altig et al., (2011); Bils and Klenow, (2004); Golosov and Lucas, (2007); Klenow and Kryvtsov, (2008); Nakamura and Steinsson, (2008)}
+    \end{itemize}
     \textbf{Long-Lag VARs:}
     \begin{itemize}
-        \item {\small De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026)}
+        \item {\footnotesize De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026); Plagborg-Moller and Wolf, (2021); Ludwig, (2026)}
     \end{itemize}
-    \textbf{Truncation Bias:}
+    \textbf{Truncation Bias and the DSGE-VAR mapping:}
     \begin{itemize}
-        \item {\small Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026)}
+        \item {\footnotesize Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026); Fernandez-Villaverde et al., (2007); Faust and Leeper, (1997); Lippi and Reichlin, (1993); Forni et al (2016)}
     \end{itemize}
- %   \textbf{DSGE State Space representation into VAR($\infty$)}
- %   \begin{itemize}
- %       \item {\small Fernández-Villaverde et al., (2005); Ravenna, (2007); Giacomini, (2013); Theodoridis, (2011); Forni et al., (2016)}
- %   \end{itemize}
-    \textbf{DSGE IRFs matching with VARs}
+    \textbf{Impulse Response Matching and DSGE Estimation:}
     \begin{itemize}
-        \item {\small Rotemberg and Woodford (1997); Christiano et al., (2005); Boivin and Giannoni (2006); Altig et al., (2011); Rossi et al., (2012)}
+        \item {\footnotesize Rotemberg and Woodford, (1997); Christiano et al., (2005); Altig et al., (2011); Iacovello (2005); Bovin and Giannoni (2006), Hall et al (2012); Giacomini (2013); Theodoridis (2011); Guerron-Quintana (2010)}
     \end{itemize}
 \end{frame}
 
@@ -200,7 +200,7 @@
 % ACEL'S MECHANISM 1
 % =======================================
 \begin{frame}{ACEL's DSGE Mechanism}
-    ACEL build two models on Christiano et al. JPE, (2005):
+    ACEL builds two models on Christiano et al. JPE, (2005):
     \begin{itemize}
         \item Homogeneous capital
         \item Firm-specific capital
@@ -248,7 +248,7 @@
     \item In the \textbf{Homogeneous} model, $\chi = 1$: $\gamma$ depends only on $\beta$
     \item In the \textbf{Firm-specific} model, $\chi < 1$ and captures two forces that make a firm move its price \textit{less} when it can reset:
     \begin{itemize}
-        \item It depends on Variable Capital Utilization $\sigma_a$
+        \item It depends on Variable Capital Utilisation $\sigma_a$
         \item The costlier it is to vary capital utilization, the steeper the firm's own marginal cost curve
         \item The more elastic the firm's demand, the larger the fall in output (and hence in marginal cost) after a price increase
     \end{itemize}
@@ -257,7 +257,7 @@
     \item So $\chi$ governs \textbf{how much} a firm moves its price
     \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
 \end{itemize}
- Given a fixed value of $\gamma$, a smaller $\chi$ imply a smaller $\xi_p$
+ Given a fixed value of $\gamma$, a smaller $\chi$ implies a smaller $\xi_p$
 \end{frame}
 
 
@@ -265,7 +265,7 @@
 % ACEL'S Shock Propagation Mechanism
 % =======================================
 
-\begin{frame}{ACEL'S Monetary Policy Shock Propagation Mechanism}
+\begin{frame}{ACEL's Monetary Policy Shock Propagation Mechanism}
 \large
 
 % --- Shared part: identical text on both overlays, held fixed at the top.
@@ -425,7 +425,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
             {\includegraphics[width=0.95\linewidth]{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}}
             {\fbox{Missing file: InSample\_Residuals\_Fed\_Funds\_Rate.pdf}}
-        \caption{FFR Residuals Comparison Across lag 4 Vs 12 }
+        \caption{FFR Residuals Comparison Across Lags 4 vs 12}
         \label{fig:placeholder1}
     \end{figure}
 \end{frame}
@@ -468,7 +468,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \item Re-estimate the DSGE by IRFs matching
         \vspace{0.2cm}
 
-        \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choice}}
+        \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choices}}
     \end{itemize}
 \end{frame}
 
@@ -562,11 +562,11 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 %  Conclusions
 % =======================================
 \begin{frame}{Conclusions}
-    Following the advices from the Long-Lag VARs literature.
+    Following the advice from the Long-Lag VARs literature.
     \\
-    Replicating ACEL et. al., (2005), enriching the VAR lag structure I find that:
+    Replicating ACEL et al., (2005), enriching the VAR lag structure I find that:
     \begin{itemize}
-        \item Capacity Utilization Cost, crucial variable to justify the firm specific model, dramatically shrinks to 0
+        \item Capacity Utilisation Cost, crucial variable to justify the firm specific model, dramatically shrinks to 0
         \item Firm specificity of capital seems not the key concept to explain inflation inertia
         \item ACEL's evidence on firm specific capital is not robust to long-lag VARs
     \end{itemize} 
@@ -635,24 +635,15 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \item Estimating the VAR at $p=12$ we approach the feasible limit: only $T_u-k = 38$ degrees of freedom per equation, and a total number of coefficients $n + n^2 p = 1210$
         \item Bootstrap Confidence Intervals actually shrink!
         \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
-        "Misspecification reduction not only leads to Bias-Variance trade off, but it reduces variance" 
+        ``Misspecification reduction not only leads to Bias-Variance trade-off, but it reduces variance''
     \end{itemize}
 \end{frame}
 
 % =======================================
-%  DSGE IRFs: MP
+%  Long Rung Identification Fragilities
 % =======================================
-\begin{frame}{DSGE IRFs; Monetary Policy Shock}
-    \begin{figure}
-        \centering
-        \IfFileExists{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
-            {\includegraphics[width=0.95\linewidth]{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
-            {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-        \caption{DSGE IRFs Long Lag Progressively Plots 4 8 12 }
-        \label{fig:placeholder1}
-    \end{figure}
+\begin{frame}{Long Rung Identification Fragilities}
 \end{frame}
-
 
 % =======================================
 %  VAR IRFs: NT
@@ -683,6 +674,19 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 \end{figure}
 \end{frame}
 
+% =======================================
+%  DSGE IRFs: MP
+% =======================================
+\begin{frame}{DSGE IRFs; Monetary Policy Shock}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
+            {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+        \caption{DSGE IRFs Long Lag Progressively Plots 4 8 12 }
+        \label{fig:placeholder1}
+    \end{figure}
+\end{frame}
 
 % =======================================
 %  MonteCalvo VAR 4
@@ -693,7 +697,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_4.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_4.pdf}}
-    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(4)}
+    \caption{Calvo Price Parameter PDF from Monte Carlo Simulation; VAR(4)}
     \label{fig:placeholder4}
 \end{figure}
 
@@ -711,7 +715,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}
         {\includegraphics[width=1\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_8.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_8.pdf}}
-    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(8)}
+    \caption{Calvo Price Parameter PDF from Monte Carlo Simulation; VAR(8)}
     \label{fig:placeholder4}
 \end{figure}
 
@@ -729,7 +733,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \IfFileExists{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/MonteCarlo_Calvo_PDF_Plots/MonteCalvo_PDF_Plot_lag_12.pdf}}
         {\fbox{Missing file: MonteCalvo\_PDF\_Plot\_lag\_12.pdf}}
-    \caption{Calvo Price Parameter PDF from MonteCarlo Simulation; VAR(12)}
+    \caption{Calvo Price Parameter PDF from Monte Carlo Simulation; VAR(12)}
     \label{fig:placeholder4}
 \end{figure}
 \begin{center}
