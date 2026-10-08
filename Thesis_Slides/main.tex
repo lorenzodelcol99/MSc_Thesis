@@ -97,8 +97,8 @@
 
 \begin{frame}{CEE and ACEL's DSGE Motivation}
     \begin{itemize}
-        \item CEE JPE (2005) and ACEL RoED (2011) seminal works introduced the concept of \textbf{Firm Specific Capital} to model inflation persistence,
-            mechanism supported by IRFs matching with VAR(4)
+        \item CEE JPE (2005) and ACEL RED (2011) seminal works introduced the concept of \textbf{Firm-Specific Capital} to model inflation persistence,
+            mechanism supported by IRF matching with VAR(4)
     \end{itemize}
     \vspace{0.3cm}
     \pause
@@ -119,7 +119,7 @@
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item \textit{``If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be computed at each horizon}''}
+        \item \textit{``If the \textbf{VAR is misspecified}, then, the \textbf{specification errors will be compounded at each horizon}''}
         \vspace{0.1cm}
         \\
         \hfill {\small \textbf{Ramey (2016) p. 83} }
@@ -148,15 +148,15 @@
     \vspace{0.4cm}
     \textbf{What's been done:}
     \begin{itemize}
-        \item Revisit ACEL contribution, estimating Homogeneous vs Firm Specific Capital versions of their DSGE with VARs with different dynamic structures
+        \item Revisit ACEL contribution, estimating \textcolor{PadovaRed}{\textbf{homogeneous}} vs \textcolor{PadovaRed}{\textbf{firm-specific capital}} versions of their DSGE with VARs with different dynamic structures
     \end{itemize}
     \pause
     
     \vspace{0.4cm}    
     \textbf{Findings:}
     \begin{itemize}
-        \item Increasing the VAR lag structure casts doubts on the importance of Specificity of Capital to explain inflation inertia
-        \item Lag choice can have implications for optimal policy design, modelling and structural inference
+        \item Increasing the VAR lag structure casts \textcolor{PadovaRed}{\textbf{doubt}} on the importance of \textcolor{PadovaRed}{\textbf{specificity of capital}} to explain inflation inertia
+        \item Lag choice might have implications for optimal policy design, modelling and structural inference
     \end{itemize}
 \end{frame}
 
@@ -171,15 +171,15 @@
     \end{itemize}
     \textbf{Long-Lag VARs:}
     \begin{itemize}
-        \item {\footnotesize De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026); Plagborg-Moller and Wolf, (2021); Ludwig, (2026)}
+        \item {\footnotesize De Graeve and Westermark, (2025); Baumeister, (2025); Antolín-Díaz and Surico, (2025); Antolín-Díaz et al., (2026); Plagborg-M{\o}ller and Wolf, (2021); Ludwig, (2026)}
     \end{itemize}
     \textbf{Truncation Bias and the DSGE-VAR mapping:}
     \begin{itemize}
-        \item {\footnotesize Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026); Fernandez-Villaverde et al., (2007); Faust and Leeper, (1997); Lippi and Reichlin, (1993); Forni et al (2016)}
+        \item {\footnotesize Ravenna, (2007); De Graeve and Westermark, (2025); Chari et al., (2008); Barnichon et al., (2026); Fernández-Villaverde et al., (2007); Faust and Leeper, (1997); Lippi and Reichlin, (1993); Forni et al., (2016)}
     \end{itemize}
     \textbf{Impulse Response Matching and DSGE Estimation:}
     \begin{itemize}
-        \item {\footnotesize Rotemberg and Woodford, (1997); Christiano et al., (2005); Altig et al., (2011); Iacovello (2005); Bovin and Giannoni (2006), Hall et al (2012); Giacomini (2013); Theodoridis (2011); Guerron-Quintana (2010)}
+        \item {\footnotesize Rotemberg and Woodford, (1997); Christiano et al., (2005); Altig et al., (2011); Iacoviello, (2005); Boivin and Giannoni, (2006); Hall et al., (2012); Giacomini, (2013); Theodoridis, (2011); Guerrón-Quintana, (2010)}
     \end{itemize}
 \end{frame}
 
@@ -196,9 +196,9 @@
     \vspace{0.5cm}
     
     \begin{itemize}
-        \item \textbf{Inflation is inertial} despite firms re-optimising prices on average every 1.5 quarters
-        \item  When firms re-optimise, \textbf{prices are adjusted by a small amount} because each firm's short run marginal cost is increasing in its own output
-        \item The key assumption is that, in any given period, a \textbf{firm's capital stock is pre-determined and firm-specific}
+        \item The key assumption is that, in any given period, a \textbf{aggregate capital stock is pre-determined and firm-specific}
+        \item When firms re-optimise, \textbf{prices are adjusted by a small amount} because each firm's short-run marginal cost is increasing in its own output
+        \item \textbf{Inflation is inertial} despite firms re-optimising prices more frequently than in the homogeneous capital model
     \end{itemize}    
 \end{frame}
 
@@ -208,7 +208,7 @@
 
 \begin{frame}{ACEL's DSGE Mechanism (Cont'd)}
 \begin{itemize}
-    \item When log-linearized, the only difference in the characterizing equilibrium equations lies in the Phillips Curve
+    \item When log-linearised, the only difference in the characterising equilibrium equations lies in the Phillips Curve
 \end{itemize}
 
 \begin{align}
@@ -230,68 +230,28 @@
 % ACEL'S MECHANISM 3
 % =======================================
 
-\begin{frame}{ACEL's DSGE Mechanism (Cont'd)}
- Here $\chi$ is a non-linear function representing the strategic complementarity in price settings 
+\begin{frame}{ACEL's DSGE Mechanism (Cont'd)}\label{slide:acel_dsge_mechanism}
+ Here $\chi$ is a non-linear function representing the strategic complementarity in price setting 
 \begin{itemize}
-    \item In the \textbf{Homogeneous} model, $\chi = 1$: $\gamma$ depends only on $\beta$
+    \item In the \textbf{Homogeneous} model, $\chi \equiv 1$
     \item In the \textbf{Firm-specific} model, $\chi < 1$ and captures two forces that make a firm move its price \textit{less} when it can reset:
     \begin{itemize}
-        \item It depends on Variable Capital Utilisation $\sigma_a$
-        \item The costlier it is to vary capital utilization, the steeper the firm's own marginal cost curve
+        \item It depends on capacity utilisation cost $\sigma_a$.
+        \\
+              The costlier it is to vary capital utilisation, the steeper the firm's own marginal cost curve
         \item The more elastic the firm's demand, the larger the fall in output (and hence in marginal cost) after a price increase
     \end{itemize}
     \vspace{0.3cm}
     
-    \item So $\chi$ governs \textbf{how much} a firm moves its price
+    \item $\chi$ governs \textbf{how much} a firm moves its price
     \item $\xi_p$ \textbf{how often}, with implied duration $1/(1-\xi_p)$
 \end{itemize}
  Given a fixed value of $\gamma$, a smaller $\chi$ implies a smaller $\xi_p$
-\end{frame}
 
+ \begin{center}
+        \hyperlink{slide:acel_mp_shock_prop_mech}{\beamerbutton{ACEL's MP shock propagation mechanism}}
+    \end{center}
 
-% =======================================
-% ACEL'S Shock Propagation Mechanism
-% =======================================
-
-\begin{frame}{ACEL's Monetary Policy Shock Propagation Mechanism}
-\large
-
-% --- Shared part: identical text on both overlays, held fixed at the top.
-% Plain letters-and-arrows style (\Up/\Down defined in the preamble, now
-% PadovaRed), no boxes -- fill in/extend freely below. ---
-$\varepsilon_t^M\Down \Rightarrow i_t\Down$ $\Rightarrow$ $y^d_t\Up$
-$\Rightarrow$ $y^s_t\Up$ $\Rightarrow h_t^d\Up$
-\\
-$\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
-
-\vspace{0.5cm}
-
-% --- Swapped part: same spot, content replaced across the two overlays ---
-\only<1>{%
-\textbf{Homogeneous}
-\begin{itemize}
-    \setlength{\itemsep}{8pt}
-    \item $K_t=u_t\bar K_t$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K_t}$ and $u_t\Up$ $r_t\Up$ given $\hat{\sigma_a}$
-    \item $\Rightarrow$ $MC_{i,t} = MC_t$ $\Rightarrow$ MC independent from $y_{i,t}$ $\chi=1$
-    \item $MC_t\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
-    \item $\gamma = f(\overset{-}{\xi_p})$ given $\bar{\gamma}$ low, $\xi_p$ need to be high enough
-\end{itemize}
-}%
-
-\only<2->{%
-\textbf{Firm Specific}
-\begin{itemize}
-    \setlength{\itemsep}{8pt}
-    \item $K_{i,t}=u_{i,t}\bar K_{i,t}\Up$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K}$
-    \item Given $\chi < 1$ $\Rightarrow MC_{i,t}\Up$ in $y_{i,t}$
-    \item $MC_{i,t}\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
-    \item $\gamma = f(\overset{-}{\xi_p};\overset{-}{\sigma_a})$ given $\bar{\gamma}$
-\end{itemize}
-\vspace{0.5cm}
-\begin{itemize}
-    \item If $\sigma_a \rightarrow 0$ $\Rightarrow$ $\chi \rightarrow 1$ $\Rightarrow$ $\gamma = f(\overset{-}{\xi_p};0)$ $\Rightarrow$ $\xi_{p,\text{FS}} \rightarrow \xi_{p,\text{H}}$
-\end{itemize}
-}
 \end{frame}
 
 
@@ -332,7 +292,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \begin{itemize}
         \item The VAR with $p < p^{*}$ suffers from truncation bias.\footnote{Where $p^{*}$ denotes the DGP true lag length.}
 
-        \item Lag truncation biases the reduced form coefficients $B(L)$ and the reduced form variance covariance matrix $\Sigma$, which are the two main ingredients for IRF estimation.
+        \item Lag truncation biases the reduced-form coefficients $B(L)$ and the reduced-form variance-covariance matrix $\Sigma$, which are the two main ingredients for IRF estimation.
     \end{itemize}
 
     \begin{equation}
@@ -351,7 +311,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % =======================================
 
 \begin{frame}{Long-Lag VARs}
-    De Graeve and Westermark, (2025) demonstrate that increasing the lag structure improves VAR's IRFs estimates obtaining:
+    De Graeve and Westermark (2025) demonstrate that increasing the lag structure improves VAR IRF estimates, obtaining:
     \pause
     \vspace{0.4cm}
     
@@ -365,7 +325,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \textbf{Lower Variance}
     \begin{itemize}
         \item Misspecification reduction lowers the variance of the residuals
-        \item This variance reduction counteracts the imprecision caused by increased parametrisation
+        \item This variance reduction counteracts the imprecision caused by increased parameterisation
     \end{itemize}
 \end{frame}
 
@@ -418,20 +378,20 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 \begin{frame}{Replication Exercise}
     Framework:
     \begin{itemize}
-        \item \textbf{Altig et al., (2011)}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
+        \item \textbf{Altig et al. (2011)}'s DSGE\footnote{Where the replication package provided by the authors refers to the 2005 NBER working paper}
     \end{itemize}
 
     VAR:
     \begin{itemize}
-        \item Short and Long-Run restrictions, medium scale 10 variables
+        \item Short and long-run restrictions, medium-scale VAR with 10 variables
         \item Monetary Policy, Neutral and Embodied Technology shocks
         \item Sample period 1959:Q2-2001:Q4
     \end{itemize}
     
     Exercise:
     \begin{itemize}
-        \item I re-estimate the VAR increasing lag order
-        \item Re-estimate the DSGE by IRFs matching
+        \item I re-estimate the VAR increasing the lag order
+        \item Re-estimate the DSGE by IRF matching
         \vspace{0.2cm}
 
         \item \textbf{\textcolor{PadovaRed}{Analyse implications of possible variations in the structural parameters and IRFs across different lag choices}}
@@ -519,7 +479,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \normalsize
 
     \begin{itemize}
-        \item Firm Specific model's Calvo Price parameter converges to the Homogeneous one
+        \item Firm-Specific model's Calvo Price parameter converges to the Homogeneous one
         \item Back to the micro-macro implied price duration mismatch
     \end{itemize}
 
@@ -532,20 +492,18 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 %  Conclusions
 % =======================================
 \begin{frame}{Conclusions}
-    Following the advice from the Long-Lag VARs literature.
-    \\
-    Replicating ACEL et al., (2005), enriching the VAR lag structure I find that:
+    Following the advice of the Long-Lag VAR literature and replicating ACEL (2005) with an enriched VAR lag structure, I find that:
     \begin{itemize}
-        \item Capacity Utilisation Cost, crucial variable to justify the firm specific model, dramatically shrinks to 0
-        \item Firm specificity of capital seems not the key concept to explain inflation inertia
-        \item ACEL's evidence on firm specific capital is not robust to long-lag VARs
+        \item Capacity Utilisation Cost, crucial variable to justify the firm-specific model, dramatically shrinks to 0
+        \item Firm specificity of capital does not seem to be the key concept to explain inflation inertia
+        \item ACEL's evidence on firm-specific capital is not robust to long-lag VARs
     \end{itemize} 
     \vspace{0.5cm}
     \pause
 
     \hfill {\color{PadovaRed}\small \textbf{De Graeve \& Westermark (2025) and Baumeister (2025)} }
     \begin{itemize}
-        \item Long-Lag VARs might have structural implications, it's up to the researcher to demonstrate that their findings are robust to an enriched lag structure
+        \item Long-Lag VARs might have structural implications; it's up to the researcher to demonstrate that their findings are robust to an enriched lag structure
     \end{itemize}
     
 \end{frame}
@@ -568,6 +526,68 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % APPENDICE
 % =========================================================
 \appendix
+
+% =======================================
+% ACEL'S Shock Propagation Mechanism: HOMOGENEOUS
+% =======================================
+
+\begin{frame}{ACEL's MP Shock Propagation Mechanism}\label{slide:acel_mp_shock_prop_mech}
+\large
+
+$\varepsilon_t^M\Down \Rightarrow i_t\Down$ $\Rightarrow$ $y^d_t\Up$
+$\Rightarrow$ $y^s_t\Up$ $\Rightarrow h_t^d\Up$
+\\
+$\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
+
+\vspace{0.5cm}
+
+\textbf{Homogeneous}
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item $K_t=u_t\bar K_t$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K_t}$ and $u_t\Up$ $r_t\Up$ given $\hat{\sigma_a}$
+    \item $\Rightarrow$ $MC_{i,t} = MC_t$ $\Rightarrow$ MC independent of $y_{i,t}$ $\chi=1$
+    \item $MC_t\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
+    \item $\gamma = f(\overset{-}{\xi_p})$ given $\bar{\gamma}$ low, $\xi_p$ needs to be high enough
+\end{itemize}
+
+\begin{center}
+        \hyperlink{slide:acel_dsge_mechanism}{\beamerbutton{Back to ACEL's DSGE Mechanism}}
+    \end{center}
+
+\end{frame}
+
+% =======================================
+% ACEL'S Shock Propagation Mechanism: FIRM SPECIFIC
+% =======================================
+\begin{frame}{ACEL's MP Shock Propagation Mechanism (Cont'd)}
+\large
+
+$\varepsilon_t^M\Down \Rightarrow i_t\Down$ $\Rightarrow$ $y^d_t\Up$
+$\Rightarrow$ $y^s_t\Up$ $\Rightarrow h_t^d\Up$
+\\
+$\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
+
+\vspace{0.5cm}
+    
+\textbf{Firm-Specific}
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item $K_{i,t}=u_{i,t}\bar K_{i,t}\Up$ $\Rightarrow$ $K^d_t\Up$ but $\hat{K}$
+    \item Given $\chi < 1$ $\Rightarrow MC_{i,t}\Up$ in $y_{i,t}$
+    \item $MC_{i,t}\Up$ $\Rightarrow$ $P_t^{1-\xi_p}\Up$ $\Rightarrow$ $P_t\Up$ $\Rightarrow$ $\pi_t\Up$
+    \item $\gamma = f(\overset{-}{\xi_p};\overset{-}{\sigma_a})$ given $\bar{\gamma}$
+\end{itemize}
+\vspace{0.5cm}
+\begin{itemize}
+    \item If $\sigma_a \rightarrow 0$ $\Rightarrow$ $\chi \rightarrow 1$ $\Rightarrow$ $\gamma = f(\overset{-}{\xi_p};0)$ $\Rightarrow$ $\xi_{p,\text{FS}} \rightarrow \xi_{p,\text{H}}$
+\end{itemize}
+
+\begin{center}
+        \hyperlink{slide:acel_dsge_mechanism}{\beamerbutton{Back to ACEL's DSGE Mechanism}}
+    \end{center}
+
+\end{frame}
+
 
 % =======================================
 %  Chi Parameter Across Lags (linked from Truncation Bias slide)
@@ -610,7 +630,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \IfFileExists{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}
         {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_CI_PE_4_8_12_Plots/Monetary_Policy_Shock/Comparison_Lags_4_8_12.pdf}}
         {\fbox{Missing file: Comparison\_Lags\_4\_8\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Monetary Policy Shock}
+    \caption{VAR IRFs Comparison with all CIs: Monetary Policy Shock}
     \label{fig:placeholder4}
 \end{figure}
 \end{frame}
@@ -618,11 +638,11 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % =======================================
 %  Comment on CI
 % =======================================
-\begin{frame}{Bootstrap Confidence Intervals Shrinks!}
+\begin{frame}{Bootstrap Confidence Intervals Shrink}
     \begin{itemize}
-        \item With respect to De Graeve and Westermark (2025) examples, this exercise has a medium scale VAR; 10 variables + constant
-        \item Estimating the VAR at $p=12$ we approach the feasible limit: only $T_u-k = 38$ degrees of freedom per equation, and a total number of coefficients $n + n^2 p = 1210$
-        \item Bootstrap Confidence Intervals actually shrink!
+        \item Compared to the examples in De Graeve and Westermark (2025), this exercise uses a medium-scale VAR: 10 variables + constant
+        \item Estimating the VAR at $p=12$, we approach the feasible limit: only $T_u-k = 38$ degrees of freedom per equation, and a total number of coefficients $n + n^2 p = 1210$
+        \item Bootstrap Confidence Intervals actually shrink
         \item Confirming De Graeve and Westermark (2025) p.2 JME point on variance reduction even in a limit case
         ``Misspecification reduction not only leads to Bias-Variance trade-off, but it reduces variance''
     \end{itemize}
@@ -635,13 +655,13 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     Ravenna (2007) finds a second channel through which lag truncation operates: \textbf{\textcolor{PadovaRed}{Identification Bias}}
     \begin{itemize}
         \item It is a \textbf{different source of bias} from pure truncation
-        \item It arises when the identifying assumptions are correct, and it emerges in population
-        \item \textbf{It appears when the AR coefficients enter the identifying map's computations}
+        \item It arises even when the identifying assumptions are correct, and it emerges in population
+        \item \textbf{It appears when the AR coefficients enter the identifying map's computations of structural shocks}
         \item If the AR coefficients are biased, the identifying map is biased as well
         \vspace{0.3cm}
         
-        \item Is not present in short-run Cholesky identification
-        \item Is present in long-run restrictions identification à la Blanchard and Quah (1989)
+        \item It is not present in short-run Cholesky identification
+        \item It is present in long-run restrictions identification à la Blanchard and Quah (1989)
     \end{itemize}
     
     \begin{center}
@@ -653,17 +673,17 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % =======================================
 %  Long Rung Identification Fragilities
 % =======================================
-\begin{frame}{Long Rung Restrictions' Fragilities}
-    Using the Blanchard and Quah (1989) identification as example.
+\begin{frame}{Long-Run Restrictions' Fragilities}
+    Using the Blanchard and Quah (1989) identification as an example.
     \\
-    It is a long run Cholesky that restricts the cumulative effect of a shock on the level of a variable to be zero, which is equivalent to restricting the sum of the impulse responses to be zero.
+    It is a long-run Cholesky that restricts the cumulative effect of a shock on the level of a variable to be zero, which is equivalent to restricting the sum of the impulse responses to be zero.
     \vspace{0.3cm}
     \\
     A VAR($p$) does not estimate the sum consistently when the true representation is of infinite order,
     therefore the restrictions are imposed on the wrong object.
     \vspace{0.3cm}
     \\
-    This has concequences for where the bias might appear. A long run restriction says nothing 
+    This has consequences for where the bias might appear. A long-run restriction says nothing 
     about any finite horizon. Therefore the bias can appear at any horizon, impact included, not just the long run.
 
     \begin{center}
@@ -681,7 +701,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
             {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}}
             {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-        \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
+        \caption{VAR IRFs Comparison: Neutral Technology Shock}
         \label{fig:placeholder4}
     \end{figure}
 
@@ -702,7 +722,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
             {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}}
             {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-        \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
+        \caption{VAR IRFs Comparison: Embodied Technology Shock}
         \label{fig:placeholder4}
     \end{figure}
 
@@ -717,14 +737,14 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % =======================================
 \begin{frame}{Tech Shocks Comment}
     \begin{itemize}
-        \item The Identification Bias is binding, and the its effect can be seen by the fact that 
-            the respinses disagree across lags at every horison
-        \item Under sort-run recursive identification most impact of a MP shock are zero by construction.
-            Pure truncation bias distorts the propagation of a correctly isolated shock, so its accumulate with 
-            horizon and cannot by itself generate a disagreement at $h = 0$
-        \item MP shock responses have kept their sign and shape moving only in timing
-        \item Tech shocks responses, identified by long-rung restrictions, do not agree at any horizon, 
-            including the impact, and the disagreement is not only in timing but also in sign
+        \item The Identification Bias is binding, and its effect can be seen in the fact that 
+              the responses disagree across lags at every horizon
+        \item Under short-run recursive identification, most impact responses to an MP shock are zero by construction.
+              Pure truncation bias distorts the propagation of a correctly isolated shock, so it accumulates with the 
+              horizon and cannot by itself generate a disagreement at $h = 0$
+        \item MP shock responses have kept their sign and shape, moving only in timing
+        \item Tech shock responses, identified by long-run restrictions, do not agree at any horizon, 
+              including the impact, and the disagreement is not only in timing but also in sign
     \end{itemize}
     
     \begin{tikzpicture}[remember picture, overlay]
@@ -743,7 +763,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \IfFileExists{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}
             {\includegraphics[width=0.95\linewidth]{../Output/DSGE_IRFs_Long_Lag_Progressively_Plots_4_8_12/Monetary_Policy_Shock/Step_3_UpToLag_12.pdf}}
             {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-        \caption{DSGE IRFs Long Lag Progressively Plots 4 8 12 }
+        \caption{DSGE IRFs Matched with VAR(4), VAR(8) and VAR(12): Monetary Policy Shock}
         \label{fig:placeholder1}
     \end{figure}
 \end{frame}
