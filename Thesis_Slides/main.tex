@@ -160,18 +160,6 @@
     \end{itemize}
 \end{frame}
 
-% =======================================
-% ROADMAP
-% =======================================
-\begin{frame}{Roadmap}
-    \begin{itemize}
-        \item Related Literature
-        \item ACEL model
- %      \item DSGE as VAR($\infty$)
-        \item Truncation Bias
-        \item Results
-    \end{itemize}
-\end{frame}
 
 % =======================================
 % RELATED LITERATURE
@@ -329,31 +317,10 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 
 
 % =======================================
-% DSGE, State Space and VAR($\infty$) Representation
-% =======================================
-%\begin{frame}{DSGE, State Space and VAR($\infty$) Representation}
-%\begin{itemize}
-%    \item Many DSGE's log linearized solution can be mapped in State Space representation and then into VAR($\infty$)
-%    \item When forecasting information criteria are not used
-%    \item Standard lag choice by SVAR researchers is 4 for quarterly data and 12 for monthly
-%    \item If a DSGE is estimated via IRFME with a finite order VAR, the DSGE is estimate with a Biased by Truncation VAR
-%    \item VARs are typically small systems with few lags often interpret as models of the entire economy, IRFs are highly sensitive to variable and lag choice
-%\end{itemize}
-
-%\vspace{0.4cm} 
-
-%\pause
-%\begin{itemize}
-%    \item \textcolor{PadovaRed}{\textbf{Should the VAR lag order be increased to overcome Truncation Bias implications?}}
-%\end{itemize}
-
-%\end{frame}
-
-% =======================================
 % ILLUSTRATION OF THE PROBLEM: TRUNCATION BIAS 
 % =======================================
 
-\begin{frame}{Illustration of the problem: Truncation Bias}
+\begin{frame}{Illustration of the problem: Truncation Bias}\label{slide:truncation_bias}
     \begin{equation}
         Y_t = B_1Y_{t-1} + \cdots + B_pY_{t-p} + u_t, \qquad \mathbb{E}(u_t u_t') = \Sigma
     \end{equation}
@@ -371,6 +338,12 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
     \begin{equation}
         \mathrm{IRF} = f\bigl(B(L),\Sigma\bigr)
     \end{equation}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:identification_bias}{\beamerbutton{Identification Bias}}};
+    \end{tikzpicture}
+
 \end{frame}
 
 % =======================================
@@ -419,7 +392,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % Residuals' Variance Reduction
 % =======================================
 
-\begin{frame}{Residuals' Variance Reduction}
+\begin{frame}{Residuals' Variance Reduction}\label{slide:res_var_red}
     \begin{figure}
         \centering
         \IfFileExists{../Output/VAR_Residuals_RMSE_Estimates/InSample_Residuals_Fed_Funds_Rate.pdf}
@@ -428,22 +401,15 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \caption{FFR Residuals Comparison Across Lags 4 vs 12}
         \label{fig:placeholder1}
     \end{figure}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:gen_var_ic}{\beamerbutton{Gen var and IC}}};
+    \end{tikzpicture}
+    
 \end{frame}
 
-% =======================================
-% Generalised Variance and Information Criteria
-% =======================================
-\begin{frame}{Generalised Variance and Information Criteria}
-\begin{figure}
-        \centering
-        \IfFileExists{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}
-            {\includegraphics[width=0.85\linewidth]{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}}
-            {\fbox{Missing file: Generalized\_Variance\_Vs\_Penalised\_Across\_Lags.pdf}}
-    \end{figure}
-    \IfFileExists{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}
-        {\input{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}}
-        {\noindent\fbox{Table Path Broken or File Missing}}
-\end{frame}
+
 
 % =======================================
 % REPLICATION EXERCISE
@@ -476,7 +442,7 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 % =======================================
 % VAR IRFs MP
 % =======================================
-\begin{frame}{VAR IRFs; Monetary Policy Shock}\label{slide:var_irfs}
+\begin{frame}{VAR IRFs; Monetary Policy Shock}\label<8>{slide:var_irfs}
     \begin{figure}
         \centering
         \begin{tikzpicture}
@@ -513,6 +479,12 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
         \caption{VAR IRFs Comparison: Monetary Policy Shock: \only<1>{4 lags}\only<2>{8 lags}\only<3->{12 lags}}
         \label{fig:placeholder2}
     \end{figure}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:nt_tech_shock}{\beamerbutton{Tech Shocks}}};
+    \end{tikzpicture}
+
 \end{frame}
 
 % =======================================
@@ -532,8 +504,6 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
             ($(philTL)+(-0.15,0.25)$) rectangle ($(philBR)+(0.15,-0.08)$);}
         \only<3->{\draw[red, thick, rounded corners]
             ($(calvoTL)+(-0.15,0.25)$) rectangle ($(calvoBR)+(0.15,-0.08)$);}
-        % No room left below the table for a button (note fills the slide),
-        % so it sits at title height, top-right corner, instead.
         \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
             {\hyperlink{slide:montecalvo}{\beamerbutton{MonteCalvo}}};
     \end{tikzpicture}
@@ -613,6 +583,25 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 \end{frame}
 
 % =======================================
+% Generalised Variance and Information Criteria
+% =======================================
+\begin{frame}{Generalised Variance and Information Criteria}\label{slide:gen_var_ic}
+    \begin{figure}
+            \centering
+            \IfFileExists{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}
+                {\includegraphics[width=0.85\linewidth]{../Output/Residual_Analysis_Output/Generalized_Variance_Vs_Penalised_Across_Lags.pdf}}
+                {\fbox{Missing file: Generalized\_Variance\_Vs\_Penalised\_Across\_Lags.pdf}}
+        \end{figure}
+        \IfFileExists{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}
+            {\input{../Output/Residual_Analysis_Output/IC_lag_choice_table_Slides.tex}}
+            {\noindent\fbox{Table Path Broken or File Missing}}
+
+    \begin{center}
+        \hyperlink{slide:res_var_red}{\beamerbutton{Back to Residuals' Variance Reduction}}
+    \end{center}
+\end{frame}
+
+% =======================================
 %  VAR IRFs All CI: MP
 % =======================================
 \begin{frame}{VAR IRFs All CI; Monetary Policy Shock}
@@ -640,23 +629,67 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 \end{frame}
 
 % =======================================
+%  Identification Bias
+% =======================================
+\begin{frame}{Identification Bias}\label{slide:identification_bias}
+    Ravenna (2007) finds a second channel through which lag truncation operates: \textbf{\textcolor{PadovaRed}{Identification Bias}}
+    \begin{itemize}
+        \item It is a \textbf{different source of bias} from pure truncation
+        \item It arises when the identifying assumptions are correct, and it emerges in population
+        \item \textbf{It appears when the AR coefficients enter the identifying map's computations}
+        \item If the AR coefficients are biased, the identifying map is biased as well
+        \vspace{0.3cm}
+        
+        \item Is not present in short-run Cholesky identification
+        \item Is present in long-run restrictions identification à la Blanchard and Quah (1989)
+    \end{itemize}
+    
+    \begin{center}
+        \hyperlink{slide:truncation_bias}{\beamerbutton{Back to Truncation Bias}}
+    \end{center}
+
+\end{frame}
+
+% =======================================
 %  Long Rung Identification Fragilities
 % =======================================
-\begin{frame}{Long Rung Identification Fragilities}
+\begin{frame}{Long Rung Restrictions' Fragilities}
+    Using the Blanchard and Quah (1989) identification as example.
+    \\
+    It is a long run Cholesky that restricts the cumulative effect of a shock on the level of a variable to be zero, which is equivalent to restricting the sum of the impulse responses to be zero.
+    \vspace{0.3cm}
+    \\
+    A VAR($p$) does not estimate the sum consistently when the true representation is of infinite order,
+    therefore the restrictions are imposed on the wrong object.
+    \vspace{0.3cm}
+    \\
+    This has concequences for where the bias might appear. A long run restriction says nothing 
+    about any finite horizon. Therefore the bias can appear at any horizon, impact included, not just the long run.
+
+    \begin{center}
+        \hyperlink{slide:truncation_bias}{\beamerbutton{Back to Truncation Bias}}
+    \end{center}
+
 \end{frame}
 
 % =======================================
 %  VAR IRFs: NT
 % =======================================
-\begin{frame}{VAR IRFs; Neutral Technology Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}}
-        {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
-    \label{fig:placeholder4}
-\end{figure}
+\begin{frame}{VAR IRFs; Neutral Technology Shock}\label{slide:nt_tech_shock}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Neutral_Technology_Shock/Step_3_UpToLag_12.pdf}}
+            {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+        \caption{IRFs VARs all CI Comparison: Neutral Technology Shock}
+        \label{fig:placeholder4}
+    \end{figure}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:var_irfs}{\beamerbutton{Back to MP Shock}}};
+    \end{tikzpicture}
+
 \end{frame}
 
 
@@ -664,14 +697,41 @@ $\Rightarrow$ Calvo wages: $w_t\Up$, $\frac{w_t}{P_t}\Up$ little
 %  VAR IRFs: ET
 % =======================================
 \begin{frame}{VAR IRFs; Embodied Technology Shock}
-\begin{figure}
-    \centering
-    \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
-        {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}}
-        {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
-    \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
-    \label{fig:placeholder4}
-\end{figure}
+    \begin{figure}
+        \centering
+        \IfFileExists{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}
+            {\includegraphics[width=0.95\linewidth]{../Output/VAR_IRFs_Long_Lag_Progressively_Plots_4_8_12/Embodied_Technology_Shock/Step_3_UpToLag_12.pdf}}
+            {\fbox{Missing file: Step\_3\_UpToLag\_12.pdf}}
+        \caption{IRFs VARs all CI Comparison: Embodied Technology Shock}
+        \label{fig:placeholder4}
+    \end{figure}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:var_irfs}{\beamerbutton{Back to MP Shock}}};
+    \end{tikzpicture}
+\end{frame}
+
+% =======================================
+%  Tech Shocks Comment
+% =======================================
+\begin{frame}{Tech Shocks Comment}
+    \begin{itemize}
+        \item The Identification Bias is binding, and the its effect can be seen by the fact that 
+            the respinses disagree across lags at every horison
+        \item Under sort-run recursive identification most impact of a MP shock are zero by construction.
+            Pure truncation bias distorts the propagation of a correctly isolated shock, so its accumulate with 
+            horizon and cannot by itself generate a disagreement at $h = 0$
+        \item MP shock responses have kept their sign and shape moving only in timing
+        \item Tech shocks responses, identified by long-rung restrictions, do not agree at any horizon, 
+            including the impact, and the disagreement is not only in timing but also in sign
+    \end{itemize}
+    
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north east, xshift=-0.3cm, yshift=-0.25cm] at (current page.north east)
+            {\hyperlink{slide:var_irfs}{\beamerbutton{Back to MP Shock}}};
+    \end{tikzpicture}
+
 \end{frame}
 
 % =======================================
