@@ -36,7 +36,7 @@ filename = fullfile(save_base_path, 'implied_duration_beamer_4_8_12.tex');
 fileID = fopen(filename, 'w');
 
 fprintf(fileID, '\\centering\n');
-fprintf(fileID, '\\small\n\n');
+fprintf(fileID, '\\footnotesize\n\n');
 fprintf(fileID, '\\begin{table}[htpb]\n');
 fprintf(fileID, '    \\centering\n');
 fprintf(fileID, '    \\renewcommand{\\arraystretch}{1.1}\n');
