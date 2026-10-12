@@ -103,7 +103,7 @@ for s = 1:3
 
         % Band first, then the lines, single column
         legend_handles = [h_band, h_lines];
-        legend_labels  = [{'95% CI'}, labels(1:step)];
+        legend_labels  = [{'95% CI (VAR p = 4)'}, labels(1:step)];
 
         lgd = legend(ax12, legend_handles, legend_labels, 'Location', 'west');
         lgd.FontSize = 11;
