@@ -45,7 +45,15 @@
 
 % --- CITATIONS & LINKS ---
 \usepackage{natbib}
-\usepackage[colorlinks=true, citecolor=PadovaRed, linkcolor=black, urlcolor=black]{hyperref}
+\newif\ifprintversion
+\printversiontrue
+%\printversionfalse   % set to \printversiontrue for an all-black printed copy
+
+\ifprintversion
+  \usepackage[colorlinks=true, citecolor=black, linkcolor=black, urlcolor=black]{hyperref}
+\else
+  \usepackage[colorlinks=true, citecolor=PadovaRed, linkcolor=black, urlcolor=black]{hyperref}
+\fi
 
 \begin{document}
 
@@ -2345,7 +2353,11 @@ sample that a longer lag order happens to require.
 
 \begin{flushleft}
 \itshape
-Al Prof. Efrem Castelnuovo, mentore a cui sarò sempre grato.\\[1em]
+Dopo cinque anni posso dire tranquillamente che sono stati senza ombra di dubbio i più belli della vita, ricomincerei volentieri di nuovo tutto da capo, grazie.\\[1em]
+
+Al Prof. Efrem Castelnuovo, faro guida e mentore a cui sarò sempre grato.\\[1em]
+
+Al Prof. Giovanni Caggiano, per le opportunità e la fiducia riposta.\\[1em]
 
 Ai miei genitori e ai miei fratelli, la mia grande famiglia.\\[1em]
 
