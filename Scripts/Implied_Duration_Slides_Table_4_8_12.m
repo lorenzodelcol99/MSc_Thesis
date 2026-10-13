@@ -46,13 +46,14 @@ fprintf(fileID, '        \\textbf{Model Specification} & \\textbf{VAR $p=4$} & \
 fprintf(fileID, '        \\midrule\n\n');
 
 fprintf(fileID, '        \\multicolumn{4}{l}{\\textit{Homogeneous Capital Model}} \\\\\n');
-fprintf(fileID, '        Calvo parameter ($\\xi_{p, hom}$) & %.2f & %.2f & %.2f \\\\\n', data4.ksiph, data8.ksiph, data12.ksiph);
-fprintf(fileID, '        Implied duration (quarters)      & \\textbf{%.1f} & \\textbf{%.1f} & \\textbf{%.1f} \\\\\n\n', dur_hom_4, dur_hom_8, dur_hom_12);
+% p = 12 column in Padova red (PadovaRed is defined in Thesis_Slides/main.tex)
+fprintf(fileID, '        Calvo parameter ($\\xi_{p, hom}$) & %.2f & %.2f & \\textcolor{PadovaRed}{%.2f} \\\\\n', data4.ksiph, data8.ksiph, data12.ksiph);
+fprintf(fileID, '        Implied duration (quarters)      & \\textbf{%.1f} & \\textbf{%.1f} & \\textcolor{PadovaRed}{\\textbf{%.1f}} \\\\\n\n', dur_hom_4, dur_hom_8, dur_hom_12);
 
 fprintf(fileID, '        \\midrule\n');
 fprintf(fileID, '        \\multicolumn{4}{l}{\\textit{Firm-Specific Capital Model}} \\\\\n');
-fprintf(fileID, '        Calvo parameter ($\\xi_{p, fs}$) & %.2f & %.2f & %.2f \\\\\n', data4.ksip, data8.ksip, data12.ksip);
-fprintf(fileID, '        Implied duration (quarters)     & \\textbf{%.1f} & \\textbf{%.1f} & \\textbf{%.1f} \\\\\n\n', dur_fs_4, dur_fs_8, dur_fs_12);
+fprintf(fileID, '        Calvo parameter ($\\xi_{p, fs}$) & %.2f & %.2f & \\textcolor{PadovaRed}{%.2f} \\\\\n', data4.ksip, data8.ksip, data12.ksip);
+fprintf(fileID, '        Implied duration (quarters)     & \\textbf{%.1f} & \\textbf{%.1f} & \\textcolor{PadovaRed}{\\textbf{%.1f}} \\\\\n\n', dur_fs_4, dur_fs_8, dur_fs_12);
 
 fprintf(fileID, '        \\bottomrule\n');
 fprintf(fileID, '    \\end{tabular}\n');
